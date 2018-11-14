@@ -18,7 +18,7 @@ All measurements were converted to gene space by calculating mean probeset value
 The code below describes the application of ANOVA and Dunnett's test on the raw (de-logged) microarray data. An initial step of quantile normalization is followed by the ANOVA. As the execution can take a while the user can skip this section as its output is provided as supplementary file. If the user wants to execute the following chunk, the option "include" should be changed to TRUE.
 ```{r Analysis of expression data with ANOVA coupled with Dunnett's test, include=FALSE}
 library(multcomp)
-data<-read.delim("Exp1234_raw_common18704genes_antiTNF.tsv", header=T, sep="\t")
+data<-read.delim("Raw_common18704genes_antiTNF.tsv", header=T, sep="\t")
 boxplot(data[,2:67])
 genes=data$Gene
 library("preprocessCore")
@@ -137,6 +137,7 @@ volcanoPlot(datadunnett[,1:3], 1, 0.05)
 ## 1.6 Clustering of differentially expressed genes
 Agglomerative hierarchical clustering using Ward's minimum variance criterion for both genes and conditions.
 ```{r TgDeg Heatmap}
+library(gplots)
 data<-read.delim("Dunnett_antiTNF_vs_Wt_and_Tg.tsv")[,1:13]
 hcols<-colorRampPalette(c("steelblue4","white","firebrick4"))(256)
 pcols<-c("firebrick4", "red", "dark orange", "gold","dark green", "dodgerblue", "blue", "magenta", "darkorchid4")
@@ -162,6 +163,7 @@ for (i in c(6,5,4,3,2,8,7,1)){
 Functional Analysis was performed at the levels of GO terms (BP: Biological Process, MF: Molecular Function, CC: Cellular Component), KEGG pathways and Transcription Factor targets. The gProfileR library was used in all cases.
 The code below is used to re-create Figure 1B but the full list of enriched terms can also be compiled by storing the output in stable files instead of temporary (temp).
 ```{r, Disease-Associated Gened Functional Analysis}
+library(gProfileR)
 totalresults<-0
 totalcols<-0
 funcanal<-function(genes, clusters, species){
@@ -184,9 +186,9 @@ gprofiler(query=as.character(tgdegnames[which(tgcluster==cl[i])]), organism="mmu
 gprofiler(query=as.character(tgdegnames[which(tgcluster==cl[i])]), organism="mmusculus", significant=T, src_filter="KEGG")[,c(9,12, 4,3)]->kegg
 rbind(kegg, tf, gobp, gomf, gocc)->all
 # write to file temp (temporary)
-write.table(all, file="Supplement/temp", row.names = F, sep="\t", quote=F, col.names = T)
+write.table(all, file="temp", row.names = F, sep="\t", quote=F, col.names = T)
 # read from temp
-results<-read.delim("Supplement/temp", header=T, sep="\t")
+results<-read.delim("temp", header=T, sep="\t")
 grep("TF:", results$term.id)->tf
 grep("GO:", results$term.id)->go
 grep("KEGG:", results$term.id)->kegg
