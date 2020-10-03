@@ -140,9 +140,9 @@ Think of the information you will need to answer these questions _before_ you go
 ---
 
 ### Problems of Bioinformatics #8
-[Genomic Variability](https://www.dropbox.com/s/g72200g7hhd1dby/Figure10_02.jpg)
+[Genomic Variability](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figure10_02.jpg)
 
-#<img src="https://www.dropbox.com/s/g72200g7hhd1dby/Figure10_02.jpg" width="60%" height="45%" style="float: center"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figure10_02.jpg" width="60%" height="45%" style="float: center"> 
 
 *  Genomic Variation. How can we link genetic variability with the phenotype?
 *  *the Question*: How can we locate gene polymorphisms that are predictors of disease susceptibility?
