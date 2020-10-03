@@ -140,7 +140,6 @@ Think of the information you will need to answer these questions _before_ you go
 ---
 
 ### Problems of Bioinformatics #8
-[Genomic Variability](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figure10_02.jpg)
 
 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figure10_02.jpg" width="60%" height="45%" style="float: center"> 
 
