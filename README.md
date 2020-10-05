@@ -13,33 +13,36 @@ Course Objectives
 
 ## 1. Introduction (Oct 25th 2019) 
 This weeks class is an introduction to the concepts we will be discussing throughout the semester. Namely:
-The "informatics" in Bioinformatics
-What do we need it for
-What it may refer to
-What it actually is
-Remembering stuff (from high-school)
-How to measure things
-How to assess/compare/interpret measurements
+* The "informatics" in Bioinformatics
+* What do we need it for
+* What it may refer to
+* What it actually is
+* Remembering stuff (from high-school)
+* How to measure things
+* How to assess/compare/interpret measurements  
+
 Students are all advised to access the Reading material (to be read BEFORE class) that you may find below:
-"The median isn't the message" by Stephen Jay Gould
-Intuitive Biostatistics. Chapter 1. by Harvey Motulsky  
-Υπολογιστική Βιολογία. Κεφάλαιο 1. Χριστόφορος Νικολάου
-Lecture 1. Introduction
+* "The median isn't the message" by Stephen Jay Gould
+* Intuitive Biostatistics. Chapter 1. by Harvey Motulsky  
+* Υπολογιστική Βιολογία. Κεφάλαιο 1. Χριστόφορος Νικολάου
+* Module 1. Introduction
 
 ## 2. "-omics" Approaches to Biology (Nov 1st 2019)
 A. Omes and Omics.
-NGS applications in Biology
-The problems
-The solutions
+ * NGS applications in Biology
+ * The problems
+ * The solutions
 B. After NGS
-Types of data
-Data retrieval
-Preparation for analysis
+ * Types of data
+ * Data retrieval
+ * Preparation for analysis
+
 Reading Material:
-Goodwin et al. (2016) Coming of Age. Ten years of NGS technologies. Nat Rev Genetics
-Marx. (2013) The Big Challenges of Big Data. Nature
-Downloading Genes from Databases (https://www.youtube.com/watch?v=EdY0Vt4xXjk) and (https://www.youtube.com/watch?v=KsgFMoTXu-g)
-Lecture 2. "Omics" approaches to Biology
+* Goodwin et al. (2016) Coming of Age. Ten years of NGS technologies. Nat Rev Genetics
+* Marx. (2013) The Big Challenges of Big Data. Nature
+* Downloading Genes from Databases (https://www.youtube.com/watch?v=EdY0Vt4xXjk) and (https://www.youtube.com/watch?v=KsgFMoTXu-g)
+
+Module 2. "Omics" approaches to Biology
  
 ## 3. First steps in NGS data analysis (Nov 8th 2019)
 A. Quality Control
