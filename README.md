@@ -39,14 +39,16 @@ Students are all advised to access the reading material (to be read BEFORE class
  * Problems that deal with serial data
  * Problems that require/allow modeling
 
-Reading Material:
+### Reading Material:
 * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf)
 * Points of Significance. [The Importance of being uncertain](https://www.dropbox.com/s/ukex2y7jh3fy1st/ImportanceOfBeingUncertain.pdf)
 * Χριστόφορος Νικολάου, Ανάλυση Δεδομένων με την R. [Kεφάλαιο 1. Εισαγωγή στην R](https://rstudio.cloud/spaces/37438/project/1747066)
 
-Module 2. "Omics" approaches to Biology
- 
-## 3. First steps in NGS data analysis (Nov 8th 2019)
+### Assignments
+* Go through the first 2 chapters of Data analysis with R (https://rstudio.cloud/spaces/37438/project/1747066)
+
+
+## 3. Part IIa. Similarity and Distance. Statistics (Nov 6th 2020)
 A. Quality Control
 Before QC
 Analysis of sequencing quality
@@ -63,7 +65,7 @@ Integrative Genomics Viewer (IGV):high-performance genomics data visualization a
 Build your own Suffix Tree 
 Lecture 3. NGS QC and mapping
  
-## 4. Analysis of Gene Expression with RNASeq (Nov 15th 2019)
+## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression (Nov 13th 2020)
 A. The theory
 Transcriptome complexity
 Reconstruction of transcripts
@@ -83,7 +85,7 @@ Points of Significance. Comparing Samples pt II. Nat Methods 11, 355-356 (2014)
 Cluster analysis and display of genome-wide expression patterns, Eisen et al. PNAS (1998)
 Lecture 4. Gene Expression with RNASeq
 
-## 5. Gene Regulation through ChIPSeq approaches (Nov 22nd 2019)
+## 5. Part IIIa. Variability and Information. In statistics and Data Science (Nov 20th 2020)
 A. Analysis of ChIPSeq data
  Normalization
  Creation of abundance profiles
@@ -99,7 +101,7 @@ ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia. Landt e
 Computation for ChIP-seq and RNA-seq studies. Pepke et al. Nat Methods (2009)
 Lecture 5. Analysis of ChIPSeq experiments
 
-## 6. NGS Approaches to Genomic Variability (Nov 29th 2019)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation (Nov 27th 2020)
 Genomic Variability Analysis
 Whole-Genome or Whole-Exome Sequencing
 Calling of variants
@@ -111,7 +113,7 @@ Khurana et al. (2013). Integrative Annotation of Variants from 1092 Humans: Appl
 Understanding Odds-Ratios
 Lecture 6. Analysis of Genomic Variation
 
-## 7. NGS Approaches to Chromatin Structure (Dec 6th 2019)
+## 7. Part IVa. Correlation and Causation. In statistics (Dec 4th 2020)
 B. Chromatin Structure Analysis
 Epigenetics and Histone-modifications
 Open Chromatin Approaches
@@ -122,7 +124,9 @@ Valouev et al.  (2011). Determinants of Nucleosome Positioning in primary human 
 Marti-Renom and Mirny. (2011). Bridging the resolution gap in structural modeling of 3D genome organization. PLoS Computational Biology, 7, 7, e1002125
 Lecture 7. Analysis of Chromatin Structure
 
-## 8. Hands-on practical (Dec 13th 2019)
+## 8. Part IVb. Correlation and Causation. In biomedical modeling (Dec 11th 2020)
+
+## 9. Recap, Projects and Evaluation (Dec 19th 2020)
 The class will focus on the application of web-based bioinformatics tools for simple, straightforward analyses of datasets
 Analyzing the quality of a fastq dataset with FASTQC through Galaxy (use.galaxy.org). Get the fastq file here. 
 Map a fastq file against a reference genome using Galaxy (use.galaxy.org). The file comes from a S. cerevisiae dataset and should be mapped against the SacCer2 genome index. (Note: You will need to use FASTQ-Groomer to convert to Sanger/Illumina before mapping with BWA).
