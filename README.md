@@ -11,9 +11,9 @@ Course Objectives
 - Concepts: To give you an overview of the problems solved by computational and algorithmic approaches in modern biomedicine.
 - Skillset: To show you how to perform (but more importantly how to interpret) standard bioinformatics analyses on genomic data.[Gene Expression, Functional Analysis, Modeling of biological data]
 
-## 1. [Part I. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ia_Introductory_Concepts.md) (Oct 23rd 2020)
+## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ia_Introductory_Concepts.md) (Oct 23rd 2020)
 This weeks class is an introduction to the concepts we will be discussing throughout the semester. Namely:
-* The "informatics" in Bioinformatics
+* Statistics and Informatics
 * What do we need it for
 * What it may refer to
 * What it actually is
@@ -21,26 +21,28 @@ This weeks class is an introduction to the concepts we will be discussing throug
 * How to measure things
 * How to assess/compare/interpret measurements  
 
-Students are all advised to access the Reading material (to be read BEFORE class) that you may find below:
-* "The median isn't the message" by Stephen Jay Gould
-* Intuitive Biostatistics. Chapter 1. by Harvey Motulsky  
-* Υπολογιστική Βιολογία. Κεφάλαιο 1. Χριστόφορος Νικολάου
+### Reading
+Students are all advised to access the reading material (to be read BEFORE class) that you may find below:
+* Harvey Motulsky, Intuitive Biostatistics. [Chapter 1. Introduction to Statistics](https://www.dropbox.com/s/qaxqndv6zjoxi1l/Intuitive_Biostatistics.pdf)   
+* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf)
+* S. J. Gould. [The median isn't the message](https://journalofethics.ama-assn.org/article/median-isnt-message/2013-01)
 
+### Assignment(s)
+* Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation. 
+* Prepare to present this in a flash talk in class (no powerpoint needed).
 
-## 2. "-omics" Approaches to Biology (Nov 1st 2019)
-A. Omes and Omics.
- * NGS applications in Biology
- * The problems
- * The solutions
-B. After NGS
- * Types of data
- * Data retrieval
- * Preparation for analysis
+## 2. Part Ib. Problems that require computation "-omics" Approaches to Biology (Oct 30th 2020)
+* Class will start with the presentations of the first assignment (see above) and discussion.
+* Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
+ * Problems of difference/distance/similarity
+ * Problems related to variability
+ * Problems that deal with serial data
+ * Problems that require/allow modeling
 
 Reading Material:
-* Goodwin et al. (2016) Coming of Age. Ten years of NGS technologies. Nat Rev Genetics
-* Marx. (2013) The Big Challenges of Big Data. Nature
-* Downloading Genes from Databases (https://www.youtube.com/watch?v=EdY0Vt4xXjk) and (https://www.youtube.com/watch?v=KsgFMoTXu-g)
+* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf)
+* Points of Significance. [The Importance of being uncertain](https://www.dropbox.com/s/ukex2y7jh3fy1st/ImportanceOfBeingUncertain.pdf)
+* Χριστόφορος Νικολάου, Ανάλυση Δεδομένων με την R. [Kεφάλαιο 1. Εισαγωγή στην R](https://rstudio.cloud/spaces/37438/project/1747066)
 
 Module 2. "Omics" approaches to Biology
  
