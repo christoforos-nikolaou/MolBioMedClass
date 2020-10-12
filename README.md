@@ -2,7 +2,7 @@ Welcome to the (unusually long named)
 # Fundamental principals in Bioinformatics, Computational Biology and Biostatistics
 A class that is part of the Molecular Biomedicine MSc Program.
 Course Structure
-9 Lectures on topics related to computational and statistical approaches of molecular/biomedical problems
+9(+1) Lectures on topics related to computational and statistical approaches of molecular/biomedical problems
 Readings to be performed BEFORE each class (You have been warned)
 Topics and questions to be discussed in class
 Final evaluation will consist of written essay(s) and an (old-fashioned) in-class oral test.
@@ -28,8 +28,8 @@ Students are all advised to access the reading material (to be read BEFORE class
 * S. J. Gould. [The median isn't the message](https://journalofethics.ama-assn.org/article/median-isnt-message/2013-01)
 
 ### Assignment(s)
-* Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation. 
-* Prepare to present this in a flash talk in class (no powerpoint needed).
+ * Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation. 
+ * Prepare to present this in a flash talk in class (no powerpoint needed).
 
 ## 2. Part Ib. Problems that require computation "-omics" Approaches to Biology (Oct 30th 2020)
 * Class will start with the presentations of the first assignment (see above) and discussion.
@@ -38,109 +38,115 @@ Students are all advised to access the reading material (to be read BEFORE class
  * Problems related to variability
  * Problems that deal with serial data
  * Problems that require/allow modeling
+* At a second level we will discuss the basic concepts of computation. In particular how we will:
+ * Use flowcharts and pseudocode to describe a computational pipeline
+ * Employ optimization techniques
+ * Describe logical relationships
 
 ### Reading Material:
-* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf)
-* Points of Significance. [The Importance of being uncertain](https://www.dropbox.com/s/ukex2y7jh3fy1st/ImportanceOfBeingUncertain.pdf)
-* Χριστόφορος Νικολάου, Ανάλυση Δεδομένων με την R. [Kεφάλαιο 1. Εισαγωγή στην R](https://rstudio.cloud/spaces/37438/project/1747066)
+ * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf)
+ * Points of Significance. [The Importance of being uncertain](https://www.dropbox.com/s/ukex2y7jh3fy1st/ImportanceOfBeingUncertain.pdf)
+ * Wladston Ferreira Filho. Computer Science Distilled. [Chapter 1. Basics](https://www.dropbox.com/s/xeu4qdpu3jbkczb/Computer_Science_Chapter01_Basics.pdf)
 
 ### Assignments
-* Go through the first 2 chapters of Data analysis with R (https://rstudio.cloud/spaces/37438/project/1747066)
-
+ * Choose a computational problem (or invent one) and describe it with a flowchart or a pseudocode (Better if I propose one instead)
 
 ## 3. Part IIa. Similarity and Distance. Statistics (Nov 6th 2020)
-A. Quality Control
-Before QC
-Analysis of sequencing quality
-Resolving QC problems
-B. Mapping
-The problem of sequence alignment
-Sequence Alignment algorithms
-Alignment of big data
-Reading Material:
-Points of Significance. Visualizing samples with boxplots. Nat Methods 11, 119-120 (2014)
-More on boxplots Nat. Methods, 11, 121-122 (2014)
-Στοιχίσεις και Ταχείες Αναζητήσεις. (Υπολογιστική Βιολογία, Κεφ 4), Χ. Νικολάου
-Integrative Genomics Viewer (IGV):high-performance genomics data visualization and exploration. Brief Bioinf (2012)
-Build your own Suffix Tree 
-Lecture 3. NGS QC and mapping
- 
+Perhaps the most common types of analyses have to do with comparing things. In this class we will discuss ways to compare measurements, quantities from samples and populations. In particular we will discuss:
+ * The notions of samples and populations
+ * Descriptive statistics such as the mean and the median values
+ * How we compare the means of two samples
+ * How we interpret comparisons outcomes
+ * How we calculate distances and similarities between numerical values
+ * How we may use these distances to group individuals/items in clusters
+
+### Reading
+ * Points of Significance. [Comparing Samples I](https://www.dropbox.com/s/ph6ctkubpfdzc3t/CompI.pdf)
+ * Points of Significance. [Comparing Samples II](https://www.dropbox.com/s/i7qijiwu6jq6r5l/CompII.pdf) 
+ * Points of Significance. [Significance, p-values and t-tests](https://www.dropbox.com/s/wg80qrf34lxhg7w/Boxplots.pdf)
+ * Points of Significance. [Interpreting p-values](https://www.dropbox.com/s/s8bthqxqvotqkhv/Interpretting_pvalues.pdf)
+ * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 7. Επαγωγή και Έλεγχος Υποθέσεων.
+ * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 11. Ομαδοποίηση.
+
+### Assignments 
+ * TBA (Use R to perform t-tests in given datasets).   
+
+
 ## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression (Nov 13th 2020)
-A. The theory
-Transcriptome complexity
-Reconstruction of transcripts
-Assessing Expression
-Understanding trends in expression patterns
-B. The practice
-Transcript reconstruction
-RPKM quantification of expression
-Differential Expression statistics
-Multiple Comparisons 
-Clustering of gene expression profiles
-Reading Material:
-A survey of best practices for RNASeq analysis. Conesa et al, Genome Biology (2016)
-Points of Significance. Significance, p-values and t-tests. Nat Methods 10, 1041-1042 (2013)
-Ανάλυση της Γονιδιακής Έκφρασης. (Υπολογιστική Βιολογία, Κεφ 7), Χ. Νικολάου (2015)
-Points of Significance. Comparing Samples pt II. Nat Methods 11, 355-356 (2014)
-Cluster analysis and display of genome-wide expression patterns, Eisen et al. PNAS (1998)
-Lecture 4. Gene Expression with RNASeq
+In this class we will see how measures of similarity may apply to biological systems and in particular in two basic bioinformatics problems: Sequence comparisons and gene expression analysis. We will discuss in detail:
+ * Measures of sequence similarity
+ * The problem of sequence alignment
+ * Data transformations for sequence alignment
+ * Clustering data for gene expression analysis
+
+### Reading
+ * Wladston Ferreira Filho. Computer Science Distilled. [Chapter 1. Basics](https://www.dropbox.com/s/xeu4qdpu3jbkczb/Computer_Science_Chapter01_Basics.pdf)
+ * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 4. Σύγκριση Αλληλουχιών](https://repository.kallipos.gr/bitstream/11419/1582/1/Chapter04_seqalignment_R.pdf)
+ * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 7. Ανάλυση της Γονιδιακής Έκφρασης](https://repository.kallipos.gr/bitstream/11419/1585/1/Chapter07_geneexpression_R.pdf)
+ * Points of Significance. [Clustering](https://www.dropbox.com/s/7qja6rg3sxuhv3p/Clustering.pdf)
+
+### Assignments
+ * TBA
 
 ## 5. Part IIIa. Variability and Information. In statistics and Data Science (Nov 20th 2020)
-A. Analysis of ChIPSeq data
- Normalization
- Creation of abundance profiles
- Localization of peaks of enrichment
-B. Analysis of Peaks of enrichment
-Clustering of peaks
- Discovery/Inference of DNA-binding sites
- Assigning peaks to genomic regions of interest
-Reading Material:
-Design and analysis of ChIP-seq experiments for DNA-binding proteins. Kharchenko et al., Nat. Biotech (2008)
-Highly expressed loci are vulnerable to misleading ChIP localization of multiple unrelated proteins. Teytelman et al, PNAS (2013)
-ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia. Landt et al. Genome Res (2012)
-Computation for ChIP-seq and RNA-seq studies. Pepke et al. Nat Methods (2009)
-Lecture 5. Analysis of ChIPSeq experiments
+Comparing means makes sense only up to one level. Samples and populations are variable and this variability is to be taken into account. In this class we will discuss issues related to variability and how it is strongly linked to the concept of information. The main points at this stage are
+ * Measures of data dispersion: range, variance and standard deviation
+ * Comparing variability in samples
+ * Comparing samples, using variance. Analysis of Variance
+ * Variability as Information
+
+### Reading
+ * Points of Significance. [Error bars](https://www.dropbox.com/s/7ujqhrtkvtl2xrj/ErrorBars.pdf)
+ * Points of Significance. [Boxplots](https://www.dropbox.com/s/wg80qrf34lxhg7w/Boxplots.pdf)
+ * Points of Significance. [ANOVA](https://www.dropbox.com/s/xy9uwwp2rz9t9ta/ANOVA.pdf)
+ * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 8. Ανάλυση Διακύμανσης και έλεγχοι Πολλαπλών Υποθέσεων.
+ 
+### Assignments
+ * TBA
 
 ## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation (Nov 27th 2020)
-Genomic Variability Analysis
-Whole-Genome or Whole-Exome Sequencing
-Calling of variants
-Annotation of Variants
-Reading Material:
-Ανάλυση της Γενετικής Ποικιλομορφίας (Υπολογιστική Βιολογία, Κεφάλαιο 10). Χ. Νικολάου
-Bamshad et al. (2011). Exome sequencing as a tool for Mendelian disease gene discovery. Nat Rev Genetics 12, 745-755
-Khurana et al. (2013). Integrative Annotation of Variants from 1092 Humans: Application to Cancer Genomics. Science 342
-Understanding Odds-Ratios
-Lecture 6. Analysis of Genomic Variation
+Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
+* We will see how genomic variability may be linked to phenotypic characteristics and provide valuable information in the study of mendelian as well as complex diseases
+* We will see how variation in sequences may be quantified in order to assess the regulatory potential of particular sequences
+* We will visualize and quantify variability in many dimensions as the product of state-of-the-art single-cell genomics analyses
 
-## 7. Part IVa. Correlation and Causation. In statistics (Dec 4th 2020)
-B. Chromatin Structure Analysis
-Epigenetics and Histone-modifications
-Open Chromatin Approaches
-Chromosomal Conformation
-Reading Material:
-Δομή της Χρωματίνης (Υπολογιστική Βιολογία, Κεφάλαιο 5). Χ. Νικολάου
-Valouev et al.  (2011). Determinants of Nucleosome Positioning in primary human cells. Nature 474, 516-520
-Marti-Renom and Mirny. (2011). Bridging the resolution gap in structural modeling of 3D genome organization. PLoS Computational Biology, 7, 7, e1002125
-Lecture 7. Analysis of Chromatin Structure
+### Reading
+ * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 10. Μείωση Διαστασιμότητας.
+ * Points of Significance. [The curse of dimensionality](https://www.dropbox.com/s/9hqd8h73thxaecc/CurseOfDimensionality.pdf)
+ * Points of Significance. [Principal Component Analysis](https://www.dropbox.com/s/kquwgp63kcqhwmr/ML_PCA.pdf?dl=0)
+ * TBA
 
-## 8. Part IVb. Correlation and Causation. In biomedical modeling (Dec 11th 2020)
+### Assignments
+ * TBA
+
+## 7. Part IVa. Correlation, Regression and Causation. In statistics (Dec 4th 2020)
+The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
+ * Relationships between categorical values in contingency tables
+ * Correlations between numerical values that are paired
+At a next level we will see how we can draw from such relationships to build predictive models of regression and classification. 
+
+### Reading
+ * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 8. Συσχέτιση και Γραμμική Παλινδρόμηση.
+ * Points of Significance. [Tabular Data](https://www.dropbox.com/s/vjz8g1gsauwjery/TabularData.pdf)
+ * Points of Significance. [Association, Correlation, Causation](https://www.dropbox.com/s/28w3ihaevhjk489/AssociationCorrelationCausation.pdf)
+
+### Assignments
+ * TBA
+
+## 8. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Dec 11th 2020)
+In this class we will see how some of the models we recently discussed find applications in the biomedical sciences. We will see how models of regression and classification can by applied in the fields of:
+ * Cancer genomics
+ * Protein biology, drug design and repurposing
+ * Biomedical Imaging
+ 
+### Reading
+ * TBA
+ 
+### Assignments
+ * Research and prepare material for your final project proposal
 
 ## 9. Recap, Projects and Evaluation (Dec 19th 2020)
-The class will focus on the application of web-based bioinformatics tools for simple, straightforward analyses of datasets
-Analyzing the quality of a fastq dataset with FASTQC through Galaxy (use.galaxy.org). Get the fastq file here. 
-Map a fastq file against a reference genome using Galaxy (use.galaxy.org). The file comes from a S. cerevisiae dataset and should be mapped against the SacCer2 genome index. (Note: You will need to use FASTQ-Groomer to convert to Sanger/Illumina before mapping with BWA).
-Use MACS through Galaxy to call peaks of ChIP enrichment for a yeast dataset. Find the ChIP SacCer2 bamfiles here (control) and here (condition). Use a user-define Genome Size of 13000000 (approximate for yeast).
-Create average plots of a ChIPSeq dataset around the TSS of yeast genes using Galaxy. Find the TSS coordinate files here and the ChIP SacCer2 bamfiles here (control) and here (condition).
-Use MEME to discover new motifs from a sequence file originating from a peak caller. Find the sequence file here.
-Use a fasta file to extract a logo using Weblogo. Get the fasta file here.
-Use the GREAT server to analyze preferences of any type of genomic coordinate files (it can be used for a few organisms). Get a mouse genome coordinates file here.
-Use a differential gene expression profile to extract differentially expressed genes. Get two files here and here. You may use Excel or a similar program to call differential expression, in which case you may find this link useful.
-Use gprofiler to perform a functional analysis of differentially expressed genes.
-Use STRING to visualize networks of Protein-Protein interactions.
-Help: install Notepad++ on your computer for easier access of text data.
+This (final) class will be devoted to clarifying concepts, a general recap and discussion of your final projects, the proposal of which you will have to prepare and present in class. Projects may be collaborative but it is important that they put to practice the skills you have acquired during the semester.
 
-## 9. What the papers say. A critical reading of bioinformatics papers (Dec 20th 2019)
-Get the list of Figures to be discussed here.
-Check the original papers here.
-Prepare to discuss the Figures. 
+## 10. Final Projects Presentation and Discussion (TBA)
+A day will be devoted to the final presentation of your projects. Date to be announced.
