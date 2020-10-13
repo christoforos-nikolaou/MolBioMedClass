@@ -8,10 +8,9 @@
 ---
 ## Course Structure
 * 9 Lectures on topics related to computational and statistical approaches of molecular/biomedical problems
-* Readings to be performed BEFORE each class. https://sites.google.com/site/uocdataanalysis/lectures/molbiomedclass
-*(You have been warned)*
+* Readings to be performed BEFORE each class. (https://github.com/christoforos-nikolaou/MolBioMedClass) _(You have been warned)_
 * Topics and questions to be discussed in class
-* Final evaluation will consist of written essay(s) and an (old-fashioned) in-class oral test. 
+* Final evaluation will consist of written essay(s) and an in-class presentations. 
 
 ---
 ## Course Objectives 
@@ -20,26 +19,11 @@
 * Skillset: To show you how to perform (but more importantly how to interpret) standard bioinformatics analyses on genomic data.[Gene Expression, Functional Analysis, Modeling of biological data]
 
 ---
-## Introduction  
-* #### A. The "informatics" in Bioinformatics
-	* What do we need it for
-	* What it may refer to
-	* What it actually is 
-* #### B. Remembering stuff (from high-school)
-	* How to measure things
-	* How to assess/compare/interpret measurements 
----
-## Part A. Bio *Informatics*
-* What it is
-* What we need it for
-* Which interesting "bio" questions can we solve with it
-
----
 
 ## What Bioinformatics may refer to
 * A piece of software
 * A series of analyses performed by a technician/intern/geek to make your experiments look fancier
-* Anything in your or other people's papers that you don't understand
+* Many things in your or other people's papers that you don't understand :)
 
 ---
 ## What Bioinformatics actually *is*
@@ -49,13 +33,15 @@ including:
 * New algorithms (not yet implemented)
 * Software implementation (web services etc)
 * Data interpretation through computation
-* Models
+* Predictive or explanatory models
 
 ---
 ## What we need Bioinformatics for
-* Consider measuring the expression of one gene between two conditions. Then consider doing the same for _all genes_ in a genome between _more than one_ conditions. **[#Handling of big data]**
-* Think of ways to compare two genomic sequences to each other. Then think of ways to _infer_ the one from the other. **[#Resolving Complexity]**
-* You measured something to reach a conclusion. Now can you use it to _predict_ an outcome. **[#Modeling a system]**
+* Consider measuring the expression of one gene between two conditions. Then consider doing the same for _all genes_ in a genome between _more than one_ conditions. **[Handling of big data]**
+* Think of ways to _identify regulatory sequences_ in a genome. Then try to think how you would decide which ones are more _likely_ to have a _strong effect_ in the activation of some gene of interest. **[Resolving Complexity]**
+* You have identified a number of genomic locations that are _over-represented_ among patients suffering from a certain condition. Now can you use it to _predict_ if a given individual who is genotyped will have the condition? **[Modeling a system]**
+
+* Take a pause and think about how you understand the underlined words.
 ---
 
 ## A few (easy?) questions
@@ -87,14 +73,14 @@ Think of the information you will need to answer these questions _before_ you go
 ---
 ### Problems of Bioinformatics #1
 
-<img src="/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure11_11.jpg" width="90%" height="60%" style="float: center"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure11_11.jpg" width="90%" height="60%" style="float: center"> 
 
 * Transcriptional Complexity. How complex is a gene? 
 * *the Question*: What can we know about the region in which the gene resides?
 
 ---
 ### Problems of Bioinformatics #2
-<img src="/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure00_02.jpg" width="50%" height="50%" style="float: right"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure00_02.jpg" width="50%" height="50%" style="float: right"> 
 
 * Genome Architecture. How are genes distributed in the genome?
 * *the Question*: Which underlying features are correlated with their distribution?
@@ -104,14 +90,14 @@ Think of the information you will need to answer these questions _before_ you go
 * Sequence similarity/homology 
 * *the Question*: How can we locate a "string" of DNA in a genome? 
 
-<img src="/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure00_03.jpg" width="100%" height="60%" style="float: right"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure00_03.jpg" width="100%" height="60%" style="float: right"> 
 
 ---
 ### Problems of Bioinformatics #4
 * Analyzing Gene Regulation 
 * *the Question*: Where does a transcription factor bind on the genome?  
 
-<img src="/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure03_07.jpg" width="60%" height="60%" style="float: center"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure03_07.jpg" width="60%" height="60%" style="float: center"> 
 
 ---
 
@@ -119,18 +105,18 @@ Think of the information you will need to answer these questions _before_ you go
 *  Gene Expression Analysis. How is gene regulation orchestrated in different conditions?
 *  *the Question*: Which group of genes changes expression in time during a development?
 
-<img src="/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure07_06.jpg" width="90%" height="45%" style="float: right"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure07_06.jpg" width="90%" height="45%" style="float: right"> 
 
 ---
 ### Problems of Bioinformatics #6
-<img src="/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure08_01.jpg" width="50%" height="45%" style="float: center"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure08_01.jpg" width="50%" height="45%" style="float: center"> 
 
 *  Functional Analysis of Gene Expression
 *  *the Question*: Which biological functions/pathways are more important given a set of over/under-expressed genes?  
 
 ---
 ### Problems of Bioinformatics #7
-<img src="/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure09_01.jpg" width="50%" height="45%" style="float: right"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure09_01.jpg" width="50%" height="45%" style="float: right"> 
 
 *  Biological Networks 
 *  What can we learn from the association of biological entities?
@@ -147,7 +133,7 @@ Think of the information you will need to answer these questions _before_ you go
 ---
 
 ### Problems of Bioinformatics #9
-<img src="/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure12_09.jpg" width="45%" height="45%" style="float: right"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure12_09.jpg" width="45%" height="45%" style="float: right"> 
 
 *  Putting it all together. Model design 
 *  *the Question*: Can we predict gene expression levels from other sources of data?  
