@@ -20,6 +20,11 @@
 
 ---
 
+## A brief introduction (to the Introduction)
+
+
+---
+
 ## What Bioinformatics may refer to
 * A piece of software
 * A series of analyses performed by a technician/intern/geek to make your experiments look fancier
