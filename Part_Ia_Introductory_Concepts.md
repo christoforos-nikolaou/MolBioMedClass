@@ -1,10 +1,9 @@
 # MSc in Molecular Biomedicine
 
-## 1. Introduction: The "informatics" in Bioinformatics 
-##### (+remembering some high-school math) ####
-#### Christoforos Nikolaou  
-Department of Biology, University of Crete  
-[computational-genomics-uoc.weebly.com](http://computational-genomics-uoc.weebly.com)  
+## 1. Introduction: Basic Concepts in Statistics and Informatics for Bioscience
+### Christoforos Nikolaou  
+#### Computational Genomics Group, BSRC "Alexander Fleming" 
+[computational-genomics.weebly.com](http://computational-genomics.weebly.com)  
 
 ---
 ## Course Structure
