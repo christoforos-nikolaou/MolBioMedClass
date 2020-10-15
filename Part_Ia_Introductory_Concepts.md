@@ -86,7 +86,7 @@ Think of the information you will need to answer these questions _before_ you go
 * Analyzing Gene Regulation 
 * *the Question*: Where does a transcription factor bind on the genome?  
 
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/tree/master/Figures/CompBio/Figure03_07.jpg" width="60%" height="60%" style="float: center"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure03_07.jpg" width="60%" height="60%" style="float: center"> 
 
 ---
 
@@ -94,7 +94,7 @@ Think of the information you will need to answer these questions _before_ you go
 *  Gene Expression Analysis. How is gene regulation orchestrated in different conditions?
 *  *the Question*: Which group of genes changes expression in time during a development?
 
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/tree/master/Figures/CompBio/Figure07_06.jpg" width="90%" height="45%" style="float: right"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure07_06.jpg" width="90%" height="45%" style="float: right"> 
 
 ---
 ### Problems of Bioinformatics #6
@@ -257,9 +257,4 @@ Describe experiments for each type
 * Did you read it? Discuss.
 ---
 
-# Test Slide
-#### A table
-|Theme name|Value|Directive|
-|:-:|:-:|:-|
-One value|Second Value| third value
  
