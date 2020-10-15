@@ -5,23 +5,7 @@
 #### Computational Genomics Group, BSRC "Alexander Fleming" 
 [computational-genomics.weebly.com](http://computational-genomics.weebly.com)  
 
----
-## Course Structure
-* 9 Lectures on topics related to computational and statistical approaches of molecular/biomedical problems
-* Readings to be performed BEFORE each class. (https://github.com/christoforos-nikolaou/MolBioMedClass) _(You have been warned)_
-* Topics and questions to be discussed in class
-* Final evaluation will consist of written essay(s) and an in-class presentations. 
-
----
-## Course Objectives 
-* Broad Picture: To remind you stuff you have chosen to forget after convincing you they were relevant all along. [Analytical thinking, quantitative approaches, statistical inference]
-* Concepts: To give you an overview of the problems solved by computational and algorithmic approaches in modern biomedicine.
-* Skillset: To show you how to perform (but more importantly how to interpret) standard bioinformatics analyses on genomic data.[Gene Expression, Functional Analysis, Modeling of biological data]
-
----
-
-## A brief introduction (to the Introduction)
-
+## Part A. Why Bio-informatics?
 
 ---
 
@@ -176,27 +160,16 @@ Can you discover "runs" of Xs or -s in the above panel?
 4 The length of the Danube River (in km)
 5 Gestation period of a lion (in days)
 6 Number of films directed by Stanley Kubrick
-7 Number of Beatles No1 hits
+7 Number of years between the first and the last Beatles recording 
 8 Age of Pope Francis
 9 Number of women who have won a Literature Nobel Prize 
 10 Wingspan of an Airbus A320 (in m)
 ```
 ---
-## Problems with Statistics #2
-* Solutions:
-```
-1 Mozart year of birth: 1756 (Wikipedia)
-2 Number of Greek Inhabited Islands: 227 (HTO)  
-3 Galis PPG: 32.8 (FIBA Europe)
-4 Length of the Danube: 2860km (Wikipedia)
-5 Lion Gestation period: 110 days (factophile)
-6 Kubrick films: 16 (imdb)
-7 Beatles No1 hits: 17 (Rolling Stone Magazine)
-8 Pope Francis is 79 (google)
-9 Female Literature Nobel Laurates: 13 (nobelprize.org)
-10 A320 wingspan: 35.8m (Airbus.com)
-```    
-How many did you get within your range?
+[comment]: <> (* Solutions: 1 Mozart year of birth: 1756 Wikipedia, 2 Number of Greek Inhabited Islands: 227 HTO 3 Galis PPG: 32.8 FIBA Europe 4 Length of the Danube: 2860km Wikipedia 5 Lion Gestation period: 110 days factophile 6 Kubrick films: 16 imdb 7 Beatles active for 7 years. No1 hits: 17 Rolling Stone Magazine 8 Pope Francis is 83 google 9 Female Literature Nobel Laurates: 14 (nobelprize.org 10 A320 wingspan: 35.8m Airbus.com)
+---
+
+## How many did you get within your range?
 
 ---
 
