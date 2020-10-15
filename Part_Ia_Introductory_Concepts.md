@@ -5,17 +5,24 @@
 #### Computational Genomics Group, BSRC "Alexander Fleming" 
 [computational-genomics.weebly.com](http://computational-genomics.weebly.com)  
 
+## Goals
+* To discuss the concept of bioinformatics, clarify its meaning and understand some common misconceptions
+* To remember some basic notions regarding math and statistics
+* To understand **why** statistical reasoning is so important in every aspect of research
+* To consider some simple (but not trivial) questions of data analysis
+---
+
 ## Part A. Why Bio-informatics?
 
 ---
 
-## What Bioinformatics may refer to
+### What Bioinformatics may refer to
 * A piece of software
 * A series of analyses performed by a technician/intern/geek to make your experiments look fancier
 * Many things in your or other people's papers that you don't understand :)
 
 ---
-## What Bioinformatics actually *is*
+### What Bioinformatics actually *is*
 #### Any computational approach to answer **or pose** a biological question
 
 including:
@@ -25,7 +32,7 @@ including:
 * Predictive or explanatory models
 
 ---
-## What we need Bioinformatics for
+### What we need Bioinformatics for
 * Consider measuring the expression of one gene between two conditions. Then consider doing the same for _all genes_ in a genome between _more than one_ conditions. **[Handling of big data]**
 * Think of ways to _identify regulatory sequences_ in a genome. Then try to think how you would decide which ones are more _likely_ to have a _strong effect_ in the activation of some gene of interest. **[Resolving Complexity]**
 * You have identified a number of genomic locations that are _over-represented_ among patients suffering from a certain condition. Now can you use it to _predict_ if a given individual who is genotyped will have the condition? **[Modeling a system]**
@@ -33,7 +40,7 @@ including:
 * Take a pause and think about how you understand the underlined words.
 ---
 
-## A few (easy?) questions
+### A few (easy?) questions
 * How much more is a gene expressed between two conditions?
 * Is the human or the yeast genome richer in genes?
 * Which human chromosome is more important for the function of mitosis?
@@ -42,7 +49,7 @@ including:
 Think of the information you will need to answer these questions _before_ you go about answering them.
 
 ---
-## And a few _not so easy_ ones
+### And a few _not so easy_ ones
 * How can I locate a given sequence on a genome?
 * How can I say which is the DNA-binding motif of protein?
 * Which of the conditions of my experiment are more similar to each other?
@@ -50,6 +57,7 @@ Think of the information you will need to answer these questions _before_ you go
 * Which of all the genes that came out of my experiment should I focus on?
 
 ---
+
 ### Problems of Bioinformatics 
 ###### (that we'll deal with)
 * Transcriptional Complexity. 
@@ -127,6 +135,7 @@ Think of the information you will need to answer these questions _before_ you go
 *  Putting it all together. Model design 
 *  *the Question*: Can we predict gene expression levels from other sources of data?  
 ---
+
 ## Part B. Remembering stuff
 * Which tools do we need to perform bioinformatics analyses?
 	* Quantitative thinking [OK]
@@ -134,6 +143,7 @@ Think of the information you will need to answer these questions _before_ you go
 	* Algorithm design [simpler than what you may think]
 	* Computer skills [can be outsourced]
 ---
+
 ## Quantitative thinking and Statistics
 * Quantitative thinking
 	* Reasoning with numbers 
@@ -187,17 +197,18 @@ Conclusion: We tend to be over-confident
 	* I give the same coin to **each one** and ask you to flip it ten times. If one of you gets 9 heads what he/she should tell me about the coin?
 ---
 
-## How to plan your analysis 
+## Part C. How to plan your analysis 
+
+---
+
 ### Five easy questions:
 1. What is the type of your outcome? Are you reporting a binomial (YES/NO) effect or is your outcome continuous values of a physical property?
 2. Which are your explanatory variables? Are they categorical (e.g. "wild-type vs. treated") or continuous (e.g. dosage of a drug)? 
 3. How many conditions are you analyzing? Is it one, two or more?
-
----
-### Five easy questions:
 4. If you are comparing more than one conditions are your data matched? Do they come in pairs or not?
 5. If your outcome is continuous is it normally distributed? Do you even know what "normally distributed" is?
 ---
+
 ### Types of outcome
 * binomial (yes/no, dead/alive, improved/not)
 * continuous (temperature, fluoresence, weight etc)
@@ -225,6 +236,7 @@ Describe experiments for each type
 * Samples are unmatched. You can compare their means but you cannot ask for correlations or "congenital" differences
 * Samples are matched. You can also track paired differences
 ---
+
 ### Is it Normal or is it not?
 * What can we do when our data are normally distributed?
 	* A number of tests apply, such as Student's t-test to compare means, ANOVA to analyze variance etc
@@ -233,13 +245,17 @@ Describe experiments for each type
 	* apply non-parametric tests
 	* KEY solution: apply computational tests
 ---
-# Practical Question #1
+
+## Part D. Some practical questions 
+
+---
+### Practical Question #1
 * We are administering a treatment to a set of patients in the form of a substance and we want to see if the efficiency of the treament is dependent on the genetic background. 
 	* How should we plan our experiment?
 	* What should we measure?
 	* What should we be careful of?
 ---
-# Practical Question #2
+### Practical Question #2
 * We want to test the effect of a drug between two sets of patients. One set is taking the drug, the other is taking a placebo. We measure the weight gain of the patients before and after administration. 
 	* What is the type of the outcome?
 	* Which is the explanatory variable?
@@ -247,7 +263,7 @@ Describe experiments for each type
 	* What test should we use?
 	* What should we be careful of?
 ---
-# Practical Question #3
+### Practical Question #3
 * We are feeding a set of mice with an assumed "superfood" at different doses. We want to see if this has any effect on their susceptibility to cancer. We expose the mice to X-ray radiation and measure tumour occurrence.  
 	* How can we tell if the superfood is effective?
 	* Can we measure how effective it is?
