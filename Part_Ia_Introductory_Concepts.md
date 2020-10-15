@@ -86,7 +86,7 @@ Think of the information you will need to answer these questions _before_ you go
 * Analyzing Gene Regulation 
 * *the Question*: Where does a transcription factor bind on the genome?  
 
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure03_07.jpg" width="60%" height="60%" style="float: center"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/tree/master/Figures/CompBio/Figure03_07.jpg" width="60%" height="60%" style="float: center"> 
 
 ---
 
@@ -94,7 +94,7 @@ Think of the information you will need to answer these questions _before_ you go
 *  Gene Expression Analysis. How is gene regulation orchestrated in different conditions?
 *  *the Question*: Which group of genes changes expression in time during a development?
 
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure07_06.jpg" width="90%" height="45%" style="float: right"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/tree/master/Figures/CompBio/Figure07_06.jpg" width="90%" height="45%" style="float: right"> 
 
 ---
 ### Problems of Bioinformatics #6
@@ -145,7 +145,7 @@ Think of the information you will need to answer these questions _before_ you go
 ## Problems with Statistics #1
 1. We tend to see patterns where they don't exist. 
 	* "Hot hands"
-	 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/hothands.jpg" width="60%" height="60%" style="float: center"> 
+	 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/hothands.png" width="60%" height="60%" style="float: right"> 
 
 Can you discover "runs" of Xs or -s in the above panel?
 
@@ -179,7 +179,7 @@ Conclusion: We tend to be over-confident
 ## Problems with Statistics #3
 3. We are fooled by regression to the mean. The case of the Sacked football managers
 
-	 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/SackedManagers2.jpg" width="60%" height="60%" style="float: center"> 
+	 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/SackedManagers2.png" width="60%" height="60%" style="float: center"> 
 ---
 ## Problems with Statistics #4
 4. We don't understand multiple comparisons
