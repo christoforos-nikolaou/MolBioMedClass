@@ -145,8 +145,7 @@ Think of the information you will need to answer these questions _before_ you go
 ## Problems with Statistics #1
 1. We tend to see patterns where they don't exist. 
 	* "Hot hands"
-	`X - - X - X - X X - X - X - X X - X - X - - X X - X X X X - - - - - - X
-X - X - X - - - - - X - X X X X X - - - - X - X X X X  - - - - X - - - - - X - - - - X X - - X - - - - - X X - - X - - - - X - X - - - - - - X - X X - X X X X - X - X X X X - X - ` 
+	 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/hothands.jpg" width="60%" height="60%" style="float: center"> 
 
 Can you discover "runs" of Xs or -s in the above panel?
 
@@ -180,8 +179,7 @@ Conclusion: We tend to be over-confident
 ## Problems with Statistics #3
 3. We are fooled by regression to the mean. The case of the Sacked football managers
 
-<img src="/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/SackedManagers2.png" width="60%" height="45%" style="float: center"> 
-
+	 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/SackedManagers2.jpg" width="60%" height="60%" style="float: center"> 
 ---
 ## Problems with Statistics #4
 4. We don't understand multiple comparisons
