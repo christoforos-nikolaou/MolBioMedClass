@@ -11,6 +11,8 @@ Course Objectives
 - Concepts: To give you an overview of the problems solved by computational and algorithmic approaches in modern biomedicine.
 - Skillset: To show you how to perform (but more importantly how to interpret) standard bioinformatics analyses on genomic data.[Gene Expression, Functional Analysis, Modeling of biological data]
 
+## Welcome note. [A few words of advice and getting to know each other better](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_0_Welcome)
+
 ## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ia_Introductory_Concepts.md) (Oct 23rd 2020)
 This weeks class is an introduction to the concepts we will be discussing throughout the semester. Namely:
 * Statistics and Informatics
