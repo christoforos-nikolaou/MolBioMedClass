@@ -166,8 +166,7 @@ Can you discover "runs" of Xs or -s in the above panel?
 10 Wingspan of an Airbus A320 (in m)
 ```
 ---
-[comment]: <> (* Solutions: 1 Mozart year of birth: 1756 Wikipedia, 2 Number of Greek Inhabited Islands: 227 HTO 3 Galis PPG: 32.8 FIBA Europe 4 Length of the Danube: 2860km Wikipedia 5 Lion Gestation period: 110 days factophile 6 Kubrick films: 16 imdb 7 Beatles active for 7 years. No1 hits: 17 Rolling Stone Magazine 8 Pope Francis is 83 google 9 Female Literature Nobel Laurates: 14 (nobelprize.org 10 A320 wingspan: 35.8m Airbus.com)
----
+[comment]: <> (Solutions: 1 Mozart year of birth: 1756 Wikipedia, 2 Number of Greek Inhabited Islands: 227 HTO 3 Galis PPG: 32.8 FIBA Europe 4 Length of the Danube: 2860km Wikipedia 5 Lion Gestation period: 110 days factophile 6 Kubrick films: 16 imdb 7 Beatles active for 7 years. No1 hits: 17 Rolling Stone Magazine 8 Pope Francis is 83 google 9 Female Literature Nobel Laurates: 14 nobelprize.org 10 A320 wingspan: 35.8m Airbus.com)
 
 ## How many did you get within your range?
 
