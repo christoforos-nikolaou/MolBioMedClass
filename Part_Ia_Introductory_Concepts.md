@@ -198,7 +198,15 @@ Conclusion: We tend to be over-confident
 ---
 
 ## Part C. How to plan your analysis 
-
+* Starting Point: Studied phenomenon
+  -> hypothesis, question
+* Experiment. What will the readout be?
+  -> technique
+* Measurement. How will we measure it?
+  -> Quantification
+* Data analysis 
+  -> Interpretation
+* End point: Understanding phenomenon. New knowledge.
 ---
 
 ### Five easy questions:
