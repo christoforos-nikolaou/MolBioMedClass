@@ -36,14 +36,14 @@ Students are all advised to access the reading material (to be read BEFORE class
 ## 2. Part Ib. Problems that require computation "-omics" Approaches to Biology (Oct 30th 2020)
 * Class will start with the presentations of the first assignment (see above) and discussion.
 * Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
- * Problems of difference/distance/similarity
- * Problems related to variability
- * Problems that deal with serial data
- * Problems that require/allow modeling
+  - Problems of difference/distance/similarity
+  - Problems related to variability
+  - Problems that deal with serial data
+  - Problems that require/allow modeling
 * At a second level we will discuss the basic concepts of computation. In particular how we will:
- * Use flowcharts and pseudocode to describe a computational pipeline
- * Employ optimization techniques
- * Describe logical relationships
+  - Use flowcharts and pseudocode to describe a computational pipeline
+  - Employ optimization techniques
+  - Describe logical relationships
 
 ### Reading Material:
  * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf)
