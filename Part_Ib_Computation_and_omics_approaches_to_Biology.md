@@ -28,7 +28,7 @@ The most common types of analyses may be classified in the following:
 * It is the simplest type of analysis:
   - Two or more groups of measurements are compared on the basis of central tendency
   - Central tendencies are: a) the mean, b) the median c) the mode
- <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/MeanMedianMode.png" width="50%" height="50%" style="float: center"> 
+ <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/MeanMedianMode.png" width="30%" height="30%" style="float: center"> 
 
  ```r
  x<-rnorm(100, 1, 0.5)
