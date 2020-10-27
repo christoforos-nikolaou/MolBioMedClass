@@ -41,7 +41,7 @@ The most common types of analyses may be classified in the following:
   - Two distributions may have the same mean but be very different in terms of _spread_
   - Measures of spread are: a) the range b) the variance c) the standard deviation
 
- <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/SamplesVsPopulation.png" width="50%" height="30%" style="float: center"> 
+ <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/SampleVsPopulation.png" width="50%" height="30%" style="float: center"> 
  
  ```r
  x<-rnorm(100, 5, 0.5)
@@ -65,17 +65,24 @@ The most common types of analyses may be classified in the following:
   * Downward/Upward trends
   * Breakpoints
   * Outliers/rare events
- 
+
+ <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/timeseries.png" width="50%" height="30%" style="float: center"> 
 
 ### 3. Examples
 In biology we can study:
 * Time-related phenomena, e.g. gene expression in development but also
 * Space-related signals treated as time-series, e.g. chromatin structure in linear space
 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure11_11.jpg" width="50%" height="30%" style="float: center">
+
+
 ### 4. Grouping Problems
 * These are problems of assigning samples/objects into groups based on their similarity
 * When we have no idea of how many groups there are, we call this an "unsupervised" analysis. We often refer to the groups as clusters and to the analysis as "unsupervised clustering"
 * Elements to consider: Number of clusters, consistency of the clusters, distance metrics
+
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure00_05.jpg" width="50%" height="30%" style="float: center">
+
 
 ### 5. Classification Problems/Feature Selection
 * In contrast to unsupervised analysis, in these cases we known the number of categories we expect data to fall into. 
