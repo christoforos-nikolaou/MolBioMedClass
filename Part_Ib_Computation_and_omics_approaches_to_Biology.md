@@ -28,7 +28,7 @@ The most common types of analyses may be classified in the following:
 * It is the simplest type of analysis:
   - Two or more groups of measurements are compared on the basis of central tendency
   - Central tendencies are: a) the mean, b) the median c) the mode
- <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/MeanMedianMode.png" width="30%" height="30%" style="float: center"> 
+ <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/MeanMedianMode.png" width="20%" height="20%" style="float: center"> 
 * The goal is to **decide** whether differences between two distributions are **significant**
  <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/ComparisonsI.png" width="50%" height="30%" style="float: center"> 
 
@@ -73,7 +73,7 @@ In biology we can study:
 * Time-related phenomena, e.g. gene expression in development but also
 * Space-related signals treated as time-series, e.g. chromatin structure in linear space
 
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure11_11.jpg" width="50%" height="30%" style="float: center">
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure11_11.jpg" width="70%" height="30%" style="float: center">
 
 
 ### 4. Grouping Problems
