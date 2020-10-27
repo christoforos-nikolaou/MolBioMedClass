@@ -41,6 +41,8 @@ The most common types of analyses may be classified in the following:
   - Two distributions may have the same mean but be very different in terms of _spread_
   - Measures of spread are: a) the range b) the variance c) the standard deviation
 
+ <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/SamplesVsPopulation.png" width="50%" height="30%" style="float: center"> 
+ 
  ```r
  x<-rnorm(100, 5, 0.5)
  y<-rpois(100, 5, 0.5)
@@ -52,6 +54,8 @@ The most common types of analyses may be classified in the following:
 * Genomic Variability
 * Variation in many dimensions
 * Taking advantage of variation to talk about means (Analysis of Variance)
+
+ <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/tsne.jpg" width="50%" height="30%" style="float: center"> 
 
 ### 3. Time Series analysis
 * We are interested in studying a phenomenon that takes place in time.
