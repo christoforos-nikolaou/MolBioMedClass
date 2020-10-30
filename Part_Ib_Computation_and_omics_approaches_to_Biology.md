@@ -52,14 +52,17 @@ When we want to compare sequences in order to spot differences or similarities.
 ### 2. Examples
 * Genomic Variability
 
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure10_02.jpg" width="60%" height="45%" style="float: center"> 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure10_01.jpg" width="60%" height="45%" style="float: center"> 
 
-Phenotypic diversity stems (to a large part) from genomic variation. In many cases we are interested to know 
+Phenotypic diversity stems (to a large part) from genomic variation. 
+In many cases we are interested to know how and in which way this variation is distributed in the population. 
 
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/tsne.jpg" width="50%" height="30%" style="float: center"> 
+* Variation in omics data
 
-* Variation in many dimensions
-* Taking advantage of variation to talk about means (Analysis of Variance)
+* Taking advantage of variation to talk about means. A technique calls Analysis of Variance (ANOVA) is a very useful tool in the analysis of gene expression
+
+* Harnessing variability in order to detect patterns of identity and qualitative traits. 
+In many cases we have data that can be "spread" on a n-dimensional space (we call this a manifold). This "spreading" allows us to spot groupd that we didn't know existed. Many analysis of single-cell -omics start with exactly this sort of analysis.
 
  <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/tsne.jpg" width="50%" height="30%" style="float: center"> 
 
@@ -76,7 +79,8 @@ Phenotypic diversity stems (to a large part) from genomic variation. In many cas
 
 ### 3. Examples
 In biology we can study:
-* Time-related phenomena, e.g. gene expression in development but also
+* Time-related phenomena, e.g. gene expression in development. 
+
 * Space-related signals treated as time-series, e.g. chromatin structure in linear space
 
 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure11_11.jpg" width="70%" height="30%" style="float: center">
@@ -94,12 +98,18 @@ In biology we can study:
 * In contrast to unsupervised analysis, in these cases we known the number of categories we expect data to fall into. 
 * We call these analysis "supervised". In these we try to recognize what makes pieces of data to fall into certain categories, which we call classes.
 
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/TitanicClassification.png" width="50%" height="30%" style="float: center">
-
 
 ### 5. Examples
+* In data analysis, we often want to understand which elements of a given dataset are **responsible** for an outcome. Take for instance the following analysis of the numbers of survivors of the Titanic, when their gender and passenger class are taken into account.
+* This sort of analysis, called "Decision Tree" gives us an idea for the impact of these 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/TitanicClassification.png" width="50%" height="30%" style="float: center">
+
+* At a secondary level, we are often trying to **discover** which of the characteristics of the data are more likely to be shaping the outcome. We don't know yet (although we may suspect) but careful analyses allow us to learn more.
+
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/MachineLearningFeatures.png" width="50%" height="30%" style="float: center">
+
 * All cases of biomarker detection are basically classification problems. We are trying to figure out properties of samples/objects that classify them into categories in the clearest possible way.
-* Elements to consider: Sensitivity, Specificity, Complexity
+* Elements to consider: Sensitivity, Specificity, Complexity. How do you understand these terms?
 
 ### 6. Modeling Relationships
 * A common type of problems involves the relationships between properties/measurements.
@@ -116,30 +126,50 @@ _Edsger Dijkstra_
 
 
 ### Describing the problem
+* The most important part in programming is to **state the problem as clearly as possible**. Once this is done, it's up to the computer to sort it out.
 
-* Flow charts
-
+* Flow charts. They are in a sense a plan of our thoughts made as explicit as possible.
+* This is an example of the way Wikipedia is being edited by the community in a simple flow chart.
 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/FlowChart.png" width="50%" height="30%" style="float: center">
 
-* Pseudocode
-It's basically code but written in real language. 
+* Flow charts are, of course, as simple as the process. Try to think of a simple (?) problem like sorting a list of integers. 
+  - How would you do it?
+  - Can you describe it in a detailed and precise way (so that a dumb machine can understand it)?
+  - Now, try to plot it in a flow chart.
+
+* Pseudocode is often proposed as an alternative to flow charts. It's basically code but written in real language. Quite often *this is exactly the problem*. When trying to express a well-defined computational process (we call it an "algorithm") in real language, the same ambiguity of the language suddenly makes it less "well-defined".
 
 ### Elements of coding
-
-* Logical controls
+* Coding should be looked at as a way of describing things, much like a language. While, as with natural languages, each language has its own vocabulary, some basic elements are constant. All natural languages have syntax and grammar and most use the same key elements (such as subjects, verbs, clauses etc).
+* In the same way, all coding languages contain some key elements, such as:
+  
+  - Logical controls. 
+  These are clauses (statements) that the program evaluates as True or False. They allow the program to "branch" depending on alternative cases and in this way we are allowed to explore and evaluate  a great number of combinations of outcomes
 
 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/LogicalOperations.png" width="50%" height="30%" style="float: center">
+  
+  - Loops. These are (often tedious) processes that are repeated many times (exactly the sort of thing you *would absolutely want* a computer to do for you). Loops lie at the core of programming that involves two basic processes: a) iteration and b) recursion
 
-
-* Loops
-* Iteration
+### Iteration. 
+* Is the process by which we use a programming loop to repeat a number of steps in order to evaluate, calculate or decide about something. In the example below we use an iterative process to join two lists alphabetically.
 
 <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/MergeListIteration.png" width="50%" height="30%" style="float: center">
 
-* Recursion
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/FibonacciRecursion.png" width="50%" height="30%" style="float: center">
+### Recursion 
+  * This is somewhat different. In absolute terms it is type of iteration but it differs in the fact that the process in **"self-referential"**, meaning that it repeats _itself on itself_. Confused? Try to think of the problem of the Fibonacci numbers.
+  
+  * The Fibonacci series is the series that starts with 0 and 1 and then proceeds by creating a new number which is always the sum of the two previous ones. Thus the series becomes:
+    - 0
+    - 1
+    - 0+1=1
+    - 1+1=2
+    - 2+1=3
+    - 3+2=5
+    ....etc
+    
+* If you try to create a flow chart to describe this process you may understand what recursion is.
 
-At a second level we will discuss the basic concepts of computation. In particular how we will:
-Use flowcharts and pseudocode to describe a computational pipeline
-Employ optimization techniques
-Describe logical relationships
+## Assignments
+
+* Create a flow chart for a program that calculates the n-th term of the Fibonacci series
+* If you can code, try to write a program that sorts N integer numbers.
