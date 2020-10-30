@@ -88,6 +88,9 @@ In biology we can study:
 * In contrast to unsupervised analysis, in these cases we known the number of categories we expect data to fall into. 
 * We call these analysis "supervised". In these we try to recognize what makes pieces of data to fall into certain categories, which we call classes.
 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/TitanicClassification.png" width="50%" height="30%" style="float: center">
+
+
 ### 5. Examples
 * All cases of biomarker detection are basically classification problems. We are trying to figure out properties of samples/objects that classify them into categories in the clearest possible way.
 * Elements to consider: Sensitivity, Specificity, Complexity
@@ -98,6 +101,8 @@ In biology we can study:
 * With "modeling" we very often refer to the creation of a function that explains the relationship between the data. We call this process "regression"
 * Depending on the type of the function we may have logistic, linear, polynomial, exponential regression etc.
 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/SLERegression.png" width="50%" height="30%" style="float: center">
+
 
 ## Part B. Elements of computation
 _Computer science is not about machines, in the same way astronomy is not about telescopes_
@@ -107,15 +112,26 @@ _Edsger Dijkstra_
 ### Describing the problem
 
 * Flow charts
+
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/FlowChart.png" width="50%" height="30%" style="float: center">
+
 * Pseudocode
+It's basically code but written in real language. 
 
 ### Elements of coding
 
 * Logical controls
+
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/LogicalOperations.png" width="50%" height="30%" style="float: center">
+
+
 * Loops
 * Iteration
-* Recursion
 
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/MergeListIteration.png" width="50%" height="30%" style="float: center">
+
+* Recursion
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/FibonacciRecursion.png" width="50%" height="30%" style="float: center">
 
 At a second level we will discuss the basic concepts of computation. In particular how we will:
 Use flowcharts and pseudocode to describe a computational pipeline
