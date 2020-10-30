@@ -106,7 +106,7 @@ In biology we can study:
 
 * At a secondary level, we are often trying to **discover** which of the characteristics of the data are more likely to be shaping the outcome. We don't know yet (although we may suspect) but careful analyses allow us to learn more.
 
-<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/MachineLearningFeatures.png" width="50%" height="30%" style="float: center">
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/MachineLearningFeatures.jpg" width="50%" height="30%" style="float: center">
 
 * All cases of biomarker detection are basically classification problems. We are trying to figure out properties of samples/objects that classify them into categories in the clearest possible way.
 * Elements to consider: Sensitivity, Specificity, Complexity. How do you understand these terms?
