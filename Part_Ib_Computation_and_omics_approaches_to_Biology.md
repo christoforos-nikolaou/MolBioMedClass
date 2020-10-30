@@ -12,6 +12,7 @@
 ---
 
 ## Part A. One-slide presentations by the students
+We will leave this for next time 
 
 ## Part B. Computational Approaches to Biology
 The most common types of analyses may be classified in the following:
@@ -33,8 +34,12 @@ The most common types of analyses may be classified in the following:
  <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/ComparisonsI.png" width="50%" height="30%" style="float: center"> 
 
 ### 1. Examples
-* Gene Expression changes
+* Gene Expression changes. 
+When we want to measure how genes are more or less expressed between different conditions
 * Sequences?
+When we want to compare sequences in order to spot differences or similarities.
+
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure00_03.jpg" width="100%" height="60%" style="float: right"> 
 
 ### 2. Comparison at the level of variability
 * In this case we are interested in variation, not central tendencies.
@@ -43,15 +48,16 @@ The most common types of analyses may be classified in the following:
 
  <img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/SampleVsPopulation.png" width="50%" height="30%" style="float: center"> 
  
- ```r
- x<-rnorm(100, 5, 0.5)
- y<-rpois(100, 5, 0.5)
- boxplot(x,y)
- mean(x); mean(y)
-  ```
 
 ### 2. Examples
 * Genomic Variability
+
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/CompBio/Figure10_02.jpg" width="60%" height="45%" style="float: center"> 
+
+Phenotypic diversity stems (to a large part) from genomic variation. In many cases we are interested to know 
+
+<img src="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/tsne.jpg" width="50%" height="30%" style="float: center"> 
+
 * Variation in many dimensions
 * Taking advantage of variation to talk about means (Analysis of Variance)
 
