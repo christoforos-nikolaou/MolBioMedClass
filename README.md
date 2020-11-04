@@ -33,7 +33,7 @@ Students are all advised to access the reading material (to be read BEFORE class
  * Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation. 
  * Prepare to present this in a flash talk in class (no powerpoint needed).
 
-## 2. [pPart Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Oct 30th 2020)
+## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Oct 30th 2020)
 * Class will start with the presentations of the first assignment (see above) and discussion.
 * Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
   - Problems of difference/distance/similarity
