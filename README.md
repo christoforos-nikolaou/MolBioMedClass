@@ -51,7 +51,7 @@ Students are all advised to access the reading material (to be read BEFORE class
  * Wladston Ferreira Filho. Computer Science Distilled. [Chapter 1. Basics](https://www.dropbox.com/s/xeu4qdpu3jbkczb/Computer_Science_Chapter01_Basics.pdf)
 
 ### Assignments
- * Choose a computational problem (or invent one) and describe it with a flowchart or a pseudocode (Better if I propose one instead)
+ * Choose a computational problem (or invent one) and describe it with a flowchart or in pseudocode 
 
 ## 3. Part IIa. Similarity and Distance. Statistics (Nov 6th 2020)
 Perhaps the most common types of analyses have to do with comparing things. In this class we will discuss ways to compare measurements, quantities from samples and populations. In particular we will discuss:
@@ -62,13 +62,16 @@ Perhaps the most common types of analyses have to do with comparing things. In t
  * How we calculate distances and similarities between numerical values
  * How we may use these distances to group individuals/items in clusters
 
+### Practical Exercises in R
+We will be using R to 
+
 ### Reading
  * Points of Significance. [Comparing Samples I](https://www.dropbox.com/s/ph6ctkubpfdzc3t/CompI.pdf)
  * Points of Significance. [Comparing Samples II](https://www.dropbox.com/s/i7qijiwu6jq6r5l/CompII.pdf) 
  * Points of Significance. [Significance, p-values and t-tests](https://www.dropbox.com/s/wg80qrf34lxhg7w/Boxplots.pdf)
  * Points of Significance. [Interpreting p-values](https://www.dropbox.com/s/s8bthqxqvotqkhv/Interpretting_pvalues.pdf)
- * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 7. Επαγωγή και Έλεγχος Υποθέσεων.
- * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 11. Ομαδοποίηση.
+ * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 7. Επαγωγή και Έλεγχος Υποθέσεων. (links in English coming up)
+ * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 11. Ομαδοποίηση. (links in English coming up)
 
 ### Assignments 
  * TBA (Use R to perform t-tests in given datasets).   
