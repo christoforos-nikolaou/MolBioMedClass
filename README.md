@@ -68,7 +68,7 @@ We will be using R to
 ### Reading
  * Points of Significance. [Comparing Samples I](https://www.dropbox.com/s/ph6ctkubpfdzc3t/CompI.pdf)
  * Points of Significance. [Comparing Samples II](https://www.dropbox.com/s/i7qijiwu6jq6r5l/CompII.pdf) 
- * Points of Significance. [Significance, p-values and t-tests](https://www.dropbox.com/s/wg80qrf34lxhg7w/Boxplots.pdf)
+ * Points of Significance. [Significance, p-values and t-tests](https://www.dropbox.com/s/i39z040zn6zdblt/Pvalues_Significance.pdf)
  * Points of Significance. [Interpreting p-values](https://www.dropbox.com/s/s8bthqxqvotqkhv/Interpretting_pvalues.pdf)
  * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 7. Επαγωγή και Έλεγχος Υποθέσεων. (links in English coming up)
  * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 11. Ομαδοποίηση. (links in English coming up)
