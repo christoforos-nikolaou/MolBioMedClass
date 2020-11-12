@@ -53,7 +53,7 @@ Students are all advised to access the reading material (to be read BEFORE class
 ### Assignments
  * Choose a computational problem (or invent one) and describe it with a flowchart or in pseudocode 
 
-## 3. Part IIa. Similarity and Distance. Statistics (Nov 6th 2020)
+## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/689253) (Nov 6th 2020)
 Perhaps the most common types of analyses have to do with comparing things. In this class we will discuss ways to compare measurements, quantities from samples and populations. In particular we will discuss:
  * The notions of samples and populations
  * Descriptive statistics such as the mean and the median values
@@ -63,7 +63,7 @@ Perhaps the most common types of analyses have to do with comparing things. In t
  * How we may use these distances to group individuals/items in clusters
 
 ### Practical Exercises in R
-We will be using R to 
+We will be using R to analyze data and so assignments will be based on R. You are strongly advised to install R and R studio in your work computers. 
 
 ### Reading
  * Points of Significance. [Comparing Samples I](https://www.dropbox.com/s/ph6ctkubpfdzc3t/CompI.pdf)
