@@ -70,11 +70,11 @@ We will be using R to analyze data and so assignments will be based on R. You ar
  * Points of Significance. [Comparing Samples II](https://www.dropbox.com/s/i7qijiwu6jq6r5l/CompII.pdf) 
  * Points of Significance. [Significance, p-values and t-tests](https://www.dropbox.com/s/i39z040zn6zdblt/Pvalues_Significance.pdf)
  * Points of Significance. [Interpreting p-values](https://www.dropbox.com/s/s8bthqxqvotqkhv/Interpretting_pvalues.pdf)
- * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 7. Επαγωγή και Έλεγχος Υποθέσεων. (links in English coming up)
- * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 11. Ομαδοποίηση. (links in English coming up)
+ * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 7. Επαγωγή και Έλεγχος Υποθέσεων. 
+ * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 11. Ομαδοποίηση. 
 
 ### Assignments 
- * TBA (Use R to perform t-tests in given datasets).   
+ * Analysis of Gene Expression Data. Identification of Differentially expressed genes
 
 
 ## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression (Nov 13th 2020)
