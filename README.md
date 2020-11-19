@@ -77,7 +77,7 @@ We will be using R to analyze data and so assignments will be based on R. You ar
  * Analysis of Gene Expression Data. Identification of Differentially expressed genes
 
 
-## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression (Nov 13th 2020)
+## 4. [Part IIb. Similarity and Distance. In sequence comparison and gene expression](https://www.dropbox.com/s/z6isaj9ad8c7fah/Module_IIb_SequenceSimilarity.html) (Nov 20th 2020)
 In this class we will see how measures of similarity may apply to biological systems and in particular in two basic bioinformatics problems: Sequence comparisons and gene expression analysis. We will discuss in detail:
  * Measures of sequence similarity
  * The problem of sequence alignment
@@ -91,9 +91,9 @@ In this class we will see how measures of similarity may apply to biological sys
  * Points of Significance. [Clustering](https://www.dropbox.com/s/7qja6rg3sxuhv3p/Clustering.pdf)
 
 ### Assignments
- * TBA
+ * Sequence Alignment and Clustering
 
-## 5. Part IIIa. Variability and Information. In statistics and Data Science (Nov 20th 2020)
+## 5. Part IIIa. Variability and Information. In statistics and Data Science (Nov 27th 2020)
 Comparing means makes sense only up to one level. Samples and populations are variable and this variability is to be taken into account. In this class we will discuss issues related to variability and how it is strongly linked to the concept of information. The main points at this stage are
  * Measures of data dispersion: range, variance and standard deviation
  * Comparing variability in samples
@@ -109,7 +109,7 @@ Comparing means makes sense only up to one level. Samples and populations are va
 ### Assignments
  * TBA
 
-## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation (Nov 27th 2020)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation (Dec 4th 2020)
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
 * We will see how genomic variability may be linked to phenotypic characteristics and provide valuable information in the study of mendelian as well as complex diseases
 * We will see how variation in sequences may be quantified in order to assess the regulatory potential of particular sequences
@@ -124,7 +124,7 @@ Variability lies at the heart of a number of biological phenomena from genomic v
 ### Assignments
  * TBA
 
-## 7. Part IVa. Correlation, Regression and Causation. In statistics (Dec 4th 2020)
+## 7. Part IVa. Correlation, Regression and Causation. In statistics (Dec 11th 2020)
 The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
  * Relationships between categorical values in contingency tables
  * Correlations between numerical values that are paired
@@ -138,7 +138,7 @@ At a next level we will see how we can draw from such relationships to build pre
 ### Assignments
  * TBA
 
-## 8. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Dec 11th 2020)
+## 8. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Dec 18th 2020)
 In this class we will see how some of the models we recently discussed find applications in the biomedical sciences. We will see how models of regression and classification can by applied in the fields of:
  * Cancer genomics
  * Protein biology, drug design and repurposing
@@ -150,7 +150,7 @@ In this class we will see how some of the models we recently discussed find appl
 ### Assignments
  * Research and prepare material for your final project proposal
 
-## 9. Recap, Projects and Evaluation (Dec 19th 2020)
+## 9. Recap, Projects and Evaluation (TBA)
 This (final) class will be devoted to clarifying concepts, a general recap and discussion of your final projects, the proposal of which you will have to prepare and present in class. Projects may be collaborative but it is important that they put to practice the skills you have acquired during the semester.
 
 ## 10. Final Projects Presentation and Discussion (TBA)
