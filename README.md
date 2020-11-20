@@ -53,7 +53,7 @@ Students are all advised to access the reading material (to be read BEFORE class
 ### Assignments
  * Choose a computational problem (or invent one) and describe it with a flowchart or in pseudocode 
 
-## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/689253) (Nov 6th 2020)
+## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 6th 2020)
 Perhaps the most common types of analyses have to do with comparing things. In this class we will discuss ways to compare measurements, quantities from samples and populations. In particular we will discuss:
  * The notions of samples and populations
  * Descriptive statistics such as the mean and the median values
@@ -77,7 +77,7 @@ We will be using R to analyze data and so assignments will be based on R. You ar
  * Analysis of Gene Expression Data. Identification of Differentially expressed genes
 
 
-## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 20th 2020)
+## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 20th 2020)
 In this class we will see how measures of similarity may apply to biological systems and in particular in two basic bioinformatics problems: Sequence comparisons and gene expression analysis. We will discuss in detail:
  * Measures of sequence similarity
  * The problem of sequence alignment
