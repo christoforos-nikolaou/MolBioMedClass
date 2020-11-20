@@ -77,7 +77,7 @@ We will be using R to analyze data and so assignments will be based on R. You ar
  * Analysis of Gene Expression Data. Identification of Differentially expressed genes
 
 
-## 4. [Part IIb. Similarity and Distance. In sequence comparison and gene expression](https://www.dropbox.com/s/z6isaj9ad8c7fah/Module_IIb_SequenceSimilarity.html) (Nov 20th 2020)
+## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 20th 2020)
 In this class we will see how measures of similarity may apply to biological systems and in particular in two basic bioinformatics problems: Sequence comparisons and gene expression analysis. We will discuss in detail:
  * Measures of sequence similarity
  * The problem of sequence alignment
