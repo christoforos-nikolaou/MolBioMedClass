@@ -93,21 +93,22 @@ In this class we will see how measures of similarity may apply to biological sys
 ### Assignments
  * Sequence Alignment and Clustering
 
-## 5. Part IIIa. Variability and Information. In statistics and Data Science (Nov 27th 2020)
+## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Dec 4th 2020)
 Comparing means makes sense only up to one level. Samples and populations are variable and this variability is to be taken into account. In this class we will discuss issues related to variability and how it is strongly linked to the concept of information. The main points at this stage are
  * Measures of data dispersion: range, variance and standard deviation
  * Comparing variability in samples
  * Comparing samples, using variance. Analysis of Variance
- * Variability as Information
+ * Dimensionality Reduction Techniques
+ * K-means Clustering
 
 ### Reading
- * Points of Significance. [Error bars](https://www.dropbox.com/s/7ujqhrtkvtl2xrj/ErrorBars.pdf)
- * Points of Significance. [Boxplots](https://www.dropbox.com/s/wg80qrf34lxhg7w/Boxplots.pdf)
+ * Points of Significance. [p-values and multiple comparisons](https://www.dropbox.com/s/i39z040zn6zdblt/Pvalues_Significance.pdf)
  * Points of Significance. [ANOVA](https://www.dropbox.com/s/xy9uwwp2rz9t9ta/ANOVA.pdf)
- * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 8. Ανάλυση Διακύμανσης και έλεγχοι Πολλαπλών Υποθέσεων.
+ * Points of Significance. [The Curse of Dimensionality](https://www.dropbox.com/s/9hqd8h73thxaecc/CurseOfDimensionality.pdf)
+ * Points of Significance. [PCA](https://www.dropbox.com/s/f58v64m90hyttc4/PCA.pdf)
  
 ### Assignments
- * TBA
+ * Performing PCA and k-means Clustering in Gene Expression Data
 
 ## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation (Dec 4th 2020)
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
