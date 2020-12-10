@@ -86,7 +86,7 @@ In this class we will see how measures of similarity may apply to biological sys
 
 ### Reading
  * Wladston Ferreira Filho. Computer Science Distilled. [Chapter 1. Basics](https://www.dropbox.com/s/xeu4qdpu3jbkczb/Computer_Science_Chapter01_Basics.pdf)
- * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 4. Σύγκριση Αλληλουχιών](https://repository.kallipos.gr/bitstream/11419/1582/1/Chapter04_seqalignment_R.pdf)
+ * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 5. Σύγκριση Αλληλουχιών](https://repository.kallipos.gr/bitstream/11419/1582/1/Chapter04_seqalignment_R.pdf)
  * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 7. Ανάλυση της Γονιδιακής Έκφρασης](https://repository.kallipos.gr/bitstream/11419/1585/1/Chapter07_geneexpression_R.pdf)
  * Points of Significance. [Clustering](https://www.dropbox.com/s/7qja6rg3sxuhv3p/Clustering.pdf)
 
@@ -110,20 +110,18 @@ Comparing means makes sense only up to one level. Samples and populations are va
 ### Assignments
  * Performing PCA and k-means Clustering in Gene Expression Data
 
-## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation (Dec 4th 2020)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_B)(Dec 4th 2020)
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
 * We will see how genomic variability may be linked to phenotypic characteristics and provide valuable information in the study of mendelian as well as complex diseases
 * We will see how variation in sequences may be quantified in order to assess the regulatory potential of particular sequences
 * We will visualize and quantify variability in many dimensions as the product of state-of-the-art single-cell genomics analyses
 
 ### Reading
- * Χριστόφορος Νικολάου. Ανάλυση Δεδομένων με την R. Κεφάλαιο 10. Μείωση Διαστασιμότητας.
- * Points of Significance. [The curse of dimensionality](https://www.dropbox.com/s/9hqd8h73thxaecc/CurseOfDimensionality.pdf)
- * Points of Significance. [Principal Component Analysis](https://www.dropbox.com/s/kquwgp63kcqhwmr/ML_PCA.pdf?dl=0)
- * TBA
+ *  Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 4. Μοτίβα σε Αλληλουχίες](https://repository.kallipos.gr/bitstream/11419/1581/1/Chapter03_seqmotifs_R.pdf)
+ *  Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 10. Ανάλυση Γενετικής Ποικιλομορφίας](https://repository.kallipos.gr/bitstream/11419/1588/1/Chapter10_genvariation_R.pdf)
 
 ### Assignments
- * TBA
+ * Analyzing Motifs in Sequences
 
 ## 7. Part IVa. Correlation, Regression and Causation. In statistics (Dec 11th 2020)
 The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
