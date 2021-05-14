@@ -3,6 +3,22 @@
 
 ## Part 1. Final Projects
 
+### Notes/Points from the Replication of analyses
+
+* Problems
+  1. Data access (can we find it? is it documented? is it matched to what we expect?)
+  2. Documentation. Original code or just packages used? Parameters?
+  3. Use of not open source software, under license (major problem)
+
+* Type of papers make a difference
+  1. "Biological" papers overlook the computational analysis and how they were performed
+  2. "Methods" papers are more well-structured in this respect
+  3. High profile papers often use commercial software (e.g. Ingenuity or similar)
+
+* What do you think is missing in terms of replication?
+  1. your comments here
+
+
 
 ## Part 2. Interviews Discussion
 
@@ -14,15 +30,15 @@
   3. Immunology
 
 * Skills for a good scientist
-  1. Passion ****
-  2. Technical/specialized skills **
-  3. Perseverance, Patience, Flexibility ***
+  1. Passion [!]
+  2. Technical/specialized skills [!]
+  3. Perseverance, Patience, Flexibility [!]
   4. Risk-taking
   5. Focus on goals
   6. Original thinking
   7. Analytical thinking
   8. Open-mind (being able to be taught)
-  9. Curiosity !
+  9. Curiosity (finally!)
 
 * Innate or acquired
   1. Acquired (reading, being up to date with developments, being organized, work ethic)
