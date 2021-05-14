@@ -154,4 +154,4 @@ This (final) class will be devoted to clarifying concepts, a general recap and d
 
 ## 10. Final Projects Presentation and Discussion (May 14th, 2020)
 A day will be devoted to the final presentation of your projects.
-A few notes from your interviews from Week #1 can be found [here]
+A few notes from your interviews from Week #1 can be found [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Interview-Notes.md)
