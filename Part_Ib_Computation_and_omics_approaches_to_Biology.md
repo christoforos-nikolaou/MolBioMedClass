@@ -62,7 +62,7 @@ In many cases we are interested to know how and in which way this variation is d
 
 * Variation in omics data
 
-* Taking advantage of variation to talk about means. A technique calls Analysis of Variance (ANOVA) is a very useful tool in the analysis of gene expression
+* Taking advantage of variation to talk about means. A technique called Analysis of Variance (ANOVA) is a very useful tool in the analysis of gene expression
 
 * Harnessing variability in order to detect patterns of identity and qualitative traits. 
 In many cases we have data that can be "spread" on a n-dimensional space (we call this a manifold). This "spreading" allows us to spot groupd that we didn't know existed. Many analysis of single-cell -omics start with exactly this sort of analysis.
