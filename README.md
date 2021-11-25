@@ -66,10 +66,10 @@ Perhaps the most common types of analyses have to do with comparing things. In t
 We will be using R to analyze data and so assignments will be based on R. You are strongly advised to install R and R studio in your work computers. 
 
 ### Data files to be used in practicals
-You are advised to download the following files in order to use them in the practical exercises
-[Gene expression dataset](https://www.dropbox.com/s/d0kv52p8xy8j1jj/GeneExpressionData.tsv)
-[GC% of yeast genes](https://www.dropbox.com/s/ccf8saclts0dygc/SCgenes_gcContent.tsv)
-[GC% of yeast regulatory sequences](https://www.dropbox.com/s/tkgq1qwoi9v38qu/SCRegSeq_gcContent.tsv)
+You are advised to download the following files in order to use them in the practical exercises  
+* [Gene expression dataset](https://www.dropbox.com/s/d0kv52p8xy8j1jj/GeneExpressionData.tsv)  
+* [GC% of yeast genes](https://www.dropbox.com/s/ccf8saclts0dygc/SCgenes_gcContent.tsv)  
+* [GC% of yeast regulatory sequences](https://www.dropbox.com/s/tkgq1qwoi9v38qu/SCRegSeq_gcContent.tsv)  
 
 ### Reading
  * Points of Significance. [Comparing Samples I](https://www.dropbox.com/s/ph6ctkubpfdzc3t/CompI.pdf)
