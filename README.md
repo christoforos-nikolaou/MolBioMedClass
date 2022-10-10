@@ -1,5 +1,5 @@
 Welcome to the (unusually long named)
-# Fundamental principals in Bioinformatics, Computational Biology and Biostatistics
+# Fundamental principles in Bioinformatics, Computational Biology and Biostatistics
 A class that is part of the Molecular Biomedicine MSc Program.
 Course Structure
 9(+1) Lectures on topics related to computational and statistical approaches of molecular/biomedical problems
