@@ -19,10 +19,10 @@ https://www.nature.com/nbt/articles?searchType=journalSearch&sort=PubDate&type=p
 * [Statistics in Biology](https://www.nature.com/collections/qghhqm). A few Nature Editorials on quantitative concepts for biologists.
 
 ## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_0_Welcome.md) (Oct 14th 2022)
-[slides](https://www.dropbox.com/s/4164rafkq7b0sof/MBioMed_OpeningNotes.pdf)
+### [Lecture slides](https://www.dropbox.com/s/4164rafkq7b0sof/MBioMed_OpeningNotes.pdf)
 
 ## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ia_Introductory_Concepts.md) (Oct 27th 2022)
-[slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf?dl=0)
+
 This weeks class is an introduction to the concepts we will be discussing throughout the semester. Namely:
 * Statistics and Informatics
 * What do we need it for
@@ -37,6 +37,8 @@ Students are all advised to access the reading material (to be read BEFORE class
 * Harvey Motulsky, Intuitive Biostatistics. [Chapter 1. Introduction to Statistics](https://www.dropbox.com/s/qaxqndv6zjoxi1l/Intuitive_Biostatistics.pdf)   
 * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf)
 * S. J. Gould. [The median isn't the message](https://journalofethics.ama-assn.org/article/median-isnt-message/2013-01)
+
+### [Lecture slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf)
 
 ### Assignment(s)
  * Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation. 
