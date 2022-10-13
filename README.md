@@ -1,7 +1,9 @@
 Welcome to the (unusually long named)
 # Fundamental principles in Bioinformatics, Computational Biology and Biostatistics
 A class that is part of the Molecular Biomedicine MSc Program.
-Course Structure
+The class is supported by BSRC "Alexander Fleming" [Computational Genomics Group](http://computational-genomics.weebly.com/)
+
+## Course Structure
 9(+1) Lectures on topics related to computational and statistical approaches of molecular/biomedical problems
 Readings to be performed BEFORE each class (You have been warned)
 Topics and questions to be discussed in class
