@@ -11,6 +11,13 @@ Course Objectives
 - Concepts: To give you an overview of the problems solved by computational and algorithmic approaches in modern biomedicine.
 - Skillset: To show you how to perform (but more importantly how to interpret) standard bioinformatics analyses on genomic data.[Gene Expression, Functional Analysis, Modeling of biological data]
 
+## Some very useful resources
+
+* [Nature Biotechnology Primers](
+https://www.nature.com/nbt/articles?searchType=journalSearch&sort=PubDate&type=primer&page=1). A very interesting series of short, introductory descriptions of some useful (and some quite hardcore) bioinformatics concepts.
+* [Nature Methods. Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance). A key primer series for statistics
+* [Statistics in Biology](https://www.nature.com/collections/qghhqm). A few Nature Editorials on quantitative concepts for biologists.
+
 ## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_0_Welcome.md) (Oct 14th 2022)
 
 ## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ia_Introductory_Concepts.md) (Oct 27th 2022)
