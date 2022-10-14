@@ -141,7 +141,7 @@ Problem #2: We tend to be overconfident
 * A 40-year old woman gets a positive mamogram test.
 * What are the chances she **actually** has breast cancer?
 
-Think before you answer
+_Think before you answer_
 
 ---
 
