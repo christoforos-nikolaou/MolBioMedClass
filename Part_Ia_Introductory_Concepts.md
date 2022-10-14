@@ -135,6 +135,27 @@ Problem #2: We tend to be overconfident
 
 --- 
 
+## Should we be scared of mamograms?
+
+* A mamogram is **correctly positive** 90% of times. It's falsely positive 7% of the times. 
+* A 40-year old woman gets a positive mamogram test.
+* What are the chances she **actually** has breast cancer?
+
+Think before you answer
+
+---
+
+## Priors, Posteriors and Conditional probabilities
+
+* _Being positive given you have cancer_ is 90%
+* But _having cancer given your are positive_ **is not the same!**
+* The actual probability depends on **how many 40-year old women get breast cancer**
+
+![](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/BayesRule.jpeg?raw=true)
+
+---
+
+
 ## Part B. Planning your analyses
 ---
 
