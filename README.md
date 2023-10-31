@@ -20,10 +20,10 @@ https://www.nature.com/nbt/articles?searchType=journalSearch&sort=PubDate&type=p
 * [Nature Methods. Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance). A key primer series for statistics
 * [Statistics in Biology](https://www.nature.com/collections/qghhqm). A few Nature Editorials on quantitative concepts for biologists.
 
-## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_0_Welcome.md) (Oct 27th 2022)
+## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_0_Welcome.md) (Oct 27th 2023)
 ### [Lecture slides](https://www.dropbox.com/s/4164rafkq7b0sof/MBioMed_OpeningNotes.pdf)
 
-## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ia_Introductory_Concepts.md) (Oct 27th 2022)
+## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ia_Introductory_Concepts.md) (Oct 27th 2023)
 
 This weeks class is an introduction to the concepts we will be discussing throughout the semester. Namely:
 * Statistics and Informatics
@@ -46,7 +46,7 @@ Students are all advised to access the reading material (to be read BEFORE class
  * Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation. 
  * Prepare to present this in a flash talk in class (no powerpoint needed).
 
-## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 4th 2022)
+## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 3rd 2023)
 * Class will start with the presentations of the first assignment (see above) and discussion.
 * Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
   - Problems of difference/distance/similarity
@@ -66,7 +66,7 @@ Students are all advised to access the reading material (to be read BEFORE class
 ### Assignments
  * Choose a computational problem (or invent one) and describe it with a flowchart or in pseudocode 
 
-## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 11th 2022)
+## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 10th 2023)
 Perhaps the most common types of analyses have to do with comparing things. In this class we will discuss ways to compare measurements, quantities from samples and populations. In particular we will discuss:
  * The notions of samples and populations
  * Descriptive statistics such as the mean and the median values
@@ -96,7 +96,7 @@ You are advised to download the following files in order to use them in the prac
  * Analysis of Gene Expression Data. Identification of Differentially expressed genes
 
 
-## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 18th 2022)
+## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 16th 2023)
 In this class we will see how measures of similarity may apply to biological systems and in particular in two basic bioinformatics problems: Sequence comparisons and gene expression analysis. We will discuss in detail:
  * Measures of sequence similarity
  * The problem of sequence alignment
@@ -112,7 +112,7 @@ In this class we will see how measures of similarity may apply to biological sys
 ### Assignments
  * Sequence Alignment and Clustering
 
-## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 25th 2022)
+## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 24th 2023)
 Comparing means makes sense only up to one level. Samples and populations are variable and this variability is to be taken into account. In this class we will discuss issues related to variability and how it is strongly linked to the concept of information. The main points at this stage are
  * Measures of data dispersion: range, variance and standard deviation
  * Comparing variability in samples
@@ -130,7 +130,7 @@ Comparing means makes sense only up to one level. Samples and populations are va
 * Performing PCA and k-means Clustering in Gene Expression Data   
 First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset. 
 
-## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_B)(Dec 2nd 2022)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_B)(Dec 1st 2023)
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
 * We will see how genomic variability may be linked to phenotypic characteristics and provide valuable information in the study of mendelian as well as complex diseases
 * We will see how variation in sequences may be quantified in order to assess the regulatory potential of particular sequences
@@ -143,7 +143,7 @@ Variability lies at the heart of a number of biological phenomena from genomic v
 ### Assignments
  * Analyzing Motifs in Sequences
 
-## 7. Part IVa. Correlation, Regression and Causation. In statistics (Dec 9th 2022)
+## 7. Part IVa. Correlation, Regression and Causation. In statistics (Dec 8th 2023)
 The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
  * Relationships between categorical values in contingency tables
  * Correlations between numerical values that are paired
@@ -157,7 +157,7 @@ At a next level we will see how we can draw from such relationships to build pre
 ### Assignments
  * TBA
 
-## 8. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Dec 16th 2022)
+## 8. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Dec 15th 2022)
 In this class we will see how some of the models we recently discussed find applications in the biomedical sciences. We will see how models of regression and classification can by applied in the fields of:
  * Cancer genomics
  * Protein biology, drug design and repurposing
@@ -169,9 +169,9 @@ In this class we will see how some of the models we recently discussed find appl
 ### Assignments
  * Research and prepare material for your final project proposal
 
-## 9. Recap, Projects and Evaluation (Dec 22nd 2021)
+## 9. Recap, Projects and Evaluation (Dec 22nd 2023)
 This (final) class will be devoted to clarifying concepts, a general recap and discussion of your final projects, the proposal of which you will have to prepare and present in class. Projects may be collaborative but it is important that they put to practice the skills you have acquired during the semester.
 
-## 10. Final Projects Presentation and Discussion (Dec 23rd, 2021)
+## 10. Final Projects Presentation and Discussion (TBD)
 A day will be devoted to the final presentation of your projects.
 A few notes from your interviews from Week #1 can be found [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Interview-Notes.md)

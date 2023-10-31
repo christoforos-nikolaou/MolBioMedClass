@@ -403,8 +403,9 @@ the Question: How can we locate gene polymorphisms that are predictors of diseas
 
 ![](https://miro.medium.com/max/1200/1*N1-K-A43_98pYZ27fnupDA.jpeg)
 
-Model design
-the Question: Can we predict gene expression levels from other sources of data?
+Model design  
+
+The Question: Can we predict gene expression levels from other sources of data?
 
 ---
 
