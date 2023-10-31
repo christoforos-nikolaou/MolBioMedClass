@@ -20,7 +20,7 @@ https://www.nature.com/nbt/articles?searchType=journalSearch&sort=PubDate&type=p
 * [Nature Methods. Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance). A key primer series for statistics
 * [Statistics in Biology](https://www.nature.com/collections/qghhqm). A few Nature Editorials on quantitative concepts for biologists.
 
-## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_0_Welcome.md) (Oct 27th 2023)
+## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/Classes_2022/Part_0_Welcome.md) (Oct 27th 2023)
 ### [Lecture slides](https://www.dropbox.com/s/4164rafkq7b0sof/MBioMed_OpeningNotes.pdf)
 
 ## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ia_Introductory_Concepts.md) (Oct 27th 2023)
