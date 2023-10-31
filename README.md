@@ -20,10 +20,10 @@ https://www.nature.com/nbt/articles?searchType=journalSearch&sort=PubDate&type=p
 * [Nature Methods. Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance). A key primer series for statistics
 * [Statistics in Biology](https://www.nature.com/collections/qghhqm). A few Nature Editorials on quantitative concepts for biologists.
 
-## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/Classes_2022/Part_0_Welcome.md) (Oct 27th 2023)
+## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_0_Welcome.md) (Oct 27th 2023)
 ### [Lecture slides](https://www.dropbox.com/s/4164rafkq7b0sof/MBioMed_OpeningNotes.pdf)
 
-## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ia_Introductory_Concepts.md) (Oct 27th 2023)
+## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ia_Introductory_Concepts.md) (Oct 27th 2023)
 
 This weeks class is an introduction to the concepts we will be discussing throughout the semester. Namely:
 * Statistics and Informatics
@@ -46,7 +46,7 @@ Students are all advised to access the reading material (to be read BEFORE class
  * Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation. 
  * Prepare to present this in a flash talk in class (no powerpoint needed).
 
-## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 3rd 2023)
+## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 3rd 2023)
 * Class will start with the presentations of the first assignment (see above) and discussion.
 * Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
   - Problems of difference/distance/similarity
@@ -174,4 +174,4 @@ This (final) class will be devoted to clarifying concepts, a general recap and d
 
 ## 10. Final Projects Presentation and Discussion (TBD)
 A day will be devoted to the final presentation of your projects.
-A few notes from your interviews from Week #1 can be found [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Interview-Notes.md)
+A few notes from your interviews from Week #1 can be found [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Interview-Notes.md)
