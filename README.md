@@ -150,9 +150,9 @@ In particular we will:
 - Use R to assess sequence similarity and reconstruct phylogenetic relationships  
 - Search for motifs in DNA sequences  
 - Assess genetic variability
+(Links to material will be posted here in due time)
 
-
-## 7. Part IVa. Correlation, Regression and Causation. In statistics (postponed for 2023)
+## 7. Part IVa. Correlation, Regression and Causation. In statistics (moved to early 2024)
 The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
  * Relationships between categorical values in contingency tables
  * Correlations between numerical values that are paired
@@ -166,7 +166,7 @@ At a next level we will see how we can draw from such relationships to build pre
 ### Assignments
  * TBA
 
-## 8. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Dec 15th 2022)
+## 8. Part IVb. Correlation, Regression and Causation. In biomedical modeling (cancelled for 2023-2024)
 In this class we will see how some of the models we recently discussed find applications in the biomedical sciences. We will see how models of regression and classification can by applied in the fields of:
  * Cancer genomics
  * Protein biology, drug design and repurposing
@@ -178,7 +178,7 @@ In this class we will see how some of the models we recently discussed find appl
 ### Assignments
  * Research and prepare material for your final project proposal
 
-## 9. Recap, Projects and Evaluation (Dec 22nd 2023)
+## 9. Recap, Projects and Evaluation (now moved to early 2024)
 This (final) class will be devoted to clarifying concepts, a general recap and discussion of your final projects, the proposal of which you will have to prepare and present in class. Projects may be collaborative but it is important that they put to practice the skills you have acquired during the semester.
 
 ## 10. Final Projects Presentation and Discussion (TBD)
