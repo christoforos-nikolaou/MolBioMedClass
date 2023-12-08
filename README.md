@@ -112,7 +112,7 @@ In this class we will see how measures of similarity may apply to biological sys
 ### Assignments
  * Sequence Alignment and Clustering
 
-## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 24th 2023)
+## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 16th 2023; Now postponed for Dec 15th 2023)
 Comparing means makes sense only up to one level. Samples and populations are variable and this variability is to be taken into account. In this class we will discuss issues related to variability and how it is strongly linked to the concept of information. The main points at this stage are
  * Measures of data dispersion: range, variance and standard deviation
  * Comparing variability in samples
@@ -130,7 +130,7 @@ Comparing means makes sense only up to one level. Samples and populations are va
 * Performing PCA and k-means Clustering in Gene Expression Data   
 First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset. 
 
-## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_B)(Dec 1st 2023)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_B)(Dec 8th 2023)
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
 * We will see how genomic variability may be linked to phenotypic characteristics and provide valuable information in the study of mendelian as well as complex diseases
 * We will see how variation in sequences may be quantified in order to assess the regulatory potential of particular sequences
@@ -143,7 +143,16 @@ Variability lies at the heart of a number of biological phenomena from genomic v
 ### Assignments
  * Analyzing Motifs in Sequences
 
-## 7. Part IVa. Correlation, Regression and Causation. In statistics (Dec 8th 2023)
+## Intermission. Practical Class with R and Online Bioinformatics Tools (Dec 22nd 2023)
+The aim of this separate class is to put some of the things we have discussed into practice by implementing written code in R and through the use of available software in online bioinformatics tools.  
+In particular we will:  
+- Use R to analyze gene expression data for differential gene expression and functional enrichment analysis  
+- Use R to assess sequence similarity and reconstruct phylogenetic relationships  
+- Search for motifs in DNA sequences  
+- Assess genetic variability
+
+
+## 7. Part IVa. Correlation, Regression and Causation. In statistics (postponed for 2023)
 The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
  * Relationships between categorical values in contingency tables
  * Correlations between numerical values that are paired
