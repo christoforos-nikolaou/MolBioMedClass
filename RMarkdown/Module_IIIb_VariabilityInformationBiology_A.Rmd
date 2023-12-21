@@ -1,0 +1,261 @@
+---
+title: "MSc in Molecular Biomedicine"
+subtitle: "Part IIIb: Variability and Information (in Genomics). Part A. Regulation"
+author: "Christoforos Nikolaou, Computational Genomics Group, BSRC 'Alexander Fleming'"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
+---
+
+## Introduction. The biological problem
+
+* In this class we will shift our attention to problems of variability in a more direct biological context. We will be discussing how sequence variability may affect gene regulation through the study of regulatory motifs, before we go on to see how genomic variability in general shapes phenotypic changes in individuals.
+
+We will focus on two particular problems:
+
+  - A. The study, analysis and interpretation of biological **sequence motifs**.
+  - B. The concept of **genomic variability** and how it is directly related to phenotypical variation in a population.
+  
+
+## Part A. Sequence Motifs
+
+### Motifs in general
+
+What is a **motif** in general? How do we understand a motif?
+
+![Motifs in Biology](C:/Users/chris/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/MotifExamples.png)
+
+### Motifs. A definition
+
+We consider a motif a "repetitive substructure of a bigger object that is meant to convey a certain message"
+
+* Most (in not all) forms of messages employ "motifs" for:
+    - **repat/emphasis** : 
+      e.g. "I have a dream", MLK, "March on Jobs and Freedom Speech"
+           "Crawth the raven, Nevermore", Edgar Allan Poe   
+    - **coherence**: 
+      e.g. "Who controls the past, controls the future", George Orwell "1984"
+    - **subtextualization**: 
+      e.g. "Fair is foul and foul is fair", William Shakespeare, "Macbeth"
+        (and almost all of "Pulp Fiction")
+    - **internal reference**: e.g. all "leitmotivs" in Operas
+
+### Motifs in Biology
+
+In biology we find a number of meaningful motifs that serve one (or more) of the above functions.
+
+* Genome: Codons, Transcription factor binding sites, CpG islands, 
+* All areas of the genome that interact with proteins in sequence-dependent manner
+* Protein: Patterns of aminoacids that are related to particular function, modules, domains etc
+
+![Motifs in Biology](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/MotifsInBiology.png)
+
+### Motif-related biological problems
+
+Having introduced the concept of a biological motif, we may ask the following questions related to their definition, discovery and function.
+
+* How to define a motif? How will we **formally** describe a motif in a way that allows us to analyze its properties?
+
+* How to locate a *known* motif? Given a formally defined motif, how can we identify its location(s) in the bigger "message" (i.e. the sequence)
+
+* How to evaluate the motif? Are all motifs equal? Can we distinguish between strong and weak motifs? What are the implications in their function
+
+* How to discover *unknown* motifs in a sequence? (A whole different problem)
+
+#### Problem #1: What is a motif?
+
+* How do we define a biological motif?
+
+We will have to consider the following questions:
+  * What do we need as input?   
+  * What will the output be?
+  
+In the figure below we see the _most common_ motif for the binding of the NF-kB transcription factor. What was required to identify it?
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/NFKbmotif.png)
+
+
+#### Problem #1: Input
+
+Motifs are by definition repeated in the sequence. This means that we can find _multiple instances_ of the subsequence that serves as the motif in longer sequences (such as chromosomes or even complete genomes).
+
+We thus have **a set of oligonucleotides** that fulfil a certain function. These are:
+    - Many (sometimes in the orders of thousands)
+    - Different from each other. Sequences have **variability**
+We therefore should define the motif as a coherent entity that describes **all instances** of the binding sequence.
+    
+#### Defining a motif
+
+In the figure below we see only 8 instances of the NF-kB binding site. All of them function as binding sites but see how they are not identical.
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/MotifVariations.png)
+We need a **formal way** to describe the binding sites as a collection of instances/variations.
+
+#### Consensus Sequences
+
+One way to do that is through **consensus sequences**.   
+We may define as "consensus" either the most common sequence variant or as a set of rules (in the form of a "regular expression") that describes all instances of the motif.  
+
+In the example we use the bracket notation to describe sequence variability. Residues inside bracket correspond to alternatives for the given position. This means that in the NF-kB motif that is described by **this set of 8 instances** the three first positions are always "G" but the fouth may either be a "A" or a "G", the fifth a "A" or a "C" etc.
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/MotifConsensus.png)
+
+#### The problem with the Consensus approach
+
+As the instances we collect grows bigger, the variants increase in number. So is their variability when seen from a qualitative point of view. If just one nucleotide changes it has to be included in the consensus and so the regular expressions strategy is not functional anymore. 
+See how "vague" the motif becomes when we look at ~100 instances.  
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/MotifConsensus2.png)
+Most of the positions in the motif now, can practically be anything. 
+
+How do we describe all the variants without losing in specificity? 
+
+#### Not all positions are equal
+
+The problem with the consensus sequences is that it assumes **all positions in the motif are equivalent**. However, they are not and they are not because they **differ in variability**. Not all positions in the motif are equally variable. 
+
+See this with an example:
+
+Let's consider that the NF-kB motif is: $GGG[AG][AG]TT[TC]CC$. 
+How good a motif is $AAAAATTCCC$ compared to $GGGGGTTTCC$?  
+  
+We can try to compare the instances using an Edit (Hamming) Distance. But this disregards the local tendencies in the motif's positions.
+
+In the example above, both sequences would give a distance of 3 (compared to the most common motif shown in the Figure below). But we know from the consensus that the first of the two cannot function as a binding site, since **the first two positions are invariably "G"**.
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/HammingDistance2.png)
+
+We thus need to account for the fact that some positions are more "fixed" and other more "flexible", and so we need a _probabilistic_ description of the motif.  
+
+### Probabilistic definition of a motif
+
+We can think of such a probabilistic approach that takes into account the variability in each position. 
+Starting with a number of sequence instances of equal size we may calculate the probabilities of occurrence of _each nucleotide_ for _each position_.
+The resulting table of the probabilities is a called a **Position Weigth Matrix, PWM**.
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/PWM.png)
+This approach allows us to evaluate the variability of some positions against others and in addition to see which residues tend to be more important in which position.
+
+
+#### Accounting for background nucleotide composition
+
+Sequence variation does not only occur within the motif's instances. Fluctuations in the compositions of DNA sequences occur throughout the genomes of all eukaryotes and specific regions may be enriched in some residues at the expence of others. 
+
+This is particularly evident in the fluctuation of GC% along eukaryotic chromosomes, which are divided in regions of high/low GC% that are called "isochores".
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/Isochores.jpg)
+The variability in the genomic sequences will undoubtedly interfere with the motif instances. Binding sites embedded in high GC% regions of the genome will be more GC-rich themselves. In order to account for this variability we need to normalize against what we call the **background nucleotide composition**. 
+
+We achieve this with a different kind of table called **Position Specific Scoring Matrices, PSSM**.
+
+These are created by dividing the _observed_ probabilities per position in the original PWM (P) with the _expected_ values that are obtained for a given sequence (Q).
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/PSSM.png)
+
+A log2-transformation step results in a table where high positive values are corresponding to preferred combinations of residues-positions. A PSSM table is always specific for a given sequence in which one can search for a motif, which brings us to the next problem...
+
+
+### Finding a motif in a sequence with a PWM/PSSM
+
+PWM and PSSM tables are important not only for representations but also for the search and identification of motif instances in an unknown sequence. 
+
+Given a table (be it PWM or PSSM) and a longer sequence in which we are searching for the motif we can think of a strategy with which:
+
+  1. We start at position 1 of the sequence
+  2. Extract a subsequence $S_1$ equal in length the the length of the PWM/PSSM
+  3. Compare $S_1$ with the PWM/PSSM by identifying the score of each nucleotide in each position
+  4. Calculate a mean score of $S_1$
+  5. Go to the next position (=2) of the sequence
+  6. Repeat steps 1-5.
+
+
+#### Application of PWM/PSSM search
+
+In the graph below you may see how PWM/PSSM scores for a given transcription factor fluctuate against a complete bacterial genome.
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/PWMvsPSSM.png)  
+Notice how the PWM search (grey) is much more "noisy" and to a large extent correlates to the overall GC% (green). The results of the PSSM search are, on the other hand, a lot clearer with a greater dynamic range, that allows us to identify real maxima, corresponding to likely positions of the motif in the sequence. 
+
+
+### Strong vs Weak. Evaluating motifs.
+
+Up to now we have seen how every motif can be described as a PWM/PSSM. A different question is related to how different PWM may be describing different patterns. The PWM for NF-kB may contain some very clear positional tendencies in the first and last positions, but this is not the case for the mid-positions. A motif for a different transcriptional regulator may have completely different preferences. We are interested in understanding how the underlying variability in each position and in the motif as a whole may be assessed and what it may tell us about the motif in general.
+
+The question may be rephrased using the concept of **"motif strength"**. A "strong motif" is one that allows little variability. It means that it is very often found occurring in the same way. On the other hand a "weak" motif has a highly variable structure and thus may be found in a genome in many different variations.
+
+#### Mathematics Interlude: Variation, Information and Entropy
+
+* In 1948 Claude Shannon's pioneering work on message transmission introduce a fundamental concept and gave rise to a whole field of Science called "Information Theory".
+
+
+![Claude Shannon](C:/Users/chris/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/ClaudeShannon.jpg)  
+
+* The basis of information theory is the concept of Entropy which is defined in the following:
+
+    * Given the set $S$ of $n$ probable outcomes of a "source", each of which has probability $P[i]$
+    * The "Shannon" Entropy of this source is equal to the negative sum of the products of those probabilities and their logarithms, such as: $$H(S)=-\sum_{i=1}^{n} P[i]log(P[i])$$
+
+#### Mathematics Interlude: Information as Entropy
+
+* It derives from Shannon's formula that **Entropy maximizes when all possible outcomes have equal probability**.
+* This is directly related to the notion of Entropy as you know it from Physics. Can you see how?
+  
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/ShannonEntropy.png)
+
+When all outcomes have equal probability we are in a position of **maximum uncertainty**. In principle, out of all the possible things that can happen, we cannot dare make a guess in favour of one or another. We are thus in the worst possible state in terms of **being informed** about the system under study. Thus when all outcomes are equiprobable, _uncertainty is maximum and information is minimum_.
+This is the link between variablity, uncertainty and information that allows us to assess the strength of motifs.
+
+#### Stop and think: How is this related to motifs?
+
+A motif where all positions are equiprobable for all nucleotides has maximum Entropy. It also conveys the least possible information. There isn't absolutely anything it can tell us about where the sequence has embedded a message.
+Assuming that we are about to receive a message, before we receive it we know nothing (high uncertainty). Once we **have seen** the message we have **reduced the uncertainty** by a certain amount, which **we have gained as information**.
+
+According to Information Theory, Information equals the change in the Entropy before and after a message has been transmitted: $$I(S)=H(S)_{after}-H(S)_{before}$$
+
+#### Evaluating a motif with Information (I)
+
+How can we then employ this concept in the case of DNA sequence motifs? 
+Let's say that you want to "guess" what a motif is. You will need to guess the residue occuppying each position. Considering there are four different outcomes (nucleotides) for each position, we can calculate the "before" Entropy, as being the maximum, with all outcomes equiprobable (P=0.25) to a total, maximum $H=2$:
+
+$$H(S)_{before}=-\sum_{i=1}^{4} P[0.25]*log(P[0.25])=2$$  
+This will be the same for every position in the motif.
+    
+What is then the entropy **once the message has been transmitted?** 
+We will denote as "after" the entropy, which we can calculate directly **from the PWM**. Remember that the PWM contains the probabilities of each position:
+
+$$H(S)_{after}=-\sum_{i=1}^{4} P[i]*log(P[i])=H$$ 
+
+and thus:
+
+$$I(S)=2-H(S)_{after}$$  
+
+The key is that the smaller the $H(S)_{after}$ the more we have gained as information, since we are **reducing the uncertaintly** of the message.
+
+Below you see how this is calculated for the NF-kB case:
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/PWMLogo.png)
+
+Notice (red boxes) how some positions have high I, with low uncertainty, while others low I, when there is **variability** in the observed residues.
+
+### Plotting Information in Sequence Logos
+
+Bioinfromaticians have come up with a nice way to represent the information content of motifs. In these, called **Sequence Logos**, each residue is shown as a coloured letter, whose height corresponds to its contribution to the overall I of the position (which is $-P_ilog(P_i)$, with $P_i$ being its probability in the given position). High bars correspond to high information content. 
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/LogoExample.jpg)
+
+#### Motif representations (PWM/PSSM)
+
+Going back to the motif search with PWM/PSSM, below you may see the logos obtained for the collection of the top 5% high scoring instances obtained with PSSM (top) and PWM (bottom) searches. Notice how the more "noisy" PWM-search gives rise to less "clear" motifs that eventually are more vague and score lower Information contents, in contrast to the much stronger PSSM-search motifs. The difference in I is considerable (13.7 against 8.6 out of a possible maximum of 20).
+
+![](C:/Users/chris/Dropbox/Teaching/My_BC205/Figures/PWMvsPSSMLogo.png)
+

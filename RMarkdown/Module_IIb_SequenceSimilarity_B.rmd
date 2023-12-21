@@ -1,0 +1,209 @@
+---
+title: "MSc in Molecular Biomedicine"
+subtitle: "Part IIb: Similarity and Distance in sequence comparison. Part B"
+author: "Christoforos Nikolaou, Computational Genomics Group, BSRC 'Alexander Fleming'"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
+---
+
+## Part B. Going a bit faster
+ 
+### The Problem with the alignment approach
+It takes approximately (NxM) calculations to align a sequence of lenght N to a sequence of length M. If we want to align a lot of sequences we need to be able to do it faster, especially if we just want to find their best match in a much larger sequence (e.g. a complete genome) 
+
+### Big Data Alignment Solutions. BLAST
+BLAST is an approximate approach that filters out most of the sequence targets before going further.  BLAST searches for sequence similarity of a "query" sequence against a "target" database. You may see a read as a "query" and the reference genome as the "target"
+
+![BLAST](/home/labuser/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure04_09.jpg)
+
+
+### BLAT (BLAST-like tool)
+BLAT is a BLAST-like approach for quick searches in a particular genome sequence instead of entire sequence databases. It was quite popular before the advent of NGS approaches which have posed a real bottleneck even for the fastest comparison algorithms existing at the time.
+
+![BLAT, a BLAST-like tool](/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/BLAT.png)
+
+Thus even the fastest alignment and rapid-search approaches are not fast enough for NGS data. In the following we will see why we have to resolve to **data-transformation approaches** to tackle the read alignment problem.
+
+
+## Part C. NGS Approaches to Fast String Matching
+
+### We need something stronger
+Up to now the approaches we have discussed look at either one-vs-one exact sequence alignments, or fast approaches for approximate matching of one vs many sequences. 
+
+In NGS data we a slightly different task from a qualitative point of view. This is **the exact match of many-to-one sequences**.
+More importantly, it is also quite different from a quantitative point of view. A typical NGS experiment creates ~100Mi sequence reads of ~200bp that have to be matched against a genome of ~3Gbp. This is impossible to carry out getting one read at a time and matching it against the _reference genome_. It is the equivalent of having a highway that extends for hundreds of kilometers and allowing only one car to use it every time.  
+
+### Data Transformation Approaches
+In order to be able to use the "highway" more effectively we have to transform the highway so that it is more easily accessible. The solution for the NGS **"read mapping problem"** is thus based on manipulating the reference genome sequence.
+
+Data transformation methods, create an easily searchable/mappable version of the _**target**_ sequence (the Reference Genome). Although memory-demanding they make the process much faster and allow the repetitive sequence search at great speed and efficiency. Examples of such transformations are the _Suffix trees_ and the _Burrows-Wheeler Transform (BWT)_.
+
+Below we will discuss the first of the two.
+
+### Suffix Trees
+Suffix Trees (ST) are an efficient way to create a rapidly "searchable" representation of a long sequence.  
+
+Imagine the sequence $S=GAGTAAGTCA$. We will create its ST, starting with the creation of all the suffixes(=endings) of the sequence. In order to create its suffixes (as dictated by the "suffix") we simply append a \$ sign at the end of each possible suffix of $S$.  
+  
+| Suffixes S  |
+|-------------|
+| GAGTAAGTCA$ |
+| AGTAAGTCA$  |
+| GTAAGTCA$   |
+| TAAGTCA$    |
+| AAGTCA$     |
+| AGTCA$      |
+| GTCA$       |
+| TCA$        |
+| CA$         |
+| A$          |
+
+
+We then order all the suffixes alphabetically
+
+| Suffixes  So|
+|-------------|
+| A$          |
+| AAGTCA$     |
+| AGTAAGTCA$  |
+| AGTCA$      |
+| CA$         |
+| GAGTAAGTCA$ |
+| GTAAGTCA$   |
+| GTCA$       |
+| TAAGTCA$    |
+| TCA$        |
+
+
+At the same time we keep the positions of each suffix in the original sequence
+
+| Suffixes         |
+|------------------|
+| A$ [10]          |
+| AAGTCA$ [5]      |
+| AGTAAGTCA$ [2]   |
+| AGTCA$ [6]       |
+| CA$ [9]          |
+| GAGTAAGTCA$ [1]  |
+| GTAAGTCA$ [3]    |
+| GTCA$ [7]        |
+| TAAGTCA$ [4]     |
+| TCA$ [8]         |
+
+### Building a Suffix Tree
+
+A Suffix Trie looks, well, like a tree. You start with a root and then proceed in iteration by:
+  1. adding each suffix to the root **given that its prefix doesn't already exist** or 
+  2. adding each suffix to an already existing prefix **if it's suffix is matching it**
+
+![Suffix Tree Building](/home/labuser/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure11_07.jpg)
+
+Once we go through the whole list of suffixes the tree can be compressed in order to have all non-branching clades in "leaves". Even so, compare the size of the tree with the original 10-nucleotide sequence.
+
+![Suffix Tree Building](/home/labuser/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure11_08.jpg)
+
+
+### Using a Suffix Tree
+Why did we bother to use up so much memory and time to create the ST? 
+It is because the tree has some specific properties that allow us to locate identical matches in an ultra-fast and efficient way.  
+
+The basic property of the ST is that **every substring of $S$ is a prefix of some suffix of $S$**. This means that **every sequence contained in $S$ will be connected to the root** and thus we can tell if a shorter sequence exists in the main sequence just by looking at the tree.
+
+We can actually do much more like:
+  
+* Decide if a pattern exists in a sequence
+* Find a pattern in a sequence
+* Find how many times a pattern occurs in a sequence
+* Find the position(s) of a patten in a sequence
+* Find the **longest repeat** in a sequence
+* Find the **longest common pattern** between two sequences
+* etc.
+
+
+### Suffix Trees Games
+We can check the existence of a subsequence starting from the root and working our way down the tree. If we manage to read all the subsequence inside the tree, then *by definition* is is part of the longer, main, sequence. 
+
+In the figure below we check if $AGT$ is contained in the orignal sequence.
+
+![](/home/labuser/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure11_08.jpg)
+
+It turns out that it does (remember the original sequence was $S=GAGTAAGTCA$). 
+
+### Finding repeats in a sequence
+
+Even better the ST can help us identify _how many times the sequence exists in the main sequence_. This is given directly by _the number of branches_ coming out of the clade that we have followed in our search. In the figure above $AGT$ branches out into two leaves, which means that it is contained twice in the original sequence (again remember it was $S=GAGTAAGTCA$).
+
+Last but not least we can identify the positions in the original sequence. Remember that we have kept those for every suffix. We have not drawn this in the tree but if we go back to the original list:
+
+| Suffixes         |
+|------------------|
+| A$ [10]          |
+| AAGTCA$ [5]      |
+| AGTAAGTCA$ [2]   |
+| AGTCA$ [6]       |
+| CA$ [9]          |
+| GAGTAAGTCA$ [1]  |
+| GTAAGTCA$ [3]    |
+| GTCA$ [7]        |
+| TAAGTCA$ [4]     |
+| TCA$ [8]         |
+
+We can see that the branches starting with $AGT$ are the ones at positions 2 and 6. Indeed these are the positions of $AGT$ in the sequence:
+
+```
+1 2 3 4 5 6 7 8 9 10
+G A G T A A G T C A
+  A G T   A G T
+```
+
+Suffix Trees were used for some of the first ultra-fast NGS mapping software. Even though they are now largely replaced by Burrows-Wheeler Transform based approaches the concept of data transformation is very similar (and similarly ground-breaking).
+
+## Assignment
+
+### Introduction
+
+The goal of this assignment will be to combine sequence similarity analysis with the clustering approaches we discussed last time. 
+
+Histone H4 is one of the most well-preserved proteins among eukaryotic organisms. In this assignment, you will have to assess **the degree of conservation** through **Needleman-Wunsch pair-wise alignment** in specific protein sequences derived from a broad group of eukaryotes.
+
+The file you will find [here](https://www.dropbox.com/s/gz554anznooo91k/histone4.fa) contains the H4 protein sequences from the following organisms: (Homo sapiens: HUMAN, Mus musculus: MOUSE, Drosophila melanogaster: DROME, Arabidopsis thaliana: ARATH, Bos taurus: BOVIN, Caenorhabditis elegans: CAEEL : CHICK, Rattus norvegicus: RAT, Saccharomyces cerevisiae: YEAST, Xenopus laevis: XENLA)
+
+### Stage 1
+You are asked to:
+
+1. Align all sequences with each other in pairs using the BLOSUM50 replacement table.
+2. Indicate the alignment scores on a square table of $NXN$ dimensions
+
+Auxiliary information:
+It is recommended that you use the the R::seqinr and BioConductor::Biostrings libraries.
+The installation of the former is done directly by R 
+```{r, echo=T, eval=F}
+install.packages("seqinr")
+```
+while for Biostrings you have to go through Bioconductor: 
+```{r, echo=T, eval=F}
+BiocManager::install("Biostrings")
+```
+
+The reading of the sequences can be done with the $read.fasta()$ function of seqinr.
+Alignment will be performed with the Biostrings $pairwiseAlignment()$ function using the substitutionMatrix = "BLOSUM50" parameter.
+
+### Stage 2
+In this second stage you will use the data from the previous query. The purpose here is to estimate the evolutionary distances between the sequences based on pairwise alignment.
+You are required to:
+
+1. Convert the similarity table from Stage 1 to a distance table. You can do this by taking the maximum similarity max(S) of the whole table and applying the formula $D_i=(1-S_i)/Max(S)$ to all $S_i$ values.  
+2.Use the distance $D$ table as input to create a UPGMA tree. You can use the $hclust()$ function of the basic R.  
+
+3. Return the tree and comment if it has an image that reflects the complexity relationships between the organisms

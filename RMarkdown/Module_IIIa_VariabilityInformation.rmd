@@ -1,0 +1,429 @@
+---
+title: "MSc in Molecular Biomedicine"
+subtitle: "Part IIIa: Variability and Information (in Data Science)"
+author: "Christoforos Nikolaou, Computational Genomics Group, BSRC 'Alexander Fleming'"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
+---
+
+## Introduction. The biological problem
+
+* In this class we will shift to another statistical concept. Instead of looking at central modes and tendencies we will be focusing on variation, variability and how we can use it to translate it into valuable information in various contexts. The analysis of variation is key in many data analysis techniques that include the comparison of multiple samples through ANOVA (Analysis of Variance), handling the complexity of data through dimensionality reduction and clustering methods that take into account data variability.
+
+* The topics of this lecture include:
+  - A. The use of variance in **Analysis of Variance**, a family of methods that take advantage of *distribution variances* in order to draw conclusions *on their means*
+  - Β. Techniques that assess variation in data in order to analyze complex datasets through approaches that are grouped under the collective term of **Dimensionality Reduction**
+  - C. Clustering approaches that build on data variability 
+
+
+## Part A. Using Variance to improve our statistical inference
+
+Variance (or dispersion) analysis is a very useful methodological tool in statistical analysis. It is based on the comparison of variance between multiple samples. In the simplest case, we may compare the variance of two samples, with the F-test or variance test. In R, the corresponding function is called $var.test()$ and its application is simple as shown below.
+We will be performing a test on two subsets of a broader dataset that comprises weight values of chicks depending on the material they were fed on, containing 71 measurements from 6 different feeds:
+
+```{r, echo=T, eval=T}
+str(chickwts)
+```
+
+We would first like to see how we can compare the variances in a pairwise-manner, choosing an example case between linseed and horsebean.
+
+```{r, echo=T, eval=T}
+which(chickwts$feed=="linseed")->linseed
+which(chickwts$feed=="horsebean")->horsebean
+var.test(chickwts$weight[linseed],chickwts$weight[horsebean])
+```
+
+An overview of the output shows that it is very similar to that of the $t.test()$. The corresponding statistic is F. Degrees of freedom, p-value and confidence interval are also included in the output. The reference value here is the ratio of the two variances and the base value is the unit, since in the case of equal variances: $var_A/var_B=1$. In this example, although the two variances differ from that of linseed by about 1.8 times, the difference is not considered statistically significant. (Notice the p-value, and in addition how _the value 1 is included within 95% confidence interval_.
+
+Now, compare this to:
+```{r, echo=T, eval=T}
+t.test(chickwts$weight[linseed],chickwts$weight[horsebean])
+```
+
+which tells us that two samples may have _statistically significant differences in terms of their mean value_ but this difference is not reflected in the level of variance. 
+
+Up to this point we have already seen how to compare two datasets against each other. But the question arises when more than two samples are to be compared against each other. What happens then? 
+One easy answer is to perform pairwise t.tests to all possible combinations like this:
+
+```{r}
+pairwise.t.test(chickwts$weight, chickwts$feed, p.adjust.method = "fdr")
+```
+
+This is not entirely unjustified, although it comes at a cost which you may see in the _p.adjust_ parameter. The adjustment of the p-values is necessary in every case that we perform _multiple comparisons_ (as we do here) and it is necessary because when a large number of p-values is produced, we need to apply stricter thresholds to what we will consider small enough.
+_(There is a lot of statistics behind p-adjustment and corrections for multiple testing but you can read a nice and compact introduction on the topic [here](https://www.dropbox.com/s/i39z040zn6zdblt/Pvalues_Significance.pdf))_ 
+
+Going beyond pairwise comparisons and back into variance, there is a great way we can use the variance of the multiple samples to our advantage to draw **more accurate** conclusions on the mean differences. Below we see how.
+
+###  Analysis of Variance (ANOVA)
+
+The term **Analysis of variance** refers to a set of statistical modeling analyzes that aim to estimate difference in the mean values between groups in complex samples. ANOVA is the methodological approach of choice for comparing more than two samples. Conceptually, it does not differ much from a multi-pair t-test approach, however it is generally more rigorous and thus leads to **more conservative results** with limited type I errors, i.e. it rarely leads to the rejection of zero assumptions that are true.
+
+The basis of ANOVA is the estimation of the difference in the mean value of a parametric variable in relation to one or more categorical variables.
+This may sound too technical at first but basically it means that, given a set of values coming from many categorical variables, we are looking to _disentangle_ the **variability within** each subset of the same category against the **variability between** them.
+
+![ANOVA](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/ANOVA.png)
+
+##### ANOVA in theory
+
+The best way to understand how this is done is to look at a step-by-step example. We will return to the $chickwts$ data and now take a look at all the categorical variables visually:
+
+```{r, echo=F, eval=T, fig.width=6}
+library(ggplot2)
+# Δημιουργία πίνακα με τις μέσες τιμές ανά κατηγορία
+m_aggr<-aggregate(chickwts$weight, by=list(chickwts$feed), FUN=mean)
+group_means<-data.frame(feed=m_aggr[,1], Wt=m_aggr[,2])
+# Υπολογισμός γενικής μέσης τιμής
+grand_mean<-mean(chickwts$weight)
+# Δημιουργία βασικού διαγράμματος με την ggplot με δεδομένα που δίνονται ως: aes(feed, weight)
+myplot<-ggplot(chickwts, aes(feed, weight), colour=feed)
+# Προσθήκη
+myplot +
+  geom_jitter(aes(colour=feed)) + # προσθήκη γραφικού στοιχείου αναπαράστασης σημείων με χρώμα
+  facet_grid(~feed)+labs(x="") + # διαχωρισμός γραφικών σε ξεχωριστά τμήματα (facets)
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) + # απαλοιφή διπλών εγγραφών στον Χ-άξονα
+  geom_hline(aes(yintercept = Wt, colour=feed), data=group_means) + # προσθήκη οριζόντιων γραμμών επιμέρους μέσων τιμών
+  geom_hline(aes(yintercept = grand_mean)) # προσθήκη οριζόντιας γραμμής γενικής μέσης τιμής
+```
+
+What more can we learn from this chart? In this we see that the total dispersion of values of each category can be broken down into two components. The first is the degree to which their individual average value differs from the general average value (the solid black line running in all panels) and the second is the degree to which they are _scattered around the individual average value of their category_. Between the two we can see the first as a "signal" and the second as a "noise". This is because the former is indeed indicative of the difference between the categories in terms of their average values, while the latter has to do with the dispersion of the values of each category.
+
+**The purpose of ANOVA is precisely to assess the weight of the former in relation to the latter**. 
+You can read more about ANOVA [here](https://www.dropbox.com/s/xy9uwwp2rz9t9ta/ANOVA.pdf)
+Below we will see how we can apply it in practice.
+
+
+##### ANOVA in practice
+
+ANOVA essentially belongs to a broader class of statistical models called _generalized linear models_. The aim of the model is to estimate this relationship at the dispersion level. 
+
+R employs models in a similar way, separating the response variable from one or more explanatory variables with the "~" symbol. In the general case we are interested in analyzing the combined/isolated variance of a ResponseVariable against one, two or more explanatory, categorical variables (A, B, C etc). The general "grammar" looks something like this
+
+> aov (ResponseVariable ~ A + B + C ..., data = data.frame)
+
+where ResponseVariable is the parametric variable we are interested in controlling and A, B, C, etc. are the categorical variables on the basis of which we want to control. In our case we only have:
+- A response variable (weight) and 
+- One categorical variable (dietary supplement). 
+
+Based on the above the call of the ANOVA R function $aov()$ will be:
+
+
+```{r, echo=T, eval=T}
+aov(weight~feed, data=chickwts)->fit
+summary(fit)
+```
+
+Which creates a model (called $fit$) and whose contents we inspect with the function summary:
+
+What does this possibility tell us? At a first level, that its value is too small to justify the rejection of the null hypothesis and therefore the data by category do not come from the same distribution. As a result it seems poor as it tells us nothing about which dietary supplements behave best. We can obtain this information by applying a confidence interval calculation to the differences in the mean values of the individual categories with the $TukeyHSD()$ function acting on an object created by ANOVA.
+
+```{r, echo=T, eval=T}
+aov(weight~feed, data=chickwts)->fit
+TukeyHSD(fit, conf.level = 0.99)
+```
+and we can plot these results, including their confidence intervals as you see below:
+
+```{r, echo=T, eval=T, fig.width=6}
+aov(weight~feed, data=chickwts)->fit
+TukeyHSD(fit, conf.level = 0.99)->tukey
+par(las=1)
+par(mar=c(5,10,2,2))
+plot(tukey)
+for(i in 1:length(tukey$feed[,1])){
+  text(x=tukey$feed[i,1],y=length(tukey$feed[,1])-i+1.3, labels=round(-log10(tukey$feed[i,4]), digits=3), cex=0.4)
+}
+```
+
+Take a look at the final outcome of the ANOVA analysis and compare it to the pairwise t.test we saw above. You will notice that some of the p-values are greater in the ANOVA and thus some of the comparisons that were deemed significant at a given level in the t.tests are not significant for the ANOVA (at the same level). This is a nice demonstration of how taking the combined variances into account allows us to be more rigorous and avoid type-I errors (false positives).
+
+
+## Part B. Dimensionality Reduction for Complex Data
+
+Having seen how we can take advantage of variance in order to improve our statistical armour we will now move to a different topic. That of analyzing and making sense of complex data. 
+
+Imagine that you are observing an object in three dimensions with a rather complex shape, folds, cavities, bumps, etc. In fact, what you are doing is looking for the vantage points (the viewing angles) that allow you to better discern its peculiarities. Now imagine that instead of an object you have a cloud of points corresponding to the elements for which you have measured three variables. In a graphic representation of them in three dimensions you will try to rotate the axes in such a way that you can better distinguish if your points are evenly distributed, create groups, etc.
+
+In the example shown below we plot three measurements of demographical data from the 50 states of USA.
+
+```{r, echo=T, eval=T}
+USStateData<-state.x77
+head(USStateData)
+library(scatterplot3d)
+scatterplot3d(USStateData[,1:3], pch=19, color="dark red", angle=35)
+```
+
+You see that data referring to the population, the average income and the percentage of illiterate people are more or less distributed evenly. We can try to rotate the axes a little bit using the angle parameter
+
+```{r, echo=T, eval=T}
+USStateData<-state.x77
+head(USStateData)
+library(scatterplot3d)
+scatterplot3d(USStateData[,1:3], pch=19, color="dark red", angle=75)
+```
+
+and we see that indeed a slight rotation of the axes allows us to detect differences in the initially seemingly uniform set of points. This may be OK for a 3-D space defined by three variables, but what if we had 4, 5 or 20? In fact for this dataset we have 8 different variables. What can we make of the states' behaviour by looking into 8 variables at the same time?
+
+This is what we call the **"curse of dimensionality"**. A large number of variables define an equally large dimensional space in which we have to search for patterns. You can read a bit more about it (although in rather abstract terms) [here](https://www.dropbox.com/s/9hqd8h73thxaecc/CurseOfDimensionality.pdf). The main point to keep in mind is that, _in order to discern patterns in high-dimensional data, we first need to define the parts of the data that contain the largest variability_. This is because by identifying variation we can then use it to look into the data in a clearer way. (You can think of it intuitively as looking for ways to "spread" the data as much as possible).
+
+In the following we will see two methods for reducting and interpreting data dimensionality: Principal Component Analysis (or [PCA](https://www.dropbox.com/s/f58v64m90hyttc4/PCA.pdf)) and t-distributed Stochastic Neighbour Embedding (or t-SNE).
+
+### Principal Component Analysis (PCA)
+
+PCA is a method of data transformation, in that it aims to represent the data in a space that will highlight their **greatest variation** and thus help us better discern the existence of distinct groups. The main difference is that the variables _are not used as they are, but instead we use their linear transformations_, which are called **principal components**. These transformations are essentially new variables corresponding to *new axes that define the maximum variance* of the elements.
+
+![PCA. Notice how the coloured axes represent the first two PC which are -in addition- orthogonal to each other](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/PCA_1.png)
+
+Each such component is the result of a combination of all variables, with the first principal component (or PC) corresponding to the arrangement of points to achieve the greatest possible variance. This process continues for the second major component, the third and so on. Each PCA analysis will eventually generate a number of components equal to the number of variables (and therefore the dimensions). 
+
+But what do we gain? The fact that by its construction, the analysis will distribute the overall variation *unevenly and with priority to the first major components*. In this way even for tens or hundreds of variables the _total variation is concentrated by 80% or 90% in the first two or three principal components_, which are enough to represent our data in the best possible way. By now you should have understood that **variance is a proxy for information** and that's exactly where the concept of reducing dimensionality lies.
+
+#### PCA in practice
+
+Let's look at how we can use PCA in R to analyze the States data we only superficially addressed in the 3D plot above.
+We will first apply PCA with the $prcomp()$ function to create a PCA object
+
+```{r, echo = T, eval = T}
+statespca <- prcomp(USStateData[,1:8], scale = T)
+```
+
+and then use the $summary()$ function that we have already encountered to see the contents of the analysis
+
+```{r, echo = T, eval = T}
+summary(statespca)
+```
+
+We first see that there are as many components as there are variables. But notice the last row of the table above (which corresponds to the cumulative distribution of dispersion) and see how it is unevenly distributed in the first PCs. This practically tells us that we can get over 65% of the information by looking at just the first two components. How do we do it? We can plot the data with appropriate functions shown below (using the factoextra library).
+
+#### What does it look like?
+
+We may first visualize what we call the "PC loadings" for each object (State) in our data in the two-dimensional space defined by the first two PCs.
+
+```{r, echo=T, eval=T}
+library(factoextra)
+fviz_pca_ind(statespca, col.ind="cos2", gradient.cols=c("steelblue4", "grey", "firebrick4"))
+```
+Notice how a 2D plot of PCA data is much more informative than a 3D plot of unprocessed data. In the plot above we are using the information on all 8 variables and thus we can achieve a clearer distinction. Not all states are alike (as one would expect).
+
+#### What matters more?
+
+The plot we see above is a result of a combination of information from all 8 variables but which are responsible for placing North Dakota in the bottom left and Texas in the top right? We can see the relative contributions of the original variables as vectors in a 2D space, like this:
+
+```{r, echo=T, eval=T}
+library(factoextra)
+fviz_pca_var(statespca, col.var="contrib", gradient.cols=c("steelblue4", "grey", "firebrick4"))
+```
+Where we see that what makes a state appear at the bottom left is largely associated with low temperatures and life expectancy, while Murder rates are likely to drive a state in the opposite direction of this plot. 
+Also notice that arrows pointing towards the same direction represent features that are "correlated" (but we will discuss this concept in a next class).
+
+#### PCA and grouping data
+
+![PCA can help us define groups](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/PCA_2.png)
+
+Dimensionality reduction techniques are often presented next to clustering approaches (and this class is no exception). This is because they can assist us into **visually** identifying groups of data. Although PCA is not the best example of such a function we can see how this is done if we create a grouping of our own and then _project it_ on the PCA plot. We can do this by working our way in the data frame that contains the original data.
+
+In the following we add an additional factor labeled "State" in the original data and in it we assign each state to a broad geographical region.
+
+```{r, echo=T, eval=T, warning=F}
+USStateData<-as.data.frame(state.x77)
+USStateData$State<-""
+USStateData$State[which(row.names(USStateData) %in% c("Connecticut", "Maine", "Massachusetts", "New Hampshire", "Rhode Island", "Vermont", "New Jersey", "New York", "Pennsylvania", "Illinois", "Indiana", "Michigan", "Ohio", "Wisconsin"))]<-"North"
+USStateData$State[which(row.names(USStateData) %in% c("Iowa", "Kansas", "Minnesota", "Missouri", "Nebraska", "North Dakota", "South Dakota", "Utah", "Wyoming", "Colorado", "Idaho", "Montana"))]<-"MidWest"
+USStateData$State[which(row.names(USStateData) %in% c("Delaware", "Florida", "Georgia", "Maryland", "North Carolina", "South Carolina", "Virginia", "West Virginia", "Alabama", "Kentucky", "Mississippi", "Tennessee", "Arkansas", "Louisiana", "Oklahoma", "Texas"))]<-"South"
+USStateData$State[which(row.names(USStateData) %in% c("Arizona", "Nevada", "New Mexico", "Alaska", "California", "Hawaii", "Oregon", "Washington"))]<-"West"
+```
+
+Let's now see how these 4 geographical categories (North, South, West, Midwest) are distributed in the 2D PCA plot
+
+```{r, echo=T, eval=T, warning=F}
+library(ggfortify)
+autoplot(statespca, data=USStateData, colour="State", frame=T)
+```
+We see that the geographical position of the state matters. Each polygon encloses the states that correspond to a certain geographical region. There is a more or less clear divide between North and South. Midwest and West are also clearly different in many respects. We thus see that PCA has captured some of the characteristics that are particular to the geographical position of the states based on demographical data. A nice example of how we can use dimensionality reduction to get information on the "granularity" of the data.
+
+### t-distributed Stochastic Neighbour Embedding (t-SNE)
+
+PCA is based linear transformations of variables or their relationships. In many cases, however, especially when the number of variables is very large, the relationships between the variables are non-linear, leading to methods such as PCA delivering non-uniform weights to different components. Methods that overcome this problem are based on nonlinear and probabilistic approaches, in which the relationships between the elements are not defined by linear relationships.
+An extremely effective methodology of this type is T-Distributed Stochastic Neighbor Embedding (tSNE), which is essentially another mapping method applied to large-scale data for imaging. in two or three dimensions. 
+
+
+#### t-SNE in practice
+
+We will not go into the (rather weary) technical details of t-SNE but will instead present it directly in a molecular biology context as t-SNE is one of the methods of preference for the analysis of single-cell (sc) genomics data.
+In sc analyses we are actually measuring a large number of cells for many features at once (e.g. the expression or methylation of hundreds or thousands of genes). This makes these datasets extremely high-dimensional (the dimension is equal to the number of genes analyzed) and thus even PCA struggles. t-SNE can analyze this sort of data in a fast and efficient way. 
+
+Below we see how we can use R to analyze a (preprocessed) single-cell dataset. We will use data from a published paper on cell fate decisions during mouse gastrulation [Mohammed et al., Cell Reports, 2017](https://www.cell.com/cell-reports/pdf/S2211-1247(17)30961-0.pdf)
+
+We have already downloaded and filtered the data which we load into R
+
+```{r, eval=T, echo=F}
+allrawcounts<-read.delim("~/Dropbox/collaborations/FVinas/Mohamed2017_data/GSE100597_count_table_QC_filtered.txt", header=T, sep="\t")
+source("~/Dropbox/Programs/R_functions/splitlist.R")
+genename<-splitlist(as.character(allrawcounts$X), "_", 1)
+allrawcounts<-data.frame(Gene.Symbol=genename, allrawcounts[,2:length(allrawcounts[1,])])
+celltypes<-splitlist(as.character(colnames(allrawcounts)), "_", 1)
+colnames(allrawcounts)<-celltypes
+```
+
+They comprise a 24483X722 table, meaning that 722 cell have been analyzed for more that 24k genes.
+
+```{r, echo=T, eval=T}
+dim(allrawcounts)
+```
+As this is a time-frame experiment in which we also know the time at which the cells were drawn from the sample so we can see that there are:
+
+```{r}
+table(colnames(allrawcounts))
+```
+cells drawn at 3.5, 4.5, 5.5, 6.5 and 6.75 days after gastrulation.
+We are mostly interested in the first transition between 3.5 and 4.5 days so we can subset only these cells from the population:
+
+```{r, Clustering of E4.5, E3.5}
+allcounts<-allrawcounts[,c(1, which(colnames(allrawcounts)=="E4.5" | colnames(allrawcounts)=="E3.5" ))]
+```
+
+We will now try to see if these two categories can be distributed differently in a reduced space. One thing that needs to be done first is to filter out the genes that have very low expression since they are not informative. We will only keep genes that have at least 1000 reads.
+
+```{r}
+selcountdata<-allcounts[which(rowSums(allcounts[,2:205])>1000),]
+dim(selcountdata)
+```
+
+Which means we are left with 205 cells (of two timepoints) measured in the space of 8880 genes. It is in this space that we will try to apply t-SNE. As we want to project the reduced data in two dimensions we will set this as a parameter:
+
+```{r, DimRed}
+library(Rtsne)
+set.seed(1)
+#
+selcountdatatsne<-Rtsne(t(selcountdata[,2:205]), dims=2, max.iter=100, check_duplicates = FALSE)
+#
+```
+
+The object that we have created carries all the necessary information in two dimensions stored in a list named Y:
+
+```{r}
+str(selcountdatatsne)
+```
+
+As a final step we will try to plot this data by projecting their origin. We know from the structure of the original table that the first 99 columns were E3.5 and the next 105 were E4.5. We can use them as indices to save time:
+
+```{r}
+plot(selcountdatatsne$Y, main="tSNE between E3.5 and E4.5", xlab="tSNE1", ylab="tSNE2", cex.main=2, cex.lab=1.4, las=1)
+lines(selcountdatatsne$Y[1:99,], type="p", pch=19, col="steelblue4")
+lines(selcountdatatsne$Y[100:204,], type="p", pch=19, col="firebrick4")
+legend("bottomleft", c("E3.5", "E4.5"), fill=c("steelblue4", "firebrick4"), bty="n")
+```
+You see that the discrimination is near perfect. Thus we have a clear and fast way to see that the two developmental stages are clearly distinct at gene expression level without looking at ~9000 gene expression values for each cell but just at two (reduced) dimensions.
+
+In the case of PCA, we saw how we can use the variable analysis to figure out which of the variables is more associated to each state. In this case the variables are of the order of ~9000. How could we figure out **which of these ~9000 genes** are more "responsible" for the E3.5-E4.5 differences? We will revisit this question in a later chapter. 
+
+### Part C. Taking advantage of variation in clustering
+
+As a last example of the uses of variation in data analysis we will revisit the problem of identifying groups/clusters in multidimensional data. Remember that we have seen how **hierarchical clustering** performs an analysis of distances before iteratively joining the items in a table with the smallest distances. 
+This is not the only way to cluster things and in fact most commonly used clustering techniques take advantage of the variability of data in a space and then go on to *partition* that space in areas that define the groups(=clusters). This is what is called **Partition Clustering** with the most frequently used approaches being **k-means clustering** and **Partitioning Around Medoids, PAM**. 
+
+In the following we will present **k-means** as the most frequently employed and the more intuitive in explanation
+
+#### k-means. Step 1: Calculate the optimal number of groups
+
+The main difference between hierarchical methods and partition methods is that the latter presuppose the number of groups as the initial data. We thus need to **preset** the number of clusters we are going to create. There are many ways to do this but we will refrain from presenting the detailed analysis here. The general principle behind any approach to estimating the optimal number of teams is "group coherence". A small number of groups is expected to have a low degree of coherence because groups contain large numbers of elements with expectedly larger variance. On the other hand, a large number of groups will lead to coherent groups, but due to their number they will not have the same ability to interpret the data. One group cohesion measure is the "Within-Sum-of-Squares (WSS)" which when applied to the USA State data gives us an optimal number of 2. We will thus try to cluster the state data in two groups with k-means as follows:
+
+#### k-means. Step 2: The algorithm
+
+K-means is based on an iterative convergence process that uses distances from the mean values of a given number of groups as a criterion for determining the distribution of data. Thus, the initial data are the table of data with the values of the variables and the desired number of groups. For a set of $p$ items in $n$ variables to be allocated to $k$ groups, the procedure is as follows:
+
+![k-means algorithm schematically](/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure07_11.jpg)
+  
+1. The $p$ elements are randomly divided into groups equal to the desired number ($k$).
+  
+2. For each group, an average value (k-mean) is calculated for all $n$ variables. This mean value is defined as a vector of length $n$ called a centroid.
+  
+3. Calculate the Euclidean distances of all elements from all centrifuges. For each element $p$ there are $k$ distances.
+  
+4. The elements are redistributed into $k$ groups based on the minimum distance of each element $p$ from the centrifuges. This creates new groups of equal number $k$.
+
+#### k-means. Step 3: Clustering
+
+R has an homonymous function called $kmeans()$ which takes the dataset and the number of groups as arguments, while it is also a good idea to set a maximum number of iterations in case there is no convergence:
+
+```{r, echo = T, eval = T}
+kmeans(USStateData[, 2:6], centers = 2, iter.max = 100)
+```
+
+We see that the result of the application leads to two groups with obvious differences in the variables of income ($Income$), the degree of illiteracy and college graduates ($Illiteracy$, $HSGrad$) and crime ($Murder$). Along with the average values, k-means returns the distribution of states in the two groups as well as some data on group cohesion (WSS).
+
+We can see which states belong to which group in by applying $which()$ on the $cluster$ variable:
+
+```{r, echo = T, eval = T}
+statekm2 <-kmeans(USStateData[,2:6], centers = 2, iter.max = 100)
+which (statekm2$cluster == 1)
+```
+
+We observe a geographical enrichment in the southern states. Respectively in cluster 2:
+
+```{r, echo = T, eval = T}
+which(statekm2$cluster == 2)
+```
+
+there is a tendency for over-representation of the northern states.
+
+Let's see how two of the most important variables are distributed between the two clusters, by plotting Income and Illiteracy for the two clusters:
+
+```{r}
+plot(USStateData$Income, USStateData$Illiteracy, main="US Data", cex.main=2, xlab="Income", ylab="Illiteracy", cex.lab=1.5)
+lines(USStateData$Income[which(statekm2$cluster==1)], USStateData$Illiteracy[which(statekm2$cluster==1)], type="p", pch=19, col="firebrick4")
+lines(USStateData$Income[which(statekm2$cluster==2)], USStateData$Illiteracy[which(statekm2$cluster==2)], type="p", pch=19, col="steelblue4")
+legend("topright", c("Southern States", "Northern States"), fill=c("firebrick4", "steelblue4"), bty="n")
+```
+From which it is obvious that northern states are on average more literate and high-earning (notice though these are 1977 data).
+
+Can we evaluate this trend in any way? A solution is given by the following procedure. First we will create an auxiliary vector that we will add to the initial table and it will refer to the North-South geographical position. Following the historical distinction between the Union and the Confederation for the eastern states and a geographical division for the western and given the following series of states:
+
+```{r, echo = T, eval = T}
+rownames(USStateData)
+```
+
+this vector becomes:
+
+```{r, echo = T, eval = T}
+NS<-c("S","N","S","S","S","S","N","N","S","S","N","N","N","N","N","S","S","S","N","N","N","N","N","S","S","N","N","S","N","N","S","N","S","N","N","S","N","N","N","S","N","S","S","S","N","S","N","S","N","N")
+```
+
+Next we can see to what extent the grouping we performed, coincides with the geographical distribution by creating a matching table using $table()$:
+
+```{r, echo = T, eval = T}
+table(statekm2$cluster, NS)
+```
+
+This 2X2 coincidence table shows that there is indeed a tendency for the northern states to belong to group 2 (23/28 = 82%). The corresponding trend of the southern states for group 1 is 15/22
+(68%). 
+
+One additional question we may ask is how statistically significant this result is. We will come back to this question in an upcoming lecture. For the moment we can say that k-means has done a fair job in spotting demographic differences that are associated with the North-South divide in the US.
+
+## Assignment
+For this week's assignment you are asked to revisit a gene expression dataset you analyzed two weeks ago. Only this time you will not work with the processed but the original normalized data.
+
+First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv)
+
+The data come from an expression experiment using DNA microarrays. mRNA expression has been measured for 18703 mouse genes in a wild-type strain (Wt-control) against 5 different conditions (TG, A, B, C, D). Each experiment has **10 biological replicates**. 
+
+You are asked to:
+
+a. Extract a subset of genes that correspond on average (over all samples) to the top 5% most expressing genes
+
+b. Perform a PCA analysis of this subset over all samples. 
+
+c. Spot differences between the 6 conditions and present them visually. Discuss how the samples from each condition are grouped together (or not).
+
+d. Try to isolate the genes that are more "responsible" for the distribution of points on the PCA plot (with the use of fviz_pca_var() function)
+
+e. Repeat the analysis with k-means for 6 clusters and return the contingency table. What do you make of it? Do the clusters correspond to enrichments in the samples. (In order to do this last step you will have to rename the samples so that samples from the same condition carry the same label).

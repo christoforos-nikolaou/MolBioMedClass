@@ -1,0 +1,366 @@
+
+title: "MSc in Molecular Biomedicine"
+subtitle: "Part IIIb: Variability and Information (in Genomics)"
+author: "Christoforos Nikolaou, Computational Genomics Group, BSRC 'Alexander Fleming'"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
+
+
+## Introduction. The biological problem
+
+* Discussion on the problems of 
+
+  - A. Sequence motifs
+  - B. 
+* The topics of this lecture include:
+  - A. The use of variance in **Analysis of Variance**, a family of methods that take advantage of *distribution variances* in order to draw conclusions *on their means*
+  - Β. Techniques that assess variation in data in order to analyze complex datasets through approaches that are grouped under the collective term of **Dimensionality Reduction**
+  - C. Clustering approaches that build on data variability 
+
+## Part A. Sequence Motifs
+
+## Motifs
+* Most (in not all) forms of messages employ "motifs" for:
+    - **repat/emphasis** : 
+      e.g. "I have a dream", MLK, "March on Jobs and Freedom Speech"
+           "Crawth the raven, Nevermore", Edgar Allan Poe   
+    - **coherence**: 
+      e.g. "Who controls the past, controls the future", George Orwell "1984"
+    - **subtextualization**: 
+      e.g. "Fair is foul and foul is fair", William Shakespeare, "Macbeth"
+        (and almost all of "Pulp Fiction")
+    - **internal reference**: e.g. all "leitmotivs" in Operas
+
+## Motifs in Biology
+* Genome: Codons, Transcription factor binding sites, CpG islands, 
+* All areas of the genome that interact with proteins in sequence-dependent manner
+* Protein: Patterns of aminoacids that are related to particular function, modules, domains etc
+![Motifs in Biology](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/MotifsInBiology.png)
+
+## Motif-related biological problems
+* How to define a motif?
+* How to locate a *known* motif?
+* How to evaluate the motif?
+* How to discover *unknown* motifs in a sequence?
+
+## Problem #1: What is a motif?
+* How do we define a biological motif?
+* What do we need as input?
+* What will the output be?
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/NFKbmotif.png)
+
+
+## Problem #1: Input
+* Given a set of oligonucleotides that fulfil a certain function:
+    - Sequence have variability, so we should:
+    - Define the motif as a coherent entity that describes all *instances* of the sequence
+    
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/MotifVariations.png)
+
+
+## Problem #1: Consensus Sequence
+* We may define as "consensus" either the most common sequence variant or
+* A set of rules (in the form of a "regular expression") that describes all instances of the motif  
+
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/MotifConsensus.png)
+
+## Problem #1: The problem with the Consensus approach
+* As the instances we collect grows bigger, the variants increase
+* Regular Expressions don't work  
+
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/MotifConsensus2.png)
+
+How do we describe all the variants without losing in specificity? 
+
+## Problem #1: The problem with Hamming/Edit Distances
+* Assuming the motif is $GGG[AG][AG]TT[TC]CC$ how good a motif is:  
+  1. AAAAATTCCC?
+  2. compared to GGGTTTACCC?  
+  
+* We actually have two problems:
+    * We cannot compare with a "consensus" regexp
+    * Even if we did compare with most common sequence variant, the results would be misleading
+  
+Why?
+
+## Not all positions in the motif are equal
+* Comparison of instances with the Hamming Distance disregards the local tendencies in the motifs position
+* We need to account for the fact that some positions are more "fixed" and other more "flexible"
+* We need a _probabilistic_ description of the motif  
+
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/HammingDistance2.png)
+
+
+## Problem #1: Defining a motif with PWM
+* Given a number of sequence of equal size
+* Calculate the probabilities of occurrence of _each nucleotide_ for _each position_ in the sequences
+* Create a table of the probabilities
+
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/PWM.png)
+
+## Try it yourselves
+* Get the sequences of the GATA binding protein from here (https://tinyurl.com/ms6rm24)
+* Write a program that will create a PWM
+
+
+## Problem #1: PSSM: PWMs without the background
+* PWM are sensititve to background nucleotide composition
+* This means that sequences rich is some nucleotides will tend to "load" motifs with those nucleotides
+* By now we know how to control for that by dividing over a background model
+* PSSM (Position-Specific Scoring Matrices) are motifs derived like this:
+
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/PSSM.png)
+
+## Problem #2: Finding a motif in a sequence with PWM/PSSM
+* Calculate the PWM scores of AAAAATTCCC and GGGTTTACCC. How does this compare with their Hamming Distances
+* Now think of how you can use the PWM to scan a longer sequence 
+
+## Problem #2: Finding a motif: PSSM vs PWM
+1. Given a PWM, can we calculate the probability of a given pattern to match the motif?
+2. What should we be careful about the probability calculations?
+      [Hint: Products are sensitive to 0s]
+      1. We should be careful to add "pseudocounts" to PWMs or
+      2. Work with sums instead
+
+## Problem #2: Finding a motif: PSSM vs PWM
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/PWMvsPSSM.png)  
+
+1. See how noisy the PWM output is. Why?
+2. What makes the PSSM more specific?
+
+## Problem #3: Evaluating a motif instance
+We saw how every motif can be described as a PWM. But:  
+    1. How are different PWM describing patterns?  
+    2. How strong is the motif given its PWM?  
+    
+
+## Mathematics Interlude: Information as Entropy
+* In 1948 Claude Shannon's pioneering work on message transmission introduce a fundamental concept and gave rise to a whole field of Science called "Information Theory"
+* The basis of information theory is the concept of Entropy which is defined as:
+    * Given the set $S$ of $n$ probable outcomes of a "source", each of which has probability $P[i]$
+    * The "Shannon" Entropy of this source is equal to the negative sum of the products of those probabilities and their logarithms, such as: $H(S)=-\sum_{i=1}^{n} P[i]\*log(P[i])$
+
+## Mathematics Interlude: Information as Entropy
+* It derives from Shannon's formula that Entropy maximizes when all possible outcomes have equal probability
+* This is directly related to the notion of Entropy as you know it from Physics. Can you see how?
+  
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/ShannonEntropy.png)
+
+## Stop and think: How is this related to motifs?
+* A motif where all positions are equiprobable for all nucleotides has maximum Entropy
+* It also conveys the least possible information. There isn't absolutely anything it can tell us about where the sequence has embedded a message
+* According to Information Theory, Information can be measured as the change in the Entropy before and after a message has been transmitted: $I(S)=H(S)_{before}-H(S)_{after}$
+
+## Problem #3: Evaluating a motif with Information (I)
+* What is the maximum entropy for any given position in a motif?  
+    $H(S)_before=-\sum_{i=1}^{4} P[0.25]\*log(P[0.25])=2$  
+    we will call this the before Entropy
+    
+* What is the entropy once the message has been transmitted? We will denote as "after" the entropy we can calculate from the PWM:  
+    $H(S)_{after}=-\sum_{i=1}^{4} P[i]\*log(P[i])=H$ and thus  
+    $I(S)=2-H(S)_{after}$  
+* The key is that the smaller the $H(S)_{after}$ the more we have gained as information, since we are **reducing the uncertaintly** of the message
+
+## Problem #3: Calculating the Information Content of a motif
+* Each position in the motif gets a score $I(p)$
+* Each nucleotide in each position gets a weight equal to $P*log(P)$  
+
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/PWMLogo.png)
+
+## Problem #3: Plotting Information as Sequence Logo
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/LogoExample.jpg)
+
+## Problem #3: Create a logo
+1. Download a set of motif instances from the GATA binding factor here (https://tinyurl.com/ms6rm24)
+2. Go to the Webpage of Weblogo, an implementation of the Sequence Logo concept here: (http://weblogo.berkeley.edu/logo.cgi)
+3. Paste in sequences
+4. Obtain Logo
+
+## Problem #3: Evaluation of motifs
+Compare the top5% scores of our PSSM and PWM search
+![](/home/christoforos/Dropbox/Teaching/My_BC205/Figures/PWMvsPSSMLogo.png)
+
+## Part B. Genomic Variability
+
+## Introduction  
+* #### A. Genomic Variability Analysis
+	* Whole-Genome or Whole-Exome Sequencing
+	* Calling of variants
+	* Annotation of Variants
+
+
+## A. Genomic Variability Analysis
+*  Stating the question. What are we looking for?
+*  Whole genome or whole exome?
+*  Localization of Variants
+*  Filtering of known SNP
+*  Annotation of Variants
+ 
+
+## Genomic Variation
+![](/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_01.jpg)
+
+* Types of genomic variation:
+	* SNP
+	* Copy Number variation 
+
+
+## What are we looking for?
+![](/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_02.jpg) 
+
+* Variation in a specific locus?
+* Variation in a panel of genes?
+* Variation anywhere in the genome?
+
+
+## Whole Genome vs Whole-Exome
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/Overview_WES.png)
+
+* Whole Genome sequencing is very costly
+* Whole-exome is affordable but only targeting coding sequences (+ some small parts of splice junctions)
+* In principle, the capture step can be used to select for everything. What other approaches can you think of? 
+
+
+## Computational Analysis Overview
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_CompAnal_Overview.png)
+
+* Mapping
+* Variant Calling
+* Variant Annotation
+
+
+## Localization of variants
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_IGV_image.png)
+
+* DNA Mapping reveals accumulation of reads in exons
+* Depth should be adequate for calling 
+
+## Variant Calling. (VCF format)
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/VCF_format.png)
+
+* Annotation of known vs unknown variation (ID)
+* Variant information (REF/ALT) 
+* Quality with which the call is made (QUAL)
+	
+
+## Variant Calling
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/ENUDare.png)
+
+* Need of adequate depth
+* Robust statistics
+	* Usually t-tests followed by correction for multiple testing 	
+* Ability to discern between homo/heterozygocity
+
+
+## Variant Calling. Seq Quality
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_Good_v_bad_mapping.png)
+
+* Variation may often be misinterpreted bad quality 
+* Programs check for the quality of the aligned reads
+* Some times realignment is necessary
+* Safest way to discard reads with low quality _before_ variant calling
+
+
+## Post-variant calling analyses
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_Analysis_overview.png)
+
+* Filtering of known SNP
+* Annotation of variants (where are they?)
+* Functional annotation (what could they do)
+
+## Annotation of variants
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/Variant_Annotation_1.png)
+
+* Genomic Location of variants
+* Predicted impact of the variant (conserved? regulatory? coding?) 
+* Cross-comparison with other sources of knowledge  
+
+## Annotation of variants
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/Variant_Annotation.png)
+
+
+* Use of known variation from 1000 Genomes Project
+* Use of known variation from many cancer genomes 
+
+## Example #1
+* Clustering of Cancer types based on variation 
+
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_Tumours.png)
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_Tumours2.png)
+
+
+## Example #2
+* Clustering of cancer patients based on variation 
+
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/guo2013_wes_in_TCC.png)
+
+
+## GWAS
+![](/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_06.jpg)
+
+* Genome-wide Association studies
+* Attempts to link genotype to complex (no single gene) phenotypes
+
+## Penetrance vs Frequency
+![](/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_07.jpg)
+
+* Penetrance=likelihood of disease based on genotype
+* Frequency=spread of variant in the population
+* Goal: to understand the lower part of this plot (low penetrance variants)
+* More genomes to be analyzed to get into the low-frequency variant realm 
+
+
+## Statistics Interlude. Odds Ratios
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/OddsRatio.png)
+
+* Odds Ratios are the way we report the tendency of a variant to appear more frequently in one phenotype group than another. 
+* They represent the association of that variant for the particular phenotype.
+* Values >> 1 are highly indicative of strong association
+
+
+## Statistics Interlude. Odds Ratios
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/OddsP.png)
+
+* Odds Ratios are supported with exact p-values obtained through the application of the Fisher's test. 
+* P-values are thus the probability of observing a given contingency table (like the one above) given that there is no preference of Groups 1,2 for K1 or K2 categories.
+
+
+### GWAS output
+![](/home/christoforos/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_08.jpg)
+
+* Thousands of SNPs for which we calculate the ratio of frequencies between diseased/healthy samples
+* Manhattan plots showing the significance of variants (height of points correspond to corrected p-values of odds-ratios)
+* Follow up significant variants for further experimental support
+
+
+
+
+## Assignment
+For this week's assignment you are asked to revisit a gene expression dataset you analyzed two weeks ago. Only this time you will not work with the processed but the original normalized data.
+
+First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv)
+
+The data come from an expression experiment using DNA microarrays. mRNA expression has been measured for 18703 mouse genes in a wild-type strain (Wt-control) against 5 different conditions (TG, A, B, C, D). Each experiment has 10 biological replicates. 
+
+You are asked to:
+
+a. Extract a subset of genes that correspond on average (over all samples) to the top 5% most expressing genes
+
+b. Perform a PCA analysis of this subset over all samples
+
+c. Spot differences between the 6 conditions and present them visually
+
+d. Try to isolate the genes that are more responsible for the PCA plot (with the use of $fviz_pca_var()$ function)
+
+e. Repeat the analysis with k-means for 6 clusters and return the contingency table. What do you make of it?

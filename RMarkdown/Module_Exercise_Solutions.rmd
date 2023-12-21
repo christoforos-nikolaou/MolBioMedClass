@@ -1,0 +1,147 @@
+---
+title: "MSc in Molecular Biomedicine"
+subtitle: "Solutions to Assignments"
+author: "Christoforos Nikolaou, Computational Genomics Group, BSRC 'Alexander Fleming'"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
+---
+
+## Assignment 3. Sequence Similarity and Clustering
+
+### Introduction
+
+The goal of this assignment will be to combine sequence similarity analysis with the clustering approaches we discussed last time. 
+
+Histone H4 is one of the most well-preserved proteins among eukaryotic organisms. In this assignment, you will have to assess **the degree of conservation** through **Needleman-Wunsch pair-wise alignment** in specific protein sequences derived from a broad group of eukaryotes.
+
+The file you will find [here](https://www.dropbox.com/s/gz554anznooo91k/histone4.fa) contains the H4 protein sequences from the following organisms: (Homo sapiens: HUMAN, Mus musculus: MOUSE, Drosophila melanogaster: DROME, Arabidopsis thaliana: ARATH, Bos taurus: BOVIN, Caenorhabditis elegans: CAEEL : CHICK, Rattus norvegicus: RAT, Saccharomyces cerevisiae: YEAST, Xenopus laevis: XENLA)
+
+### Stage 1
+You are asked to:
+
+1. Align all sequences with each other in pairs using the BLOSUM50 replacement table.
+2. Indicate the alignment scores on a square table of $NXN$ dimensions
+
+Auxiliary information:
+It is recommended that you use the the R::seqinr and BioConductor::Biostrings libraries.
+The installation of the former is done directly by R 
+```{r, echo=T, eval=T}
+library("seqinr")
+```
+while for Biostrings you have to go through Bioconductor: 
+```{r, echo=T, eval=T}
+library("Biostrings")
+```
+
+The reading of the sequences can be done with the $read.fasta()$ function of seqinr.
+Alignment will be performed with the Biostrings $pairwiseAlignment()$ function using the substitutionMatrix = "BLOSUM50" parameter.
+
+Answer: Loading the sequences
+```{r, echo=T, eval=T}
+sequences<-read.fasta("RMarkdown/histone4.fa")
+```
+
+```{r}
+myseqs<-list()
+for(i in 1:length(sequences)){
+  myseqs[i]<-toupper(paste(sequences[[i]], collapse=""))
+}
+names(myseqs)<-names(sequences)
+```
+
+```{r}
+alignMat<-matrix(0, nrow=length(myseqs), ncol=length(myseqs))
+for(i in 1:length(myseqs)){
+  for(j in 1:length(myseqs)){
+    alignMat[i,j]<-pairwiseAlignment(myseqs[[i]], myseqs[[j]], substitutionMatrix="BLOSUM50", scoreOnly=T)    
+  }
+}
+```
+
+```{r}
+maxS<-max(alignMat)
+alignMat<-1-(alignMat/maxS)
+distMat<-as.dist(alignMat)
+```
+
+```{r}
+hclSeq<-hclust(distMat, method = "complete")
+plot(hclSeq, labels=names(myseqs))
+```
+```{r}
+myseqs<-myseqs[c(1:8,10)]
+alignMat<-matrix(0, nrow=length(myseqs), ncol=length(myseqs))
+for(i in 1:length(myseqs)){
+  for(j in 1:length(myseqs)){
+    alignMat[i,j]<-pairwiseAlignment(myseqs[[i]], myseqs[[j]], substitutionMatrix="BLOSUM50", scoreOnly=T)    
+  }
+}
+#
+maxS<-max(alignMat)
+alignMat<-1-(alignMat/maxS)
+distMat<-as.dist(alignMat)
+#
+hclSeq<-hclust(distMat, method = "complete")
+plot(hclSeq, labels=names(myseqs))
+```
+
+## Assignment 4. Clustering and Dimensionality Reduction in Gene Expression
+
+### Introduction
+We will analyze a gene expression experiment with the goals of:
+* Reducing dimensionality of the gene expression dataset
+* 
+
+```{r, Reading of Data, Selection of genes}
+data<-read.delim("~/Dropbox/Teaching/EAP_BNP54/Class_Winter_2019/Exercises_Winter2019/GeneExpressionDataset_normalized.tsv", header=T, sep="\t")
+```
+
+```{r, Calculation of means, calculation of quantiles, extraction of top 5% }
+expMeans<-rowMeans(data[,2:61])
+expQuants<-quantile(expMeans, probs = seq(0, 1, 0.05), na.rm = FALSE)
+i<-which(expMeans>=expQuants[20])
+subdata<-data[i,]
+```
+
+```{r, PCA}
+subdatapca<-prcomp(t(subdata[,2:61]), scale=T)
+rownames(subdata)<-subdata$Gene
+summary(subdatapca)
+```
+
+```{r, PCA plot}
+library(factoextra)
+fviz_pca_ind(subdatapca, col.ind="cos2", gradient.cols=c("steelblue4", "grey", "firebrick4"), repel=T)
+```
+```{r, PCA contribution}
+fviz_pca_var(subdatapca, col.var="contrib", gradient.cols=c("steelblue4", "grey", "firebrick4"), geom = c("point", "text"), select.var = list(cos2 = 0.95))
+```
+
+```{r, running kmeans}
+subdatakm6<-kmeans(t(subdata[,2:61]), centers=6, iter.max = 100, nstart = 1)
+conditions<-c(rep("WT",10), rep("TG",10), rep("TherA", 10), rep("TherB", 10), rep("TherC",10), rep("TherD",10))
+subdatakm6contingency<-table(Cluster=as.numeric(subdatakm6$cluster),Condition=conditions)
+row.names(subdatakm6contingency)<-c(paste("Cluster", seq(1:6), sep=""))
+subdatakm6contingency
+```
+
+```{r}
+fviz_pca_ind(subdatapca, habillage=subdatakm6$cluster, addEllipses=TRUE, ellipse.level=0.95, palette = "Dark2", ellipse.type="convex", repel=T)
+
+```
+
+```{r, estimating clustering performance}
+library(flexclust)
+randIndex(subdatakm6contingency)
+```

@@ -1,0 +1,236 @@
+---
+title: "MSc in Molecular Biomedicine"
+subtitle: "Part IIb: Similarity and Distance in sequence comparison. Part A"
+author: "Christoforos Nikolaou, Computational Genomics Group, BSRC 'Alexander Fleming'"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
+---
+
+## Introduction. The biological problem
+
+* In this class we will be moving into the discussion of problems of similarity in sequence analysis. Two basic questions that we will deal with are:
+
+1. Given two sequences of comparable length, what is the best way to objectively define a measure of their of their similarity?
+
+2. Given two sequences with significantly different lengths, how can we identify all identical matches of the shorter within the longer one?
+
+
+## Part A. Objectively defining the similarity between two sequences
+
+### Biological Context
+
+This is one of the most primary problems of bioinformatics with its roots in the study of:
+a. Phylogenetic relationships at the molecular level, e.g. the comparison of **orthologous** sequences
+b. Evolutionary dynamics in genomes, e.g. the identification of gene duplications, rearrangements etc
+c. Genomic variability, e.g. comparisons of the same sequence among different individuals
+
+### Sequence Similarity. The problem
+
+* How similar are two sequences?
+* Let's start by looking into a very simple example of two 10-nucleotide sequences
+
+```
+G G G A A T T T C C
+G G C A A T T T C C
+```
+
+It is obvious that they basically differ in only one nucleotide. The question is **how we can quantify this?** 
+
+
+### Measures of sequence distance
+In Computer Science this is a problem of "character string comparison" (or "string comparison"). There are many measures for the quantification of such similarities, the simplest of which is called "Edit Distance" or "Hamming Distance". We can define it as following:
+
+* Edit distance is the number of residues we need to **edit/substitute** to obtain one sequence from the other, without re-arrangements, deletions or insertions.
+
+![Edit Distance of two Sequences](/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/HammingD1.png)
+
+In the figure you see that between the two sequences there are 9 identical residues, meaning only one change is needed. 
+We say that they have $Distance=1$. This can be scaled for the total size of the combined sequences $Distance=1/10=0.1$
+
+In a similar way we can quantify the distance of the following pair of sequences as $Distance = 3/10 = 0.3$
+
+![Distance 2](/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/HammingD2.png)
+
+
+### Going beyond distance measures
+What if the sequences are not so similar? In the example we see below the distance is calculated as $D=9/10=0.9$. 
+This means that the two sequences are only 10% similar to each other? 
+
+```{r, out.width = "400px", echo=F, eval=T}
+knitr::include_graphics("/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/NotAligned.png")
+```
+
+Are they though?  
+
+If one "slides" the two sequences against each other we can obtain a higher similarity as residues become "aligned"
+
+```{r, out.width = "400px", echo=F, eval=T}
+knitr::include_graphics("/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/SlideAligned.png")
+```
+
+The sequences now have a much lower distance than 0.9, even allowing for the fact that the combined length of the two sequences is 12 nucleotides $D=4/12=0.33$. 
+
+The main point here is that we have allowed ourselves the additional liberty of **displacing the two sequence against each other, without changing the order of residues in either of the two**
+
+### The Sequence Alignment Problem
+
+The highlighted text above is a good definition of  **Sequence Alignment**.
+
+This is:  
+
+* Assuming two sequences, which is the **best way** we can "slide" one against the other, without altering the order of residues, in order to **maximize** their similarity?
+
+In the example shown below, we see that two sequences can be "aligned" with more than one ways. 
+
+Both of the following sequences give rise to 5 "matching" residues, but in the first there 4 more "slides" required to open a gap in the middle of the second sequence. Do we prefer the first or the second? Should we take into account the "matching" residues or also the number of "gaps" in the alignment? 
+
+```{r, out.width = "400px", echo=F, eval=T}
+knitr::include_graphics("/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/TwoAlignments.png")
+```
+
+
+The question that arises is then related to that **best way** we mentioned earlier. The problem is now reduced to the following:
+
+* Given two sequences, how can we define which of their possible alignments provides the highest similarity score provided an evaluation of **matches, mismatches and gaps**
+
+We will approach this through ...
+
+### ...A not so biological problem
+
+We will use an analogy for the "optimal pairwise alignment problem" in which:
+
+* My friend V. wants to take a sailing trip in the Aegean.
+* He checks the weather: N/NW winds throughout the whole period mean he will have to set a course S/SE.
+* Moving S/SE and starting from Rafina (START), he needs to find **the best route** in order to reache Astypalaia
+
+* His choice of route will depend on a _grading_ of possible destinations based on the places he wants to visit the most.
+
+
+* We will start by making a grid which we will use to grade each destinations. 
+* We will also note the permissible map transitions, which can only be: a) left-to-right horizontally b) top-to-bottom vertically and c) topleft-to-bottomright diagonally 
+
+
+![Mapping a route](/home/labuser/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure04_02.jpg)
+
+
+### Best possible route. Take 1
+
+* Move from START to END making the best choice at each step
+
+![Best possible route](/home/labuser/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure04_03.jpg)
+
+This itinerary gives a total score of 23, which is the sum of the scores as V. goes through the marked squares in the matrix map. 
+
+The question is:
+
+### Is there a better way?
+
+The approach described above is what we call a "greedy" approach in Computer Science, that is simply going for the best case in every step without taking into account alternatives we may be disregarding once committed to a choice.  
+
+In the example shown above, this is seen if you consider that once V. has committed himself to reaching Mykonos, he cannot go back to any of the squares in the first two columns of the map (some of which carry formidable scores). This is because of the restriction of only making left-right, top-bottom displacements.
+
+### The "best" possible way by mean of "all ways"
+
+What if we scored all the possible routes and then just chose the one with the highest scores?  
+This is what computer scientists would call a "brute force" or "exhaustive" approach. Even though it is by definition correct, it is impractical in most of the cases. If you can't think why, try figuring out the number of possible itineraries for this simple 5x6 matrix. Even for such a small matrix the number is in the few hundreds (!!!). 
+
+We thus have to find a better way.
+
+### Dynamic Programming for the "Sailor Problem"
+
+We will now introduce an alternative strategy that guarantees the best solution without exhaustively searching all possible trajectories in the matrix.  
+
+The main idea behind the *dynamic programming algorithm* is to solve a bigger problem by iteratively solving many smaller (and for that easier to solve) subproblems.  
+
+In our case, the subproblems will consist of identifying the best possible way to **reach** every  square/position in the matrix. 
+
+Once we have done this we can easily reconstruct the optimal itinerary by tracing the optimal solutions from each square. 
+
+Let's see how this is done step-by-step
+
+#### Step 1. Fill in the first row and the first column
+
+This is easy since for these squares we have no alternatives. We can only reach squares of the first row with horizontal displacements and those of the first column with vertical.
+
+We can thus score the part of the matrix shown below:
+
+![Alignment Step #1](/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/AlignmentStep0.png)
+
+#### Step 2. Score a 3-to-1 square case
+
+With the first row and column filled we now have **one** square in the matrix that we can "solve". This square is the one lying at the top-left corner of the "unsolved" part of the map (in this case it is the island of Tinos) and we can solve it if we ask the question, which is the best way to **reach** it? 
+
+This is now solvable because we have all the available information. Consider that in order to solve a square we need to have the scores from all three surrounding squares (top, left and top-left). Thus for the square $M[i,j]$, we need the scores of $M[i-1,j]$, $M[i, j-1]$ and $M[i-1,j-1]$. Then we simply have to calculate which of the three sums of those scores with $M[i,j]$ is the maximum. $M[i,j]$ will now become:
+$$M[i,j]=max(M[i-1,j]+M[i,j], M[i, j-1]+M[i,j], M[i-1,j-1]+M[i,j])$$
+
+Once we identify the maximum of the three sums we keep it as new score and we **take note of the direction from which it was obtained**. We call this the "trace" of the square and it is important to help us draw the route.
+
+This is shown below for the case of Tinos. The best way to reach Tinos is by way of Andros approaching from the north (top-bottom displacement)
+
+![Alignment Step #2](/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/AlignmentStep1.png)
+
+#### Step 3. Iteratively score all squares
+
+Consider what this solution allows us to do. We have just solved the subproblem of the optimal root for the 2X2 top-left subsquare of the matrix. This means that if our question was "Which is the best way to reach Tinos?" we would know the solution by tracing backwards from Tinos:
+a. The best way to reach Tinos is through Andros
+b. The best/only way to reach Andros is from Start
+c. Thus the root is START->Andros->Tinos with a total score of M[i,j]
+
+We can use the same strategy used for Tinos for every square for which we have score the 3 surrounding squares. Thus as we work our way from top-left to bottom-right we can iteratively score the complete matrix.
+
+![Alignment Step #3](/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/AlignmentStep2.png)
+
+#### Step 4. Backtracking
+
+Once **all squares** have been scored, all we need to do is look at the last (bottom-right) corner of the matrix. The score it contains is the total score of the route.  
+
+Compare the score in Astypalaia with Dynamic Programming (31) with the one obtained with the greedy approach (23). 
+
+For the complete route we now have to "backtrack" going back from the last square and following the traces (arrows) that we have marked as the best origin for each square. 
+
+So, this is the route we have identified based on the scores that V. gave us.
+
+![Backtracking for the best route](/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/AlignmentStep3.png)
+
+### Back to Sequence Alignment
+
+Nice, but how does this help us to align sequences?
+
+It is basically the same problem. Here are the analogies.
+1. Aligning to sequences is a process of reading both sequences from beginning to end. If we place one sequence on the rows of a matrix and the other on its columns, then what we need to do is to go from the top-left to the bottom-right corner of the $S_1XS_2$ matrix.
+2. We are not allowed to change the order of the residues or re-read parts of any sequence. This means that we can only read either just one (left-to-right), just the other (top-to-bottom) or both sequences at the same time (diagonally topleft-to-bottomright).
+3. We have a system to score our displacements on this matrix. This will be based on whether the comparison is favourable. In the simplest case we just need three scores for the three possible outcomes: matching residues, not-matching residues and gap (match/mismatch/gap)
+
+In the following figure you see two alternative alignments using the dynamic programming algorithm we described above (it is called Needleman-Wunsch by the two scientists who invented it).
+
+The difference between the two alignments is the scoring scheme. In the left we use a Match=1, Mismatch=-1, Gap=-1 scoring table in the second a Match=1, Mismatch=-2, Gap=-1.
+
+Notice the track of the alignment shown in red. When mismatches and gaps are penalized equally, the displacements occur largely through the diagonal. When mismatches are penalized more the diagonal is avoided in the region where there is no similarity and horizontal-vertical (gap) displacements are more prominent.
+
+![X](/home/labuser/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure04_05.jpg)
+
+### Protein Sequence Alignments use more detailed score matrices
+
+Scoring schemes are thus very important. They largely shape both the alignment and the final score. This is why, especially when comparing protein sequences, we avoid using such simplified schemes of three scores. One has to consider the physical properties of the aminoacids.
+
+```{r, out.width = "400px", echo=F, eval=T}
+knitr::include_graphics("/home/labuser/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure04_06.jpg")
+```
+
+The similarities and differences between aminoacids mean that we should not consider the substitution (mismatch) of an aspartate by a glutamate to be the same as an aspartate being substituted by lysine. In the same way the maintenance (match) of a valine is not as important as that of a tryptophane, which is a rare, essential aminoacid. To account for all these relationships we use pre-calculated matrices, which we employ as "look-up" tables every time we move diagonally in an alignment matrix.  
+
+Below you can see one such matrix, the BLOSUM50 created from the comparison of a large number of similar protein alignments.
+
+![The BLOSUM50 substitution matrix](/home/labuser/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure04_07.jpg)
+

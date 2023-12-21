@@ -1,0 +1,652 @@
+---
+title: "MSc in Molecular Biomedicine"
+subtitle: "Part IIa: Statistics, Similarity and Distance"
+author: "Christoforos Nikolaou, Computational Genomics Group, BSRC 'Alexander Fleming'"
+date: "`r Sys.Date()`"
+header-includes:
+  - \usepackage[greek]{babel}
+  - \usepackage{fontspec}
+  - \usepackage{xunicode}
+  - \usepackage{xgreek}
+  - \usepackage{polyglossia}
+  - \setmainlanguage{greek}
+  - \setmainfont[Ligatures=TeX]{Linux Libertine O}
+  - \newfontfamily\greekfonttt[Script=Greek]{Linux Libertine O}
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
+---
+
+## Introduction
+
+* In this class we will be discussing problems of similarity that arise during general data analysis problems.
+
+* In most of the cases these may be divided in two main types:
+    1. Comparisons of distributions in order to assess general differences
+    2. Comparisons of objects in order to create meaningful clustering/partitions
+
+* We will study the above concepts using a hands-on approach through actual programming with the use of the R programming and data analysis environment
+
+    
+## Part A. An Introduction to R
+
+### Using R for data analysis   
+We will use [R](https://www.r-project.org/about.html) in order to analyze data and perform a large number of statistical tests. R is basically a programming environment that allows the user to apply a lot of predefined functions without having to program him/herself.
+
+In the following chapters we will include R code in the flow of the class content but I urge you to do some reading by yourselves from a number of interesting and useful resources, shown below:
+
+* [An introduction to R](https://biocorecrg.github.io/CRG_RIntroduction/)
+* [R in Codecademy](https://www.codecademy.com/learn/learn-r)
+
+In the meanwhile I will try to help with additional material from my book (in Greek) whenever there is need. 
+
+The main focus though will be a hands-on approach, through which we will be discussing code for practical purposes and always with the aim of solving particular problems. 
+
+### Installing and using R
+I strongly suggest that you install [R](https://www.r-project.org/) and [R-Studio](https://www.rstudio.com/) in order for you to use R and follow the material posted for the class. An alternative may be to use [R Studio over the cloud](https://rstudio.cloud/projects) by registering for free.  
+
+Once you have done this you may easily reproduce all the analyses we will be discussing in "class" and then modify and explore the code accordingly for your own work and assignments. 
+
+### Creating and Loading data in R
+
+### Simple Variables 
+
+We will start by seeing how we create variables in R. Variables may either be singular values like:
+
+```{r, eval=T, echo=T}
+x<-5
+```
+
+We can see any variable by printing its name:
+
+```{r, eval=T, echo=T}
+x
+```
+
+and we can use variables to pass values to other variables
+
+```{r}
+x<-5
+y<-x # y now equals 5
+y<-6 # y becomes 6
+```
+
+Variables can be real, decimal or complex numbers
+
+```{r}
+an_integer<-12
+a_real<-3.141
+a_complex<-5-8i
+```
+
+and they can also be character strings, which is quite useful for categorical data
+
+```{r}
+my_name<-'Christoforos'
+my_passion<-"football"
+a_character_variable<-"ytg67_a?"
+```
+
+last but not least, variables may also be logical values, (TRUE, FALSE or T, F) which we use **without** quotation
+
+```{r}
+my_logical1<-T
+my_logical2<-FALSE
+```
+
+### Numerical processing
+
+You can code for any numerical process in R using the corresponding symbol as shown in the table below
+
+```{r, echo=F, eval=T}
+data<-data.frame(Symbol=c("+","-","*","/","**", "%%"),Process=c("Addition","Subtraction","Mutliplication","Division","Power", "Modulo"))
+knitr::kable(data, caption = "")
+```
+
+
+### Logical Processes
+
+The logical processes we went through previously are also encoded in R
+
+```{r, echo=F, eval=T}
+data<-data.frame(Symbol=c("==", "!=", ">","<",">=","<="),Control=c("Equal","Non-equal","Greater","Smaller","Greater or equal" ,"Smaller or equal"))
+knitr::kable(data, caption = "")
+```
+
+### Functions in R
+
+Functions are R's main characteristic. There is probably one for everything you would like to do and, if not, you can easily write your own, by combining pre-existing ones. The general syntax for R functions is:  
+
+> fun(variable(s), parameter(s))
+
+where $fun()$ is the name of the function, which accepts variable(s) and parameter(s) inside parentheses.
+
+### Variable Types in R
+
+It is much more interesting to work with more complex variable types than singular values. R allows us to handle various data structures such as:  
+
+1. One dimensional **vectors**, which are ordered series of items of the same class (e.g. numbers). We create them with a simple function $c()$:
+
+```{r, eval=T, echo=T}
+vec<-c(1,2,5,3.14,8)
+vec
+```
+
+
+2. Two dimensional **matrices** which can only hold numerical values and are created with a function called $matrix()$. This needs a vector of values as input and a set of parameters to adjust the dimension of the matrix. In the following case we create a matrix containing the values from 1 to 20 (1:20) in a 4X5 matrix:
+
+```{r}
+matrix(1:20, nrow=4, ncol=5, byrow=T)
+```
+
+3. Two dimensional **data frames** are versatile 2D tables that can hold multiple types of data (e.g. numerical, character and logical values), on the condition that each column has only one type. We create data frames as collections of vectors of the same size, with the function of the same name $data.frame()$:
+
+```{r}
+name<-c("Curtis", "James", "Joe", "Andrew", "Alex", "Kostas")
+number<-c(17, 7, 12, 26, 15, 21)
+starting<-c(F, F, T, T, F, F)
+data.frame(name, number, starting)
+```
+
+4. Other types of data include tables and lists (but we will leave them for later)
+
+
+### Data Input/Output in R
+
+It is obviously much more practical to have the data loaded into R instead of typing them by hand. This can be done with a number of functions that belong to the same $read()$ family as shown in the table below:
+
+```{r, echo=F, eval=T}
+data<-data.frame("Name of Function"=c("read.table()","read.csv()","read.delim()","readLines()"), "Performed Action"=c("Reading of a 2D table","Reading of a comma-separated table","Reading of a table with a given delimiter","Reading of text by line"))
+knitr::kable(data, caption = "")
+```
+
+As an example, this is how we can load a file into R and store it as a data frame
+
+```{r}
+geneexp<-read.delim("GeneExpressionData.tsv", header=T, sep="\t")
+```
+
+and this is a nice way to go through the contents of the original file (called "GeneExpressionData.tsv")
+
+```{r}
+str(geneexp)
+```
+
+We will come back to this file later on. 
+
+For now, let's turn to some basic **statistical concepts** that will help us deal with the problems of comparisons
+
+## Part B. Basic statistical concepts
+
+### Sample and Population
+
+Let's start by examining the notions of **sample** and **population**. 
+In statistics the _population_ is the entire group that you are attempting to study. The _sample_ is a subset of the population that you can actually analyze. What we want is to be able to draw conclusions about the former by looking into the latter. This is why it is very important that the sampling is representative, unbiased and sufficient.
+
+One of the major problems with sampling is estimating central tendencies (mean, median etc) and spread (variance, standard deviation) for the population based on the group. 
+
+We will discuss this problem in greater detail while we get to practice R at the same time.
+
+We will start by creating an ideal *population* of persons for which we will study their weight in kg. We will assume this to be a normally distributed population with a mean value of 75kb and a standard deviation of 15. In R it is easy to create sets of numbers with given means, variances for a large variety of distributions. Our population of 10000 members can be:
+
+```{r}
+weights<-rnorm(10000, mean=75, sd=15)
+```
+
+### Central Tendencies and Measures of Variation
+
+We can check how well $rnorm()$ has simulated our distribution by calculating the mean and the standard deviation with $mean()$ and $sd()$:
+
+```{r}
+mean(weights)
+sd(weights)
+```
+
+(pretty well)
+
+In the same way we did for mean and sd, we can calculate any set's (numerical vector's) median, variance, range or minimum and maximum values with a corresponding function:
+
+```{r}
+median(weights)
+var(weights)
+range(weights)
+min(weights)
+max(weights)
+```
+
+### Random sampling 
+
+Remember that weights is our population and in practice we are unable to measure everyone of the 10000 individuals. We can only sample subsets of this group. We can simulated this sampling with a suitable function in R:
+
+```{r}
+s1<-sample(weights, 30, replace = F)
+```
+
+and accordingly we can calculate the sample's mean and sd values:
+
+```{r}
+mean(s1)
+sd(s1)
+```
+
+
+Which is close but not exactly matching the ones of the population. 
+
+### Visualizing distributions as histograms
+
+We can visualize this by graphically plotting the histograms of population and sample. Remember that in a histogram we plot the values of a given set organized in bins of certain size against their frequency in the set. 
+
+```{r}
+hist(weights, breaks=30, las=1, main="Population", xlab="weight", col="olivedrab", freq = T, plot=T, ylab="Number of persons")
+hist(s1, breaks=30, las=1, main="Sample (30)", xlab="weight", col="olivedrab", freq = T, plot=T, ylab="Number of persons")
+
+```
+
+The differences are obvious and even more striking in the shape of the distributions. The structure of the population with a well defined mean=75 and most of the values within a range of mean+/-3*sd (this is a good approximation for the normal distribution)
+
+When asking a statistician how many measurements/replicates to perform in an experiment, one thing you will often hear is "as many as possible". You can see why as we go on to compare the histograms of samples of increasing size.
+
+```{r}
+hist(weights, breaks=30, las=1, main="Population", xlab="weight", col="olivedrab", freq = T, plot=T, ylab="Number of persons")
+hist(s1, breaks=30, las=1, main="Sample (30)", xlab="weight", col="olivedrab", freq = T, plot=T, ylab="Number of persons")
+s2<-sample(weights, 50, replace = F)
+hist(s2, breaks=30, las=1, main="Sample (50)", xlab="weight", col="olivedrab", freq = T, plot=T, ylab="Number of persons")
+s3<-sample(weights, 100, replace = F)
+hist(s3, breaks=30, las=1, main="Sample (100)", xlab="weight", col="olivedrab", freq = T, plot=T, ylab="Number of persons")
+s4<-sample(weights, 300, replace = F)
+hist(s4, breaks=30, las=1, main="Sample (300)", xlab="weight", col="olivedrab", freq = T, plot=T, ylab="Number of persons")
+s5<-sample(weights, 1000, replace = F)
+hist(s5, breaks=30, las=1, main="Sample (1000)", xlab="height", col="olivedrab", freq = T, plot=T, ylab="Number of persons")
+
+```
+
+Compare the mean and sd of the last, more representative sample with the first, smaller one:
+```{r}
+mean(s5); 
+sd(s5); 
+```
+
+Which may help you see how better (in this case better=more) sampling helps you define the characteristics of the population more precisely.
+
+## Part C. Comparing values and distributions
+
+We can now attempt to compare numerical values in statistical context. There are many ways we may do this depending on whether:
+
+1. We compare singular values with distributions or distributions against each other
+2. We compare two or more distributions (pairwise vs multiple comparisons)
+3. We compare normally distributed values or not.
+
+## C1. Comparing single values against distributions
+
+Let's start with the simplest problem, that of comparing a value with a given distribution. For this problem we will consider a problem from genome analysis. 
+
+### The Problem: Identifying horizontal gene transfer
+
+Every genomic sequence can be quantified on the basis of its content in nucleotides. Nucleotides are paired on the DNA as G:::C or A::T pairs. The main difference between the two is the number of hydrogen bonds between them.
+We call GC content (or GC%) the ratio of (G+C) nucleotides of a given DNA sequence. It is important because it provides a sort of "compositional signature" for the sequence.  
+
+![Base Pairing in DNA](/home/labuser/Dropbox/Teaching/My_BC205/Figures/GCcouplin.jpg)
+
+In unicellular organisms GC% is rather stable throughout the genome. So much so that it allows us to classify them according to DNA composition.
+
+![GC content in a-proteobacteria, (Etemma, Anderson,2009)](/home/labuser/Dropbox/Teaching/My_BC205/Figures/GCbacteria.jpg)
+
+The question now is: Given an **unknown sequence** and a set of GC% values for a given genome can we say if the sequence under study may be part of that genome or not?
+
+This is an important question in the field of microbial genomics where events of horizontal gene transfer (one gene moving from one genome to another) are very frequent.
+
+![Horizontal Gene Transfer](/home/labuser/Dropbox/Teaching/My_BC205/Figures/HGT.png)
+
+This problem is actually reduced to a simple similarity analysis. 
+Given:
+1. The distribution of GC% values for the genome
+2. The GC% value of the uknown sequence
+We are asked to say how likely it is that the sequence may be part of the genome under study.
+
+This is equivalent to a statistical question: How likely it is that the the GC% of the sequence may _have originated_ from the GC% values distribution of the genome. 
+
+***
+_BOX: How we frame statistical questions_  
+
+The question is phrased in a particular way in order to match the way we state the hypothesis we are trying to check. In statistics we call this process **hypothesis testing** and the statement we are assessing is called the **null hypothesis**. The null hypothesis is almost always the "less interesting" alternative and our goal is to find a test to check its validity. If the null hypothesis is valid, we accept it. If not, we say that we "cannot accept the null hypothesis". Although this doesn't mean that we reject it (there's always even a miniscule probability that it is true) "not accepting" the null hypothesis, means that something interesting is very likely going on. 
+
+***
+
+### Comparing a value to a distribution
+
+Coming back to our problem let us see the real case of all GC% from all the genes of the yeast _S. cerevisiae_. I have precalculated these and stored them in a file, which we can easily pass into an R data frame variable called $gcContent$. The data frame contains three variables, corresponding to the gene name, GC% and its length in base pairs.
+
+```{r}
+gcContent<-read.delim("SCgenes_gcContent.tsv", header=T, sep="\t")
+str(gcContent)
+```
+
+We can now check the histogram of the GC% values.
+```{r}
+hist(gcContent$GC, breaks=50, las=1, main="Yeast Genes GC%", xlab="GC%", col="steelblue4", freq = T, plot=T, ylab="Number of genes")
+```
+
+You may see that the distribution is not exactly symmetrical. There is a somewhat long "skew" towards high values on the right and a smaller one on the left that shows a handful of very small values (<0.25). These are clearly what we would call "outliers" but we 'll discuss them in a next class when we talk about variation.
+For now we want to check one GC value against this distribution. 
+
+Let's say that we are given a gene with a **GC%=0.53**. What can we say about it, compared to the distribution? 
+We can try to visualize its position by adding it on the histogram plot as a vertical line (R has another function for this and its called $abline()$).
+
+```{r}
+hist(gcContent$GC, breaks=50, las=1, main="Yeast Genes GC%", xlab="GC%", col="steelblue4", freq = T, plot=T, ylab="Number of genes")
+abline(v=0.53, col="firebrick4", lwd=3)
+```
+
+Our sequence's GC% (shown with the red vertical line) looks quite far from the main volume of the distribution and we are inclinded to say that it "doesn't look likely" to be part of it. However "it doesn't look likely" is not very rigorous. We need a test for that. How can we say for instance that 0.43 is likely to be coming from this distribution but 0.53 is not, in a quantitative way?
+
+### Normalization
+
+We can do this by taking advantage of the structure of the normal distribution. We will assume (rather safely) that GC% is normally distributed (there are tests you can do to decide this). Then we will use the property of the normal distribution according to which 99.7% of its values lie within 3 standard deviations from the mean, as shown in the figure below.
+
+![Normal Distribution](/home/labuser/Dropbox/Teaching/My_BC205/Figures/Figure01_07.jpg)   
+
+This basically means that, for a normal distribution, we can calculated the "distance" of any value from its mean in _units of standard deviation_ and then use this distance to assess the likelihood that the value may have originated from it. Such an absolute "distance" value of >3 would mean that the value under consideration has a less than 0.003 (1-0.997) probability of belonging in this distribution. We can easily calculate this distance by subtracting the distribution's mean and dividing over its standard deviation. In R we can do this:
+
+```{r}
+(0.53-mean(gcContent$GC))/sd(gcContent$GC)
+```
+
+This means that we can rather safely assume that the gene under study has a rather high GC% value to be coming from _S. cerevisiae_ and is therefore likely to be a product of horizontal gene transfer.
+
+***
+_BOX: Normalization and the Z-score_  
+
+The transformation of values to their _sd-scaled differences from the mean_ is a type of **normalization**, that is, a process by which data become comparable in a meaningful way, removing arbitraty biases. The way we have chosen to do this here is called a Z-transformation and the resulting values are called z-scores. 
+$$z_i=(x_i-mean(x))/sd(x)$$  
+A z-score distribution is by definition a normal distribution with $μ=0$ and $σ=1$. 
+
+***
+
+## C2. Comparing distributions 
+
+### The problem: DNA compositional differences in genomes
+
+We saw how we compare a value to a given distribution, but what about having to compare between two different distributions?
+Two distributions, that is two sets of numerical data, can be compared on the basis of many things, but the most obvious (and the most frequent) comparison is on the basis of their central tendencies (most often their means).
+We thus need to consider ways that will help us address the following questions:
+1. Are the means of the two distributions different?
+2. How different?
+3. How important is that difference?
+
+We will consider these questions again in the context of genomic DNA composition. As we saw above the GC% of the genes of _S. cerevisiae_ are normally distributed with a mean value of ~0.40. However, the eukaryotic genome doesn't only contain genic sequences. In fact a large part corresponds to intergenic sequences which, in turn, harbor, regulatory DNA (sequences that have roles in the activation or repression of nearby genes). Sequences with different roles may also have different DNA composition due to different constraints acting on the selection of codons, mutation rates, DNA repair etc. Thus, the question we will like to consider is the following:
+
+Do the genic sequences and the regulatory sequences of _S. cerevisiae_ have different GC%?
+
+To do this, we will first need to select genic and regulatory sequences and calculate their GC%. We have pre-calculated this in two files, which we pass to the corresponding variables in R.
+
+```{r}
+gcGenes<-read.delim("SCgenes_gcContent.tsv", header=T, sep="\t")
+gcRegSeq<-read.delim("SCRegSeq_gcContent.tsv", header=T, sep="\t")
+```
+
+All that is left to do now is to compare the two distributions. Before we see how this is done statistically let's first try to visualize the comparison.
+
+
+### Visualizing distribution comparisons
+
+Up to now we have only visualized singular distributions as histograms. But comparing two or more histograms is not very practical. We need a way to have the distributions visualized side-by-side in a common scale that allows us to see their main characteristics (central tendencies, spread) in a concise, comprehensive way. A nice way to do this is through boxplots. 
+
+![Boxplots](/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/BoxplotCreation.png)
+
+Boxplots are 5-point summarizations of a distribution of numbers that keeps information for the median, the core spread (as the range of the central 50% of the values) and the overall spread as the full range. In some cases, information on outliers (values going beyond a certain distance from the median threshold) is also included (but more for this later).
+
+R (obviously) has a variety of functions for boxplot representations. We will use a basic function here to plot the GC% values of genes and regulatory sequences.
+
+```{r}
+boxplot(gcGenes$GC, gcRegSeq$GC, lwd=2, col="dark orange", names=c("Genes", "Reg Seqs"), main="Yeast GC%", las=1, xlab="Genome Partition", cex.main=1.8, cex.axis=1.3, cex.lab=1.4)
+```
+
+What can we say from this plot? Again, it appears to be very likely that the means of the two distributions are quite different. Remember that the central, coloured "box" of the boxplot encloses 50% of the most central values and the two boxes appear to be falling within rather discrete GC% ranges. There are strong indications that regulatory sequences have smaller GC% than genes. But we need to back this up numerically. 
+
+### t-test
+
+We can compare the means of two normal distributions with the application of Student's t-test (Student was **not** the name of the person who introduced it but there is a nice story about this). While there are variations in the way it is applied, what you need to remember is that the t-test will assess how likely it is that the real differences between the means of the two populations is non-zero.  
+
+![Boxplots](/home/labuser/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/ComparisonsII.png)
+
+The t-test can be readily applied in R through the $t.test()$ function on the two distributions to be compared.
+
+```{r}
+t.test(gcGenes$GC, gcRegSeq$GC)
+```
+
+The output appears a bit complex but can be analyzed in its main parts, starting from the bottom, where we see the two means of the two distributions (x, y are the first and second given in the command). We see that for genes GC=0.401 while for regulatory sequences GC=0.339. Is this ~0.06 difference worthy of our interest? The t-test gives us the answer here. A few lines above we see the "95 percent confidence interval" we notice that the pair of values there are:
+[0.06097173-0.06397072]
+The 95% confidence interval (for the t-test) should be explained as the _range of values within which the difference in means will fall in 95% of the cases_. That is, if we were to repeat this analysis 100 times, 95 of them will have difference in means of at least 0.061. (Compare this with the actual 0.07). As a general rule of thumb _a confidence interval that doesn't contain 0_ is a strong indication of statistical significance.
+This is further enforced, in this case, by the p-value which is very small ($<10^{-16}$). 
+
+### p-values
+
+By now, you must have heard a lot about p-values. The chance is most of it is either incomplete or outright wrong. In strict statistical terms a p-value is a conditional probability that helps us decide upon accepting the null hypothesis. A lot of fuss is related with the way it is being reported but keeping a few things in mind can actually help you avoid confusion:
+1. Always report the exact p-value instead of arbitrary thresholds (such as e.g. <=0.05)
+2. If possible, report p-values alongside confidence intervals
+3. Interpret p-value as the _"conditional probability of observing a difference in sample mean smaller all equal than the observed, **given that the population mean difference** is equal to 0"_
+
+You can read more about p-values [here](https://www.dropbox.com/s/i39z040zn6zdblt/Pvalues_Significance.pdf) and [here](https://www.dropbox.com/s/s8bthqxqvotqkhv/Interpretting_pvalues.pdf)
+
+### Non-normal distributions
+
+One thing we tend to forget when applying a t-test is that the test can be applied on the condition of normality, meaning when the two distributions are normal. We can test this in our case by applying a _statistical test for normality_ such as the **Shapiro-Wilk test**. In R, it is quite straightforward (here for a sample of 1000 values):
+```{r}
+shapiro.test(gcRegSeq$GC[1:1000])
+```
+
+Tests like this are usually more strict than the data really suggest so we take their outcomes with some reserve. In addition, it is important to apply the test to the full size of our dataset and not to a small subset, which is a limitation for the Shapiro-Wilk.
+
+An alternative solution to the normality test that will take into account the full set of sample points is to use the **Kolmogorov-Smirnov test**, which compares two distributions in terms of their type, on top of other properties. This means that we need a normal distribution against which we will compare our own. In order to benchmark, we can use R's rnorm function to create a random but normal distribution with the exact, size, mean and standard deviation as the one we want to test:
+```{r}
+testDistribution<-rnorm(length(gcRegSeq$GC), mean=mean(gcRegSeq$GC), sd=sd(gcRegSeq$GC))
+```
+and then apply the Kolmogorov-Smirnov test as below:
+```{r}
+ks.test(gcRegSeq$GC, testDistribution)
+```
+We see that a test that takes into account the full size of our data sample (equal length) results in a p-value that **does not allow us** to reject the null hypothesis, (which is that the two distributions are of the same type), and therefore we can assume our distribution to be normal.
+
+A way to visualize this comparison and to test for normality is a **Quantile-Quantile Plot (qqplot)**, which actually plots the sample values of both distributions in a space of quantiles, meaning according to their ranked order in the sample. If the qqplot points fall on a diagonal line with small deviations even at the edges then we can assume normality. Here is how we plot our values with the use of a function from the ggpubr() package:
+```{r}
+library(ggpubr)
+ggqqplot(gcRegSeq$GC, pch=19)
+```
+Even though the fit is not perfect, their is strong indication of normality.
+
+Even though normality can be assumed in many cases with marginal outcomes of normality tests, it is always good to know **what we do when normality does not hold**. In these cases the more correct approach would be to compare the data with a non-parametric test. One such is the Wilcoxon Rank Sum test that performs the same analysis (comparison of means) but which can be applied to non-normal distributions.
+This is done in R:
+
+```{r}
+wilcox.test(gcGenes$GC, gcRegSeq$GC)
+```
+
+As you see the p-value is similarly (very) small. Even though the output of this test in R is less detailed, a combination of a t-test and a Wilcoxon test can give you all the information you need. 
+
+## C3. Clustering of data through similarity
+
+### The question: Which gene expression profiles are more similar?
+
+We now move on to a slight more complex problem, that of comparing set of paired data in order to create groups. 
+This is a very common problem in gene expression analysis where the same set of genes is analyzed under a number of different conditions and what we are interested in is finding out which conditions resemble each other in terms of gene expression profile.
+Gene expression data are usually extensive tables with a large number of rows (since the analyzed genes are of the order of thousands). Below we load one such file in R.
+
+```{r}
+geneexp<-read.delim("GeneExpressionData.tsv", header=T, sep="\t")
+```
+
+and then we explore its contents
+
+```{r}
+str(geneexp)
+```
+
+We see that it consists of 22426 genes (observations) for which we know the chromosomal coordinates (chrom, transcriptions start and end sites), its name and the gene expression values in 5 different conditions, which are actually different time points after a certain treatment (1, 3, 6, 24 hours and 7 days). Each condition is represent by two values, one (logFC) is a measurement of relative gene expression (against a given control which is here t=0). logFC is a log2-transformed Fold-change value, which means that a value of 1 means twice the expression (2-fold), while a value of -1 means half the expression of the background condition. The other value in the table is a p-value that tells us how significant the logFC value is.
+
+### Subsetting in R
+
+What we would like to do is to quantify the **overall differences** between timepoints in terms of gene expression. We are not interested in particular genes but neither would we like to perform the analysis on the whole set of >20000 genes, since only a subset of those will change significantly from the original background condition. 
+
+Thus, the first step should be to obtain a subset of genes that satisfy given (arbitrary) conditions in terms of logFC and p-value. Depending on how stringent we want to be in gene selection we can set low p-value thresholds and high (absolute) logFC thresholds. For instance we may choose to analyze only genes that are at least twice over- or under-expressed (|logFC|>=1) that are also significant with a p-value<=0.05. 
+
+How will we choose these genes? R allows us to apply logical controls on the data with the use of the <, >, == symbols, the boolean symbols (&, | and !) and the application of a "subsetting" function called $which()$. Therefore:
+```{r}
+h1deg<-which(abs(geneexp$h1logFC)>=1 & geneexp$h1pval<=0.05)
+```
+
+checks which logFC values for h1 are >=1 or <=-1 (abs stands for "absolute value") **and** also have p-value for h1 <=0.05. The "&" symbol here corresponds to the boolean "and" meaning that we want the intersection of the two sets.
+We can do this for all 5 timepoints, storing the genes in 5 different vectors.
+
+```{r}
+h3deg<-which(abs(geneexp$h3logFC)>=1 & geneexp$h3pval<=0.05)
+h6deg<-which(abs(geneexp$h6logFC)>=1 & geneexp$h6pval<=0.05)
+h24deg<-which(abs(geneexp$h24logFC)>=1 & geneexp$h24pval<=0.05)
+d7deg<-which(abs(geneexp$d7logFC)>=1 & geneexp$d7pval<=0.05)
+```
+
+(which we name XXdeg after DEG=Differentially Expressed Gene)
+
+Remember that each XXdeg vector contains the genes that are differentially expressed in the corresponding condition but we want to compare all of them. We will therefore join all the genes in one large set. An easy way to do this is to combine them in one vector:
+```{r}
+deg<-c(h1deg, h3deg, h6deg, h24deg, d7deg)
+```
+
+and then remove all duplicates with the application of the $unique()$ function:
+
+```{r}
+deg<-unique(deg)
+```
+
+In this last command, you can see that R allows you to overwrite a variable with itself after the application of a function.
+
+We now have a set of genes for which we would like to calculate distances/similarities at the level of logFC. We can obtain the **subset** of these genes from the original dataframe by selecting the rows that correspond to the DEG.
+
+```{r}
+selgeneexp<-geneexp[deg,]
+```
+
+The structure A[X,] means that we keep only X-numbered rows from the dataframe A. X is a vector of numbers that correspond to the positions in the dataframe. 
+
+### Distances of vectors
+
+We now have all we need to calculate the distances between conditions. How are we to do this? There are various measures of distance when it comes to vectors of paired data. A very commonly used one is the easiest to understand intuitively. Consider the simplest example of a pair of vectors: $(x_1, y_1)$ and $(x_2, y_2)$. We can imagine them as a pair of coordinates in a Cartesian (two-dimensional) plane and so we can calculate their distance given by the square root of the sum of the coordinate differences:
+$$D=\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}$$
+
+We call $D$ the "Euclidean Distance" because it is actually deduced geometrically through the application of the Pythagorean theorem. But $D$ need not be confined in two-dimensional spaces. In fact it holds for any N-dimensional manifold (that is a space where Euclidean geometry applies). We can thus extend D in the following way:
+
+$$D=\sqrt{\sum_{1}^{N} (i_1-i_2)^2}$$
+where $N$ are dimensions of the space and 1, 2 are the coordinates of item1 and item2. 
+This latest equation can be applied directly to the case of gene expression data. Here item1 and item2 will be the two compared conditions and $N$ will be the number of genes which we will compare. $i_1$ and $i_2$ are the gene expression values of the $i-th$ gene in the two conditions.
+
+R allows us to apply the Euclidean distance directly with the use of a function suitably called $dist()$. We only need to choose the two vectors and combine them in a table with the use of another function called $rbind()$:
+
+```{r}
+dist(rbind(selgeneexp$h1logFC, selgeneexp$h3logFC), method = "euclidean")
+```
+
+We see that the distance between h1 and h3 is 44.03. We can calculate all pairwise distances at once by applying $dist()$ in the whole table. 
+
+```{r}
+condTab<-rbind(selgeneexp$h1logFC, selgeneexp$h3logFC, selgeneexp$h6logFC, selgeneexp$h24logFC, selgeneexp$d7logFC)
+condD<-dist(condTab, method = "euclidean")
+condD
+```
+
+The resulting table links the 5 conditions in pairs. Notice how the distances between each condition and itself are not included since by definition $D(x,x)=0$. From the table we can see that the most similar conditions are h3 and h6 D[2,3] and that d7 is farther from all others to the exception of h24.
+
+### Clustering of groups according to distances
+
+The benefit of having all the $N(N-1)/2$ pairwise comparisons between $N$ items We can now use the relationships of their distance table to group the items. There are many ways to do this, but the most commonly used is through agglomerative hierarchical clustering. This is a process through which:
+1. We select the smallest distance in the table
+2. We join the two items that are linked by this distance
+3. We recalculate the table taking the joined items as a single one
+4. Go back to step 1.
+
+R can do this for us through a function, called $hclust()$ which takes the distance table as input. We first build the clustering tree:
+
+```{r}
+hcltree<-hclust(condD)
+```
+
+and then we plot it with a function suitably named as $plot()$
+
+```{r}
+plot(hcltree, labels=c("h1", "h3", "h6", "h24", "d7"), las=1, main="Condition Distance")
+```
+
+Where the relationships between early (h1, h3, h6) and late (h24, d7) timepoints are obvious.
+
+The analysis we have conducted was aiming at comparing conditions in the space of $N$ genes. But we can do the opposite and compare genes in the space of $M$ conditions, looking for, this time, to group genes according to their similarity in expression in time. All we need to do is to invert the original table and join it by columns instead of by rows. We will thus use $cbind()$ instead of $rbind()$ to create a gene distance table.
+
+```{r}
+geneTab<-cbind(selgeneexp$h1logFC, selgeneexp$h3logFC, selgeneexp$h6logFC, selgeneexp$h24logFC, selgeneexp$d7logFC)
+geneD<-dist(geneTab, method = "euclidean")
+```
+
+and then plot the resulting tree (without labels since there are >1500 genes)
+
+```{r}
+hcltree<-hclust(geneD)
+plot(hcltree, main="Gene Distance", labels=F, las=1)
+```
+
+### Groups from clusters
+
+Trees are a good way to see the relationships between objects but not very good at giving us actual groups. We can use a tree to define groups indirectly by applying a threshold on the distance from the leaves to the root. You can imagine it as a horizontal line that cuts through the branches. All leaves below a cut are grouped together.
+
+```{r}
+hcltree<-hclust(geneD)
+plot(hcltree, main="Gene Distance", labels=F, las=1)
+abline(h=10, col="red", lwd=2, lty=3)
+```
+
+The line at a distance threshold=10 cuts the tree in 5 groups. We can obtain them through the application of a function called $cutree()$ setting the distance threshold as the $h$ (height) parameter. We can see the numbers of genes in the clusters with the use of $table()$:
+
+```{r}
+h10clusters<-cutree(hcltree, h=10)
+table(h10clusters)
+```
+
+This is of course not the only way to cluster data. In fact clustering is an "art" of its own when it comes to data analysis. We will discuss more about it as we deal with specific cases and examples.
+
+### Heatmaps for gene expression data comparisons
+
+Agglomerative clustering takes place as a side-analysis in most of the heatmaps produced for gene expression data. What is actually happening in heatmaps is that both dimensions of a $NXM$ matrix of gene expression values ($M$ conditions and $N$ genes) are clustered at the same time and the resulting trees are plotted on the sides of the heatmap. 
+This is how our data would look like in such a heatmap (provided some additional aesthetic touches).
+
+```{r}
+library(gplots)
+library(RColorBrewer)
+hcols<-colorRampPalette(c("steelblue4", "white", "firebrick4"))(256)
+ccols<-c("dark red", "dark orange", "olivedrab", "steelblue4", "violet")
+heatmap.2(geneTab, hclustfun = function(x) hclust(x,method = 'complete'), col=hcols, RowSideColors=ccols[h10clusters], key.title="", density.info="none", scale="none", mar=c(10,5), trace="none", tracecol="black", vline=0, labCol=c("h1","h3","h6","h24","d7"), labRow="")
+```
+
+Notice how the trees (dendrograms) on either side are the ones that we had already obtained. The additional advantage of this representation is that we can now link the similarities of the trees with the actual gene expression values. We can see for instance that the green gene cluster contains genes that are over-expressed in h3 but drop in h6 and h24 before coming up again in d7. We can also spot the similarity (qualitatively) between gene expression patterns in d7 and h24 etc.
+
+## Assignments
+
+The goal of this assignment will to become better acquainted with R and to familiarize yourselves with its use for simple data handling and analysis. First of all you will need to:  
+
+1. Download and install R on your computers. I also recommend installing [R-Studio](https://rstudio.com/), which provides a more user-friendly environment.  
+
+2. Once you do this, please take a look at this [R-for-beginners-bundle](https://www.dropbox.com/s/yfzojs40ul1aran/DataAnalysisWithR-Part-I-Basics.zip) (in Greek) that contains most of the things you need to know on installing R, data input and output and handling the basic data types and plots.  
+
+3. Next, you are asked to try to analyze a real gene expression dataset that you can download from [here](https://www.dropbox.com/s/w56zqo80yig0d2r/Expression_Data.tsv). The data we will study come from an expression experiment using DNA microarrays. mRNA expression has been measured for 18703 mouse genes in a wild-type strain (Wt-control) against 5 different conditions (A, B, C, D, E). Each experiment was performed in 4 biological replicates. The result is an array 18703x24 (four repetitions for 5 + 1 conditions). The file in the link above contains the **normalized expression values**. Our goals in this analysis are:  
+  * Calculate gene expression fold change for each gene. In order to do this you will need to obtain the mean value for _each gene_ and for _each condition_ (Wt, A, B, C, D, E) and then calculate the difference $logFC(gene_{i,X/WT})=mean(gene_{i,X})-mean(gene_{i,Wt})$ for all conditions $X={A,B,C,D,E}$ and for every gene $i$. The mean will be calculated over the 4 replicates.  
+  
+  * Calculate the p-value of a t-test for the same comparisons. This time you will use the 4 replicates instead of the mean. That is we need a p-value referring to $t.test(gene_{i,X,k=1-4}, gene_{i,Wt,k=1-4})$.  
+  
+  * Once you have done this, you will have successfully transformed the count data to relative expression data. You are now in position to apply the commands we discussed in part C3 (above) in order to extract differentially expressed genes (DEGs) for each of the conditions A, B, C, D and E. Use the following arbitrary thresholds (|logFC|>=1 & p.value<=0.05). Report back the numbers of DEGs for each condition.  
+  
+You are free to work in groups of 2-3 people but please drop a comment on our Slack channel naming the members of your group.
