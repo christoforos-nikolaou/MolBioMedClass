@@ -17,26 +17,340 @@ link-citations: yes
 bibliography: null
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+setwd("/home/christoforos/Dropbox/github/MolBioMedClass/RMarkdown")
 ```
 
-## R Markdown
+## R Practicals
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+In this practical class we will try to put into practice a number of statistical and bioinformatics analyses we have already discussed and presented.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Part 1. Statistics
+
+#### 1.1 Comparing means of distributions with t-test
+We will compare the GC% of the yeast genes vs yeast non-coding sequences. We will first load them in R like this:
+
+```{r}
+gcGenes<-read.delim("../Datasets/SCgenes_gcContent.tsv", header=T, sep="\t")
+gcRegSeq<-read.delim("../Datasets/SCRegSeq_gcContent.tsv", header=T, sep="\t")
+```
+
+and inspect the dataframe structures
+
+```{r}
+str(gcGenes)
+head(gcRegSeq)
+```
+
+Next, we may plot the distributions of GC% values in the form of boxplots.
 
 ```{R}
-summary(cars)
+boxplot(gcGenes$GC, gcRegSeq$GC, lwd=2, col="dark orange", names=c("Genes", "Reg Seqs"), main="Yeast GC%", las=1, xlab="Genome Partition", cex.main=1.8, cex.axis=1.3, cex.lab=1.4)
 ```
 
-## Including Plots
+And, as a final step, we will assess the differences in the distributions' means by applying a t-test.
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+t.test(gcGenes$GC, gcRegSeq$GC)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+##### Additional Exercise
+
+Do the same analysis (boxplot, t-test) for random samples of 100 genes vs 100 non-coding sequences from the original datasets, using R's sample function. Do the observations quantitatively and/or qualitatively change? 
+
+#### 1.2 Comparing means of more than two distributions with ANOVA
+
+For this (and other) exercises we will use a more complex dataset of gene expression. We will draw the normalized gene expression data from the work of [Karagianni et al., PLoS Computational Biology, 2018](https://journals.plos.org/ploscompbiol/article/authors?id=10.1371/journal.pcbi.1006933).
+
+This includes gene expression counts for >18000 genes referring to 6 different conditions. One normal (WT), a disease transgenic model (TG) and 4 different treatment conditions for this TG model (designated as TherA-D). There are 10 biological replicates for each gene expression measurement.
+
+Loading the data:
+
+```{r}
+gene_expression_data <- read.delim("../Datasets/GeneExpressionDataset_normalized.tsv")
+```
+
+and visualizing the structure of the dataframe 
+
+```{r}
+str(gene_expression_data)
+head(gene_expression_data)
+```
+
+shows us the wealth of the dataset.
+
+The question now is to compare the gene expression values for **each gene** across **all conditions**. We know that we can (and should) do this with ANOVA, so we need to figure out how.
+
+Each gene is contained in one row of this dataframe. We may obtain its values across conditions with the bracket subsetting structure like this:
+
+```{r}
+gene_expression_data[1,]
+```
+
+What we need to keep in mind though, is that in order 
+to apply ANOVA we need to create a dataframe where a numerical vector will be paired with a categorical vector. Here the numerical values are the gene expression values, but we don't (yet) have a categorical vector. We need to create this through a vector function like so:
+
+```{r}
+group <- c(rep("WT", 10), rep("TG", 10), rep("TherA", 10), rep("TherB", 10), rep("TherC", 10), rep("TherD", 10))
+group
+```
+
+This simple vector contains the information that needs to be matched with gene expression values **for each gene**.   
+
+We now only need to create a dataframe for the gene in question and apply ANOVA. Let's consider one particular gene (say the crucial transcriptional regulator Klf4).
+First we locate its position (row) in the dataframe
+```{r}
+i <- which(gene_expression_data$Gene == "Klf4")
+i
+```
+
+We then extract the gene expression values for all conditions for this gene.
+
+```{r}
+values <- gene_expression_data[i, 2:61]
+values
+```
+
+Notice how, from the dataframe we take the i-th row and columns 2 to 61, since the 1st column doesn't hold gene expression values but simply the name of the gene. Let's now join numerical values and the categorical vector we created above in one dataframe with the known function
+
+```{r}
+genedata <- data.frame("GeneExpression"=as.numeric(values), "Group"=as.factor(group))
+genedata
+```
+
+Notice the as.numeric() and as.factor() functions applied on the constituent vectors to make sure these are incorporated in the correct class.
+
+We are now good to go with the ANOVA application, with a simple call of the aov() function, on the output of which we will apply the Tukey's "honestly significant difference" (HSD) function.
+
+```{r}
+geneaov <- aov(GeneExpression ~ Group, data = genedata)
+tukeyaov <- TukeyHSD(geneaov)
+tukeyaov
+```
+
+we may notice that only the first 5 rows of the output are of interest as they contain the comparisons of all conditions against TG. We can obtain them with a careful use of brackets to first get the whole table (using the $Group vector name) and then select only the first 5 rows ([1:5])
+
+```{r}
+tukey <- tukeyaov$Group[1:5,]
+tukey
+```
+
+Where we see that all comparisons yield significant differences.
+
+##### Additional exercises
+
+1. Above we saw how we can perform ANOVA on **one particular gene**. But how would we do it for more than one?
+Think of what would be required to perform this analysis on 100, 1000 or all genes of the dataset.
+2. Create the ANOVA WT-TG differences for entire lists of genes.
+
+##### Solutions/Hints (skip for now)
+
+1. You may use a for-loop structure such as:
+```{r}
+for(i in 1:100){
+  values <- gene_expression_data[i, 2:61]
+  # etc
+  # ...
+  # ...
+}
+```
+
+2. We first need to decide on the list. One interesting case is to focus on particular pathways. Below there is an example of how one can get the genes belonging to a particular pathway from the mouse genome.
+
+```{r}
+mouseKEGG<-readRDS("~/Dropbox/Data/GO_KEGG_Lists_RDS/kegg_pathways_list_mus_musculus.rds")
+mtorgenes <- as.character(mouseKEGG$`mTOR signaling pathway - Mus musculus (house mouse)`[3][,1])
+```
+
+and then use a handy function/symbol of %in% to extract the genes in question from the dataframe
+
+```{r}
+i <- which(gene_expression_data$Gene %in% mtorgenes)
+```
+
+and then use i as a vector instead of an index. 
+
+#### 1.3 Assessing ratios and percentages
+
+One of the most common statistical analyses has to do with the decision on whether some combinations of two (or more) categorical values lead to more interesting co-occurrences than others. Say that you have smokers and non-smokers. Do the men smoke more or less than the women? 
+
+Or, in a more directly biological example: consider a position in the genome in which there is variation between individuals between G (the most common allele) and A (the less frequent allele). Now, also consider that we are suspecting there is association of this allele with a certain medical condition. To this end we have genotyped individuals with and without that condition at this particular position. We thus have two categorical variables: Genotype = (common, rare allele) and Condition = (healthy, diseased). 
+The data we got from 147 individuals are contained in the following dataset:
+
+```{r}
+genevardata <- read.table("../Datasets/GeneticVariationData.tsv", header=T, sep="\t")
+str(genevardata)
+head(genevardata)
+```
+
+The question is: Does our assumption of genetic association of the locus with this disease hold for this particular dataset?
+
+Our approach will require two steps. First we need to create a table that holds the combinations of the two categorical values. That is, how many healthy individuals have G or A and the same for the diseased ones. We can do this directly with a useful function called table():
+
+```{r}
+varTab <- table(genevardata$Genotype, genevardata$Condition)
+varTab
+```
+
+Which means that out of 78 diseased individuals, 37 had the rare allele and 31 the common one, while for the healthy individuals the situation is inversed with 49 having the common allele and 30 having the rare one.
+
+We can visualize these differences in stacked bar plot like the one below:
+
+```{r}
+library(ggplot2)
+ggplot(genevardata, aes(fill=Genotype, x=Condition, y=Genotype)) + 
+    geom_bar(position="stack", stat="identity") + ggtitle("Genotype Data")
+```
+
+The second (and last) step will be to assess the significance of this discrepancy. We will do this by applying a statistical test called chi-square, or Fisher's exact test (in honour of the Ronald Fisher who first devised it). This is done like so:
+
+```{r}
+fisher.test(varTab)
+```
+
+From which we see that:
+a. The odds ratio statistic is 1.94. The odds ratio is, as its name implies, the ratio of the two odds calculated as the percentages of combinations of categorical data. That is, from the varTab table we see that the odds for the rare allele are 37/31=1.194 for the diseased and 30/49=0.612 for the healthy individuals. The ratio of these two fractions is: 1.194/0.6122 ~ 1.95. This means that it is almost two times (1.95) more likely that you get the rare allele if you have the disease than if you don't. 
+
+Is this enrichment/association significant? Yes, because: 
+
+b. The p-value reported by the test is 0.04885, which is below the generally accepted threshold of 0.05 and
+c. Because the 95% confidence interval of the test is [0.958261, 3.97442] which **doesn't contain the basal value of 1**. 
+
+#### Additional exercises
+1. Why is the basal value for Fisher's test 1 and not 0?
+2. Suppose we had not one but >100 loci with suspected associations with this disease. What would we need to be mindful of while performing the same analysis on all of them?
+
+
+#### 1.4 Correlation and Regression
+
+One major type of statistical analyses that we often do have to do with quantitative associations between numerical data. We analyze them in the form of correlations.
+
+We will see one example from genomic data with two different types of measurements that are suggested to be associated: gene expression and DNA methylation.
+
+Below we load onto R a dataset containing relative DNA methylation and differential gene expression for >500 mouse genes in a genome-wide experiment that analyzed both transcriptomic and epigenetic data. These come from this work by [Ntougkos et al., 2017](https://acrjournals.onlinelibrary.wiley.com/doi/epdf/10.1002/art.40128).
+
+```{r}
+expmethdata<-read.delim("../Datasets/Exp_Meth_Deg_pvalues.tsv", header=T, sep="\t")
+head(expmethdata)
+str(expmethdata)
+```
+
+You see that the dataset contains a large number of variables related to the names of the genes, their positions in the genome, methylation and expression values for three different time points, as well as information on the groups they form in terms of their expression patterns. We will focus on one particular timepoint (the latest one) and obtain the values of methylation (for the promoter Regression) and the expression score for that one only. 
+The desired variables are: GeneName, LateExp, meanLate_prom (corresponding to columns 1, 4 and 22 respectively).
+
+```{r}
+expmethdataLate <- expmethdata[,c(1,4,22)]
+head(expmethdataLate)
+```
+
+We can plot the data on a 2-D scatterplot like this
+```{r}
+plot(expmethdataLate[,2:3], pch=19, col="dark grey", type="p", xlab="Gene Expression Change", ylab="Methylation Change")
+```
+
+
+
+```{r}
+cor(expmethdataLate[,2:3])
+```
+
+#### 1.5 When we don't know which test to use
+In one of our very first classes we talked about our lack of ability to qualitatively assess trends of continuity such as successful runs or consecutive outcomes. We had used the example of a basketball player's "hot hand" to show that runs of success (or failure) are -most of the times- due to chance if one takes into account the overall probability of an event.
+
+We often have to deal with such problems in time series data or basically all types of data where a quantitative (or binary) outcome is a function of a linear variable (which can be space or time). In biology, and in genomics in particular, we often find ourselves dealing with data that are spatially-dependent along linear chromosomes.
+
+In the dataset shown below we have measured DNA methylation along a 10Mb stretch of human chromosome 10.
+
+```{r}
+chrommethdata <- read.delim("../Datasets/GenomeSeriesData.tsv", header=T, sep="\t")
+head(chrommethdata)
+str(chrommethdata)
+```
+
+The dataset contains information on chromosome, start and end position of each segment and the Methylation score in the 4th column. This is a typical case of genomic coordinate format, which we call [bedgraph](https://genome.ucsc.edu/goldenPath/help/bedgraph.html).
+In these cases it is very handy to directly plot the data in order to visualize it.
+
+```{r}
+plot(chrommethdata$start/100000000, chrommethdata$MethScore, type="l", col="olivedrab", lwd=5, xlab="Genomic Coordinates (x100Mb)", ylab="Methylation Score", main="chrom10", las=1, cex.lab=1.5, cex.main=2, cex.axis=1.3)
+```
+
+Looking at the data leads us to the suggest that something happens around one third of the interval and the methylation values drop (on average). By eye inspection alone we hypothesize that there is a boundary somewhere around 1.24 before which the values are considerably higher than after. 
+
+We can try and visualize this boundary with a solid vertical line, like this:
+
+```{r}
+plot(chrommethdata$start/100000000, chrommethdata$MethScore, type="l", col="olivedrab", lwd=5, xlab="Genomic Coordinates (x100Mb)", ylab="Methylation Score", main="chrom10", las=1, cex.lab=1.5, cex.main=2, cex.axis=1.3)
+abline(v=1.24, col="firebrick4", lty=3, lwd=3)
+```
+
+We can test this hypothesis in various ways. A simple one would be to just take **all** the values before the boundary against **all** values after it and perform a t-test.
+
+```{r}
+before<-which(chrommethdata$start<=124000000)
+after<-which(chrommethdata$start>124000000)
+boxplot(chrommethdata$MethScore[before], chrommethdata$MethScore[after], col=c("steelblue2", "steelblue3"), lwd=3, las=1, ylab="Methylation Score", names=c("Before", "After"))
+t.test(chrommethdata$MethScore[before], chrommethdata$MethScore[after])
+```
+
+There is a clear indication of significantly higher values before the boundary compared to after. 
+
+There is however an additional question having to do with the fluctuation of the values, as singular methylation scores on either side of the boundary can be either high or low.
+
+A different (but related) question is:
+Do stretches of high methylation scores occur more frequently before the boundary than after it?
+
+In order to answer this question conclusively, we need to carry out a number of additional tasks that will allow us to perform a new type of statistical inference. 
+
+The steps we will follow are:
+1. We will set a baseline value according to which we will binarize the data into two categories (high/low) in the form of (success/failure). This will then allow us to check for runs of consecutive high or low values.
+2. We will count the occurrences of such runs and record the number of cases we have X consecutive high (or low values) in each area of the genome.
+3. We will assess these numbers statistically to see if these runs do indeed occur with higher frequencies than expected.
+
+Below we show these steps one by one.
+
+1. Baseline value and binarization of data.
+We will use the overall mean of the values, as a simple threshold for the binarization.
+```{r}
+mMS<-mean(chrommethdata$MethScore)
+high<-which(chrommethdata$MethScore>=mMS)
+low<-which(chrommethdata$MethScore<mMS)
+```
+
+and we will translate high/low values to 1/0 for purposes of simpler computation.
+
+```{r}
+mscore<-vector(mode="numeric", length=length(chrommethdata$MethScore))
+mscore[high]<-1
+mscore
+```
+
+2. Calculating run lengths
+Next, we want to be able to count the lengths of consecutive runs of the same value. We will use an R function for this which is called rle() (run-length encoding)
+
+```{r}
+rmscore <- rle(mscore)
+rmscore
+```
+
+The output of rle is a paired vector that holds the sizes (lengths) of consecutive runs, matched with the value of the run's elements. This means that our series starts with 6 high values (1's), followed by 1 low, then 10 high values, followed by 1 low etc. We can isolate the runs of low values (0's) and check their distribution.
+
+```{r}
+lowpos <- which(unlist(rmscore[2])==0)
+library(beanplot)
+beanplot(unlist(rmscore[1])[lowpos], col="grey", ylab="Consecutive Low MethScores", names="Low Score")
+```
+
+(Notice that, we use the unlist() function to convert elements of a list object into the more easily handled vector format.)
+
+3. Assessing the statistical significance of runs
+
+Looking at runs of low values (regardless of their position) we can see that their mean value is 3.8 and their maximum is 11.
+
+```{r}
+mean(unlist(rmscore[1])[lowpos])
+max(unlist(rmscore[1])[lowpos])
+```
+
+The question is: are these values high or low? Would we expect them to be higher or not. Could we get a value as high as 11 simply out of chance?
+
+All of these questions cannot be tested against a known distribution. So we need a different approach.
