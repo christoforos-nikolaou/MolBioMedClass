@@ -486,11 +486,13 @@ As a last task we will perform a motif building and search analysis using a set 
 
 Our goal is to create a PWM with a set of instances of the GATA transcription factor, transform it into PSSM and then search it against a whole genome sequence.
 
-1. You may start by downloading a set of GATA binding sequences that you will find [here](https://www.dropbox.com/s/pr51bnmp39b996a/gata.fa).
+1. You may start by downloading a set of GATA binding sequences that you will find [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/gata.fa).
 
-2. Once this is done, you can download the target sequence against which you will search the PWM [here](https://www.dropbox.com/s/ni6nrp0niv47kd2/test1.fa).
+2. Once this is done, you can download the target sequence against which you will search the PWM [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/test1.fa).
 
-3. In order to build the PWM you need to read the GATA sequences using [this custom function](https://www.dropbox.com/s/2hmtvg6wn9xgjst/readfastafile.R) and then create the matrix with the [PWM function](https://www.dropbox.com/s/67815vjkrvxa72i/seqMotif.R). 
+3. In order to build the PWM you need to read the GATA sequences using [this custom function](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Rfunctions/readfastafile.R) and then create the matrix with the [PWM function](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Rfunctions/seqMotif.R). 
+
+
 In order to use these functions you have to upload them to R using:
 ```{r, eval=F, echo=T}
 source("nameoffunction.R")
@@ -499,7 +501,7 @@ source("nameoffunction.R")
 This means, that you may use $readfastafile()$ as:
 ```{r, eval=F, echo=T}
 source("../Rfunctions/readfastafile.R")
-gataseqs<-readfastafile("gata.fa")
+gataseqs<-readfastafile("../Datasets/gata.fa")
 ```
 
 and then obtain the PWM with:
@@ -508,17 +510,33 @@ source("../Rfunctions/seqMotif.R")
 gataPWM<-seqMotif(gataseqs, drawmotif=F)
 ```
 
+We can visualize the motif with the same function, changing the parameter drawmotif to TRUE
 
-4. The transformation of the PWM to PSSM requires an additional random sequence collection, which you can find [here](https://www.dropbox.com/s/102g7y0ortf43dq/random.fa). You can then create the PSSM by taking the log2(ratio) of the two PWMs (one from the GATA sequences over the one from the random sequence).
+```{r}
+seqMotif(gataseqs, drawmotif=TRUE)
+```
 
-5. In the next step you will use a [PSSMSearch Function](https://www.dropbox.com/s/4ssz9kg3dj9bhbt/pssmSearch.R) to search for the motif in the longer target sequence. Assuming you have created the PSSM into the table called $pssm$, the list of commands below should work:
+```{r}
+gataPWM
+```
+
+4. The transformation of the PWM to PSSM requires an additional random sequence collection, which you can find [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/random.fa). You can then create the PSSM by taking the log2(ratio) of the two PWMs (one from the GATA sequences over the one from the random sequence).
+
+```{r}
+
+```
+
+5. In the next step you will use a [PSSMSearch Function](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Rfunctions/pssmSearch.R) to search for the motif in the longer target sequence. Assuming you have created the PSSM into the table called $pssm$, the list of commands below should work:
+
+
+
 ```{r, eval=F, echo=T}
 source("../Rfunctions/pssmSearch.R")
-targetset<-readfastafile("test1.fa")
-pssmSearch(pssm, targetseq, threshold=X)
+targetseq<-readfastafile("../Datasets/test1.fa")
+pssmSearch(pssm, targetseq, threshold=0.9)
 ```
 
 The parameter X in the threshold tells the search function to return a different number of successful hits for the search. Threshold can take values from 0 to 1, with 1 returning the instances of the binding sites that have score equal to the maximum (100%) of the PSSM. A value of 0.8 will return values with scores 80% or more of the maximum and thus a greater number of hits.
 
-6. As a last step you are asked to do the following. Perform three different searches with threshold=0.5, 0.8 and 1.0 and obtain the results in a vector. Then use this vector of positions to extract the sequences from the target sequence (test1.fa). Then store these sequences in a table (you can use "write.table") and paste them to the [WebLogo WebService](http://weblogo.berkeley.edu/logo.cgi) to obtain three different sequence logos.
+1. As a last step you are asked to do the following. Perform three different searches with threshold=0.5, 0.8 and 1.0 and obtain the results in a vector. Then use this vector of positions to extract the sequences from the target sequence (test1.fa). Then store these sequences in a table (you can use "write.table") and paste them to the [WebLogo WebService](http://weblogo.berkeley.edu/logo.cgi) to obtain three different sequence logos.
 Compare the three and discuss their differences. 
