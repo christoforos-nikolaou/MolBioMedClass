@@ -174,7 +174,15 @@ Variability lies at the heart of a number of biological phenomena from genomic v
 
 * Analyzing Motifs in Sequences
 
-## 7. Part IVa. Correlation, Regression and Causation. In statistics (Dec 8th 2023)
+## 7. Part X. An R practical Class (Dec 22nd 2023)
+
+This class will include an all-around practical on most of the topics we have covered up to now, using R.
+
+You can find the (tentative) material [here](RMarkdown/ModuleX_RPracticals.rmd).
+
+(More info for this, to be posted soon)
+
+## 8. Part IVa. Correlation, Regression and Causation. In statistics (included in previous practical class for the 2023-2024 season)
 
 The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
 
@@ -192,7 +200,7 @@ The ultimate goal in the study of physical phenomena is to reveal quantifiable r
 
 * TBA
 
-## 8. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Dec 15th 2022)
+## 9. Part IVb. Correlation, Regression and Causation. In biomedical modeling (included in previous practical class for the 2023-2024 season)
 
 In this class we will see how some of the models we recently discussed find applications in the biomedical sciences. We will see how models of regression and classification can by applied in the fields of:
 
@@ -208,7 +216,7 @@ In this class we will see how some of the models we recently discussed find appl
 
 * Research and prepare material for your final project proposal
 
-## 9. Recap, Projects and Evaluation (Dec 22nd 2023)
+## 9. Recap, Projects and Evaluation (Postponed for early 2024)
 
 This (final) class will be devoted to clarifying concepts, a general recap and discussion of your final projects, the proposal of which you will have to prepare and present in class. Projects may be collaborative but it is important that they put to practice the skills you have acquired during the semester.
 
