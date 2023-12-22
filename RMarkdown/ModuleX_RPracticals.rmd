@@ -227,7 +227,7 @@ One major type of statistical analyses that we often do have to do with quantita
 
 We will see one example from genomic data with two different types of measurements that are suggested to be associated: gene expression and DNA methylation.
 
-Below we load onto R a dataset containing relative DNA methylation and differential gene expression for >500 mouse genes in a genome-wide experiment that analyzed both transcriptomic and epigenetic data. These come from this work by [Ntougkos et al., 2017](https://acrjournals.onlinelibrary.wiley.com/doi/epdf/10.1002/art.40128).
+Below we load onto R a dataset containing relative DNA methylation and differential gene expression for >500 mouse genes in a genome-wide experiment that analyzed both transcriptomic and epigenetic data. These come from this work by [Ntougkos et al., 2017](https://acrjournals.onlinelibrary.wiley.com/doi/epdf/10.1002/art.40128). You can find a version of the dataset [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/Exp_Meth_Deg_pvalues.tsv).
 
 ```{r}
 expmethdata<-read.delim("../Datasets/Exp_Meth_Deg_pvalues.tsv", header=T, sep="\t")
@@ -235,11 +235,11 @@ head(expmethdata)
 str(expmethdata)
 ```
 
-You see that the dataset contains a large number of variables related to the names of the genes, their positions in the genome, methylation and expression values for three different time points, as well as information on the groups they form in terms of their expression patterns. We will focus on one particular timepoint (the latest one) and obtain the values of methylation (for the promoter Regression) and the expression score for that one only. 
-The desired variables are: GeneName, LateExp, meanLate_prom (corresponding to columns 1, 4 and 22 respectively).
+You see that the dataset contains a large number of variables related to the names of the genes, their positions in the genome, methylation and expression values for three different time points, as well as information on the groups they form in terms of their expression patterns. We will focus on one particular timepoint (the latest one) and obtain the mean values of methylation (for the body of the gene) and the expression score for that one only. 
+The desired variables are: GeneName, LateExp, meanLate_gb (corresponding to columns 1, 4 and 13 respectively).
 
 ```{r}
-expmethdataLate <- expmethdata[,c(1,4,22)]
+expmethdataLate <- expmethdata[,c(1,4,13)]
 head(expmethdataLate)
 ```
 
@@ -248,109 +248,277 @@ We can plot the data on a 2-D scatterplot like this
 plot(expmethdataLate[,2:3], pch=19, col="dark grey", type="p", xlab="Gene Expression Change", ylab="Methylation Change")
 ```
 
-
+A trained eye may spot some positive correlation. We can try to calculate this with a suitable function named cor().
 
 ```{r}
 cor(expmethdataLate[,2:3])
 ```
 
-#### 1.5 When we don't know which test to use
-In one of our very first classes we talked about our lack of ability to qualitatively assess trends of continuity such as successful runs or consecutive outcomes. We had used the example of a basketball player's "hot hand" to show that runs of success (or failure) are -most of the times- due to chance if one takes into account the overall probability of an event.
-
-We often have to deal with such problems in time series data or basically all types of data where a quantitative (or binary) outcome is a function of a linear variable (which can be space or time). In biology, and in genomics in particular, we often find ourselves dealing with data that are spatially-dependent along linear chromosomes.
-
-In the dataset shown below we have measured DNA methylation along a 10Mb stretch of human chromosome 10.
+It turns out our eyes were mistaken and the correlation was actually negative. Well, not exactly. The value is undermined by a considerable proportion of zero values for methylation. We can remove them and recalculate.
 
 ```{r}
-chrommethdata <- read.delim("../Datasets/GenomeSeriesData.tsv", header=T, sep="\t")
-head(chrommethdata)
-str(chrommethdata)
+nzExpMethDataLate <- expmethdataLate[which(expmethdataLate$meanLate_gb!=0),]
+cor(nzExpMethDataLate[,2:3])
 ```
 
-The dataset contains information on chromosome, start and end position of each segment and the Methylation score in the 4th column. This is a typical case of genomic coordinate format, which we call [bedgraph](https://genome.ucsc.edu/goldenPath/help/bedgraph.html).
-In these cases it is very handy to directly plot the data in order to visualize it.
+Now, we see that the positive correlation we spotted is indeed there, even if only marginal.
+
+##### Additional things to consider
+
+Correlation is tightly associated with the concept of regression, which is, in turn, the introductory concept to modeling data. 
+We will come back to this (hopefully) next year.
+
+### Part 2. Bioinformatics
+
+#### 2.1 Sequence Similarity and Clustering
+
+Our goal here will be to combine sequence similarity analysis with the clustering approaches we have discussed in class.
+
+Histone H4, one of the core histone proteins of nucleosomal particles, is one of the most well-conserved proteins among eukaryotic organisms. In this assignment, you will have to assess **the degree of conservation** through **Needleman-Wunsch pair-wise alignment** in specific protein sequences derived from a broad group of eukaryotes.
+
+The file you will find [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/histone4.fa) contains the H4 protein sequences from the following organisms: (Homo sapiens: HUMAN, Mus musculus: MOUSE, Drosophila melanogaster: DROME, Arabidopsis thaliana: ARATH, Bos taurus: BOVIN, Caenorhabditis elegans: CAEEL : CHICK, Rattus norvegicus: RAT, Saccharomyces cerevisiae: YEAST, Xenopus laevis: XENLA)
+
+In the following we will:
+
+1. Align all sequences with each other in pairs using the BLOSUM50 replacement table.
+2. Indicate the alignment scores on a square table of 10X10 dimensions.
+
+It is recommended that you use the the R::seqinr and BioConductor::Biostrings libraries.
+The installation of the former is done directly by R 
+```{r}
+library("seqinr")
+```
+while for Biostrings you have to go through Bioconductor: 
+```{r}
+library("Biostrings")
+```
+
+The reading of the sequences can be done with the read.fasta() function of seqinr().
+
+We will first load the sequences and check out the way they are imported in R.
+```{r}
+sequences<-read.fasta("../Datasets/histone4.fa")
+sequences
+str(sequences)
+```
+
+Looking at the sequences we see that the data are imported in character vectors. We actually need every sequence to be a continuous chunk of residues into **one single string**. This can be achieved with a function called paste(). Below we apply the function to one sequence of the object called "sequences". As **this is a list**, we use **double brackets** to assess its elements.
 
 ```{r}
-plot(chrommethdata$start/100000000, chrommethdata$MethScore, type="l", col="olivedrab", lwd=5, xlab="Genomic Coordinates (x100Mb)", ylab="Methylation Score", main="chrom10", las=1, cex.lab=1.5, cex.main=2, cex.axis=1.3)
+paste(sequences[[1]], collapse ="")
 ```
 
-Looking at the data leads us to the suggest that something happens around one third of the interval and the methylation values drop (on average). By eye inspection alone we hypothesize that there is a boundary somewhere around 1.24 before which the values are considerably higher than after. 
-
-We can try and visualize this boundary with a solid vertical line, like this:
+the collapse="" parameter, tells paste() to *not use* any character between the joining elements. 
+Below we see how we can also convert the entire string to upper case characters.
 
 ```{r}
-plot(chrommethdata$start/100000000, chrommethdata$MethScore, type="l", col="olivedrab", lwd=5, xlab="Genomic Coordinates (x100Mb)", ylab="Methylation Score", main="chrom10", las=1, cex.lab=1.5, cex.main=2, cex.axis=1.3)
-abline(v=1.24, col="firebrick4", lty=3, lwd=3)
+toupper(paste(sequences[[1]], collapse =""))
 ```
 
-We can test this hypothesis in various ways. A simple one would be to just take **all** the values before the boundary against **all** values after it and perform a t-test.
+In the following code lines we create a new list called myseqs, in which we store the joined, upper case transformed sequences of the entire dataset. This is done in **a for-loop**, a repetitive structure that is introduced with a for command and uses curly brackets to enclose loop-commands.
 
 ```{r}
-before<-which(chrommethdata$start<=124000000)
-after<-which(chrommethdata$start>124000000)
-boxplot(chrommethdata$MethScore[before], chrommethdata$MethScore[after], col=c("steelblue2", "steelblue3"), lwd=3, las=1, ylab="Methylation Score", names=c("Before", "After"))
-t.test(chrommethdata$MethScore[before], chrommethdata$MethScore[after])
+myseqs<-list()
+for(i in 1:length(sequences)){
+  myseqs[i]<-toupper(paste(sequences[[i]], collapse=""))
+}
+# assigning names to myseqs, the same as in sequences
+names(myseqs)<-names(sequences)
 ```
 
-There is a clear indication of significantly higher values before the boundary compared to after. 
-
-There is however an additional question having to do with the fluctuation of the values, as singular methylation scores on either side of the boundary can be either high or low.
-
-A different (but related) question is:
-Do stretches of high methylation scores occur more frequently before the boundary than after it?
-
-In order to answer this question conclusively, we need to carry out a number of additional tasks that will allow us to perform a new type of statistical inference. 
-
-The steps we will follow are:
-1. We will set a baseline value according to which we will binarize the data into two categories (high/low) in the form of (success/failure). This will then allow us to check for runs of consecutive high or low values.
-2. We will count the occurrences of such runs and record the number of cases we have X consecutive high (or low values) in each area of the genome.
-3. We will assess these numbers statistically to see if these runs do indeed occur with higher frequencies than expected.
-
-Below we show these steps one by one.
-
-1. Baseline value and binarization of data.
-We will use the overall mean of the values, as a simple threshold for the binarization.
+Our dataset now looks like this
 ```{r}
-mMS<-mean(chrommethdata$MethScore)
-high<-which(chrommethdata$MethScore>=mMS)
-low<-which(chrommethdata$MethScore<mMS)
+myseqs
 ```
 
-and we will translate high/low values to 1/0 for purposes of simpler computation.
+We can now proceed with the alignment step. This will be performed pairwise, that is using two sequences every time, with the Biostrings pairwiseAlignment() function and using the substitutionMatrix = "BLOSUM50" parameter. 
+
+See how this works with the first two sequences
+```{r}
+pairwiseAlignment(myseqs[[1]], myseqs[[2]], substitutionMatrix="BLOSUM50")
+```
+
+and how we can do this by only keeping the score of the alignment
 
 ```{r}
-mscore<-vector(mode="numeric", length=length(chrommethdata$MethScore))
-mscore[high]<-1
-mscore
+pairwiseAlignment(myseqs[[1]], myseqs[[2]], substitutionMatrix="BLOSUM50", scoreOnly=T)
 ```
 
-2. Calculating run lengths
-Next, we want to be able to count the lengths of consecutive runs of the same value. We will use an R function for this which is called rle() (run-length encoding)
+Below we do this in one go using a **nested loop structure** that loops over all 2-sequence combinations in the dataset.
+
+We are adding a printing command in the middle of the loop so that we keep track of what we do.
 
 ```{r}
-rmscore <- rle(mscore)
-rmscore
+alignMat<-matrix(0, nrow=length(myseqs), ncol=length(myseqs))
+for(i in 1:length(myseqs)){
+  for(j in 1:length(myseqs)){
+  print(paste("Now comparing", names(myseqs)[i], " with ", names(myseqs)[j]))
+    alignMat[i,j]<-pairwiseAlignment(myseqs[[i]], myseqs[[j]], substitutionMatrix="BLOSUM50", scoreOnly=T)    
+  }
+}
 ```
 
-The output of rle is a paired vector that holds the sizes (lengths) of consecutive runs, matched with the value of the run's elements. This means that our series starts with 6 high values (1's), followed by 1 low, then 10 high values, followed by 1 low etc. We can isolate the runs of low values (0's) and check their distribution.
+The final alignMat matrix contains only the scores of the sequence alignments.
 
 ```{r}
-lowpos <- which(unlist(rmscore[2])==0)
-library(beanplot)
-beanplot(unlist(rmscore[1])[lowpos], col="grey", ylab="Consecutive Low MethScores", names="Low Score")
+alignMat
 ```
 
-(Notice that, we use the unlist() function to convert elements of a list object into the more easily handled vector format.)
+The values this matrix holds are **similarity scores**. But in order to perform hierarchical clustering we require some sort of **distance score**. 
 
-3. Assessing the statistical significance of runs
+There is no rule for how to do this transformation. So we can think of or improvise various alternatives. Below I am showing one such. 
 
-Looking at runs of low values (regardless of their position) we can see that their mean value is 3.8 and their maximum is 11.
+We will start by obtaining the maximum and the minimum score in the whole matrix. We will then calculate the difference of all scores against the minimum and scale this against the maximum difference of (max-min).
 
 ```{r}
-mean(unlist(rmscore[1])[lowpos])
-max(unlist(rmscore[1])[lowpos])
+maxS<-max(alignMat)
+minS<-min(alignMat)
+newMat<-(alignMat-minS)/(maxS-minS)
+newMat
 ```
 
-The question is: are these values high or low? Would we expect them to be higher or not. Could we get a value as high as 11 simply out of chance?
+The newMat matrix is now _almost_ ready to be passed onto the hierarchical clustering function. As a last step we need to change its format to that of a distance with R's function as.dist().
 
-All of these questions cannot be tested against a known distribution. So we need a different approach.
+```{r}
+distMat<-as.dist(newMat)
+```
+
+As a final step we use hierarchical clustering with hclust() and then pass the result onto plot() for visualization.
+
+```{r}
+hclSeq<-hclust(distMat, method = "complete")
+plot(hclSeq, labels=names(myseqs))
+```
+
+Go over the tree of the dendrogram and check if the clustering of the sequences makes sense from an evolutionary perspective.
+
+#### 2.2 Clustering of Gene Expression Data
+
+Having analyzed sequences we can now move on to more complex numerical datasets. 
+
+We will see how we can use dimensionality reduction techniques on a the gene expression dataset we analyzed before with ANOVA. We will load a transposed version of this dataset in which columns have been converted to rows and vice versa, which is required for the application of PCA later on. 
+
+```{r, Reading of Data, Selection of genes}
+tqnormdata<-read.delim("../Datasets/Exp1234_raw_common18704genes_transposed_antiTNF.tsv", header=T, sep="\t")
+```
+
+Some structural subsetting is also required in order to make sure that it matches the samples we described above (as some extra samples were included in the original paper). Below we only keep the ones corresponding to the groups we saw above.
+
+```{r}
+tqnormdata<-tqnormdata[c(1:20,27:66),]
+dim(tqnormdata)
+```
+
+Our goal here will be to see if our data behave in a consistent way and if our biological replicates are representative of each condition. We will do this with PCA and similar visualization approaches. 
+
+Since the dataset contains more than 18000 genes we will restrict our analysis to the most informative genes, corresponding to the top 5% of the dataset with the highest variability. We will first calculate the variance for every gene, that is for every row of the data frame. 
+
+See how this is easily done with an apply() function. Apply functions are **helper/wrapper functions** whose job is to _apply_ other functions in clever ways. Below we apply the var() function on the data dataframe on each column.
+
+```{r}
+colVars <- apply(tqnormdata[,2:18704], 2, FUN=var)
+```
+
+Keep in mind we have to select columns from 2 to 18704 because the first column contains gene names (character values).
+Let's now find the value of colVars that corresponds to the top 5%. We can use quantiles() to do that. quantiles() splits a numerical vector in quantiles according to a vector of probabilities that we provide. (Otherwise it uses 25% percentiles by default)
+
+```{r}
+varQuants<-quantile(colVars, probs = seq(0, 1, 0.05), na.rm = FALSE)
+varQuants
+```
+
+We see that the top 5% of variance values lies above 1.2564 (corresponding to the 20th element of varQuants). 
+
+We will create a subset of the dataframe only containing the genes whose variances lie above this threshold.
+
+```{r}
+i<-which(colVars>=varQuants[20])
+tdata <- tqnormdata[,i]
+dim(tdata)
+tdata$State <-  group
+tdata$State <- factor(tdata$State) 
+```
+
+We can now apply PCA on this subset and check the outcome. Notice that we only use columns 2-936 since the first and last carry label values.
+
+```{r, PCA}
+subdatapca<-prcomp(tdata[,2:936], scale=T)
+summary(subdatapca)
+```
+
+We can plot the outcome of the PCA values like so:
+
+```{r}
+library(ggfortify)
+library(ggplot2)
+pcols<-c("firebrick4","dark orange", "gold", "dark green", "blue", "darkorchid4")
+#
+p <- autoplot(subdatapca, data=tdata, colour="State", frame=T)
+p+scale_fill_manual(values = pcols) + scale_color_manual(values = pcols)
+```
+
+In the example shown above we used some additional layering in the plotting functions. This is based on the ggplot2 library, whose details we cannot afford to go into here. You can check out more yourselves [here](https://ggplot2.tidyverse.org/).
+
+Our output shows some degree of underlying batch effect in our dataset. That is our data points are not perfectly distributed according to condition and some conditions appear to be closer to each other. We can test this further by attempting to cluster our data.
+
+We will use kmeans with k=6, since we know that we have 6 different conditions
+
+```{r, running kmeans}
+subdatakm6<-kmeans(tdata[,2:936], centers=6, iter.max = 100, nstart = 1)
+conditions<-c(rep("WT",10), rep("TG",10), rep("TherA", 10), rep("TherB", 10), rep("TherC",10), rep("TherD",10))
+```
+
+Once the data are grouped in 6 clusters we can compare the cluster distribution with the actual underlying conditions. We can do this with table() which will provide a 6X6 contingency matrix. A contingency matrix is a table showing the coincidence between two types of categorical groupings. Here it is going to be clusters vs conditions.
+
+```{r}
+subdatakm6contingency<-table(Cluster=as.numeric(subdatakm6$cluster),Condition=conditions)
+row.names(subdatakm6contingency)<-c(paste("Cluster", seq(1:6), sep=""))
+subdatakm6contingency
+```
+
+The desired case for such a table is to have values clustered on the diagonal of the matrix, as this will imply a 1:1 relationship of the two categorical variables. We see that, while some of the combinations are indeed found on the diagonal, there are also quite a few off-diagonal enrichments.
+
+This suggests that our defined clusters correspond to something other than the conditions. 
+
+#### 2.3 Sequence motifs
+
+As a last task we will perform a motif building and search analysis using a set of defined motif instances and custom-made R functions.
+
+Our goal is to create a PWM with a set of instances of the GATA transcription factor, transform it into PSSM and then search it against a whole genome sequence.
+
+1. You may start by downloading a set of GATA binding sequences that you will find [here](https://www.dropbox.com/s/pr51bnmp39b996a/gata.fa).
+
+2. Once this is done, you can download the target sequence against which you will search the PWM [here](https://www.dropbox.com/s/ni6nrp0niv47kd2/test1.fa).
+
+3. In order to build the PWM you need to read the GATA sequences using [this custom function](https://www.dropbox.com/s/2hmtvg6wn9xgjst/readfastafile.R) and then create the matrix with the [PWM function](https://www.dropbox.com/s/67815vjkrvxa72i/seqMotif.R). 
+In order to use these functions you have to upload them to R using:
+```{r, eval=F, echo=T}
+source("nameoffunction.R")
+```
+
+This means, that you may use $readfastafile()$ as:
+```{r, eval=F, echo=T}
+source("../Rfunctions/readfastafile.R")
+gataseqs<-readfastafile("gata.fa")
+```
+
+and then obtain the PWM with:
+```{r, eval=F, echo=T}
+source("../Rfunctions/seqMotif.R")
+gataPWM<-seqMotif(gataseqs, drawmotif=F)
+```
+
+
+4. The transformation of the PWM to PSSM requires an additional random sequence collection, which you can find [here](https://www.dropbox.com/s/102g7y0ortf43dq/random.fa). You can then create the PSSM by taking the log2(ratio) of the two PWMs (one from the GATA sequences over the one from the random sequence).
+
+5. In the next step you will use a [PSSMSearch Function](https://www.dropbox.com/s/4ssz9kg3dj9bhbt/pssmSearch.R) to search for the motif in the longer target sequence. Assuming you have created the PSSM into the table called $pssm$, the list of commands below should work:
+```{r, eval=F, echo=T}
+source("../Rfunctions/pssmSearch.R")
+targetset<-readfastafile("test1.fa")
+pssmSearch(pssm, targetseq, threshold=X)
+```
+
+The parameter X in the threshold tells the search function to return a different number of successful hits for the search. Threshold can take values from 0 to 1, with 1 returning the instances of the binding sites that have score equal to the maximum (100%) of the PSSM. A value of 0.8 will return values with scores 80% or more of the maximum and thus a greater number of hits.
+
+6. As a last step you are asked to do the following. Perform three different searches with threshold=0.5, 0.8 and 1.0 and obtain the results in a vector. Then use this vector of positions to extract the sequences from the target sequence (test1.fa). Then store these sequences in a table (you can use "write.table") and paste them to the [WebLogo WebService](http://weblogo.berkeley.edu/logo.cgi) to obtain three different sequence logos.
+Compare the three and discuss their differences. 
