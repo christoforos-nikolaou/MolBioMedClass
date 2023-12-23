@@ -18,7 +18,7 @@ bibliography: null
 ---
 
 ```{r}
-setwd("/home/christoforos/Dropbox/github/MolBioMedClass/RMarkdown")
+setwd("C:/Users/user/Dropbox/github/MolBioMedClass/RMarkdown")
 ```
 
 ## R Practicals
@@ -28,6 +28,7 @@ In this practical class we will try to put into practice a number of statistical
 ### Part 1. Statistics
 
 #### 1.1 Comparing means of distributions with t-test
+
 We will compare the GC% of the yeast genes vs yeast non-coding sequences. We will first load them in R like this:
 
 ```{r}
@@ -45,7 +46,7 @@ head(gcRegSeq)
 Next, we may plot the distributions of GC% values in the form of boxplots.
 
 ```{R}
-boxplot(gcGenes$GC, gcRegSeq$GC, lwd=2, col="dark orange", names=c("Genes", "Reg Seqs"), main="Yeast GC%", las=1, xlab="Genome Partition", cex.main=1.8, cex.axis=1.3, cex.lab=1.4)
+boxplot(gcGenes$GC, gcRegSeq$GC, lwd=2, col="blue", names=c("Genes", "Reg Seqs"), main="Yeast GC%", las=1, xlab="Genome Partition", cex.main=2, cex.axis=1.3, cex.lab=1.5)
 ```
 
 And, as a final step, we will assess the differences in the distributions' means by applying a t-test.
@@ -158,14 +159,14 @@ for(i in 1:100){
 2. We first need to decide on the list. One interesting case is to focus on particular pathways. Below there is an example of how one can get the genes belonging to a particular pathway from the mouse genome.
 
 ```{r}
-mouseKEGG<-readRDS("~/Dropbox/Data/GO_KEGG_Lists_RDS/kegg_pathways_list_mus_musculus.rds")
-mtorgenes <- as.character(mouseKEGG$`mTOR signaling pathway - Mus musculus (house mouse)`[3][,1])
+#mouseKEGG<-readRDS("~/Dropbox/Data/GO_KEGG_Lists_RDS/kegg_pathways_list_mus_musculus.rds")
+#mtorgenes <- as.character(mouseKEGG$`mTOR signaling pathway - Mus musculus (house mouse)`[3][,1])
 ```
 
 and then use a handy function/symbol of %in% to extract the genes in question from the dataframe
 
 ```{r}
-i <- which(gene_expression_data$Gene %in% mtorgenes)
+#i <- which(gene_expression_data$Gene %in% mtorgenes)
 ```
 
 and then use i as a vector instead of an index. 
@@ -214,7 +215,7 @@ a. The odds ratio statistic is 1.94. The odds ratio is, as its name implies, the
 Is this enrichment/association significant? Yes, because: 
 
 b. The p-value reported by the test is 0.04885, which is below the generally accepted threshold of 0.05 and
-c. Because the 95% confidence interval of the test is [0.958261, 3.97442] which **doesn't contain the basal value of 1**. 
+c. Because the 95% confidence interval of the test is [0.958261, 3.97442] which **does contain the basal value of 1**. 
 
 #### Additional exercises
 1. Why is the basal value for Fisher's test 1 and not 0?
@@ -523,8 +524,22 @@ gataPWM
 4. The transformation of the PWM to PSSM requires an additional random sequence collection, which you can find [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/random.fa). You can then create the PSSM by taking the log2(ratio) of the two PWMs (one from the GATA sequences over the one from the random sequence).
 
 ```{r}
-
+randomseqs<-readfastafile("../Datasets/random.fa")
+seqMotif(randomseqs, drawmotif=T)
 ```
+
+```{r}
+randomPWM<-seqMotif(randomseqs, drawmotif=F)
+```
+
+Create the PSSM by log2(PWM1/PWM2)
+
+```{r}
+pssm<-log2(gataPWM/randomPWM)
+pssm
+```
+
+
 
 5. In the next step you will use a [PSSMSearch Function](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Rfunctions/pssmSearch.R) to search for the motif in the longer target sequence. Assuming you have created the PSSM into the table called $pssm$, the list of commands below should work:
 
@@ -533,8 +548,24 @@ gataPWM
 ```{r, eval=F, echo=T}
 source("../Rfunctions/pssmSearch.R")
 targetseq<-readfastafile("../Datasets/test1.fa")
-pssmSearch(pssm, targetseq, threshold=0.9)
+pssmSearch(pssm, targetseq, threshold=0.8)
 ```
+
+
+```{r}
+pssmHits <- pssmSearch(pssm, targetseq, threshold=0.5)
+myHits <- vector(mode="character", length=length(pssmHits[,1]))
+for(i in 1:length(pssmHits[,1])){
+  position <- pssmHits[i,1]
+  myHits[i] <- substr(targetseq[[1]], position, position+6)
+}
+myHits
+```
+
+```{r}
+write.table(myHits, file="../Datasets/PSSMHits.fa", row.names = F, quote=F, col.names = F)
+```
+
 
 The parameter X in the threshold tells the search function to return a different number of successful hits for the search. Threshold can take values from 0 to 1, with 1 returning the instances of the binding sites that have score equal to the maximum (100%) of the PSSM. A value of 0.8 will return values with scores 80% or more of the maximum and thus a greater number of hits.
 
