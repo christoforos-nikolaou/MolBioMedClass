@@ -151,7 +151,7 @@ IL33 functions as both a chromatin binding protein inside the nucleus and as a c
    d. Is Figure 8b a gene expression heatmap? How was it created and what does it tell us?  
 
 #### 3. Data Exercises
-A simple gene expression analysis dataset is deposited here: [Data](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE115097&format=file).
+A simple gene expression analysis dataset is deposited here: [Data](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE115097&format=file).  
    a. Treat the data from the three conditions (empty vector, full length, truncated) separately and identify differentially expressed genes between no-Dox (untreated) and Dox (treated) samples. Use a simple t-test for the comparisons.    
    b. Present the results in the form of three volcano plot.  
    c. Combine the differentially expressed genes (at |logFC|>=1, p-value<=0.05) from all three comparisons in one set and present the logFC values in a heatmap.  
