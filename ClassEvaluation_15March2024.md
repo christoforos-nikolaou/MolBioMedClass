@@ -77,10 +77,10 @@ A nice review on cell renewal in the gut is this work by [Gehart and Clevers, Na
 
 #### 3. Data Exercises
 Τhe data for this paper are stored in tab-separated file containing gene expression for more than 4500 cells. This can be found here: [Data](https://www.dropbox.com/scl/fi/pgvbi2b0cstnqwu7lqqvd/GSE154007_RAW.tar?rlkey=cnud6a46b6bbw51gk3x0aeo5i&dl=0).  
-   a. Create a filter strategy to keep only the genes that have non-zero counts in more than 90% of the cells.    
-   b. Create a filter strategy to keep only the genes that have counts above the median value for each gene.  
-   c. Create a strategy to identify the top 100 most variable genes in terms of counts values.  
-   d. For the last set of genes perform a PCA analysis and compare your output to the figures presented in the paper.  
+   a. Create a filter strategy to keep only the genes that have non-zero counts in more than 90% of the cells.      
+   b. Create a filter strategy to keep only the genes that have counts above the median value for each gene.    
+   c. Create a strategy to identify the top 100 most variable genes in terms of counts values.    
+   d. For the last set of genes perform a PCA analysis and compare your output to the figures presented in the paper.    
 
 ### P4. Gene Modules of Immune Cell Types from Multiple Data Resources
 #### 1. Introduction
