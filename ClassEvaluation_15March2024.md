@@ -1,9 +1,3 @@
----
-runme:
-  id: 01HNX1T5J3QS7JACCRWG34CPC1
-  version: v2.2
----
-
 # Molecular Biomedicine: Evaluation Class 2023-2024
 
 ## Evaluation
