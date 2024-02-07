@@ -132,11 +132,12 @@ This work by [Zelenka et al. Nature Communications, 2022](https://www.nature.com
 
 
 #### 3. Data Exercises
-The complete processed collection of datasets may be found in a spreadsheet here: [Data](https://www.dropbox.com/scl/fi/04opizuhz0398lfcdp4n9/3DEnhancer_SATB1_Source_Data.xlsx?rlkey=ta0lmbv2ya3tk288jozwcdz6j&dl=0)
-   a. Use the data you will find in the tab referring to Figures 4h/6b and split them in over/under-interacting loops according to the score of H3K27Ac (positive:over/negative:under). Then calculate the difference in log-fold-change between the two categories and assess its significance with a t-test.
-   b. Do the same with the same data, this time by splitting the gene in those being part of a SATB1 loop vs those that aren't.
-   c. Using the data from the tab referring to Figure 4f calculate the mean log-fold-change for all four categories (SATB1 or CTCF / over- or under-interacting loop)
+The complete processed collection of datasets may be found in a spreadsheet here: [Data](https://www.dropbox.com/scl/fi/04opizuhz0398lfcdp4n9/3DEnhancer_SATB1_Source_Data.xlsx?rlkey=ta0lmbv2ya3tk288jozwcdz6j&dl=0)  
+   a. Use the data you will find in the tab referring to Figures 4h/6b and split them in over/under-interacting loops according to the score of H3K27Ac (positive:over/negative:under). Then calculate the difference in log-fold-change between the two categories and assess its significance with a t-test.  
+   b. Do the same with the same data, this time by splitting the gene in those being part of a SATB1 loop vs those that aren't.  
+   c. Using the data from the tab referring to Figure 4f calculate the mean log-fold-change for all four categories (SATB1 or CTCF / over- or under-interacting loop).  
    d. Going back to tab Figure 4h/6b take the genes belonging to SATB1 over-interacting vs SATB1 under-interacting loop and perform a functional enrichment analysis. You may do this using [gProfiler](https://biit.cs.ut.ee/gprofiler/gost) by pasting the gene list in the query section.   
+   
 
 ### P7. Nuclear Role of IL33
 
