@@ -94,10 +94,10 @@ As this is a more bioinformatics-driven work, I suggest that you stick to the pa
    d. The authors state that the "most biologically relevant" GO terms associated with each module are reported in the left side of the heatmap of Figure 3. Play the role of the reviewer and go check if this is indeed the case by comparing Figure 3 to the tab named "DEG modules enrichment" in the supplementary data (see File mmc4.xlsx below).  
 
 #### 3. Data Exercises
-You can find the data that accompany this paper in this file: [Data](https://www.dropbox.com/scl/fo/8luv1vsx9y1rsvfu4jm55/h?rlkey=cpnwxw1aojn8twzbr8sfp420v&dl=0).
-   a. Navigate in the DEG modules and Co-expression modules **enrichment** tabs and perform the following analyses: For each DEG module take all the enriched terms and compare them with all the co-expression module ones. Mark the number of common terms for all Module-Module combination and present it in a table.
-   b. Do the same at Gene Level with the tabs named DEG Modules/Co-expression Modules. Do the tables appear more similar at gene or at pathway/GO-term level?  
-   c. Think of a way to visualize the information contained in the last tab of the mmc4.xlsx file (Immune housekeeping Genes).      
+You can find the data that accompany this paper in this file: [Data](https://www.dropbox.com/scl/fo/8luv1vsx9y1rsvfu4jm55/h?rlkey=cpnwxw1aojn8twzbr8sfp420v&dl=0).  
+   a. Navigate in the DEG modules and Co-expression modules **enrichment** tabs and perform the following analyses: For each DEG module take all the enriched terms and compare them with all the co-expression module ones. Mark the number of common terms for all Module-Module combination and present it in a table.  
+   b. Do the same at Gene Level with the tabs named DEG Modules/Co-expression Modules. Do the tables appear more similar at gene or at pathway/GO-term level?    
+   c. Think of a way to visualize the information contained in the last tab of the mmc4.xlsx file (Immune housekeeping Genes).        
 
 ### P5. Differential Splicing Patterns and Nuclear Architecture
 #### 1. Introduction
