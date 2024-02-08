@@ -3,7 +3,10 @@ title: "Untitled"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
+```{r}
+```
+
+```{r}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
