@@ -137,7 +137,7 @@ You can find the data that accompany this paper in this file: [Data](https://www
    d. Describe the process of data collection, analysis and presentation/visualization for Figure 4. State the most important conclusions that may be drawn from it.   
 
 #### 3. Data Exercises
-The data used in the creation of Figure 4 are stored in a spreadsheet that you may find here: [Data](https://www.dropbox.com/scl/fi/oo958tmasmo08axx4zkj3/1-s2.0-S109727652200106X-mmc4.xlsx?rlkey=hyjnlbcztfk0s26q91wokn4ix&dl=0)
+The data used in the creation of Figure 4 are stored in a spreadsheet that you may find here: [Data](https://www.dropbox.com/scl/fi/oo958tmasmo08axx4zkj3/1-s2.0-S109727652200106X-mmc4.xlsx?rlkey=hyjnlbcztfk0s26q91wokn4ix&dl=0)  
    a. Design and conduct an analysis that will recreat Figure 4B in the best possible way.
    b. Perform an analysis that will rank all splicing factors according to:  
       i. the mean GC% of their bound exons  
