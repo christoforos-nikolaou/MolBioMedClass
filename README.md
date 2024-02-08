@@ -452,4 +452,4 @@ This (final) class will be devoted to clarifying concepts, a general recap and d
 ## 10. Final Projects Presentation and Discussion (March 15th, 2024)
 
 A day will be devoted to the final presentation of your projects.
-You may find the final assignments [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/ClassEvaluation_15March2024.md)
+You may find the final assignments [here](Classes_2022/Evaluations/ClassEvaluation_15March2024.md)
