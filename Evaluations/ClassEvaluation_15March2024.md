@@ -107,7 +107,7 @@ c. Incorporate all of the above in a short presentation. This will be given in f
 [Rana Ozer]
 
 #### 1. Introduction
-   The basis for this project is the work by [Monaco et al. Cell Reports 2019](https://www.sciencedirect.com/science/article/pii/S2211124719300592?via%3Dihub). The authors combine flow cytometry and transcriptomics data to identify genes that are: i. cell-type specific ii. co-expressed and iii. have housekeeping roles in a set of 29 immuner-related cell types. They thus propose a set of gene modules for each of these cell types.   
+   The basis for this project is the work by [Monaco et al. Cell Reports 2019](https://www.sciencedirect.com/science/article/pii/S2211124719300592?via%3Dihub). The authors combine flow cytometry and transcriptomics data to identify genes that are: i. cell-type specific ii. co-expressed and iii. have housekeeping roles in a set of 29 immune-related cell types. They thus propose a set of gene modules for each of these cell types.   
 
 #### 2. Questions
    a. How is the tree in Figure 1B constructed? Which data were used? How do you understand the term "bootstrap" and what is its use in the tree?   
