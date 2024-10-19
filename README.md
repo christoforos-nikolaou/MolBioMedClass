@@ -1,4 +1,3 @@
-
 Welcome to the (unusually long named)
 
 # Fundamental principles in Bioinformatics, Computational Biology and Biostatistics
@@ -24,11 +23,11 @@ Course Objectives
 * [Nature Methods. Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance). A key primer series for statistics
 * [Statistics in Biology](https://www.nature.com/collections/qghhqm). A few Nature Editorials on quantitative concepts for biologists.
 
-## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_0_Welcome.md) (Oct 27th 2023)
+## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_0_Welcome.md) (Oct 25th 2024)
 
 ### [Lecture slides](https://www.dropbox.com/s/4164rafkq7b0sof/MBioMed_OpeningNotes.pdf)
 
-## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ia_Introductory_Concepts.md) (Oct 27th 2023)
+## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ia_Introductory_Concepts.md) (Nov 1st 2024)
 
 This weeks class is an introduction to the concepts we will be discussing throughout the semester. Namely:
 
@@ -55,16 +54,18 @@ Students are all advised to access the reading material (to be read BEFORE class
 * Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation.
 * Prepare to present this in a flash talk in class (no powerpoint needed).
 
-## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 3rd 2023)
+## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 8th 2023)
 
 * Class will start with the presentations of the first assignment (see above) and discussion.
 * Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
+
    - Problems of difference/distance/similarity
    - Problems related to variability
    - Problems that deal with serial data
    - Problems that require/allow modeling
 
 * At a second level we will discuss the basic concepts of computation. In particular how we will:
+
    - Use flowcharts and pseudocode to describe a computational pipeline
    - Employ optimization techniques
    - Describe logical relationships
@@ -79,7 +80,7 @@ Students are all advised to access the reading material (to be read BEFORE class
 
 * Choose a computational problem (or invent one) and describe it with a flowchart or in pseudocode
 
-## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 10th 2023)
+## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 15th 2023)
 
 Perhaps the most common types of analyses have to do with comparing things. In this class we will discuss ways to compare measurements, quantities from samples and populations. In particular we will discuss:
 
@@ -115,7 +116,7 @@ You are advised to download the following files in order to use them in the prac
 
 * Analysis of Gene Expression Data. Identification of Differentially expressed genes
 
-## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 16th 2023)
+## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 22nd 2024)
 
 In this class we will see how measures of similarity may apply to biological systems and in particular in two basic bioinformatics problems: Sequence comparisons and gene expression analysis. We will discuss in detail:
 
@@ -135,7 +136,7 @@ In this class we will see how measures of similarity may apply to biological sys
 
 * Sequence Alignment and Clustering
 
-## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 24th 2023)
+## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 29th 2024)
 
 Comparing means makes sense only up to one level. Samples and populations are variable and this variability is to be taken into account. In this class we will discuss issues related to variability and how it is strongly linked to the concept of information. The main points at this stage are
 
@@ -157,7 +158,7 @@ Comparing means makes sense only up to one level. Samples and populations are va
 * Performing PCA and k-means Clustering in Gene Expression Data  
    First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset.
 
-## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_B)(Dec 1st 2023)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_B)(Dec 6th 2023)
 
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
 
@@ -174,7 +175,7 @@ Variability lies at the heart of a number of biological phenomena from genomic v
 
 * Analyzing Motifs in Sequences
 
-## 7. Part X. An R practical Class (Dec 22nd 2023)
+## 7. Part X. An R practical Class (Dec 13th 2024)
 
 This class will include an all-around practical on most of the topics we have covered up to now, using R.
 
@@ -182,7 +183,7 @@ You can find the (tentative) material [here](RMarkdown/ModuleX_RPracticals.rmd).
 
 (More info for this, to be posted soon)
 
-## 8. Part IVa. Correlation, Regression and Causation. In statistics (included in previous practical class for the 2023-2024 season)
+## 8. Part IVa. Correlation, Regression and Causation. In statistics. (Dec 20th 2024)
 
 The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
 
