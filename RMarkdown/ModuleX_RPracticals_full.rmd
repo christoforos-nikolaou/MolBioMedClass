@@ -18,7 +18,7 @@ bibliography: null
 ---
 
 ```{r}
-setwd("/home/christoforos/Dropbox/github/MolBioMedClass/RMarkdown")
+setwd("C:/users/chris/Dropbox/github/MolBioMedClass/RMarkdown")
 ```
 
 ## R Practicals

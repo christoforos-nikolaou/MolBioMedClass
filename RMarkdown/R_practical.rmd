@@ -1,0 +1,120 @@
+---
+title: "R Practical"
+author: "Christoforos Nikolaou"
+date: "`r Sys.Date()`"
+
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+setwd("C:/Users/chris/Dropbox/github/MolBioMedClass/RMarkdown")
+```
+
+## R Practical
+
+In this practical class we will try to put into practice a number of statistical and bioinformatics analyses we have already discussed and presented.
+
+### Part 0. Basics
+We will be using this space to present elements of the R language and technical issues.
+
+
+### Part 1. Statistics
+
+We will use this space to discuss concepts of statistics
+
+#### 1.1 Comparing means of distributions with t-test
+We will compare the GC% of the yeast genes vs yeast non-coding sequences. We will first load them in R like this:
+
+```{r}
+gcGenes<-read.delim("../Datasets/SCgenes_gcContent.tsv", header=T, sep="\t")
+gcRegSeq<-read.delim("../Datasets/SCRegSeq_gcContent.tsv", header=T, sep="\t")
+```
+
+and inspect the dataframe structures
+
+```{r}
+str(gcGenes)
+head(gcRegSeq)
+```
+
+Next, we may plot the distributions of GC% values in the form of boxplots.
+
+```{R}
+boxplot(gcGenes$GC, gcRegSeq$GC, lwd=2, col="dark orange", names=c("Genes", "Reg Seqs"), main="Yeast GC%", las=1, xlab="Genome Partition", cex.main=1.8, cex.axis=1.3, cex.lab=1.4)
+```
+
+And, as a final step, we will assess the differences in the distributions' means by applying a t-test.
+
+```{r}
+t.test(gcGenes$GC, gcRegSeq$GC)
+```
+
+### Part 2. Modeling
+
+We will be using this space to present problems that require modeling and ways to solve them using R.
+
+#### 2.1 The hot-hand fallacy (or not)
+
+An actual player's shots for a 188 consecutive shots
+```{r}
+real<-read.table("bballshots.txt")[,1]
+```
+
+Let's count her shooting success rate
+```{r}
+length(which(real==1))/length(real)
+```
+And now let's see how great are her streaks of consecutive successfull shots
+
+```{r}
+realRuns<-rle(real)
+realRuns
+```
+
+```{r}
+rstreaks<-which(unlist(realRuns[2])==1)
+rstreaklengths<-unlist(realRuns[1])[rstreaks]
+beanplot(rstreaklengths, col="steelblue4", ylab="Streak Length (in shots)", log="y", names="Shots", las=1)
+
+```
+
+
+Lets simulate a players shooting streak for 200 shots with a 50% success rate.
+```{r}
+shots<-rbinom(200, 1, p=0.5)
+shots
+```
+```{r}
+rle(shots)
+```
+
+```{r}
+shotRuns<-rle(shots)
+shotRuns
+```
+```{r}
+streaks<-which(unlist(shotRuns[2])==1)
+streaklengths<-unlist(shotRuns[1])[streaks]
+```
+
+And now let's compare the real with the simulated runs
+
+```{r}
+beanplot(rstreaklengths, streaklengths, col=c("steelblue4", "grey"), ylab="Streak Length (in shots)", log="y", names=c("Real Shots", "Simulated Shots"), las=1)
+
+```
+
