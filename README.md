@@ -44,25 +44,27 @@ This weeks class is an introduction to the concepts we will be discussing throug
 Students are all advised to access the reading material (to be read BEFORE class) that you may find below:
 
 * Harvey Motulsky, Intuitive Biostatistics. [Chapter 1. Introduction to Statistics](https://www.dropbox.com/s/qaxqndv6zjoxi1l/Intuitive_Biostatistics.pdf)
-* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf)
+* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf) [!Not to be used]
 * S. J. Gould. [The median isn't the message](https://journalofethics.ama-assn.org/article/median-isnt-message/2013-01)
 
 ### [Lecture slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf)
 
-### Assignment(s)
+### Assignment(s) (not applicable in 2024-2025 class)
 
 * Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation.
 * Prepare to present this in a flash talk in class (no powerpoint needed).
 
 ## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 8th 2023)
 
-* Class will start with the presentations of the first assignment (see above) and discussion.
 * Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
 
    - Problems of difference/distance/similarity
    - Problems related to variability
    - Problems that deal with serial data
    - Problems that require/allow modeling
+
+* We will use a hands on approach to see how we can start using R to describe problems, analyze them numerically and interpret the results.
+* We will use [this file], which will be dynamically updated in class. 
 
 * At a second level we will discuss the basic concepts of computation. In particular how we will:
 
@@ -72,7 +74,7 @@ Students are all advised to access the reading material (to be read BEFORE class
 
 ### Reading Material:
 
-* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf)
+* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf) [Not to be used]
 * Points of Significance. [The Importance of being uncertain](https://www.dropbox.com/s/ukex2y7jh3fy1st/ImportanceOfBeingUncertain.pdf)
 * Wladston Ferreira Filho. Computer Science Distilled. [Chapter 1. Basics](https://www.dropbox.com/s/xeu4qdpu3jbkczb/Computer_Science_Chapter01_Basics.pdf)
 
