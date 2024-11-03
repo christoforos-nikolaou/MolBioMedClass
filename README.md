@@ -45,7 +45,7 @@ This weeks class is an introduction to the concepts we will be discussing throug
 
 * You may find a slide presentation for an R Basics Introduction [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Presentations/ModuleIntroR.pdf)
 
-* A html file with more details and code that you can popy-paste to your own environments may be found [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/R_introduction.html). (It's safer to download the file and open it in the browser of your choice)
+* A html file with more details and code that you can popy-paste to your own environments may be found [here](https://www.dropbox.com/scl/fi/jgddiowy0k51kjqt6ksnf/R_introduction.html?rlkey=enzdh02olvz9god2b5o61ifzi&st=5wo1b9f6&dl=0). (It's safer to download the file and open it in the browser of your choice)
 
 * We will use a hands on approach to see how we can start using R to describe problems, analyze them numerically and interpret the results.
 * We will use [this file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/R_practical.rmd), which will be dynamically updated in class.
