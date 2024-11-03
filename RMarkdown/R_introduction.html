@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="GWrite (WYSIWYG editor)">
+  <title></title>
+  <style>
+img{
+    border: 2px;
+    border-style: solid;
+    border-color: #c3d9ff;
+    padding: 5px;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #7DA721;
+    font-weight: bold;
+}
+p{
+    text-indent: 2em;
+    text-align: justify;
+}
+blockquote{
+    background-color:#EEFFFF;
+    border-left: 5px solid green;
+    padding-left: 5px;
+    margin: 0px;
+    padding: 5px;
+}
+pre{
+    background-color:#EEEEFF;
+    display: block;
+    border-left: 1px solid green;
+    margin: 0px;
+    padding: 5px;
+}
+code{
+    background-color:#EEEEFF;
+    margin: 15px;
+    padding: 5px;
+}
+  </style>
+</head>
+<body>
+<h2>Introductory R</h2>
+<div>
+<hr id="false">
+</div>
+<div><b>An introduction to the R environment, basic functions, statistics and plotting.</b></div>
+<div><b>Christoforos Nikolaou, <a href="http://computational-genomics.weebly.com/">Computational Genomics Group</a>, Biomedical Sciences Research Center "Alexander Fleming"</b></div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.1">What is R</h3>
+<div>R is a language and environment for statistical computing and graphics. It is a GNU project which is similar to the S language and environment which was developed at Bell Laboratories (formerly AT&amp;T, now Lucent Technologies) by John Chambers and colleagues. R can be considered as a different implementation of S. There are some important differences, but much code written for S runs unaltered under R.&nbsp;
+<br>
+</div>
+<div>
+<div>&nbsp;R is an integrated suite of software facilities for data manipulation, calculation and graphical display. It includes:</div>
+<div>
+<ul>
+<li>&nbsp; &nbsp; an effective data handling and storage facility,
+<br>
+</li>
+<li>&nbsp; &nbsp; a suite of operators for calculations on arrays, in particular matrices,
+<br>
+</li>
+<li>&nbsp; &nbsp; a large, coherent, integrated collection of intermediate tools for data analysis,
+<br>
+</li>
+<li>&nbsp; &nbsp; graphical facilities for data analysis and display either on-screen or on hardcopy, and
+<br>
+</li>
+<li>&nbsp; &nbsp; a well-developed, simple and effective programming language which includes conditionals, loops, user-defined recursive functions and input and output facilities.&nbsp;
+<br>
+</li>
+</ul>
+</div>
+<div>The term "environment" is intended to characterize it as a fully planned and coherent system, rather than an incremental accretion of very specific and inflexible tools, as is frequently the case with other data analysis software.
+<br>
+</div>
+</div>
+<div>Many users think of R as a statistics system. We prefer to think of it of an environment within which statistical techniques are implemented. R can be extended (easily) via packages. There are about eight packages supplied with the R distribution and many more are available through the CRAN family of Internet sites covering a very wide range of modern statistics.</div>
+<div>
+<hr id="false">
+</div>
+<h4 id="g0.0.1.1">Why use R?</h4>
+<div>R is a versatile, dynamic and fast way to</div>
+<div>
+<ul>
+<li>Import data, especially big chunks of data in an programming environment</li>
+<li>Clean data, by removing missing or corrupted values and by easily transforming data to desirable formats</li>
+<li>Summarize data, getting descriptive statistics with straightforward commands</li>
+<li>Visualizing data, with elegant plots</li>
+<li>Modeling data, by performing state-of-the-art analyses</li>
+</ul>
+</div>
+<div>R is also quite easy to use once you get to understand its rationale and become somewhat familiar with the use of the command line. Why use the command line? Because it allows one to implement and combined a detailed series of commands into a single script. Once this happens, one is able to perform a number of complex analyses and produce elegant graphs with the strike of one key.&nbsp;</div>
+<div>
+<hr id="false">
+</div>
+<h4 id="g0.0.1.2">Getting R</h4>
+<div>Is very easy. In Linux systems just type:
+<br>
+</div>
+<pre>sudo apt-get install r-base-core</pre>
+<div>in your terminal.
+<br>
+</div>
+<div>Alternatively you can install R via the software repositories</div>
+<div>
+<br>
+</div>
+<div>In both Linux and Windows you can try R-Studio, a GUI-style R with split windows holding history, plots and file separately for advanced control (at a certain expense of speed and memory)</div>
+<div>Get it here:&nbsp;http://www.rstudio.com/</div>
+<div>
+<hr id="false">
+</div>
+<h4 id="g0.0.1.3">Running R</h4>
+<div>Is even easier. In Linux you simply type:</div>
+<pre>R</pre>
+<div>in your terminal and the environment loads automatically. You can now start working</div>
+<div>
+<br>
+</div>
+<div>R-Studio starts either via the command line or by clicking the approprate button on your programs folder.</div>
+<div>
+<hr id="false">
+</div>
+<h4 id="g0.0.1.4">Documentation. Getting help</h4>
+<div>R is open source, which makes it very easy to access the necessary information. There is a great number of online manuals and free books for using and programming R. The R development team has an extended list here</div>
+<div>http://www.r-project.org/doc/bib/R-books.html
+<br>
+</div>
+<div>
+<br>
+</div>
+<div>The standard documentation for each function pops up in R simply by typing</div>
+<pre>?nameoffunction</pre>
+<div>or, in case the function is not installed, you can get additional info on packages and modules by typing:</div>
+<pre>??nameoffunction &nbsp;</pre>
+<div>
+<br>
+</div>
+<div>When everything else fails you can seek expert advise online in the R-help and R-devel mailing lists as well as in various fora (e.g. http://stackoverflow.com/ etc). Plus there is always google.&nbsp;</div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.2">Data types</h3>
+<div>Data types are important in R. Most, if not all of its functions, are to be executed on specific type(s) of data. It is therefore crucial that you make sure you are using the right one.</div>
+<div>Data types (pieces of data) belong to one of the following five classes:</div>
+<div>
+<div>
+<ul>
+<li>character (e.g. "Christoforos", "A33")
+<br>
+</li>
+<li>numeric (real numbers) (e.g. 3.14)
+<br>
+</li>
+<li>integer (e.g. 6)
+<br>
+</li>
+<li>complex (e.g.&nbsp;-1+4i)
+<br>
+</li>
+<li>logical (True/False or in some cases T/F)
+<br>
+</li>
+</ul>
+</div>
+</div>
+<div>Data objects may be organized in data types which may be:&nbsp;</div>
+<div>
+<ul>
+<li>simple variables
+<br>
+</li>
+<li>vectors
+<br>
+</li>
+<li>matrices</li>
+<li>data frames&nbsp;
+<br>
+</li>
+<li>factors&nbsp;</li>
+<li>lists
+<br>
+</li>
+</ul>
+</div>
+
+
+
+<div>Simple variables are data types holding only one variable such as "Christoforos", 6 or True.&nbsp;</div>
+<div>Vectors are enumerated arrays of data in the sense of uni-dimensional matrices, while matrices are...well matrices in the traditional form.</div>
+<div>Conceptually, factors are variables in R which take on a limited number of different values; such variables are often refered to as categorical variables. One of the most important uses of factors is in statistical modeling. (You can read &nbsp;a bit more about them here: &nbsp; http://www.stat.berkeley.edu/~s133/factors.html but there will be more in the following)</div>
+<div>Data frames (or dataframes) are lists of vectors of equal length but not necessarily of the same class. In this sense they differ from matrices which can only be numeric (or integer). Data frames are the most versatile (and convenient) way of representing and analyzing data.</div>
+<div>Lists are generic vectors containing other objects. Lists do not need to contain vectors of the same size and are thus the most complex of data types in R.&nbsp;</div>
+<div>
+<br>
+</div>
+<h4 id="g0.0.2.1">Coercion of data types</h4>
+<div>Data types can be changed into one another with a technique called forced coercion with which some data types can be forced to become another. This works for some transformation but not all and is to be used with caution. For instance
+<br>
+</div>
+<pre>x&lt;- 1</pre>
+<div>is a number</div>
+<div>but</div>
+<pre>y&lt;-as.character(x)</pre>
+<div>makes y a character equal to "1" (notice the double quotation marks). This can be changed back to a number with</div>
+<pre>xx&lt;-as.numeric(y)</pre>
+<div>which makes xx equal to 1 again.&nbsp;</div>
+<div>Changes can be performed between numerical and characters as well as between the integers 0,1 and logicals with as.logical(). Nonetheless forced coercions are not a very good practice especially for beginners. Consider yourselves warned.</div>
+<div>
+<br>
+</div>
+<div>
+<div style="font-family: sans-serif;"><span style="color: rgb(125, 167, 33); font-weight: bold;">Vectors</span>&nbsp;
+<br>
+</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;">Vectors may be created with the simple function "concatanate"&nbsp;<font face="monospace">c</font>&nbsp;or with the use of the&nbsp;<font face="monospace">vector</font>&nbsp;function</div>
+<pre>x &lt;- c(1,2,3)
+y &lt;- c("me","you","him")</pre>
+<div style="font-family: sans-serif;">The vector function is to be used mostly for initialization purposes</div>
+<pre>z &lt;- vector("numeric", length=20)</pre>
+<div style="font-family: sans-serif;">This creates a vector of 20 "0" values.</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;">Data types containing mixed objects are to be treated with extreme caution. This is because R coerces data&nbsp;</div>
+<pre>y &lt;- c(1.7, "a") # y is now character
+y &lt;- c(TRUE, 2) # y is now numeric</pre>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;">We can find out the the class of a data type by typing</div>
+<div style="font-family: sans-serif;">
+<pre>x &lt;- c(1,2,"TRUE")
+class(x)</pre>
+<div>and coerce the data type to the one we desire with the as."" function&nbsp;
+<br>
+</div>
+</div>
+<pre>as.logical(x)
+[1] &nbsp; NA &nbsp; NA TRUE</pre>
+<div style="font-family: sans-serif;">when the coersion makes no sense, R returns the "NA" variable. Be prepared to see this a lot if you are not careful with your data assignments.</div>
+<h4 id="g0.0.2.2" style="font-family: sans-serif;">Matrices</h4>
+<div style="font-family: sans-serif;">Matrices are introduced with the matrix function. As with vectors, matrices need to be assigned with dimension specifications. Matrices need two dimensions as they are two-dimensional.&nbsp;
+<br>
+</div>
+<pre>m &lt;- matrix(0, nrow=2, ncol=5)</pre>
+<div style="font-family: sans-serif;">creates a 2x5 matrix of zeros</div>
+<div style="font-family: sans-serif;">The dimensions of a matrix can be retrieved with the dim function</div>
+<pre>dim(m) &nbsp;</pre>
+<div style="font-family: sans-serif;">R fills matrices by completing the columns, starting from the upper left part (element[1,1]). So if you wanted to fill m with the first 10 numbers that would be done by:</div>
+<pre>m &lt;- matrix(1:10, nrow=2, ncol=5)</pre>
+<div style="font-family: sans-serif;">If we now wanted to see what m looks like, we would simply type:</div>
+<pre>m
+&nbsp; &nbsp; &nbsp;[,1] [,2] [,3] [,4] [,5]
+[1,] &nbsp; &nbsp;1 &nbsp; &nbsp;3 &nbsp; &nbsp;5 &nbsp; &nbsp;7 &nbsp; &nbsp;9
+[2,] &nbsp; &nbsp;2 &nbsp; &nbsp;4 &nbsp; &nbsp;6 &nbsp; &nbsp;8 &nbsp; 10</pre>
+<div style="font-family: sans-serif;">We can also create a matrix from a vector by adding a dimension attribute. The dimensions are in this case a vector themselves</div>
+<pre>x &lt;- 1:10 # a vector of the numbers 1 to 10
+dim(x) &lt;- c(2,5) # dimensions read as number of rows, number of colums
+m
+&nbsp; &nbsp; &nbsp;[,1] [,2] [,3] [,4] [,5]
+[1,] &nbsp; &nbsp;1 &nbsp; &nbsp;3 &nbsp; &nbsp;5 &nbsp; &nbsp;7 &nbsp; &nbsp;9
+[2,] &nbsp; &nbsp;2 &nbsp; &nbsp;4 &nbsp; &nbsp;6 &nbsp; &nbsp;8 &nbsp; 10</pre>
+<div style="font-family: sans-serif;">Two very useful functions for matrix manimulation allow us to add, join rows and columns to an existing matrix, or create matrices by joining vectors.</div>
+<div style="font-family: sans-serif;">rbind joins vectors by rows and cbind does the same by columns</div>
+<pre>x &lt;- 1:10
+y &lt;- 11:20
+z &lt;- rbind(x,y) # join x and y by treating them as rows of a matrix called z
+z
+&nbsp; &nbsp; &nbsp;[,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+[1,] &nbsp; &nbsp;1 &nbsp; &nbsp;2 &nbsp; &nbsp;3 &nbsp; &nbsp;4 &nbsp; &nbsp;5 &nbsp; &nbsp;6 &nbsp; &nbsp;7 &nbsp; &nbsp;8 &nbsp; &nbsp;9 &nbsp; &nbsp;10
+[2,] &nbsp; 11 &nbsp; 12 &nbsp; 13 &nbsp; 14 &nbsp; 15 &nbsp; 16 &nbsp; 17 &nbsp; 18 &nbsp; 19 &nbsp; &nbsp;20z &lt;- cbind(x,y) # join x and y by treating them as columns of a matrix called zz&nbsp;     &nbsp;&nbsp;[,1] [,2]
+ [1,]    1   11
+ [2,]    2   12
+ [3,]    3   13
+ [4,]    4   14
+ [5,]    5   15
+ [6,]    6   16
+ [7,]    7   17
+ [8,]    8   18
+ [9,]    9   19
+[10,]   10   20
+</pre>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<h4 id="g0.0.2.3" style="font-family: sans-serif;">Data Frames</h4>
+<div style="font-family: sans-serif;">Data frames are one of the most common and versatile data type in R. They are tabular lists and so can contain elements of different classes, but they are also matrix-like in the sense that all vectors in the list should be of the same size (length). Data frames are mostly read-in in R with specific commands (see Reading Data). They have special attributes that refer to the names of the data elements stored in each row (row.names), they can carry titles for the columns etc. Data frames can be converted to matrices by calling the data.matrix() function, but this should be handled with extra care due to the coercion issues covered earlier.</div>
+<div style="font-family: sans-serif;">When not reading data frames from a file already stored in the computer, we can declare them with commands like:</div>
+<pre>x&lt;- data.frame(a=1:4, b=c("Me","You","Him","Her"))
+x
+&nbsp; a &nbsp; b
+1 1 &nbsp;Me
+2 2 You
+3 3 Him
+4 4 Her</pre>
+<div style="font-family: sans-serif;">Notice that the columns have names ("a" and "b") which were given in the declaration of the variable. Also notice that rows are numbered from 1 to 4. These can be recalled with the row.names() function</div>
+<pre>row.names(x)
+[1] "1" "2" "3" "4"</pre>
+<div style="font-family: sans-serif;">The size of the data frame can be given either with dim() or by calling the data frame-specific functions nrow() and ncol()</div>
+<pre>dim(x) #&nbsp;[1] 4 2
+nrow(x) # 4
+ncol(x) # 2</pre>
+<div style="font-family: sans-serif;">Data frames are the most commonly used data type, especially when handling external data (files from your computer). We will see more of that later on.</div>
+<h4 id="g0.0.2.4" style="font-family: sans-serif;">Factors</h4>
+<div style="font-family: sans-serif;">Imagine your data are based on some categorical, non-numeric variable such as "good", "bad", or "diseased","healthy" etc. In this case you will need a data type that deals with non-numeric data. Factors are special types of vectors that handle categorical (non-numerical) data. Their main (and outmost) difference from vectors is that they are labeled instead of ordered. This means that a factor has "names" such as "Me", "You" and "Him" instead of numbers such as 1, 2, 3 designated to its elements. In this sense, they are much more useful when trying to address different subsets of the data, a very important aspect of analysis that is called Subsetting.</div>
+<div style="font-family: sans-serif;">Inserting a factor is as easy as:</div>
+<pre>fac&lt;-factor(c("me", "me", "you", "me", "him", "you"))&nbsp;</pre>
+<div style="font-family: sans-serif;">Notice that we actually call a function called factor() upon a vector, thus we say we "factorize" a vector. fac now holds the names of the variables "me", "you" and "him" but it does so in specific positions. The different categorical values held can be visualized with the use of the levels() function</div>
+<pre>levels(fac)
+[1] "him" "me" &nbsp;"you"</pre>
+<address>Notice the variables are returned in alphabetical order. This order is used to assign specific numbers to each factor level. In this scheme, "him" will be given 1, "me" 2 and "you" 3. This can be visualized with unclass(). The unclass() function converts the levels to their attributed <span style="font-style: normal;">numbers.
+<br>
+Below the "numerized" factor, R also returns the attributed levels, a sort of legend that tells you which number corresponds to which. Not all factors you 'll be dealing with will be that small though and so it would be easy to have a summary of the levels representation in the factor. This is returned with the use of the table() function.</span></address>
+<pre>unclass(fac)&nbsp;
+[1] 2 2 3 2 1 3
+attr(,"levels")
+[1] "him" "me" &nbsp;"you"table(fac)
+fac
+him &nbsp;me you&nbsp;
+&nbsp; 1 &nbsp; 3 &nbsp; 2&nbsp;</pre>
+<div style="font-family: sans-serif;">which returns the levels ordered by attribute number and the corresponding number of elements below it. This tells us that in our fac factor we had 1 instance of "him", three instances of "me" and two of "you".</div>
+<div style="font-family: sans-serif;">Remember that if the alphabetical ordering is not very suitable/convenient for you, you can always change it by adding a levels option in the factor declaration</div>
+<pre><span style="font-family: sans-serif;">fac&lt;-factor(c("me", "me", "you", "me", "him", "you"), levels=c("me","you","him"))&nbsp;</span></pre>
+<div style="font-family: sans-serif;">table now will return the order that you chose instead of the default one</div>
+<div style="font-family: sans-serif;">
+<pre style="font-family: sans-serif;">
+<pre>table(fac)fac
+&nbsp;me you him&nbsp;
+&nbsp; 3 &nbsp; 2 &nbsp; 1&nbsp;</pre>
+</pre>
+<div>More on factors in later, not so introductory chapters.</div>
+<h4 id="g0.0.2.5">Lists</h4>
+<div>Lists are data frames that do not have to follow the restriction of equal vector size. In this sense you may see them as data "blobs" that can hold simple variables or vectors of any type or size. For the moment it would be useful to know how to introduce one. Lets do it step by step, by creating three vectors first:</div>
+<div>
+<pre>
+<pre>vec &lt;- c(1,5,7)mec &lt;- 1:10dec &lt;- c("TRUE","TRUE","FALSE","FALSE","FALSE")</pre>
+</pre>
+</div>
+<div>Now lets put them all in a list with that order</div>
+<pre>l&lt;-list(vec,mec,dec)</pre>
+<div>l now contains vec, mec and dec in this order. Which means that if call back the first element of l (by asking for l[1]) we will be getting the complete vector vec</div>
+<pre>l[1]
+[[1]]
+[1] 1 5 7</pre>
+<div>Notice the two-lined output R returns containing a "reference" with double brackets that points to our choice for the first element. We can get more than one element by invoking simple subsetting&nbsp;techniques. For instance we can retrieve the first and the third elements of the list by asking for them with a vector containing 1 and 3.</div>
+<pre>l[c(1,3)][[1]][1] 1 5 7[[2]][1] "TRUE" "TRUE" "FALSE" "FALSE" "FALSE"</pre>
+<div>which returns vec and dec, the 1st and the 3rd elements (but see more of subsetting later on).&nbsp;&nbsp;
+<br>
+</div>
+<div>Although the large proportion of R built-in function cannot handle lists, they remain important for the organization of data, especially when we are talking about big data. We 'll just live them aside for the moment and get back to them when the time is ripe.</div>
+<h4 id="g0.0.2.6">Arrays</h4>
+<div>In case you are wondering, R also supports multi(higher) dimensional data types, called arrays. These are complex numerical data types of higher order, that we choose to skip discussing for the time being.</div>
+<h4 id="g0.0.2.7">What class is my data? The class() and str() functions</h4>
+<div>Too often are we faced with the problem of not realizing the class of the data we are handling. This is especially more troubling in the case of data frames and lists whose components may be of different classes.&nbsp;</div>
+<div>The class() function is called upon any data object and returns the data type. In the case of the above list l</div>
+<div>
+<pre>class(l)<font face="sans-serif">
+</font>[1] "list"</pre>
+</div>
+<div><font face="sans-serif">class(l) returns "list" which is exactly what l is. Now what if we wanted to know what is the data type of each of the object in l? In this case we may use the str() function</font></div>
+<pre>str(l)<font face="sans-serif">
+</font>List of 3
+&nbsp;$ : num [1:3] 1 5 7
+&nbsp;$ : int [1:10] 1 2 3 4 5 6 7 8 9 10
+&nbsp;$ : chr [1:5] "TRUE" "TRUE" "FALSE" "FALSE" ...</pre>
+<div><font face="sans-serif">
+<div>str(l) returns a much more detailed output that contains the data class of l (List), the number of objects in it (of 3) and the data type of each of the objects (num, int, character) alongside the first instances in each one. Notice how the last object of l has been assigned the type "character" (chr). We can easily coerce it back to logical and put it in the list with</div>
+<pre>l&lt;-list(vec,mec,as.logical(dec))
+str(l)
+List of 3
+&nbsp;$ : num [1:3] 1 5 7
+&nbsp;$ : int [1:10] 1 2 3 4 5 6 7 8 9 10
+&nbsp;$ : logi [1:5] TRUE TRUE FALSE FALSE FALSE</pre>
+<div>
+<br>
+</div>
+</font></div>
+<div></div>
+</div>
+</div>
+<div>
+<br>
+</div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.3">Input/Output</h3>
+<h4 id="g0.0.3.1">Simple Variables</h4>
+<div>Entering input is quite straightforward. You can simply type in data in the R environment using the symbol "&lt;-" as the assignment operator. For example:</div>
+<pre>5-&gt;x;</pre>
+<div>Assignment of a value works both ways as long as it is the value that is being assigned to the variable:</div>
+<pre>5-&gt;x;
+x&lt;-5;
+x-&gt;5; # this will not work</pre>
+<div>Seeing what each variable contains is easy. Simply type the name of the variable and press enter</div>
+<pre>x
+5</pre>
+<div>Input can be of any type, including characters, logical etc:</div>
+<pre>names&lt;-"Christoforos";
+status&lt;-"False";</pre>
+<div>Integer sequences in the form of vectors can be incorporated with the specific operator (:)&nbsp;</div>
+<pre>x &lt;- 1:20</pre>
+<h4 id="g0.0.3.2">Little Arithmetics</h4>
+<div>Simple variables can be dealt with by R in all sense of arithmetical operations.</div>
+<pre>x &lt;- 2
+y &lt;- x+2 # addition/subtraction
+y
+[1] 4
+z &lt;- x*y # multiplication
+z
+[1] 8
+d &lt;- z/4 # division
+d
+[1] 2
+d**1.5 # power
+</pre>
+<div>Precedence is <span class="Apple-tab-span" style="white-space:pre">	</span>based on the normal mathematical rules of precedence (**, */, +-) so you must <b>always </b>use brackets when coding a more complicated formula. Brackets are used in a nested manner like:</div>
+<pre>p &lt;- 2*((x-y)**2)-3.14</pre>
+<div>R carries a great number of predefined arithmetical functions for basic operations such as square root, logarithms etc</div>
+<pre>x &lt;- 64
+sqrt(x) # square root of x
+[1]&nbsp;8
+y&lt;- -x
+y
+[1] -8
+abs(y) # absolute value of -8
+[1] 8
+log(y) # natural logarithm
+[1] 2.079442
+log(y)/log(2) # changing the base to log2
+[1] 3</pre>
+<div>Now, can you think about a way to get the cubic root of a simple variable x?</div>
+<div><span style="color: rgb(125, 167, 33); font-weight: bold;">
+<br>
+</span></div>
+<div></div>
+<div>
+<div style="font-family: sans-serif;">
+</div>
+<h3 id="g0.0.4" style="font-family: sans-serif;">Reading Data</h3>
+</div>
+<div>
+<div>Simply with inputting data from the command line, means we have seen nothing of R's power yet. R is able to handle great chunks of data in various levels of organization and the best way to feed them is by making R read them from a file stored in our computer. There are numerous ways to do so depending on the format, size and type of the data as well as on the downstream analyses we intend to conduct. In the following we will take a look at the most common ones. Simply invoke it with:</div>
+<pre>data&lt;-read.table("myfile.txt")</pre>
+<div>Keep in mind that myfile.txt needs to be in the directory you are currently working in. In any other case you will need the full path of the file such as e.g.</div>
+<div>
+<pre>data&lt;-read.table("~/Documents/R/myfile.txt")</pre>
+</div>
+<div style="font-family: sans-serif;">R will read through the file, skip any line starting with a comment hash "#" and will try to store the values read in the most convenient form, which is usually a data frame.&nbsp;</div>
+<div style="font-family: sans-serif;">We can now check what the data frame holds by asking R to return the first rows using head() or the last ones using tail()</div>
+<pre>head(data)
+tail(data)</pre>
+<div style="font-family: sans-serif;">If we want to be more specific we can ask R to return only a specific subset of the data frame's columns, or rows, or even combinations of the two. But let's leave this for later chapters.</div>
+<div style="font-family: sans-serif;">Reading through big files can take time even with R (or especially with R) as it tries to make some inference on the data "on the fly" as the file is being read. In this way, R tries to figure out the column separator (if data come in columns separated by space, commas, tabs etc) the class of the data in each column and store the whole file in a data type. For all the above reasons, it is important that we make R's job easier by providing some of that information ourselves. Both read.table and read.delim allow us to provide additional information before reading the file. In particular there are some important attributes/options we can activate that are related to:</div>
+<div>
+<ul>
+<li><span style="font-family: sans-serif;">the column separator </span><font face="monospace">sep</font>
+<br>
+</li>
+<li><span style="font-family: sans-serif;">the header of the columns </span><font face="monospace">header</font>
+<br>
+</li>
+<li><span style="font-family: sans-serif;">the number of rows </span><font face="monospace">nrow</font>
+<br>
+</li>
+</ul>
+</div>
+<div style="font-family: sans-serif;">Lets try to let R know that we want to read a file using tab as the column separator, keeping the first line of the file as column header and reading 1000 rows</div>
+<pre>data&lt;-read.delim("myfile.txt", header=T, sep="\t", nrow=1000)</pre>
+<div style="font-family: sans-serif;">This will keep the first line as column headers and will stop reading after the first 1000 lines (excluding the header). Each column will be read if it is tab-separated by the previous one.&nbsp;<span style="text-align: justify; text-indent: 30px;">There are a number of ways to separate columns in tables, the most common ones being space, tab and commas. You may often (or not so often) see filenames ending with the *.tsv or *.csv extensions. These indicate tab-separated-values or comma-separated-values. R has a particular function to read the latter called read.csv()</span></div>
+<div>
+<pre>data&lt;-read.csv("myfile.csv")<font face="sans-serif">
+</font></pre>
+</div>
+<div><span style="font-family: sans-serif;">will read and store data directly in columns as long as they are comma separated.</span></div>
+<div><font face="sans-serif">readLines() is a function that reads files line-by-line storing each line in a separate vector element. The output is thus a vector holding the lines of the file in the order they appear in it. This may be useful for text mining purposes but not so much when the data are numeric and you want to store them in data frames or matrices.</font></div>
+<pre>text&lt;-readLines("file.txt")
+text&lt;-readLines("file.txt", 100)</pre>
+<div><font face="sans-serif">The second command will only read the first 100 lines of the file.</font></div>
+<div><font face="sans-serif">Advanced reading can also be performed with the use of specialized functions, contained in R libraries. One such, allows the user to import Excel files</font></div>
+<div><font face="sans-serif">
+<pre>library(xlsx)
+mydata &lt;- read.xlsx("c:/myexcel.xlsx", 1)</pre>
+<div>
+<br>
+</div>
+</font></div>
+<div>
+<br>
+</div>
+</div>
+<div>
+<div style="font-family: sans-serif;"><span style="color: rgb(125, 167, 33); font-weight: bold;">Missing Values</span>
+<br>
+</div>
+<div style="font-family: sans-serif;">
+<div>
+<br>
+</div>
+<div>In many cases, the files fed into R will contain "holes", incorrectly formatted values or values that cannot be treated numerically. R is not able to understand what you meant with a funny character, or lack thereof, but is "clever" enough to mark the value with a "NA" or a "NaN" character. "NA" signifies a missing value (a hole in the data table) while "NaN" stands for not-a-number and is returned when a mathematical operation is non-sensical (e.g. a division with 0). Be extremely careful with both NA and NaN values as they may either inhibit the execution of certain functions (the good scenario, because you notice the error immediately) or make functions return erroneous values (the bad scenario, because you may not always notice the error).</div>
+<div>Always remove NA values or at least mark them out of calculations. You can test if a variable has a NA, NaN status simply by asking R:</div>
+<pre>is.na(x)
+is.nan(x)</pre>
+<div>in which case R will return TRUE or FALSE. More on this in the chapter of Subsetting.</div>
+</div>
+<h4 id="g0.0.4.1" style="font-family: sans-serif;">Writing Data</h4>
+<div style="font-family: sans-serif;">We saw how we feed data into R, how we make sure non-sensical values are not included but now how about getting data out of R and into a file in our computer? R has specific functions for writing data to files, most of which are perfectly symmetrical to the reading ones. Thus if we want to write output to a file we can make use of the write function:</div>
+</div>
+<pre>write(data, file="out.txt")</pre>
+<div style="font-family: sans-serif;">which can be made much more elaborate if additional options are fed in the command</div>
+<div>
+<pre style="font-family: sans-serif;">write(data, file="out.txt", append=T, sep="\t", ncolumns=3)</pre>
+<div style="font-family: sans-serif;">this will not only write the "data" to a file names "out.txt" but it will further append the data at the end of this file if it already exists. Moreover, data will be written in 3 columns separated with tab.&nbsp;</div>
+<div style="font-family: sans-serif;">Although the command above will work most of the times, it is probably safer to use write.table instead for increased control of the process.</div>
+<div style="font-family: sans-serif;">
+<pre>write.table(data, file="out.txt", append=T, sep="\t", row.names=F, col.names=T)</pre>
+</div>
+<div style="font-family: sans-serif;">This is only to be used on a data frame or a matrix that already has the values spread out in rows and values (notice that there is no option for number of columns as there are predefined by the dataframe structure). row.names=F (meaning FALSE) tells R to skip enumerating the rows, since this usually adds and extra column to the output file (try this yourselves).</div>
+<div style="font-family: sans-serif;">Writing to files can also be done in csv mode with (you might have guessed already) write.csv().</div>
+<div style="font-family: sans-serif;">In the same way we can write data to an Excel recognizable file with:</div>
+<pre>write.xlsx(mydata, "c:/mydata.xlsx")&nbsp;</pre>
+</div>
+<div><font face="sans-serif">sdad</font></div>
+<h4 id="g0.0.4.2">Reading R code</h4>
+<div><font face="sans-serif">As you advance in working with R you may need to store parts of the code (or simply commands) in simple text files and invoke them without having to re-write them. This can be easily done with the source() function. Simply store the code you want in a file (it helps if it carries a special extension like *.R or *.Rdata) and then call the source function on it like this:</font></div>
+<pre>source("file.R")</pre>
+<div><font face="sans-serif">This will immediately execute all the commands contained in "file.R" (and provide error messages for those that couldn't be executed).</font></div>
+<div><font face="sans-serif">What may these commands be? Carry on to the next session(s).</font></div>
+<div>
+<br>
+</div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.5">Subsetting</h3>
+<div>Subsetting refers to the selection of parts of data from greater sets. Subsetting of data types is one very important aspect of the R environment in the sense that it can be performed with extreme precision and at great speeds. In this sense it constitutes one of R's main advantages.</div>
+<div>Subsetting uses a number of special characters to perform various tasks, such as obtaining specific rows, columns, elements from all possible data types depending on the user's choice. It can be roughly divided to:</div>
+<div>structural subsetting, where data are subsetted based on the structure of the data type (e.g. the 3 first columns)</div>
+<div>logical subsetting, where data are subsetted based on a logical restriction (e.g. all values that are not "NA")</div>
+<div>numerical subsetting, where data are subsetted based on numerical/categorical operation/control (e.g. all values &gt;10 or all values equal to "FALSE")</div>
+<div>
+<br>
+</div>
+<h4 id="g0.0.5.1">Structural Subsetting</h4>
+<div>Makes use of the [], [[]] and $ operators, which with the clever combination of commas can provide absolute precision on the choise of data with only a few characters coding.&nbsp;</div>
+<div>[] may be used on any vector, factor, matrix or dataframe to subset it in one or two dimensions. In the case of vectors and factors there is only one dimension. Therefore, if we want the nth element of a vector v we simply put n within brackets</div>
+<pre>x&lt;-v[6]</pre>
+<div>x now holds the sixth value of the vector v. R enumerates all data types starting from 1 (and not 0 like Perl or Python) so 6 will actually return the 6th value.</div>
+<pre>x&lt;-v[6:8]</pre>
+<div>will get a "slice" of v and store it in x which now becomes a vector itself carrying the 6th,7th and 8th elements of v. Remember how the ":"&nbsp;<span style="font-family: sans-serif;">operator&nbsp;</span>is used for ordered integers. Now what if we wanted some compartmentalized subsetting that does not follow a certain order</div>
+<pre>x&lt;-v[c(1, 6:8, 11:15, 18, 20)]</pre>
+<div>This intricate subsetting allows us to get the 1st, then the 6th-8th, then the 11th-15th, then the 18th and then the 20th elements of v and store them in a vector called x. Notice how the subsetting indices (the numbers in the parentheses) are a vector in themselves and thus they are introduced with the concatanate function c(). We could have greater control in this subsetting if we split the process in two</div>
+<pre>ind&lt;-c(1, 6:8, 11:15, 18, 20)
+x&lt;-v[ind]</pre>
+<div><span style="font-family: sans-serif;">This first creates a vector called ind that carries the indices (the numbers of elements we want to obtain from v) and then passes it to v with [] to perform the subsetting.&nbsp;</span></div>
+<div><span style="font-family: sans-serif;">The exact same process stands for factors (which as we already know are categorical vectors). But w</span><span style="font-family: sans-serif;">hat about matrices and dataframes? Here there are two dimensions on which we can subset (rows and columns). R uses the same operator [] but allows for two values separated by comma to provide information of rows and columns (in this order). Although both of them are not always needed (suppose you only want to subset columns but not rows) R needs to keep in mind we are treating two-dimensional datatypes so we need to use a comma inbetween. This will become less confusing with an example. Suppose we need to keep only the first and the third line from a matrix m. This is done with:</span></div>
+<pre>mm &lt;- &nbsp;m[,c(1,3)]</pre>
+<div><span style="font-family: sans-serif;">Notice that the indices inside the brackets are of the form [ ,vector]. That is because the value before the comma is reserved for row subsetting. Since we don't want to subset on the rows we leave this empty, but use the comma since this is compulsory. After the comma we simply provide the vector of indices we want to subset columns by (in this case c(1,3) for the 1st and the 3rd). In perfect symmetry subsetting on rows 10 through 20 would be performed with:</span></div>
+<pre>mm &lt;- m[10:20,]</pre>
+<div><span style="font-family: sans-serif;">As in this case the indices are serial we need not use a concatanated structure so 10:20 will do. Alternatively we could use c(10,11,12,13,14,15,16,17,18,19,20) but we don't for obvious reasons.</span></div>
+<div><span style="font-family: sans-serif;">Bear in mind that in both cases above mm is a matrix (or data frame, depending on what m was) whose dimensions have now changed. If m was a MxN matrix, then mm is a Mx2 in the first case and 10xN in the second. In the case we subset on both rows and columns</span></div>
+<pre>mm &lt;- m[c(1:5,8), c(10,11, 12:14)]</pre>
+<div><span style="font-family: sans-serif;">mm is now a 6x5 matrix.&nbsp;</span></div>
+<div><span style="font-family: sans-serif;">Understandably we can return any single element of a matrix or data frame by providing its exact "coordinates" and thus</span></div>
+<pre>m[6,9]</pre>
+<div><span style="font-family: sans-serif;">will return the 6th element of the 9th column.</span></div>
+<div><span style="font-family: sans-serif;">In the case of data frames with named columns we can also use the $ operator to subset columns. Take the built-in R data frame called mtcars simply by typing</span></div>
+<pre><span style="font-family: sans-serif;">mtcars</span></pre>
+<div><font face="sans-serif">This small dataframe contains makes of cars alongside their constructor specifications. In order to choose one specific specification simply ask for the name of the data frame followed by $ and the name of the column. For instance</font></div>
+<pre><font face="sans-serif">mtcars$cyl</font></pre>
+<div><font face="sans-serif">will return the vector containing the cyl column. This is identical to calling mtcars[,2] asking thus for the second column of the data frame (not including the names of the cars).</font></div>
+<div><font face="sans-serif">The [[]] and $ operators are mostly used in list context. Although, as we saw earlier, [n] can be used to invoke the nth element of a list, [[n]] does the same without getting back the reference (the name) of that element. This is sometimes desirable, especially when we want to pass data from a list to another function. Consider the list l we saw earlier</font></div>
+<div>
+<pre>l&lt;-list(vec,mec,dec)</pre>
+</div>
+<div><font face="sans-serif">where vec, mec and dec are three vector of different type and size. l can be created by keeping names for each of the three</font></div>
+<pre>l&lt;-list(a=vec, b=mec, c=dec)</pre>
+<div><font face="sans-serif">now vec can be invoked with all of the following commands</font></div>
+<pre>l[1]
+l[[1]]
+l$a</pre>
+<div><font face="sans-serif">There are subtle differences are in the form of the output. From top to bottom the output is stripped from (sometimes unneccesary) references.</font></div>
+<h4 id="g0.0.5.2">Logical Subsetting</h4>
+<div>Makes use of logical operators ("&amp;", "!", "|", &nbsp;see more on that in Control Structures)</div>
+<div>Logical operators stand for AND (="&amp;"), OR (="|") and NOT ("!"). While the first two are more complex as "joining" operators and we will see more of them when we discuss control structures, NOT "!" can stand on its own as it signifies the negation of a statement. In this sense</div>
+<pre>!is.na(x)</pre>
+<div>returns logical values (TRUE or FALSE) depending on whether any value in x is NOT "NA". In this sense, !is.na() is the mirror-image of is.na(). Lets use this in a subset</div>
+<pre>y&lt;- x[!is.na(x)]</pre>
+<div>y is now a vector with all the elements of x that are NOT "NA". There are two things to be careful of here. One, that the subsetting index refers to the subsetted data object (x). Notice how x is subsetted based on one of its own properties (how many of its elements are not "NA"). The other is that the output is a vector, regardless of the structure of x. Even if x was to be a matrix or a data frame, the logical subsetting will return the values reading by column starting from the top left.&nbsp;</div>
+<h4 id="g0.0.5.3">Numerical Subsetting</h4>
+<div>Makes uses of the common numerical operators (&gt;, &lt;, &gt;=, &lt;=, "!=" and ==). You should already be familiar with "&gt;","&lt;" and "&lt;=", "=&gt;" as "greater", "smaller", "smaller or equal" and "greater or equal", but notice "!=" signifying "not equal to" and "==" for "equal to" (this is because in R as in most programming languages, we use "=" for assignment of variable values, (in R "-&gt;" and "=" are the same but we strongly recommend "-&gt;" to avoid confusion)).</div>
+<div>Numerical subsetting works exactly like logical. So assuming x is a data frame holding these values</div>
+<div>
+<pre>x
+&nbsp; a &nbsp; b
+1 1 &nbsp;Me
+2 2 You
+3 3 Him
+4 4 Her</pre>
+</div>
+<div>Then, subsetting it numerically by asking only values equal to 2 would be</div>
+<pre>x[(x==2)]
+[1] "2"</pre>
+<div>This returns the value "2" (only once in this case, but more times if 2 were to be found more than once). What if we wanted to get values that are greater than 2. We could try
+<br>
+</div>
+<pre>x[(x&gt;2)]</pre>
+<div>and we would get</div>
+<div>
+<pre>[1] "3" "4" NA &nbsp;NA &nbsp;NA &nbsp;NA&nbsp;
+Warning message:
+In Ops.factor(left, right) : &gt; not meaningful for factors</pre>
+</div>
+<div>What happened here? We got the two numerical values that fulfill our restriction (&gt;2) but we got four NA values at the end and an error message that said our operation is not meaningful for factors. What R is trying to tell us is that a comparison &gt;2 is not possible for categorical data like "Me" or "You". In this sense the operation "Me"&gt;2 returns nothing (NA). R prints this at the end of the vector but is kind enough to point it out to us.</div>
+<div>Numerical subsetting is not always numerical. It can be categorical as well with the use of the "==" and the "!=" operators. If we try</div>
+<div>
+<pre>&gt; x[(x!="Me")]
+[1] "1" &nbsp; "2" &nbsp; "3" &nbsp; "4" &nbsp; "You" "Him" "Her"</pre>
+</div>
+<div>we get back all the elements of x that are not equal to "Me" regardless if they are numbers or characters. This is because R performs coercion of variables wherever this is possible before conducting the subsetting. This is very handy in the general cases of data comparisons that we discuss next in Control Structures.</div>
+<div>
+<div style="font-family: sans-serif;">One very handy function for subsetting is which(). It can be used for both logical and numerical subsetting to produce a subset of indices fulfilling certain conditions.</div>
+<pre>which(x&gt;=1)-&gt;ind
+x[ind]-&gt;new_x</pre>
+</div>
+<div style="font-family: sans-serif;">which() can also be used in logical context.</div>
+<div>
+<br>
+</div>
+<h4 id="g0.0.5.4">An example. Subsetting for not NA values</h4>
+<div>Lets now use subsetting in an example that is very useful (and also quite common). Removing NA values from a data frame. The task we want to complete is, given a data frame (or a matrix), extract the instances (rows) that do not have NA values (holes). As with many cases, R already has a built-in function to check for lines in a matrix that do not carry NA values. This function is complete.cases() and can be invoked on a matrix m like this</div>
+<pre>ind&lt;-complete.cases(m)</pre>
+<div>ind now is a vector that holds the line numbers of the data frame that fulfill the condition (not having a NA value). All we have to do now is to ask for a subset of m with the rows held in ind</div>
+<pre>mm&lt;-m[ind,]</pre>
+<div>And we are done! A clean data set.</div>
+<h4 id="g0.0.5.5">And finally. The subset function</h4>
+<div>A number of things in R can be done with the use of predefined functions. Subsetting is not an exception. There is a specific subsetting function called subset().&nbsp;</div>
+<div>subset() combines the use of all types of subsetting (numerical, logical and structural) in data frames with named columns. It also makes use of logical operators to combine subsetting commands in a single. An example may be seen with a default R dataset called "airquality". "airquality" is structured data in a data frame concerning information on ozone, solar radiation, wind and temperature for a number of dates organized by month and day. To have a better view of its contents simply type</div>
+<pre>head(airquality)
+&nbsp; Ozone Solar.R Wind Temp Month Day
+1 &nbsp; &nbsp;41 &nbsp; &nbsp; 190 &nbsp;7.4 &nbsp; 67 &nbsp; &nbsp; 5 &nbsp; 1
+2 &nbsp; &nbsp;36 &nbsp; &nbsp; 118 &nbsp;8.0 &nbsp; 72 &nbsp; &nbsp; 5 &nbsp; 2
+3 &nbsp; &nbsp;12 &nbsp; &nbsp; 149 12.6 &nbsp; 74 &nbsp; &nbsp; 5 &nbsp; 3
+4 &nbsp; &nbsp;18 &nbsp; &nbsp; 313 11.5 &nbsp; 62 &nbsp; &nbsp; 5 &nbsp; 4
+5 &nbsp; &nbsp;NA &nbsp; &nbsp; &nbsp;NA 14.3 &nbsp; 56 &nbsp; &nbsp; 5 &nbsp; 5
+6 &nbsp; &nbsp;28 &nbsp; &nbsp; &nbsp;NA 14.9 &nbsp; 66 &nbsp; &nbsp; 5 &nbsp; 6</pre>
+<div>Notice how there are holes in the data with a number of NA values. Suppose now that we want to obtain a slice of the data that we contains all dates with a temperature higher than 60 degrees and a wind of 10 knots or more. We would type</div>
+<pre>dates&lt;-subset(airquality, Temp &gt; 60 &amp; Wind&gt;=10)</pre>
+<div>Observe how the function works. We call subset() on the dataframe airquality asking that a combined condition is fulfilled, so as Temp&gt;60 AND Wind&gt;=10. The logical "AND" is coded by the ambersand "&amp;" symbol. Alternatively, had we wanted to keep the dates with either Temp&gt;60 OR Wind&gt;=10 we would have asked for</div>
+<div>
+<pre>dates&lt;-subset(airquality, Temp &gt; 60 | Wind&gt;=10)</pre>
+</div>
+<div>in which case the logical "OR" is coded with the bar symbol "|".&nbsp;</div>
+<div>Think about the case where we would have wanted mutual exclusion of conditions (e.g. Temp&gt;60 "AND NOT" Wind&gt;=10). In this case we would have to think a bit more and code for an equivalent condition. That would be Temp&gt;60 &amp; Wind&lt;10 (inverting the condition on wind).</div>
+<div>Finally, subset can also incorporate structural subsetting in the form of retaining specific parts of the data. In the case e.g. that we would have wanted to keep only the dates (that is month and day) fulfilling the above condition (that is dropping the meteorological data) all we need to do is to use the select argument of subset(). The command would now be:</div>
+<pre>dates&lt;-subset(airquality, Temp &gt; 60 &amp; Wind&lt;10, select = c(Day, Month))
+head(dates)
+&nbsp; &nbsp;Day Month
+1 &nbsp; &nbsp;1 &nbsp; &nbsp; 5
+2 &nbsp; &nbsp;2 &nbsp; &nbsp; 5
+7 &nbsp; &nbsp;7 &nbsp; &nbsp; 5
+10 &nbsp;10 &nbsp; &nbsp; 5
+11 &nbsp;11 &nbsp; &nbsp; 5
+12 &nbsp;12 &nbsp; &nbsp; 5</pre>
+<div>Notice how we have complete freedom to manipulate the data frame in terms of ordering of its vectors. In this example we choose to show Days before Months although their order was the other way round in the initial data frame.&nbsp;</div>
+<div>
+<br>
+</div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.6">Simple Functions and Control Structures</h3>
+<address><span style="font-style: normal;">One of R's main powers is the great number of predefined functions. Taken together the set of built-in functions alongside those contained in various R packages constitute an extensive toolbox with which you can perform mathematical calculations, conduct complex statistical analysis and create elegant and highly informative graphs.&nbsp;</span></address>
+<address><span style="font-style: normal;">A detailed summary of the complete "dictionary" of R functions is beyond the scope of these notes (and may well be beyond the scope of most of R manuals). Nonetheless you can find the index of R functions contained in the base "core" distribution <a href="http://www.math.montana.edu/Rweb/Rhelp/00Index.html">here</a>. &nbsp;</span></address>
+<address><span style="font-style: normal;">For the purposes of our classes we will discuss only a subset of all available functions, focusing on basic mathematical operations, functions that deal with basic (and a little more advanced) statistics and plotting functions.</span></address>
+<h4 id="g0.0.6.1">An overview of operators in R</h4>
+<div>
+<div>We have already seen how mathematical calculations may be performed in R in more or less the way one uses a calculator. Remember that we can simply type the number of variables with operators inbetween and get the result by hitting return (enter)</div>
+<pre>a&lt;-5
+b&lt;-6
+a + b
+[1] 11</pre>
+<div>The basic mathematical operators are recapped in the list below</div>
+<div>&nbsp;</div>
+<div><b>Arithmetic Operators</b></div>
+<div>
+<ul>
+<li>+ <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;addition
+<br>
+</li>
+<li>- <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;subtraction
+<br>
+</li>
+<li>* <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;multiplication
+<br>
+</li>
+<li>/ <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;division
+<br>
+</li>
+<li>^ or ** <span class="Apple-tab-span" style="white-space: pre;">	</span>exponentiation
+<br>
+</li>
+<li>x %% y <span class="Apple-tab-span" style="white-space: pre;">	</span>modulus (x mod y) 5%%2 is 1
+<br>
+</li>
+<li>x %/% y <span class="Apple-tab-span" style="white-space: pre;">	</span>integer division 5%/%2 is 2
+<br>
+</li>
+</ul>
+</div>
+<div>Out of those you may not be familiar with the last two. Modulus provides the remainder of a division between two integers, while integer division is the result of a division without proceeding further than the integral part of the quotient.&nbsp;
+</div>
+<div>
+<br>
+</div>
+<div><b>Logical Operators</b></div>
+<div>Logical operators have been discussed previously in the chapters related to Subsetting. A formal definition of logical operators (or connectors, or connectives) is a set of symbols that may be used to connect two or more statements in a grammatically valid way. In the example discussed above for the subset() function these two sentences would be: a) "The temperature is greater than or equal to 60 degrees" and b) "The wind speed is greater than 10 knots".&nbsp;</div>
+<div>Each of the two sequences contain some logical operators in itself. The temperature&gt;=60 and the wind&gt;10 are examples of numerical control operators. Combinations thereof consist of asking:</div>
+<div>a) Both of them being true (A AND B)</div>
+<div>b) Only one of them being true (A AND NOT B, B AND NOT A)</div>
+<div>c) At least one of them being true (A OR B)</div>
+<div>All of the above can be coded with specific logical operators listed below.&nbsp;</div>
+<div>
+<ul>
+<li>&lt; <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;less than
+<br>
+</li>
+<li>&lt;= <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;less than or equal to
+<br>
+</li>
+<li>&gt; <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;greater than
+<br>
+</li>
+<li>&gt;= <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;greater than or equal to
+<br>
+</li>
+<li>== <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;exactly equal to
+<br>
+</li>
+<li>!= <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;not equal to
+<br>
+</li>
+<li>!x &nbsp;<span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Not x
+<br>
+</li>
+<li>x | y <span class="Apple-tab-span" style="white-space: pre;">	</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;x OR y
+<br>
+</li>
+<li>x &amp; y <span class="Apple-tab-span" style="white-space: pre;">	</span>x AND y</li>
+</ul>
+</div>
+<div>In the following chapters we will see how we go about using them and so getting used to working them on a routine basis</div>
+</div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.7">R Functions</h3>
+<div>Let's now get to the core of the basic R function toolbox. As discussed previously R almost has a function for everything. A number of these functions are very useful for getting beginners accustomed to the way R works and to prepare them for writing their own functions (when they stop being beginners). &nbsp;</div>
+<div>Below we present some of the most important R functions for various objectives covering basic statistics, plotting and string manipulation.</div>
+<div>
+<br>
+</div>
+<hr id="false">
+<h3 id="g0.0.8">Numeric Functions</h3>
+<div>Numeric functions include functions used to performed more advanced mathematical operations.</div>
+<div>Some of the most important are:</div>
+<div>
+<br>
+</div>
+<div>
+<div><b>abs(x) :&nbsp;absolute value</b></div>
+<div>abs() is used to return the absolute value of a number (integer or not). This means that both&nbsp;</div>
+<pre>abs(-5)
+abs(5)</pre>
+<div>return the value 5.</div>
+<div><b>
+<br>
+</b></div>
+<div><b>sqrt(x) :&nbsp;square root</b>
+<br>
+</div>
+<div>sqrt() returns the square root of a number.&nbsp;</div>
+<div><b>
+<br>
+</b></div>
+<div><b>ceiling(x), floor</b><b>(x),&nbsp;</b><b>trunc(x),&nbsp;</b><b>round(x, digits=n),&nbsp;</b><b>signif(x, digits=n)</b></div>
+<div>All of these functions treat real numbers in terms of rounding (that is ommission of decimal points). ceiling(x) rounds up the real number x to the closest integer that is greater than x (&gt;x) while floor(x) does the opposite, rounding x to the closest integer that is smaller than x (&lt;x). In this sense</div>
+<pre>ceiling(5.1)</pre>
+<div>returns 6, while&nbsp;</div>
+<pre>floor(5.98)</pre>
+<div>returns 5.</div>
+<div>trunc(x) truncates all decimal points rounding the number to the closest integer in the same way floor() does it. round() and signif() both take a number of digits as an additional argument but slightly differ in that round(x, digits=n) does rounding in a way that keeps n decimal points while signif(x, digits=n) rounds to n total digits (not including the comma). Thus:</div>
+<pre>x&lt;-45.6789
+round(x, digits=3)
+[1] 45.679
+signif(x, digits=3)
+[1] 45.7</pre>
+<div>
+<br>
+</div>
+<div><b>cos(x), sin(x), tan(x),&nbsp;acos(x), cosh(x), acosh(x)</b>
+<br>
+</div>
+<div>Refer to the corresponding trigonometric functions for cosine, sine, tangent, arc-cosine, hyperbolics etc.</div>
+<div>
+<br>
+</div>
+<div><b>log(x) :&nbsp;natural logarithm,&nbsp;</b><b>log10(x) :&nbsp;common logarithm</b></div>
+<div>log() is the natural logarithm while base-10 log is coded as log10(). Do you remember what you need to do to convert a natural log to, say, a base-2 logarithm?&nbsp;</div>
+<div>*In case you don't remember how to change the base you can always use log(x, base=n).</div>
+<div>
+<br>
+</div>
+<div><b>exp(x) : exponential of e</b></div>
+<div>remember generic exponentiation is coded either through a^x or a**x.</div>
+</div>
+<div>
+<hr id="false">
+</div>
+<div>
+<h3 id="g0.0.9">Character Functions</h3>
+<div>Character handling is not one of R's major strong points and you can always work around data manipulation in character strings outside R with shell scripting or other scripting languages. Still, R provides a number of functions we can use to handle strings when we need to stay within the environment.</div>
+<div>
+<br>
+</div>
+<div><b>substr(x, start=n, stop=m)</b>&nbsp;
+<br>
+</div>
+<div>The substr() function works more or less in the way the function of the same name in Perl. In a string x it returns a substring starting from n and running through m. Remember that numbering in R starts from 1.</div>
+<div>
+<br>
+</div>
+<div><b>grep(pattern, x , ignore.case=FALSE, fixed=FALSE)</b>&nbsp;<span class="Apple-tab-span" style="white-space: pre; ">	</span></div>
+<div>Pattern matching in R is performed with grep() that searches for pattern in x. Using fixed=F assures that pattern search may be performed with a regular expression. Notice that the functions returns the matching indices, that is the result of the matching is the subset of elements of the vector x that match the pattern.&nbsp;</div>
+<div>A substitution function sub() &nbsp;is similar to grep but with the addition of a replacement string</div>
+<div><b>sub(pattern, replacement, x, ignore.case=F, fixed=F)</b>&nbsp;</div>
+<pre>sub(pattern, replacement, x, ignore.case =FALSE, fixed=FALSE)</pre>
+<div>for instance</div>
+<pre>sub("\\s",".","Hello There")&nbsp;</pre>
+<div>returns "Hello.There"</div>
+<div>Splitting of a string is performed with <b>strsplit()</b></div>
+<pre>strsplit(x, split)&nbsp;</pre>
+<div>where split is the character(s) at which splitting takes place. strsplit() returns a character vector. As in the previous functions, fixed=T allows split to be a regular expression. For instance:</div>
+<div>
+<pre>x&lt;-"abc.d.eef.g"
+strsplit(x,".", fixed=T)-&gt;d
+d
+[[1]]
+[1] "abc" "d" &nbsp; "eef" "g"</pre>
+</div>
+<div>The <b>paste()</b> function joins strings in a concatenation using sep as a separator</div>
+<pre>paste("x",1:3,sep="")&nbsp;</pre>
+<div>returns c("x1","x2" "x3") while
+<br>
+</div>
+<pre>paste("x",1:3,sep="M")&nbsp;</pre>
+<div>returns c("xM1","xM2" "xM3").</div>
+<div>Transforming strings to upper or lower case is explicitly done with <b>toupper(x)</b> and <b>tolower(x)</b>.</div>
+</div>
+<div>
+<br>
+</div>
+<div>
+<div>
+<h3 id="g0.0.10">Other Useful Functions</h3>
+<div>A number of very useful functions do not fall in a specifi category but will prove very handy once you start coding your own R scripts and functions.</div>
+<div>Suppose you need to generate a sequence of numbers with a fixed interval. Remember that this can be done with the ":" operator only for interval=1 but if we want another step we may use</div>
+<div><b>seq(from , to, by)</b>
+<br>
+</div>
+<div>If you code</div>
+<pre>x &lt;- seq(1,20,3)
+x
+[1] &nbsp;1 &nbsp;4 &nbsp;7 10 13 16 19</pre>
+<div>x becomes the vector of all values down to the largest that fulfils the condition &lt; to-by</div>
+<div>Another type of sequence we may need to create is the repetition of elements. This is performed with the use of the rep() function&nbsp;</div>
+<div><b>rep(x, ntimes)&nbsp;<span class="Apple-tab-span" style="white-space: pre; ">	</span></b></div>
+<pre>y &lt;- rep(1:3, 2)
+y&nbsp;
+[1] 1 2 3 1 2 3</pre>
+<div>Obtaining a random set of values from a greater set is done with sample().</div>
+<div><b>sample(x, size, replace=F/T)
+<br>
+</b></div>
+</div>
+</div>
+<div>sample() takes a subset of size=size from the vector x and returns it a smaller vector. If replace=T then the same element can be drawn more than once.</div>
+<div><b>pretty(c(start,end), N)</b></div>
+<div>returns a vector of equally spaced N values between start and end. Invaluable for simulating distributions, producing values for standard reference plots etc.</div>
+<div><b>sort(x)</b></div>
+<div>returns the vector x sorted in numerical order from the smallest to the largest element while</div>
+<div><b>order(m[,c(i,j)])</b></div>
+<div>orders a matrix m according first ot the values in the i-th and then in the j-th columns. Calling</div>
+<pre>m[order(m[,c(i,j)]),]</pre>
+<div>will produce a re-ordered matrix according to the above ordering</div>
+<div>
+<br>
+</div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.11">Descriptive Statistics - &nbsp;Basic Functions</h3>
+<div>
+<div style="font-family: sans-serif;">A great number of users, use R solely for statistical calculations and analyses. Although there is much more to R than statistics, the existence of an extensive (and ever-expanding) statistical toolbox remains one of its main strong points compared to other programing languages. R has a plethora of both elementary and advanced statistical functions, including mode calculations, statistical tests, simulation of data etc. Below we start discussing some of the most basic functions that will help you go through some initial basic statistics with your data. (In case you are bored, stay tuned for more advanced stuff in later chapters!)</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;"><b>sum(x)</b><b>
+<br>
+</b></div>
+<div style="font-family: sans-serif;">The sum() function returns the sum of a numerical vector</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;">
+<div><b>min(x), max(x)</b></div>
+<div>Return the minimum and maximum values of numerical vectors
+<br>
+</div>
+<div>
+<br>
+</div>
+<div><b>length(x)</b></div>
+<div>The length() function applied to vectors (regardless of class) returns their size in number of elements. length() is thus the easier way of counting elements</div>
+</div>
+<div style="font-family: sans-serif;"><b>
+<br>
+</b></div>
+<div style="font-family: sans-serif;"><b>mean(x, trim=0, na.rm=FALSE)</b></div>
+<div style="font-family: sans-serif;">mean() is a function for calculating the mean (surprise!) of a vector of numerical values (keep in mind both "vector" and "numeric"). To the completely uninitialized mean equals the sum of a vector divided over the number of its elements. It is thus equivalent to sum(x)/length(x).</div>
+<div style="font-family: sans-serif;">It is called directly on the vector but allows for some additional options such as the trim option that refers to a fraction of values to be kept "out" of the data on either side of the data (max and min values). In this sense trim scales from 0 to 0.5, defaulting to 0 (this means that there is no trimming unless otherwise specified). Although trimming can be very valuable in the case of outliers (=values that fall out of the expected distribution) it is better left out before a thorough examination of the distribution has been conducted. mean() also allows the user to remove NA values before the calculation with na.rm=T. na.rm defaults to FALSE which means that if there are NA values in the vector, the function will return an error message.</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;"><b>sd(x),</b>&nbsp;<b>var(x)</b>
+<br>
+</div>
+<div style="font-family: sans-serif;">These return the standard deviation sd() and the variance var() of a numeric vector. You may remember from highschool statistics that the standard deviation is the square root of the variance and that the variance is the mean square distance of the vector's values from its mean value. In general both var and sd give a very good idea of how "spread out" the data are compared to the mean value (which may be seen as the most probable, or expected value for a give dataset)</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;"><b>median(x)</b></div>
+<div style="font-family: sans-serif;">The median of a numerical vector is the value that lies midway in a ranking of values from the lowest to the highest. Its difference from the mean is very often a good way to "guesstimate" on the existence of outliers and assymetric distributions</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;"><b>quantile(x, probs)&nbsp;<span class="Apple-tab-span" style="white-space: pre;">	</span></b></div>
+<div style="font-family: sans-serif;">A quantile is defined as the range (minimum - maximum values) of a dataset that falls within a specific "slice" of the data, defined by ranking the values from the smallest to the largest. By definition quantiles refer to equally sized data slices containing the same number of values. In this sense the quartiles of a distribution are the smallest value (1st), the one that lies at the 25% of the values (2nd), the median (50%) is the 3rd, the value corresponding to 75% of the total is the 4th and the maximum corresponds to the 5th. The quartiles of this distribution are better defined as the 1st-2nd, 2nd-3rd, 3rd-4th and 4th-5th value ranges. All quantiles are thus by definition intervals.</div>
+<div style="font-family: sans-serif;">The quantiles() function is called on a numerical vector with the option probs which accepts a vector of probabilities between 0 and 1. Thus suppose x is a numerical vector, then</div>
+<pre>quantile(x, probs=c(0,0.25,0.50,0.75,1))</pre>
+<div style="font-family: sans-serif;">produces the quartile values (4 intervals). While if we only cared about a specific value and not the whole set we could for instance try</div>
+<div style="font-family: sans-serif;">
+<pre>quantile(x, probs=c(0.3,0.7))</pre>
+<div>which would give us the range of values between the 30% and the 70% of the total. Later on, we will see how we can combine clever vector forming function with quantiles to avoid writing down explicit intervals.</div>
+</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;"><b>range(x)</b>
+<br>
+</div>
+<div style="font-family: sans-serif;">range() returns the full range of values of a vector. It is thus by definition equivalent to quantile(x, c(0,1)). The only difference is that range produces a vector, while quantile a named vector with attributed names.</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;"><b>diff(x, lag=n)</b>
+<br>
+</div>
+<div style="font-family: sans-serif;">The diff() function returns lagged differences in a series of values. It thus needs to be run on a numerical vector and it takes the order of the vector as it stands without any transformation. By default it will accept lag=1 which means that diff will transform a vector x of size N to a vector y of size N-1 differences between x[i] and x[i+1] values. In fact given a lag=n diff will transform a N-size vector of values to an N-n vector of differences between x[i] and x[i+n]. Too complicated? It may come very handy when trying to smooth curves or simulate derivatives.</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;"><b>scale(x)</b></div>
+</div>
+<div style="font-family: sans-serif;">The scale() function performs a basic normalization of a numeric vector. For the uninitialized, &nbsp;normalization is the process by which we adjust values of different scales to a common scale. A basic normalization scheme is adjusting all values to the scale of a normal distribution with mean=0 and sd=1. This (also known as) z-transformation is effected by scale(). It is essentially equivalent to calculating the difference of all values in x from the mean divided over the standard deviation, or in simple math:</div>
+<pre>y1&lt;-(x-mean(x))/sd(x)
+y2&lt;-scale(x)</pre>
+<div style="font-family: sans-serif;">where y1 and y2 are identical. Normalization schemes are very important for a number of reasons already discussed in data analysis classes or to be touched upon later on. In any case, a concept that you should keep in mind.</div>
+<div style="font-family: sans-serif;">
+<br>
+</div>
+<div style="font-family: sans-serif;"><b>describe(m)</b></div>
+<div style="font-family: sans-serif;">Is a combined function that acts on data frames and returns a number of modes in each including, variance, mean, kurtosis etc. describe() is part of the psych package so you need to pre-install psych (more on that later, lets for now assume that you have it). If we run describe on a pre-defined data frame (mtcars) this returns:</div>
+<pre>library(psych)decribe(mtcars[,1:3])
+&nbsp; &nbsp; &nbsp;vars &nbsp;n &nbsp;mean &nbsp; sd median trimmed &nbsp;mad &nbsp; min &nbsp; max range &nbsp;skew kurtosis
+mpg &nbsp; &nbsp; 1 32 20.09 6.03 &nbsp; 19.2 &nbsp; 19.70 5.41 10.40 33.90 23.50 &nbsp;0.61 &nbsp; &nbsp;-0.37
+cyl &nbsp; &nbsp; 2 32 &nbsp;6.19 1.79 &nbsp; &nbsp;6.0 &nbsp; &nbsp;6.23 2.97 &nbsp;4.00 &nbsp;8.00 &nbsp;4.00 -0.17 &nbsp; &nbsp;-1.76
+drat &nbsp; &nbsp;3 32 &nbsp;3.60 0.53 &nbsp; &nbsp;3.7 &nbsp; &nbsp;3.58 0.70 &nbsp;2.76 &nbsp;4.93 &nbsp;2.17 &nbsp;0.27 &nbsp; &nbsp;-0.71
+&nbsp; &nbsp; &nbsp; &nbsp;se
+mpg &nbsp;1.07
+cyl &nbsp;0.32
+drat 0.09</pre>
+<div style="font-family: sans-serif;">Later on, in the chapter dedicated to Programming R, we will see how do we download (and load) R Packages.&nbsp;
+</div>
+<div style="font-family: sans-serif;">Perhaps a more useful, (but less detailed) alternative to describe() would be the <b>summary()</b> function for which we can get a break-down of the values of each vector in a data.frame at once. The values returned are 5 and they represent the 5 quintiles of each numerical dataset. Calling summary() on mtcars returns a Nx5 matrix like this</div>
+<pre>summary(mtcars)
+&nbsp; &nbsp; &nbsp; mpg &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cyl &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; disp &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hp &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp;Min. &nbsp; :10.40 &nbsp; Min. &nbsp; :4.000 &nbsp; Min. &nbsp; : 71.1 &nbsp; Min. &nbsp; : 52.0 &nbsp;
+&nbsp;1st Qu.:15.43 &nbsp; 1st Qu.:4.000 &nbsp; 1st Qu.:120.8 &nbsp; 1st Qu.: 96.5 &nbsp;
+&nbsp;Median :19.20 &nbsp; Median :6.000 &nbsp; Median :196.3 &nbsp; Median :123.0 &nbsp;
+&nbsp;Mean &nbsp; :20.09 &nbsp; Mean &nbsp; :6.188 &nbsp; Mean &nbsp; :230.7 &nbsp; Mean &nbsp; :146.7 &nbsp;
+&nbsp;3rd Qu.:22.80 &nbsp; 3rd Qu.:8.000 &nbsp; 3rd Qu.:326.0 &nbsp; 3rd Qu.:180.0 &nbsp;
+&nbsp;Max. &nbsp; :33.90 &nbsp; Max. &nbsp; :8.000 &nbsp; Max. &nbsp; :472.0 &nbsp; Max. &nbsp; :335.0 &nbsp;
+&nbsp; &nbsp; &nbsp; drat &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wt &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; qsec &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; vs &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;Min. &nbsp; :2.760 &nbsp; Min. &nbsp; :1.513 &nbsp; Min. &nbsp; :14.50 &nbsp; Min. &nbsp; :0.0000 &nbsp;
+&nbsp;1st Qu.:3.080 &nbsp; 1st Qu.:2.581 &nbsp; 1st Qu.:16.89 &nbsp; 1st Qu.:0.0000 &nbsp;
+&nbsp;Median :3.695 &nbsp; Median :3.325 &nbsp; Median :17.71 &nbsp; Median :0.0000 &nbsp;
+&nbsp;Mean &nbsp; :3.597 &nbsp; Mean &nbsp; :3.217 &nbsp; Mean &nbsp; :17.85 &nbsp; Mean &nbsp; :0.4375 &nbsp;
+&nbsp;3rd Qu.:3.920 &nbsp; 3rd Qu.:3.610 &nbsp; 3rd Qu.:18.90 &nbsp; 3rd Qu.:1.0000 &nbsp;
+&nbsp;Max. &nbsp; :4.930 &nbsp; Max. &nbsp; :5.424 &nbsp; Max. &nbsp; :22.90 &nbsp; Max. &nbsp; :1.0000 &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;am &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;gear &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;carb &nbsp; &nbsp; &nbsp;
+&nbsp;Min. &nbsp; :0.0000 &nbsp; Min. &nbsp; :3.000 &nbsp; Min. &nbsp; :1.000 &nbsp;
+&nbsp;1st Qu.:0.0000 &nbsp; 1st Qu.:3.000 &nbsp; 1st Qu.:2.000 &nbsp;
+&nbsp;Median :0.0000 &nbsp; Median :4.000 &nbsp; Median :2.000 &nbsp;
+&nbsp;Mean &nbsp; :0.4062 &nbsp; Mean &nbsp; :3.688 &nbsp; Mean &nbsp; :2.812 &nbsp;
+&nbsp;3rd Qu.:1.0000 &nbsp; 3rd Qu.:4.000 &nbsp; 3rd Qu.:4.000 &nbsp;
+&nbsp;Max. &nbsp; :1.0000 &nbsp; Max. &nbsp; :5.000 &nbsp; Max. &nbsp; :8.000&nbsp;</pre>
+<div style="font-family: sans-serif;">You see that it is good for an overview of the data but not quite as detailed as describe.
+</div>
+<div style="font-family: sans-serif;">
+<hr id="false">
+</div>
+<div style="font-family: sans-serif;">
+<h3 id="g0.0.12">Statistical Inference - &nbsp;(not so) Basic Functions</h3>
+</div>
+<h4 id="g0.0.12.1">Correlation Analysis</h4>
+<div style="font-family: sans-serif;"><b>cor(x,y, method = c("pearson", "kendall", "spearman"))</b>
+<br>
+</div>
+<div style="font-family: sans-serif;">Data correlation is very important when trying to estimate relationships between datasets (careful, we are always talking about correlation, not causation). When comparing 2 equally size vectors x and y, the correlation can be measured based on the linear, numerical pearson correlation or the kendall and spearman rank correlations. You may want to refer back to your statistics&nbsp;</div>
+<div style="font-family: sans-serif;">Correlation can be called upon a matrix m, which produces a symmetrical square matrix.&nbsp;</div>
+<div style="font-family: sans-serif;"><span style="color: rgb(125, 167, 33); font-weight: bold;">
+<br>
+</span></div>
+<h4 id="g0.0.12.2">Contingency Tables </h4>
+<div>
+<div><b style="font-family: sans-serif;">table(x,y..)</b>
+<br>
+</div>
+<div><font face="sans-serif">The table() uses factors to build a contingency&nbsp;</font><span style="font-family: sans-serif;">table of the counts at each combination of factor levels. In simpler words, table takes the elements of a vector, checks the number of factors these can be assigned to and then returns a factor table where each different factor element is corresponded to the count of elements that were referring to it in the initial vector. It is better to see this with an example. Take the built-in data frame mtcars in R simply by loading it in your R environment</span></div>
+</div>
+<pre>mtcars</pre>
+<div><span style="font-family: sans-serif;">This will return a short dataframe containing types of cars with their corresponding specifications in terms of number of cylinders, horsepower, gears in the box etc. You may get an idea how table works try</span></div>
+<pre>table(mtcars$cyl)</pre>
+<div><span style="font-family: sans-serif;">what this command does is that it lets table() know that it has to act on the column of mtcars carrying the name $cyl. Remember we can use the $ operator to subset a data frame with named columns. The output of the command above is</span></div>
+<div>
+<pre>table(mtcars$cyl)
+&nbsp;4 &nbsp;6 &nbsp;8&nbsp;
+11 &nbsp;7 14&nbsp;</pre>
+<div style="font-family: sans-serif;">which means that all cars had either 4, 6 or 8 cylinder (the top row corresponding to the factors) and that 11 of those had 4, 7 had 6 and 14 had 8 cylinders. This is a simple table, that is only summarizing the cylinder data. What if we asked a more interesting and complex question? For instance, what if we wanted to know at the same time how many cars with 4 cylinders also had 5 gears? We can use table on two dimensions simply by introducing one additional vector</div>
+<pre>table(mtcars$cyl, mtcars$gear)
+&nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;3 &nbsp;4 &nbsp;5
+&nbsp; 4 &nbsp;1 &nbsp;8 &nbsp;2
+&nbsp; 6 &nbsp;2 &nbsp;4 &nbsp;1
+&nbsp; 8 12 &nbsp;0 &nbsp;2</pre>
+<div>
+<div>the result is a two-dimensional array that tells us that there are 2 cars with 4 cylinders and 5 gears, 12 with 8 cylinders and 3 gears etc.&nbsp;</div>
+<div>table() doesn't stop there and you can create even 3- or more-dimensional tables by adding more vectors in the function. But the output starts to be quite complex and needs to be handled with extra care.</div>
+</div>
+<div><span style="font-family: sans-serif;">Contingency tables are extremely useful in a number of statistical tests (to be covered later) but we can also use them for better representation of data in plots, rough classifications of data etc.</span>
+<br>
+</div>
+</div>
+<h4 id="g0.0.12.3" style="font-family: sans-serif;">Linear Regression</h4>
+<p><span style="text-align: justify; text-indent: 2em;">Linear regression in R is as easy as simply typing in the two variables you want to model separtated by a tilde "~" (dependent ~ independent) with the use of the lm (linear modeling) function. Let's first compare two variables (the car's weight and the car's horse power) in a simple scatterplot:&nbsp;</span></p>
+<pre>plot(mtcars$wt,mtcars$hp, xlab="Weight", ylab="Horse Power", pch=19, cex=1.5, col="red4", type="p", cex.axis=1.2, cex.lab=1.4)&nbsp;</pre>
+<p>The plot above has been "embelished" with some additional features but it remains a scatterplot of "wt" versus "hp". Now suppose we want to model the linear function that best explains the relationship between the weight and the horse power. The "hp" will be in this case the dependent variable that is explained by a linear model of thw "wt". We can simply create the linear model like this:</p>
+<pre>model&lt;-lm(mtcars$hp~mtcars$wt)
+model # will printCall:
+lm(formula = mtcars$hp ~ mtcars$wt)
+
+Coefficients:
+(Intercept)    mtcars$wt
+     -1.821       46.160
+</pre>
+<div>
+<br>
+</div>
+<div>The model above prints two values that have to be explained as the a, b in a linear function of the general type:</div>
+<div>f(x)=ax+b</div>
+<div>in which case x is the weight of the car and f(x) is the expected hp based on the data we "trained" the model on. We can see how this model behaves simply by plotting it against the real data like this:</div>
+<div>lines(mtcars$wt,46.160*mtcars$wt-1.821, type="l", col="blue4", lwd=3)
+<br>
+</div>
+<div>What we have done is that we asked R to plot a line over the data. That line was the function f(x)=ax+b with a,b being the coefficients of the model. We see that the fit between the model and the data is somewhat satisfactory given their variance. But how good exactly? We can have a quantitative measurement of the goodness of fit (as it is called) through a carefully designed statistic, the R-squared value. R-squared is a measurement of the a quantity called "coefficient of determination" is basically a measure of how close the line of the model function is passing through the data cloud as compared to the simplest line running parallel to the x-axis at the height of the mean of f(x). The R-squared value of the perfect fit is 1 and of the null fit (the one expected under purely random modeling) is 0. R-squared is pre-calculated from the lm function and can be directly visualized through running:</div>
+<div>
+<pre>summary(fit) #prints
+Call:
+lm(formula = mtcars$hp ~ mtcars$wt)
+Residuals:
+&nbsp; &nbsp; Min &nbsp; &nbsp; &nbsp;1Q &nbsp;Median &nbsp; &nbsp; &nbsp;3Q &nbsp; &nbsp; Max&nbsp;
+-83.430 -33.596 -13.587 &nbsp; 7.913 172.030&nbsp;
+Coefficients:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Estimate Std. Error t value Pr(&gt;|t|) &nbsp; &nbsp;
+(Intercept) &nbsp; -1.821 &nbsp; &nbsp; 32.325 &nbsp;-0.056 &nbsp; &nbsp;0.955 &nbsp; &nbsp;
+mtcars$wt &nbsp; &nbsp; 46.160 &nbsp; &nbsp; &nbsp;9.625 &nbsp; 4.796 4.15e-05 ***
+---
+Signif. codes: &nbsp;0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Residual standard error: 52.44 on 30 degrees of freedom
+Multiple R-squared: &nbsp;0.4339,<span class="Apple-tab-span" style="white-space:pre">	</span>Adjusted R-squared: &nbsp;0.4151&nbsp;
+F-statistic: &nbsp; &nbsp;23 on 1 and 30 DF, &nbsp;p-value: 4.146e-05</pre>
+<div style="text-align: start; text-indent: 0px;"><span style="text-align: justify; text-indent: 2em;">You see that all that needs to be know on the model may be found here.</span></div>
+</div>
+<h4 id="g0.0.12.4">Probability Functions and Simulation</h4>
+<div style="font-family: sans-serif;">
+<div>The basic format for probablility functions in R is&nbsp;</div>
+<div>[dpqr]-type of distribution</div>
+<div>d,p,q or r stand for</div>
+<div>d=density, p=probability function, q=quantile function and r=random generation</div>
+<div>Out of the four, r is the one to be used more often providing us with a numerical vector of random values based on &nbsp;the type of distribution and the chosen parameters.&nbsp;</div>
+<div>The supported types of distributions are:</div>
+<div>
+<ul>
+<li><b>rnorm()</b>&nbsp;for the normal distribution which can be called with
+<br>
+</li>
+</ul>
+</div>
+<pre>rnorm(n, m=0, sd=1)</pre>
+<div>which returns m values sampled from normal distribution with mean=0 and sd=1</div>
+<div>
+<ul>
+<li><b>rbinom()</b> for the binomial distribution
+<br>
+</li>
+</ul>
+</div>
+<div>which is called as</div>
+<pre>rbinom(n, N, prob=p)</pre>
+<div>which returns n values from a size N with probability p</div>
+<div>
+<ul>
+<li><b>rpois()</b> for the Poisson distribution
+<br>
+</li>
+</ul>
+</div>
+<div>which is called with</div>
+<pre>rpois(n, lamda)</pre>
+<div>returning n values from a Poisson distribution with lamda parameter.</div>
+<div>
+<ul>
+<li><b>runif()</b> for the uniform distribution
+<br>
+</li>
+</ul>
+</div>
+<div>which you can use with</div>
+<pre>runif(n, min=a, max=b)</pre>
+<div>to obtain n random elements sampled from a uniform distribution between a and b. runif() is very often used for the generation of random real numbers</div>
+<div>Other functions support less common distributions such as the geometric, the hypergeometric, weibull etc.
+<br>
+</div>
+<div>
+<hr id="false">
+</div>
+<div></div>
+<div>
+</div>
+<div></div>
+</div>
+<div>
+</div>
+<h3 id="g0.0.13" style="font-family: sans-serif;"></h3>
+<h3 id="g0.0.14" style="font-family: sans-serif;">Basic Graphs</h3>
+<address><span style="font-style: normal;">Most people start using R for its graphs and they are probably right to do so. R has a huge toolbox of functions and packages for plotting simple data, time series, big data, complex data structures, maps etc. Most importantly this toolbox is ever-expanding due to R being open source, which means that there is a constant flow of new functions for intricate plots and graphics in the repositories.&nbsp;</span></address>
+<address><span style="font-style: normal;">R's way of producing graphs differs from programs you may have used before (such as Excel or Graphpad) in the sense that it is not so much based on a graphical user interphase as it is on the command line. This may sound like a drawback in the beginning but once you get accustomed with the process of calling plot functions and customizing them on the command line you can store everything in custom scripts that will produce elegant, complicated graphs with the strike of a button.</span></address>
+<address><span style="font-style: normal;">Nevertheless, even the most elegant graphs are based on some very simple rules. We will get to know them starting from the most basic plots and will gradually add layers of "elegance" step-by-step. Lets get started assuming you have a table of numerical data and you want to see how each piece of data fluctuates against the rest. In such a case a simple barplot will be enough to give us an idea.</span>
+<br>
+</address>
+<address><span style="color: rgb(125, 167, 33); font-weight: bold;">
+<br>
+</span></address>
+<h4 id="g0.0.14.1">barplot </h4>
+<address><b>the basics</b>
+<br>
+</address>
+<address><span style="font-style: normal;">Let's start by first getting some data into R. In this link:&nbsp;http://tinyurl.com/npnagaf you will find a short data frame containing some data on a genomic partition of the mouse genome called "genome_partition.tsv". After you download it (and store it in a folder from which you start R) try loading it in R with the command you already know</span>
+<br>
+</address>
+<address>
+<address>
+<pre><span style="font-style: normal;">data&lt;-read.delim("genome_partition.tsv", sep="\t", header=T)</span></pre>
+<div><span style="font-style: normal;">This will read the data by separating columns in tabs (it is a "tsv" after all) and into a data frame keeping the first row of the file as header. A brief inspection of the dataset will show you that it consists of 4 columns the first being names of genomic regions (such as "proximal_promoters_2k_TSS" and "genebody") and three numerical columns carrying specific values for a certain score, the number of elements in each region and the total size in the genome for each region (don't try to figure out to what all these correspond for the time being).</span>
+<br>
+</div>
+<div><span style="font-style: normal;">Now lets see how the scores of the first column fluctuate for each region in a simple R barplot. To do this we simply need to tell R to use barplot() on the 2nd column of data. This includes one subsetting step</span></div>
+<pre><span style="font-style: normal;">x&lt;-data[,2]</span></pre>
+<div><span style="font-style: normal;">and one plotting step</span></div>
+<pre><span style="font-style: normal;">barplot(x)</span></pre>
+<div><span style="font-style: normal;">or if you like, two steps at once</span></div>
+<pre><span style="font-style: normal;">barplot(data[,2])</span></pre>
+<div><span style="font-style: normal;">Upon calling the barplot() function (or any plotting function) a new window will pop-out of R carrying the created plot (if you are using R studio you may be able to see it in a separate window. Inspect the plot you just created. It looks a bit bear of information. Other than the value axis it carries little more than the height of the plots. Most importantly, you can't say what is what. To see that you will need to fill in the names option in barplot(). The names will be the first column of data. Information such as names of bars, names of axis, titles and legends may be introduced in the plotting function as arguments. In the case of names of bars it's simply names="". In this case, simply write</span></div>
+<pre><span style="font-style: normal;">barplot(data[,2], names=data[,1])</span></pre>
+<div><span style="font-style: normal;">now the names of the genomic regions are attributed to the corresponding columns, only the names are two long and instead of overlapping them, R has placed only some of the names on the plot. There are two ways around this. We can either change the orientation of the names on the plot from horizontal to perpendicular. This is done with the las=2 option that rearranges the axes direction.</span></div>
+<div>
+<pre><span style="font-style: normal;">barplot(data[,2], names=data[,1], las=2)</span></pre>
+<div style="font-style: normal;">but a more elegant way would be simply making the bars horizontal and putting the names on the side</div>
+<pre><span style="font-style: normal;">barplot(data[,2], names=data[,1], horiz=T, las=1)</span></pre>
+<div><span style="font-style: normal;">where we switch to las=1 for the numerical values to be shown in horizontal mode as well. Even so, the names are too long for us to see their full names. We need to increase the margin on the left to see them. We can do this by adjusting the par() function. The par() function takes a lot of arguments that are related to how we use the space, the colouring and the layout of plots (among other things). One of the par() arguments are passed to the mar= option that has to do with the margins of the plot. mar accepts a four-element vector of numbers that correspond to the bottom, left, top and right margin sizes (in this order). We can thus increase the left margin (where the names of the barplot are written) by passing a suitable vector to mar within par(). Don't be confused. It's as easy as</span></div>
+<pre><span style="font-style: normal;">par(mar=c(5,15,5,5))
+barplot(data[,2], names=data[,1], horiz=T, las=1)</span></pre>
+<div>
+<div style="font-style: normal;">see how by setting a very high value for the left margin (15 as opposed to 5 for all the rest) we were able to fit the names in the plot. Now let's complete it by adding names to the axis and the whole plot, like this</div>
+<div style="font-style: normal;">
+<pre>barplot(data[,2], names=data[,1], horiz=T, las=1, main="Score Barplot", xlab="raw score")</pre>
+</div>
+<div style="font-style: normal;">see how main= receives the argument for the title of this plot and xlab= receives the title for the values on the x axis. Both arguments are simple strings of characters encoded within double quotation marks "".&nbsp;</div>
+<div style="font-style: normal;">
+<br>
+</div>
+<div><b>advanced barplots</b></div>
+<div><span style="font-style: normal;">Now lets move to explore the potential of barplots a bit more. For this we will make use of a built-in dataset that comes preinstalled with R's vcd package. vcd is a package that specializes in the visualization of categorical data (this is what vcd stands for). Out of this package we will load the Arthrits dataset, simply by&nbsp;</span></div>
+<pre><span style="font-style: normal;">library(vcd) # assumes vcd is installed</span><span style="font-style: normal;">Arthritis</span></pre>
+<div><span style="font-style: normal;">This loads a dataframe that carries the ID numbers of 84 Arthritis patients receiving treatment or a placebo for whom we are provided the treatment, the sex, the age and the outcome of the treatment in 3 possible outcomes (Marked, Some and None). Lets start by briefly inspecting how many of the patients showed each outcome&nbsp;</span></div>
+<pre><span style="font-style: normal;">par(mar=c(5,5,5,5))
+</span><span style="font-style: normal;">barplot(table(Arthritis$Improved), las=1, main="Treatment Outcome", xlab="Number of Patients")</span></pre>
+<div><span style="font-style: normal;">in these two commands we first restore the margins to symmetrical levels then plot in one step the output of a table created for the outcome of the treatment in the Arthritis patients (column names $Improved).&nbsp;</span></div>
+<div><span style="font-style: normal;">Now lets see how can we visualize more information combining the outcome of the treatment with the treatment itself (Treated or Placebo). For this we can use the table() function on two attributes (columns) of the Arthritis dataset. Try this with</span></div>
+<pre><span style="font-style: normal;">table(Arthritis$Improved, Arthritis$Sex)</span></pre>
+<div><span style="font-family: sans-serif; font-style: normal;">You will see that the output is a contingency table listing how many patients of each sex showed each treatment outcome. Now let's plot this with barplot.</span></div>
+<pre><span style="font-style: normal;">barplot(table(Arthritis$Improved, Arthritis$Sex), las=1, main="Treatment Outcome", xlab="Number of Patients")&nbsp;</span></pre>
+<div><span style="font-style: normal;">This produces two bars, each of which corresponds to a sex and is proportionally split to the corresponding treatment outcomes. One obvious problem has to do with the lack of colour legend. We don't know which coloured band corresponds to which outcome. Another problem is that the way the bands are laid out we cannot get a very clear idea on the total numbers. In order to see this we can ask barplot() to plot all data in separate bars by adding the beside=T option</span></div>
+<pre><span style="font-style: normal;">barplot(table(Arthritis$Improved, Arthritis$Sex), beside=T, las=1, main="Treatment Outcome", xlab="Number of Patients")</span></pre>
+<div><span style="font-style: normal;">Now each piece of data has its own separate bar but we still need to figure out which is which. We can visualize a legend by asking barplot to use the rownames of the table() output passing them to the legend option.&nbsp;</span></div>
+<div>
+<pre style="font-style: normal;">barplot(table(Arthritis$Improved, Arthritis$Sex), beside=T, las=1, main="Treatment Outcome", xlab="Number of Patients", legend=rownames(table(Arthritis$Improved, Arthritis$Sex)))&nbsp;</pre>
+<div style="font-style: normal;">but lets make it a little less complicated by first storing the output of table to a variable (say tab) and then calling barplot on tab.</div>
+<pre style="font-style: normal;">tab&lt;-<span style="background-color: rgb(238, 238, 255);">table(Arthritis$Improved, Arthritis$Sex)<font face="sans-serif">
+</font></span>barplot(tab, beside=T, las=1, main="Treatment Outcome", xlab="Number of Patients", legend=rownames(tab))&nbsp;</pre>
+<div style="font-style: normal; font-family: sans-serif;">and finally, lets give the barplot some more vivid colouring instead of the dull greyscale by passing a vector of three colours to the col= option</div>
+<div>
+<pre style="font-style: normal;">barplot(tab, beside=T, las=1, main="Treatment Outcome", xlab="Number of Patients", legend=rownames(tab), col=c("dark red", "orange", "yellow"))&nbsp;</pre>
+<div style="font-family: sans-serif; font-style: normal;">We will see more about the use of colouring in plots as we move to more complex plotting types and options. Our barplot now looks both nice and informative. We have to blocks of bars, one for each sex, carrying three bars each one for each treatment outcome. From these we can say that there are more female than male patients (this is true for Arthritis as there is a 3-4:1 incidence ratio between women and men). It also looks as if there are more patients with a "marked" treatment outcome among women than among men, while there are more patients with "none" of an outcome among men. The fact, however, that there are more women than men does not allow us to safely say so. How can we get a clearer idea about this? What we need is, instead of the absolute numbers, the proportion of treatment outcomes for each sex separately. We need, as we say, to normalize the data with regard to patient number. How can we do this? There are many ways we can go about it. The most straight-forward is to take the table() output tab and dividing the elements of each column (one for female and one for male) with their sum, thus transforming the absolute numbers to relative ratios (normalizing). First lets take a look at the tab variable</div>
+<pre><span style="font-style: normal;">tab &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Female Male
+&nbsp; None &nbsp; &nbsp; &nbsp; 25 &nbsp; 17
+&nbsp; Some &nbsp; &nbsp; &nbsp; 12 &nbsp; &nbsp;2
+&nbsp; Marked &nbsp; &nbsp; 22 &nbsp; &nbsp;6</span></pre>
+<div style="font-family: sans-serif; font-style: normal;">Now check that the first column of tab represents female data and the second male data</div>
+<div style="font-family: sans-serif; font-style: normal;">
+<pre>tab[,1]
+&nbsp; None &nbsp; Some Marked&nbsp;
+&nbsp; &nbsp; 25 &nbsp; &nbsp; 12 &nbsp; &nbsp; 22&nbsp;
+tab[,2]
+&nbsp; None &nbsp; Some Marked&nbsp;
+&nbsp; &nbsp; 17 &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp;6&nbsp;</pre>
+</div>
+<div style="font-family: sans-serif; font-style: normal;">And now see how sum() can act on each column</div>
+<pre><span style="font-style: normal;">sum(tab[,1])
+[1] 59</span></pre>
+<div style="font-family: sans-serif; font-style: normal;">which is the some of 25+12+22, that is the female column</div>
+<div style="font-family: sans-serif; font-style: normal;">Now simply by dividing tab[,1] with its sum() we get</div>
+<pre><span style="font-style: normal;">tab[,1]/sum(tab[,1])
+&nbsp; &nbsp; &nbsp;None &nbsp; &nbsp; &nbsp;Some &nbsp; &nbsp;Marked&nbsp;
+0.4237288 0.2033898 0.3728814&nbsp;</span></pre>
+<div style="font-family: sans-serif; font-style: normal;">which we can store in a variable called female</div>
+<pre><span style="font-style: normal;">female&lt;-tab[,1]/sum(tab[,1])</span></pre>
+<div style="font-family: sans-serif; font-style: normal;">and do the exact same thing for male (column 2 of tab)</div>
+<pre><span style="font-style: normal;">male&lt;-tab[,2]/sum(tab[,2])</span></pre>
+<div style="font-family: sans-serif; font-style: normal;">We now have two vectors, one for each sex holding the relative ratios. Before passing them to barplot as we did for tab we need to combine them in one matrix. We will do this by binding them by column in a data.frame</div>
+<pre><span style="font-style: normal;">sexes&lt;-data.frame(female,male)</span></pre>
+<div style="font-family: sans-serif; font-style: normal;">Now we can plot sexes the same way we did with tab</div>
+<pre><span style="font-style: normal;">barplot(sexes, beside=T, las=1, main="Treatment Outcome", xlab="Number of Patients", legend=rownames(sexes), col=c("dark red", "orange", "yellow"))</span></pre>
+</div>
+<div><font face="sans-serif"><span style="font-style: normal;">This turns back with an error message saying it won't accept data that are not vectors or matrices. Barplot only works with those while sexes was built as a data.frame. Don't panic. As we know that our data.frame contains only numeric data we can safely coerce it to a matrix by the as.matrix() function. Simply typing</span></font></div>
+<pre><span style="font-style: normal;">barplot(as.matrix(sexes), beside=T, las=1, main="Treatment Outcome", xlab="Number of Patients", legend=rownames(sexes), col=c("dark red", "orange", "yellow")</span></pre>
+<div><font face="sans-serif"><span style="font-style: normal;">provides what we wanted in the first place. Notice how the y-axis now runs from 0 to some value that cannot be greater than one since it refers to the ratio of treatment outcomes per sex.&nbsp;</span></font><span style="font-style: normal; font-family: sans-serif;">We can now see clearly that there are more non-responding patients among men and more responding patients among women, even after controling (normalizing) for number of patients. Lets see this even more clearly with one last trick in a barplot that shows the ratios piled one upon the other, instead of as separate barplots. Simply setting the beside= option to F, we get</span></div>
+<pre><span style="font-style: normal;">barplot(as.matrix(sexes), beside=F, las=1, main="Treatment Outcome", xlab="Number of Patients", legend=rownames(sexes), col=c("dark red", "orange", "yellow"))</span></pre>
+<div><font face="sans-serif"><span style="font-style: normal;">that is two bars, one for each sex, where the ratio of each outcome is delineated as a stripe, with a width proportional to the ratio. As data are normalized, both bars go up to 1 (the total of all three outcome ratios) but it is exactly this normalization that permits us to see the significant differences in treatment outcomes. (Data scientists like to call this sort of barplot a "spinogram" in the sense that it's striped pattern represents a series of spines.)&nbsp;</span></font><span style="font-style: normal; font-family: sans-serif;">We have now covered more than the basics of barplots. Before moving to more complicated two-dimensional plots, lets take a look at a similar approach that many people (or simply those with a greater love for food and economics) seem to prefer. Pies!</span></div>
+<div><span style="color: rgb(125, 167, 33); font-weight: bold; font-style: normal;">
+<br>
+</span></div>
+<h4 id="g0.0.14.2">Pies (for the lazy ones)</h4>
+</div>
+<div>
+<div style="font-family: sans-serif;"><span style="font-style: normal;">Economists (or more precisely old-fashioned economists) and the business world in general love pies but the truth is that we can perceive heights and distances easier than surfaces and for this reason pies are generally worse for describing data than say barplots or point plots. Still, R has a basic function called pie() for those old-fashioned types that like to see their data depicted as such. In the case of our table formed in the previous section we could choose to plot the data for the treatment outcomes for the females in the form of a pie like this</span></div>
+<pre><span style="font-style: normal;">pie(sexes[,1], labels=rownames(sexes), col=c("dark red","orange","yellow"))</span>
+</pre>
+<div style="font-family: sans-serif;"><span style="font-style: normal;">As one may understand, it is not possible to visualize the data for both sexes in one pie, so a pie can only hold data for a vector. What if we wanted to see the data for male and female in two pies at once? We would then have to split the screen in two and plot one pie in each half. This is done by calling a different option of the par() function (remember we used par(mar=()) to set the margins of the screen). The option for the splitting of the screen is called mfrow() and it accepts a vector of length 2 corresponding to the number of a) rows and b) columns to which the screen will be split. In this case if we wanted to plot two pies side-by-side we would like to split the screen in two columns on a single row</span></div>
+<pre><span style="font-style: normal;">par(mfrow=c(1,2))</span></pre>
+<div style="font-family: sans-serif;"><span style="font-style: normal;">where c(1,2) corresponds to 1 row, 2 columns. By calling the pie function twice for each column in sexes we get</span></div>
+<div>
+<pre><font><span style="font-style: normal;">pie(sexes[,1], labels=rownames(sexes), col=c("dark red","orange","yellow"))
+</span></font><font><span style="font-style: normal;">pie(sexes[,2], labels=rownames(sexes), col=c("dark red","orange","yellow"))</span></font></pre>
+<div style="font-family: sans-serif;"><span style="font-style: normal;">which is what we wanted. Had we desired to see the pies one below the other we would have split the screen in two rows and one column by</span>
+<br>
+</div>
+</div>
+<div>
+<pre><span style="font-style: normal;">par(mfrow=c(2,1))</span></pre>
+<div style="font-family: sans-serif;"><span style="font-style: normal;">You may see that in the two-pie plot, we still cannot say which pie is which. We may understand intuitively that the female is the one on the left since we called the pie() function first on the female data but this doesn't help someone who just sees the plot for the first time. We need to somehow tag the pies with the corresponding name for each dataset. We do this by filling in the main= option to the pie which (just like for the barplot and other plots) it will add a main title.</span><span style="font-style: normal;">
+<br>
+</span></div>
+<pre><span style="font-style: normal;">pie(sexes[,1], labels=rownames(sexes), col=c("dark red","orange","yellow"), main="Female")
+</span><span style="font-style: normal;">pie(sexes[,2], labels=rownames(sexes), col=c("dark red","orange","yellow"), main="Male")</span></pre>
+<div><span style="font-style: normal; font-family: sans-serif;">And now we are done.&nbsp;</span><span style="font-family: sans-serif; font-style: normal;">Remember to reset the screen back to 1 row, 1 column after your job is done with</span></div>
+<div style="font-family: sans-serif;">
+<pre><span style="font-style: normal;">par(mfrow=c(1,1))</span></pre>
+<div><span style="font-style: normal;">And since there's not much more to say about the (boring) pies, let's move on to more serious functions.</span></div>
+</div>
+<div style="font-family: sans-serif;"><span style="color: rgb(125, 167, 33); font-weight: bold;">
+<br>
+</span></div>
+<h4 id="g0.0.14.3">Various simple plots with plot</h4>
+</div>
+</div>
+</div>
+</div>
+</address>
+</address>
+<address><span style="font-style: normal;">Barplots are good for singular pieces of data, in the sense that we are looking at numerical values referring to some categorical cases. In the previous examples we saw how numerical values for categorical data can be visualized in the forms of bars and pies. Let's now move on to see how we can visualize relationships between numerical data. One of the most common, yet informative and insightful ways to look into your dataset's structure and relationships are simple scatterplots, that is points in a two-dimensional space. R's plot() function is the most straight-forward solution to for this. We will now demonstrate some of its capabilities&nbsp;</span><span style="font-style: normal;">using the "faithful" built-in dataset, that holds the duration of the Old Faithful Geyser eruptions vs the waiting time between them for 271 consecutive eruptions.&nbsp;</span></address>
+<pre><span style="font-style: normal;">head(faithful)
+</span><span style="font-style: normal;">&nbsp; eruptions waiting
+</span><span style="font-style: normal;">1 &nbsp; &nbsp; 3.600 &nbsp; &nbsp; &nbsp;79
+</span><span style="font-style: normal;">2 &nbsp; &nbsp; 1.800 &nbsp; &nbsp; &nbsp;54
+</span><span style="font-style: normal;">3 &nbsp; &nbsp; 3.333 &nbsp; &nbsp; &nbsp;74
+</span><span style="font-style: normal;">4 &nbsp; &nbsp; 2.283 &nbsp; &nbsp; &nbsp;62
+</span><span style="font-style: normal;">5 &nbsp; &nbsp; 4.533 &nbsp; &nbsp; &nbsp;85
+</span><span style="font-style: normal;">6 &nbsp; &nbsp; 2.883 &nbsp; &nbsp; &nbsp;55</span></pre>
+<address><span style="font-style: normal;">In the simplest approach possible we would like to see if there is a connection between the two pieces of data, that is if the duration of the eruption is somehow related to waiting times. We can plot these two values against each other with</span></address>
+<pre><span style="font-style: normal;">plot(faithful[,1], faithful[,2])</span></pre>
+<address><span style="font-style: normal;">or (in a classier way)</span></address>
+<pre><span style="font-style: normal;">plot(faithful$eruptions, faithful$waiting)</span></pre>
+<address><span style="font-style: normal;">This produces a simple scatterplot with the eruptions' duration on the x axis and the waiting times on the y axis (in the order they appear in plot()). Simple means that we only see points as white circles with minimum annotation of axis, labels etc. We can add all of those in our plot by using specific attributes of the plot() function. Here I will try to show as many of those at once</span></address>
+<pre><span style="font-style: normal;">plot(faithful$eruptions, faithful$waiting, col="dark grey", pch=19, xlim=c(1,6), ylim=c(40,100), xlab="Eruption Duration", ylab="Waiting Time", main="Old Faithful Eruptions", cex.axis=1.2, cex.lab=1.3, cex.main=1.5)</span></pre>
+<address><span style="font-style: normal;">Too many stuff at once? Let's take a look at them one by one. First of all we change the colour of the white circles into dark grey using the col= option. Notice that we made the circles bigger setting the pch= option to 19. We could have plotted stars instead of circles by setting pch=8, or squares by setting pch=15. Next we extend the limits of the plot by manually setting the lower/upper boundaries of both axis. In this sense xlim=c(1,6) means that the x-axis will run from 1 to 6. R by default sets axes boundaries to the minimum and maximum values of the dataset, unless told otherwise. Next we set names for the axes labels with xlab= and ylab= as well as for the whole plot with main= . Finally we set the font size for the numerical values of the axes with cex.axis=, the axes labels with cex.lab= and the main title of the plot with cex.main= . All cex.()= values are numerical &gt;0 with 1 equaling the default. Use values &lt;1 for smaller fonts and &gt;1 for bigger.</span></address>
+<address><span style="font-style: normal;">This way, we have covered most of the basic aspects of a scatterplot. Of course there are much more to plots than simple scatterplots and in fact there are much more to scatterplots themselves. R carries a great number of options for plotting even the simplest graphs making them appear at the same time, precise, elegant and informative. Remember that you can get a glimpse of an R function's options by seeking help with "</span><span style="font-style: normal;">?". If you simply type:</span></address>
+<pre><span style="font-style: normal;">?plot</span></pre>
+<address><span style="font-style: normal;">you will get a listing of all the options the plot function carries plus a number of interesting examples of its use at the end of the help file.&nbsp;</span></address>
+<address><span style="font-style: normal;">Before we move on lets see some different types of plots that are formed with two dimensional data and which are not scatterplots. Lets assume the (not very unlikely) case that you have two-dimensional data in which the first variable may be seen as a series of something. This can be space or time data or even simply enumerations of a ranked variable (1,2,3 ...etc). In such cases we would often want to plot the two variables in a way that permits us to see the fluctuation of one against the other. Consider the faithful dataset above. We may be asked to plot the duration of each eruption for a series of say the first 100 eruptions. The durations would be equal to</span></address>
+<pre><span style="font-style: normal;">durations&lt;-faithful[1:100,1]</span></pre>
+<address><span style="font-style: normal;">or alternatively</span></address>
+<pre><span style="font-style: normal;">durations&lt;-faithful$eruptions[1:100]</span></pre>
+<address><span style="font-style: normal;">The two commands above have identical outcomes, just a different way of subsetting. Now the series we want is a string of numbers from 1 to 100. We can simply create this with</span></address>
+<pre><span style="font-style: normal;">c(1:100)</span></pre>
+<address><span style="font-style: normal;">in the simplest case. A more elaborate way is with the use of the seq() function. seq() creates a sequence of not only integers but also real numbers given a lower and upper limit alongside a step. If we want the integers from 1 to 100 we simply call</span></address>
+<pre><span style="font-style: normal;">x&lt;-seq(from=1, to=100, by=1)</span></pre>
+<address><span style="font-style: normal;">but seq() also works with decimal numbers or even backwards like</span></address>
+<pre><span style="font-style: normal;">seq(from=1000, to=500, by=-2.5)</span></pre>
+<address><span style="font-style: normal;">Coming back to our problem we can simply create a series called x that would be the rank of the eruption</span></address>
+<pre><span style="font-style: normal;">x&lt;-seq(from=1, to=100, by=1)</span></pre>
+<address><span style="font-family: sans-serif; font-style: normal;">And now we can plot the eruptions against the series with plot</span></address>
+<pre><span style="font-style: normal;">plot(x, eruptions)</span></pre>
+<address><span style="font-family: sans-serif; font-style: normal;">But this plot doesn't look very informative. In fact it looks more like a scatterplot. What if we connected the dots with a line by setting type="l"?</span></address>
+<address>
+<pre><span style="font-style: normal;">plot(x, eruptions, type="l")</span></pre>
+<address style="font-family: sans-serif;"><span style="font-style: normal;">We can also modify the width of the line (lwd) and its color (col) like this. lwd stands for linewidth, default being one. col is just a way to set the colour</span></address>
+<address style="font-family: sans-serif;">
+<pre><span style="font-style: normal;">plot(x, eruptions, type="l", col="red", lwd=3)</span></pre>
+</address>
+<address style="font-family: sans-serif;"><span style="font-style: normal;">Better? What if we connected the dots but kept them embedded in the line like beads on a string with type="o" or plot them as a continuous filled contour with type "h"? We can even colour this contour at will with col="any color you like"</span></address>
+<address style="font-family: sans-serif;">
+<address><span style="font-style: normal;">plot(x, eruptions, type="h", col="dark green")</span></address>
+<address><span style="font-style: normal;">By now we've seen there are quite a few options even with the simple plot() function. Last but not least, what if one wanted to see more than one plots in the same graph, say plot the first 50 and the second 50 eruption durations next to each other and see how they differ. R has an easy way to do this by combining a plot() function with a lines() function. lines() is called after a plot has already been plotted to add an additional dataset to the graph. It is important though that the x-coordinates are of the same range. In this case we simply need to call</span></address>
+<pre><span style="font-style: normal;">x&lt;-seq(from=1, to=50, by=1)
+</span><span style="font-style: normal;">y1&lt;-</span><span style="font-style: normal; background-color: rgb(238, 238, 255);">durations&lt;-faithful$eruptions[1:50]
+</span><span style="font-style: normal;">y2&lt;-</span><span style="font-style: normal; background-color: rgb(238, 238, 255);">durations&lt;-faithful$eruptions[51:100]</span></pre>
+<address>
+<address><span style="font-style: normal;">and then call plot() first</span>
+<br>
+</address>
+<pre><span style="font-style: normal;">plot(x, y1, type="l", col="red", lwd=3, y</span><span style="font-style: normal; background-color: rgb(238, 238, 255);">lab="Eruption Duration", xlab="Duration No", ylim=c(1,6)</span><span style="font-style: normal;">)</span></pre>
+<address><span style="font-style: normal;">and lines() after that</span></address>
+<pre><span style="font-style: normal;">lines(x, y2,&nbsp;</span><span style="font-style: normal;">type="l", col="blue", lwd=3)</span><span style="font-style: normal;">&nbsp;</span></pre>
+<address><span style="font-style: normal;">The plot looks rather fuzzy since the durations are very similar. One last thing before we wrap up has to do with annotation of the plots. Which is the red and which is the blue line? What do they correspond to? We should always make sure our graphs are self-explanatory. After all, we are plotting data to convey information. We need a legend to denote that the red line corresponds to the 1st-50th eruptions and the blue to the 51st-100th ones. R has a function just for that with the very well-suited name legend(). In our case it could be something like</span></address>
+</address>
+<div>
+<pre><span style="font-style: normal;">legend("topright", c("first 50", "second 50"), col=c("red", "blue"), lwd=c(3,3), lty=c(1,1), bty="n", cex=1.3)</span></pre>
+</div>
+<div><span style="font-style: normal;">In brief legend() needs one argument for placement (one of "topright", "top", "bottomleft" etc) followed by vectors that contain the text, the line colors, the line types (lty=c(1,1)) and line widths in the correct order (notice how "first 50" is firs in the c() argument and "red" is also first in the col=() argument). bty="n" tells R not to draw a box around the legend and cex gives a notion of its size (default is 1). Legends are very important and you should always include them in <b>all </b>your graphs. Remember that even if noone is to look at them it is very likely that you yourselves will need them next time you take a look at your data.</span></div>
+</address>
+</address>
+<h4 id="g0.0.14.4">Histograms with hist</h4>
+<address>
+<div>
+<div><span style="font-style: normal;">In a previous section we saw how we can calculate simple statistics on datasets. Lets now get started with histograms. &nbsp;Histograms are the easiest way to graphically describe a distribution of variables be them continuous or discrete. Let's assume a normally distributed variable x.&nbsp;</span></div>
+<pre><span style="font-style: normal;">x&lt;-rnorm(1000)</span></pre>
+<div><span style="font-family: sans-serif; font-style: normal;">Calling of hist on a vector x is done with:</span><span style="font-style: normal;">
+<br>
+</span></div>
+<pre><span style="font-style: normal;">hist(x)</span></pre>
+<div><span style="font-style: normal;">Histograms are formed through the discretization of the variable space in a specified number of bins and the calculation of either the number or the frequency of the distribution's elements (the pieces of your data) falling within each range of values defined by each bin. You may imagine the bins as a set of boxes covering the entire range (max-min) of values in your dataset.&nbsp;</span><span style="font-style: normal; ">The number of the boxes is inversely related to the size of the bins which is constant. Enumeration of values occurs automatically with the hist() function in R. What hist() does is that given a vector of numerical values it will split the range of the variable in a number specified by the user with the option breaks. Compare&nbsp;</span></div>
+<pre><span style="font-style: normal;">hist(x, breaks=10)</span></pre>
+<div><span style="font-style: normal;">with</span></div>
+<pre><span style="font-style: normal;">hist(x, breaks=100)</span></pre>
+<div><span style="font-style: normal;">hist then calculates a) the counts, that is the actual number of elements in each bin b) the densities which is the probability density of each bin. hist() plots counts or densities depending on the freq option. If freq is set to FALSE, densities will be plotted, which means that the integral of the histogram will be equal to one. N</span><span style="font-style: normal; ">otice the difference in the height of the y-axis in the two following commands</span></div>
+<pre><span style="font-style: normal;">hist(x, breaks=100, freq=T)&nbsp;
+</span><span style="font-style: normal; ">hist(x, breaks=100, freq=F)&nbsp;</span></pre>
+
+<div><span style="font-style: normal;">Histograms accept a number of options that we have already covered in other plotting functions, regarding labels and coloring. For example, plotting the horse power of cars in a cars dataset called mtcars.</span></div>
+<pre><span style="font-style: normal;">cars&lt;-mtcars
+</span><span style="font-style: normal;">hist(cars$hp, breaks=10, col="red", freq=F, xlab="Horse Power")</span>
+</pre>
+</div>
+<div>
+
+<div><span style="font-style: normal;">In the example above we take the hp variable from the mtcars data.frame and plot its histogram in red color with 10 breaks. We also ask that the density and not the counts are returned.</span></div>
+<div><span style="font-style: normal; ">Histograms are not only good for depicting/plotting but can also serve for the analysis per se, that is one can obtain the data that are produced with a certain binning and for a certain density/count. Let's assume that you need the data produced by hist in the form of a an x,y table for further use. This can be done by harvesting the output of hist() on a certain vector. This is done like this:
+</span></div>
+<div><span style="font-style: normal;">data&lt;-rnorm(1000, mean=0, sd=1) # creating random data</span></div>
+<pre><span style="font-style: normal;">x&lt;-hist(data, breaks=10)$mids
+</span><span style="font-style: normal;">y1&lt;-hist(data, breaks=10)$counts
+</span><span style="font-style: normal;">y2</span><span style="font-style: normal;">&lt;-hist(data, breaks=10)$density</span></pre>
+<div><font face="sans-serif"><span style="font-style: normal;">What we did in the last three commands is that we asked for specific variables <b>created</b> by hist() to be passed onto new variables: mids stand for the midpoints of the bins we created, while counts and density have already been discussed. We can know use x, y1 and y2 freely for plotting in our own way. Lets say that we need to plot the histogram not in columns but in connected dots of red color. We can simply use plot() on the data we have just created with hist() like this:</span></font></div>
+<pre><span style="font-style: normal;">plot(x, y1, type="o", col="dark red", lwd=6)</span></pre>
+<div><font face="sans-serif"><span style="font-style: normal;">In this way we have made use of hist() only to create the histogram data but we can now plot them as we like. Before we move on, one last option/function that comes coupled with hist() (but not only). It is the <b>rug() </b>function. rug() is called on a vector just like hist to produce, well..., a rug of data that lie at the bottom of horizontal plots like hist or plot. To get an idea of how rug works simply call it on the same vector used above for the creation of a histogram</span></font></div>
+<pre><font face="monospace"><span style="font-style: normal;">hist(data, breaks=10)
+</span></font><span style="font-style: normal;"><font face="monospace">rug(data)</font></span></pre>
+<div><span style="font-family: sans-serif; font-style: normal;">You see that rug() creates a layout at the bottom of the graph that is representative of the density of elements. Each tick of the rug corresponds to one instance of the vector. In this way you can get an extra view of your dataset coupled with your histogram. rug() can be called next to a number of plots including plot() as long as they refer to the same coordinates. In this case it would be like:</span></div>
+<pre><span style="font-style: normal;">plot(x, y1, type="o", col="dark red", lwd=6); rug(data)</span></pre>
+<div><span style="font-family: sans-serif; font-style: normal;">Notice in the line above how we can call multiple commands on the same line simply by putting a semicolon between them.</span></div>
+<div><span style="color: rgb(125, 167, 33); font-weight: bold;">
+<br>
+</span></div>
+<h4 id="g0.0.14.5">Boxplots</h4>
+</div>
+</address>
+<address>
+<address><span style="font-style: normal;">Histograms are great for describing the distribution of a quantity's values in a simple and informative manner yet most of the times we need to work with comparisons. That is we need ways to plot distributions side by side and compare the distributions visually, in a direct way. R has many variations for this that are all based on boxplots, or "box-and-whiskers" plots. Boxplots may be seen as visual summarizations of a distribution of values in the way that the summary() function captures some main attributes of a vector in numbers. Remember how the summary() function when called on a vector returns the min and max values alongside the values for the lower (25%) and the upper (75%) quartiles as well as the mean and the median values. Boxplot partly builds on these values creating a structure where a) a main box is drawn around the lower and upper quartiles having this as boundaries and with an inner line corresponding to the median and b) extends "whiskers", lines that reach up and down to values equalling the interquartile range (IQR) (that is the distance between 75%-25% percentiles, corresponding to the middle 50% of the values) multiplied by 1.5 c) plots dots for values that fall beyond the</span><span style="font-style: normal; ">&nbsp;</span><span style="font-style: normal; ">± 1.5IQR which we call outliers. Here's a simple example of a boxplot.</span></address>
+<pre><span style="font-style: normal; ">x&lt;-rnorm(1000,mean=5, sd=0.5)
+</span><span style="font-style: normal; ">boxplot(x)</span></pre>
+<address><span style="font-style: normal; ">In the first command we create a random vector x which is sample from a normal distribution with mean=5 and standard deviation=0.5. Then we call the boxplot on this vector and see how the box is roughly centered around 5 with "whiskers" extending to values further outwards. Some values are randomly scattered outside the whiskers and are plotted as dots. (Notice that calling rnorm is random so the number and positions of outliers may change every time you call it. The same slightly holds for most of the boxplots attributes).</span></address>
+<address><span style="font-family: sans-serif; font-style: normal;">Boxplots can also be plotter horizontally in which case it may be nice to couple them with rug</span><span style="font-style: normal; ">
+<br>
+</span></address>
+<address>
+<pre><span style="font-style: normal;">x&lt;-rnorm(1000,mean=5, sd=0.5)
+</span><span style="font-style: normal;">boxplot(x, horizontal=T);rug(x)</span></pre>
+<div><span style="font-style: normal;">Boxplots can be modified in many ways accepting a number of options including color (col=) and line width (lwd=) that modifies there appearance. Two interesting features that are also quite informative are (varwidth=) and (notch=) both of which accept logical values (TRUE/FALSE). Setting varwidth to TRUE modifies the width of the boxplot by a factor relative to the number of the observations in the vector. In this way we can visualize differences in the sizes of the vectors compared. For instance consider</span>
+<br>
+</div>
+</address>
+<pre><span style="font-style: normal; ">x1&lt;-rnorm(1000, mean=5, sd=0.5)
+</span><span style="font-style: normal; ">x2</span><span style="font-style: normal; ">&lt;-rnorm(100, mean=5, sd=0.5)</span></pre>
+
+<address><span style="font-style: normal;">Ivn this case x1 and x2 are sampled from the same distribution but the sample size differs by an order of magnitude. Visualization with boxplot with the varwidth option set to TRUE will optically give us this information</span></address>
+<pre><span style="font-style: normal;">boxplot(x1, x2, varwidth=T, col="grey", lwd=3)</span></pre>
+<address><span style="font-style: normal;">One last attribute of boxplots that is worth mentioning for boxplots is the notch argument. notch=T draws a notch (like a bowtie) around the median of the boxplot to an extent relative to the half of the IQR. In this way it gives a rough idea of the area in which the data have the greater density. Although you cannot simply count on notches you can say that two distributions' means are different if the notches of their corresponding boxplots do not overlap</span>
+<br>
+</address>
+<address>
+<pre><span style="font-style: normal;">x1&lt;-rnorm(1000, mean=5, sd=0.5)
+</span><span style="font-style: normal;">x2</span><span style="font-style: normal;">&lt;-rnorm(1000, mean=5, sd=1)</span><span style="font-style: normal;">boxplot(x1, x2, col="grey", notch=T, lwd=3)</span></pre>
+</address>
+<address><span style="font-style: normal;">In case you want to know more about the data behind a boxplot, R has a nice function called boxplot.stats. When called on a vector it returns all the information on the number of observations n, the values of the quartiles and min, max values alongside the confidence intervals and the exact location of outliers (out).
+</span></address>
+<div>
+<h4 id="g0.0.14.6">vioplot/beanplot  </h4>
+</div>
+<div><span style="font-style: normal;">Vioplot() and beanplot() are alternatives to boxplots. Both come with additional packages so they will need prealoading. They produce a box-like plot without whiskers that mimics the shape of a histogram. Beanplot in particular has useful options that allow you to see the quartiles and a rug of the values visualized on the same plot. Beanplot can be loaded by first installing the package</span></div>
+<pre><span style="font-style: normal;">install.packages("beanplot)</span></pre>
+<div><span style="font-style: normal;">In the window that pops-up you should choose the location closer to you. After installation is finished you need to load the library with</span></div>
+<pre><span style="font-style: normal;">library("beanplot")&nbsp;</span></pre>
+<div><span style="font-style: normal;">This is basically the way we import new functions and packages to R. But wait for more in the Programming R section about this and other uses of the extensive R repository.&nbsp;</span></div>
+<div><span style="font-style: normal;">N</span><span style="font-style: normal;">ow you are ready to use beanplots like this:</span></div>
+<pre><span style="font-style: normal;">x1&lt;-rnorm(1000, mean=1, sd=1)
+</span><span style="font-style: normal;">x2&lt;</span><span style="font-style: normal;">-rnorm(1000, mean=0, sd=1)
+</span><span style="font-style: normal;">beanplot(x1,x2, what=c(1,1,1,1), col=c("black", "red", "blue","light grey")</span></pre>
+<div><font face="sans-serif"><span style="font-style: normal;">What you get is a plot that has 4 main features for every vector. These are the ones corresponding to the 4 1s in the what=() option and they are (in this order): 1: a dotted line traversing the plot that corresponds to the mean (or the median, this can be set with the&nbsp;overallline="median" option), 2: the beanplot itself, 3: the mean of each of the beanplots (vectors) this can also be set to refer to the median or even the quantiles with beanlines="median" or beanlines="quantiles", 4: a rug of the values of each vector. The colouring also follows as a vector of 4 elements, with each color corresponding to each of the five prementioned features.</span></font></div>
+</address>
+<h4 id="g0.0.14.7">Three-dimensional data with persp and filled.contour  </h4>
+<address><span style="font-style: normal;">Plotting data in three dimensions is not so common and in many cases not very practical either. Still, sometimes we would like to see how a variable z fluctuates against two others x and y. R has a number of functions for this purpose, which may be mainly divided in two categories: a) "volume" plots like the ones produced by persp() and b) "colour-coded" plots like the ones produced with contour(). Both persp() and contour() receive similar arguments, that is three objects, the first two are two vectors (x,y) set a "grid" or the main surface. The third object z <b>has to be a matrix of dimensions [x, y]</b> that represents some sort of "height" for each 2D coordinate of the grid. It is impossible to plot the data if these conditions are not fulfilled. For starters, lets begin by creating these objects:
+</span></address>
+<pre><span style="font-style: normal;">x&lt;-seq(from=1, to=10, by=1)
+</span><span style="font-style: normal;">y&lt;-seq(from=1, to=100, by=10)</span></pre>
+<address><span style="font-style: normal;">We have now created two vectors x and y with equal lengths (1 to 10 by 1 and 1 to 100 by 10). Thus the dimensions of the grid are 10x10. We should now have the data z in a matrix with the same dimensions. We can create this matrix by setting first all values equal to zero 0 like this:</span></address>
+<pre><span style="font-style: normal;">z&lt;-matrix(0, nrow=10, ncol=10)</span></pre>
+<address><span style="font-style: normal;">The command above tells R to create a matrix with 10 rows and 10 columns and setting each of the 10x10 elements equal to 0. Inspect the z matrix by typing z and see for yourselves. Now what we need is to fill in the matrix with numbers. I will simply create a list of 100 random numbers sampling from a uniform distribution</span></address>
+<pre><span style="font-style: normal;">data&lt;-runif(100, min=1, max=100)</span></pre>
+<address><span style="font-style: normal;">in fact I will make it a bit more structured by ordering the random 100 numbers from the smallest to the largest. I can do this with the use of the sort() function. Simply call on sort() on data and then feed the output to matrix</span></address>
+<pre><span style="font-style: normal;">sort(data)-&gt;temp
+</span><span style="font-style: normal;">z&lt;-matrix(temp, nrow=10, ncol=10)</span></pre>
+<address><span style="font-style: normal;">We are now in line for producing a simple 3D plot with persp like this</span></address>
+<pre><span style="font-style: normal;">persp(x,y,z, phi=15, theta=30, col="lightblue4", main="My 3D plot", xlab="some x", ylab="some y", zlab="a sorted random z")</span></pre>
+<address><span style="font-style: normal;">Take a minute to see the grammar of persp. The first three arguments are x, y and z in this order. It is crucial that it is <b>this order</b> since otherwise the dimensions of the vectors/matrix will not fit in the function. Next, two values for phi= and theta= are related to the viewpoint of the plot. phi and theta are the angles to which the plot (which is a 3D volume) is tilted. Modify these accordingly to get different (and better) views of your plots. The color and axis labels that follow you are (should be) by now very aware of.</span></address>
+<address><span style="font-style: normal;">Contour and its companion filled.contour() may be also used for the visualization of 3D data. The difference from persp is that this is not a volume representation but a colour-code one. That is, R takes the values of the matrix (here z) and instead of plotting them as heights in a 3D plot, it transforms them to a detailed colour-code (something like red being the highest and blue the lowest). In this sense it is important that a palette of colors (a series of different colours or colour gradients) are supplied to the function. One example may be:</span></address>
+<pre><span style="font-style: normal;">filled.contour(x,y,z, color.palette=rainbow, main="My Contour plot", xlab="some x", ylab="some y")</span></pre>
+<address><span style="font-style: normal;">Inspect the created plot. It is basically a 2D plot with x and y on the two axes but the grid is colour-coded with a certain degree of resolution (depending on the dimensions of z) the legend for which is given right next to the plot. T</span><span style="font-style: normal;">he main argument to keep an eye on here is color.palette, which takes as values series of colors that can either be pre-built in R or created by ourselves. Here I chose to use a pre-built array of colors called rainbow (self explanatory), other such may be heat.colors, topo.colors etc. Later on we will see how we can build our own palettes.&nbsp;</span><span style="font-style: normal;">&nbsp;</span></address>
+<h3 id="g0.0.15">Saving and Printing plots</h3>
+<address><span style="font-style: normal;">Last but not least we have reached the point where are plots look awesome but we can only sit and stare them in our screen. Is there a way to extract them as files, store them in our computer and share them with friends of colleagues? The answer is obviously yes. R employs a simple routine to export plots in various image formats such as *jpeg,*png, *ps, *tiff, or *pdf. The names of the functions are (again) self-explanatory. The grammar is the same in all of them and follows the simple structure</span></address>
+<pre><span style="font-style: normal;">nameoffunction("filename"); plotting commands; dev.off()</span></pre>
+<address><span style="font-style: normal;">Where the name of function is one of png, pdf, tiff e.t.c. and the "filename" is the name that the file will be given in the folder that you are currently working. This command opens a "writer device", an environment that accepts everyting printed in R and stores it in a filename with "filename". While providing plotting commands with the "device" on (that is having called one of the printing commands tiff, pdf e.t.c.) you will not be able to see anything on your screen. This means that the output of the plotting commands has been re-directed from the screen to the file. Once you are done, you need to finalize the file and quit the writer device. This is what the dev.off() function does. It simply tells R to print whatever has been plotted to the file with "filename" finalize it and exit the device. Then, once again printing of plots will be redirected to the screen. An example printing of a plot to a pdf file may be:</span></address>
+<pre><span style="font-style: normal;">pdf("contour.pdf")
+</span><span style="font-style: normal;">filled.contour(x,y,z, color.palette=rainbow, main="My Contour plot", xlab="some x", ylab="some y", key.title="ordered random z")
+</span><span style="font-style: normal;">dev.off()</span></pre>
+<address><span style="font-style: normal;">Notice how it also works with the commands being issued in different lines.&nbsp;</span></address>
+<address><span style="font-style: normal;">All printing functions take a series of arguments related to the size of the file (both its dimensions and its size in memory), the desired resolution, compression type (for tiff files). These differ depending on the function (and so on the format of the file to be saved). Make sure you get your options right.&nbsp;</span></address>
+<address>
+<hr id="false">
+</address>
+<h3 id="g0.0.16" style="font-family: sans-serif;"></h3>
+<h3 id="g0.0.17" style="font-family: sans-serif;">Programming R</h3>
+<address><span style="font-style: normal;">installing functions</span></address>
+<address><span style="font-style: normal;">writing functions</span></address>
+<address><span style="font-style: normal;">running R from the shell (vanilla etc)&nbsp;</span></address>
+
+<div>
+<br>
+</div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.18">Advanced Statistics and Modeling</h3>
+<div>
+<div>apply(x, MARGIN, FUN, ...)</div>
+<div>where x is the data object, MARGIN is the dimension index, FUN is a function you specify, and ... are any parameters you want to pass to FUN. In a matrix or data frame MARGIN=1 indicates rows and MARGIN=2 indicates columns.&nbsp;</div>
+</div>
+<div>
+<div>&gt; apply(mydata, 1, mean)</div>
+<div>[1] -0.155 -0.504 -0.511 0.154 -0.310 0.165</div>
+<div>&gt; apply(mydata, 2, mean)</div>
+<div>[1] -0.2907 0.0449 -0.5688 -0.3442 0.1906</div>
+<div>&gt; apply(mydata, 2, mean, trim=0.2)</div>
+</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+<div>This section will cover more advanced statistics applications including machine learning methodologies such as PCA, clustering, linear regression etc. It will also cover more elaborate plotting schemes such as heatmaps, correlograms etc</div>
+<div>
+<br>
+</div>
+<div>Hypothesis testing</div>
+<div>t.test etc</div>
+<div>phyper</div>
+<div>
+<br>
+</div>
+<div>Linear Modeling</div>
+<div>lm()</div>
+<div>Multiple Linear Regression with lm</div>
+<div>summary()</div>
+<div>plot()</div>
+<div>
+<br>
+</div>
+<div>Multiple hypotheses</div>
+<div>FDR etc</div>
+<div>
+<br>
+</div>
+<div>PCA</div>
+<div>
+<br>
+</div>
+<div>Clustering</div>
+<div>hierarchical clustering</div>
+<div>k-means</div>
+<div>
+<br>
+</div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.19">Beyond &nbsp;</h3>
+<div>This section will cover advanced R functions for specialized problems that lie out of the scope of this introduction.</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<address><span style="font-style: normal;">In the same way you did for the barplot, download and save a file named geneexp.tsv from the following link: http://tinyurl.com/npnagaf, and then load it in you R environment like this</span></address>
+<address>
+<pre><span style="font-style: normal;">data&lt;-read.delim("geneexp.tsv", sep="\t", header=T)</span></pre>
+</address>
+<address>
+<div style="font-family: sans-serif;"><span style="font-style: normal;">Before anything else, it would be nice to inspect the data. How big is the data frame that you built? How many columns and rows does it hold? Are the columns named and what does any column hold? You will see that we are talking about a big file containing more than 17000 rows, each containing data on one gene's relative expression value and the corresponding p-value of the relative change. This file is a simplified version of something that comes out of a genome-wide expression profiling.&nbsp;</span></div>
+<div><span style="font-style: normal;">
+<br>
+</span></div>
+</address>
+</div>
+<div>
+<hr id="false">
+</div>
+<h3 id="g0.0.20">Sources</h3>
+<div>Most of the notes in this page come from my personal experience with R but everyone has its sources, influences and references.&nbsp;</div>
+<div>I get most of mine directly from CRAN but some very informative links include:</div>
+<div>
+<br>
+</div>
+<div>Rob Kabafoff's Quick-R&nbsp;http://www.statmethods.net/index.html</div>
+<div>Rob also has a very well updated book on R with the intriguing title "R in action", which I highly recommend as an overall guide to R (http://www.manning.com/kabacoff/)</div>
+<div>
+<br>
+</div>
+<div>Coursera's R-Programming Course &nbsp;https://www.coursera.org/course/rprog</div>
+<div>and a very active R blog (for more advanced users)&nbsp;http://www.r-bloggers.com/</div>
+<div>
+<br>
+</div>
+<div>If you are mostly interested in the graphs, a very nice source is:</div>
+<div>"R graphics" by Paul Murrell, which comes with a (decent) companion site containing code:</div>
+<div>https://www.stat.auckland.ac.nz/~paul/RGraphics/rgraphics.html
+<br>
+</div>
+<div>
+<br>
+</div>
+<div>A more detailed and educational (in the sense of taking things step-by-step) introduction on graphics is Winston Chang's "R graphics Cookbook" from the O'Reilly series</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

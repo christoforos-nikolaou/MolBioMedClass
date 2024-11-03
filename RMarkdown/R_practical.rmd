@@ -69,16 +69,17 @@ We will be using this space to present problems that require modeling and ways t
 
 #### 2.1 The hot-hand fallacy (or not)
 
-An actual player's shots for a 188 consecutive shots
+An actual player's shots for a 187 consecutive shots
 ```{r}
 real<-read.table("bballshots.txt")[,1]
 ```
+
 
 Let's count her shooting success rate
 ```{r}
 length(which(real==1))/length(real)
 ```
-And now let's see how great are her streaks of consecutive successfull shots
+And now let's see how great are her streaks of consecutive successful shots
 
 ```{r}
 realRuns<-rle(real)
@@ -88,14 +89,14 @@ realRuns
 ```{r}
 rstreaks<-which(unlist(realRuns[2])==1)
 rstreaklengths<-unlist(realRuns[1])[rstreaks]
-beanplot(rstreaklengths, col="steelblue4", ylab="Streak Length (in shots)", log="y", names="Shots", las=1)
+beanplot(rstreaklengths, col="steelblue4", ylab="Streak Length (in shots)", names="Shots", las=1, log="y")
 
 ```
 
 
 Lets simulate a players shooting streak for 200 shots with a 50% success rate.
 ```{r}
-shots<-rbinom(200, 1, p=0.5)
+shots<-rbinom(187, 1, p=0.508)
 shots
 ```
 ```{r}
