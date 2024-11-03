@@ -39,6 +39,18 @@ This weeks class is an introduction to the concepts we will be discussing throug
 * How to measure things
 * How to assess/compare/interpret measurements
 
+### Practical: Introduction to R Programming Language and Environment
+
+* In this class we will get started with R as a programming language and Rstudio as our Integrated Development Environment (IDE) of choice.
+
+* You may find a slide presentation for an R Basics Introduction [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Presentations/ModuleIntroR.pdf)
+
+* A html file with more details and code that you can popy-paste to your own environments may be found [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/R_introduction.html). (It's safer to download the file and open it in the browser of your choice)
+
+* We will use a hands on approach to see how we can start using R to describe problems, analyze them numerically and interpret the results.
+* We will use [this file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/R_practical.rmd), which will be dynamically updated in class.
+* For today we will be also needing [this data file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/bballshots.txt)
+
 ### Reading
 
 Students are all advised to access the reading material (to be read BEFORE class) that you may find below:
@@ -49,11 +61,6 @@ Students are all advised to access the reading material (to be read BEFORE class
 
 ### [Lecture slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf)
 
-### Assignment(s) (not applicable in 2024-2025 class)
-
-* Find a scientific paper of your interest that contains computational analysis. Break down its components into understanding what is the main question, which technique is used to obtain the measurements, how are they analyzed and what sort of mathematics/statistics principles were used in their interpretation.
-* Prepare to present this in a flash talk in class (no powerpoint needed).
-
 ## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 8th 2023)
 
 * Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
@@ -63,9 +70,6 @@ Students are all advised to access the reading material (to be read BEFORE class
    - Problems that deal with serial data
    - Problems that require/allow modeling
 
-* We will use a hands on approach to see how we can start using R to describe problems, analyze them numerically and interpret the results.
-* We will use [this file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/R_practical.rmd), which will be dynamically updated in class.
-* For today we will be also needing [this data file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/bballshots.txt)
 * At a second level we will discuss the basic concepts of computation. In particular how we will:
 
    - Use flowcharts and pseudocode to describe a computational pipeline
