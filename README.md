@@ -65,6 +65,7 @@ Students are all advised to access the reading material (to be read BEFORE class
 
 * We will use a hands on approach to see how we can start using R to describe problems, analyze them numerically and interpret the results.
 * We will use [this file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/R_practical.rmd), which will be dynamically updated in class.
+* For today we will be also needing [this data file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/bballshots.txt)
 * At a second level we will discuss the basic concepts of computation. In particular how we will:
 
    - Use flowcharts and pseudocode to describe a computational pipeline
