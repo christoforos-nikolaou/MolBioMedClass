@@ -1,0 +1,173 @@
+---
+title: "R Practical 02-  Bayes Rule"
+author: "Christoforos Nikolaou"
+date: "`r Sys.Date()`"
+
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
+---
+
+### Bayes Theorem in practice
+In this practical we will be testing the Bayes Rule in a set of biomedical data. This will give us the opportunity to:  
+a. Remember some basics about probability theory
+b. Apply the Bayes Rule to infer slightly more complex outcomes which are based on combinations of observations
+c. Practice R in terms of using vectors, subsetting and making simple calculations
+
+Fist we will load a dataset of Rheumatoid Arthritis patients and controls. For this set we have also included the biological sex and the age of the persons as well as the response of patients to treatment.
+
+We load the data:
+```{r}
+newArthritis<-read.delim("C:/Users/chris/Dropbox/github/MolBioMedClass/Datasets/newArthritis.tsv", header=T, sep="\t")
+
+```
+
+**NOTE: Remember to modify the line above to point at the correct path for the dataset in your own computer.**
+
+Look at the first lines of the table:
+```{r}
+head(newArthritis)
+```
+
+and then look at the structure and the size of the dataset
+```{r}
+str(newArthritis)
+```
+
+We see that we have a set of 1084 individuals with both categorical (sex, Status) and numerical (Age) variables for each one.
+
+### The Question: Sexual dimorphism of Rheumatoid Arthritis prevalence
+The hypothesis we will be testing is the predisposition of women to suffer from RA more frequently than men. There is a reported 6:1-9:1 prevalence of women over men to suffer from RA. 
+  
+Our first goal will be to test this in our data.
+This can be easily done by looking at the combinations of outcomes regarding Status (Healthy/RA) and Sex (Female/Male).
+
+We can thus compare the percentage of Women in the whole dataset like so:
+```{r}
+probF<-length(which(newArthritis$Sex=="Female"))/length(newArthritis$Sex)
+probF
+```
+ 
+and then we can look at the frequency of Female **among the RA patients only**. For this we need to **subset** the data by looking at the Status variable.
+
+```{r}
+i<-which(newArthritis$Status=="RA")
+probFRA<-length(which(newArthritis$Sex[i]=="Female"))/length(i)
+probFRA
+```
+
+We see that there is a considerable difference between the two. In fact the ratio of women with RA compared to the ratio overall is 1.3 bigger.
+
+```{r}
+0.6904762/0.5175277
+```
+
+We could also look at the different percentages of women with RA vs healthy women. Think of how you would write this:
+
+```{r}
+
+```
+
+
+### Probability Ratios and Expectance
+
+In the calculation above. The frequency of women with RA can be seen as the observed **conditional probability** of **being a woman, given you suffer from RA**.
+This, as we saw, is 0.69. 
+  
+Now consider how different this is from the probability of the two events coinciding. The probability of being a woman (in general) is 
+
+```{r}
+probF
+```
+
+and the probability of having RA is
+
+```{r}
+probRA<-length(which(newArthritis$Status=="RA"))/length(newArthritis$Status)
+probRA
+```
+
+in the case of independence we would expect women with RA to be:
+
+$$P(women with RA)={P(F)*P(RA)}$$
+
+
+```{r}
+exprobFRA=probF*probRA
+exprobFRA
+```
+
+This is an **expected probability** based on the assumption of independence. But we can **calculate** this frequency/probability directly from our observations. It will be the number of women with RA compared to the total number of individuals
+```{r}
+obsprobFRA<-length(which((newArthritis$Status=="RA") & (newArthritis$Sex=="Female")))/length(newArthritis$Sex)
+obsprobFRA
+```
+
+let's compare the two
+```{r}
+obsprobFRA/exprobFRA
+```
+
+You see that we get the same number as above. This is what we call the *probability ratio*. We use this to get insight on preference or avoidance of two or more events taking place at the same time, compared to the assumption of being independent.
+
+### Conditional Probabilities and the Bayes Rule
+Let's now think of a different question. Suppose that someone asks you:  
+What is the probability of a female developing RA?
+
+The first thing you need to think is that this is **not** 0.69!!! 
+This is because, the probability of a female developing RA is not the same as the probability of a person with RA being a woman. These are **two inverse conditional probabilities**. 
+
+Below we will see how we understand this difference through calculations.
+
+First, let's estimate the _conditional probability of a person being a female, given that she has RA_.
+This is:
+
+```{r}
+i<-which(newArthritis$Status=="RA")
+length(which(newArthritis$Sex[i]=="Female"))/length(i)
+```
+
+And now let's compare this with the _conditional probability of a having RA, given you are a female_.
+
+```{r}
+j<-which(newArthritis$Sex=="Female")
+length(which(newArthritis$Status[j]=="RA"))/length(j)
+```
+
+See the difference in the way we calculated the two and how, in each time, we start by subsetting the data according to the **conditional outcome**, which is what we consider to be taking place "first".
+
+The two probabilities are very different!!! Having RA given you are a female is almost 7-fold smaller.
+
+We could try to estimate this last probability from the Bayes Rule.
+This would be that: 
+Looking for the probability of having RA given you are a female would be:  
+$$P(RA|F)$$
+
+and from the Bayes Formula this would be equal to:  
+$$P(RA|F)={{P(F|RA)P(RA)}\over{P(F)}}$$
+We have all the values of the right side of the equation in
+```{r}
+paste("conditional F|RA=", obsprobFRA)
+paste("probability of RA=",probRA)
+paste("probability of female=", probF)
+
+```
+
+By substituting this into the formula we get
+```{r}
+probRAF=(obsprobFRA*probRA)/probF
+probRAF
+```
+
+Which we realize is very, very small. 
+Think of what this actually means.
+

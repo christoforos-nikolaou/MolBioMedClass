@@ -1,5 +1,5 @@
 ---
-title: "R Practical -  Introduction"
+title: "R Practical 01 -  Introduction"
 author: "Christoforos Nikolaou"
 date: "`r Sys.Date()`"
 
@@ -40,8 +40,8 @@ We will use this space to discuss concepts of statistics
 We will compare the GC% of the yeast genes vs yeast non-coding sequences. We will first load them in R like this:
 
 ```{r}
-gcGenes<-read.delim("../Datasets/SCgenes_gcContent.tsv", header=T, sep="\t")
-gcRegSeq<-read.delim("../Datasets/SCRegSeq_gcContent.tsv", header=T, sep="\t")
+gcGenes<-read.delim("C:/Users/chris/Dropbox/github/MolBioMedClass/Datasets/SCgenes_gcContent.tsv", header=T, sep="\t")
+gcRegSeq<-read.delim("C:/Users/chris/Dropbox/github/MolBioMedClass/Datasets/SCRegSeq_gcContent.tsv", header=T, sep="\t")
 ```
 
 and inspect the dataframe structures
@@ -71,7 +71,7 @@ We will be using this space to present problems that require modeling and ways t
 
 An actual player's shots for a 187 consecutive shots
 ```{r}
-real<-read.table("bballshots.txt")[,1]
+real<-read.table("C:/Users/chris/Dropbox/github/MolBioMedClass/Datasets/bballshots.txt")[,1]
 ```
 
 
@@ -87,6 +87,7 @@ realRuns
 ```
 
 ```{r}
+library(beanplot)
 rstreaks<-which(unlist(realRuns[2])==1)
 rstreaklengths<-unlist(realRuns[1])[rstreaks]
 beanplot(rstreaklengths, col="steelblue4", ylab="Streak Length (in shots)", names="Shots", las=1, log="y")

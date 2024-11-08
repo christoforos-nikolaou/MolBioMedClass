@@ -70,13 +70,17 @@ Students are all advised to access the reading material (to be read BEFORE class
    - Problems that deal with serial data
    - Problems that require/allow modeling
 
-### Practicals: Using R to understand Conditional Probability
+* At a second level we will discuss the basic concepts of computation. In particular how we will:
 
-We will be using this [file](https://www.dropbox.com/scl/fi/m5ry87xg6b1l6pzzjdxwq/RPractical_2_BayesRule.rmd?rlkey=idygc7h6s9q8vmgmbog0wiidw&dl=0) for the code and [this file](https://www.dropbox.com/scl/fi/04d557smmktwtjwzbxg4a/newArthritis.tsv?rlkey=114dyja38xtu6u3c0vtlcbxdz&dl=0) as input.
+   - Use flowcharts and pseudocode to describe a computational pipeline
+   - Employ optimization techniques
+   - Describe logical relationships
 
 ### Reading Material:
 
+* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf) [Not to be used]
 * Points of Significance. [The Importance of being uncertain](https://www.dropbox.com/s/ukex2y7jh3fy1st/ImportanceOfBeingUncertain.pdf)
+* Wladston Ferreira Filho. Computer Science Distilled. [Chapter 1. Basics](https://www.dropbox.com/s/xeu4qdpu3jbkczb/Computer_Science_Chapter01_Basics.pdf)
 
 ### Assignments
 

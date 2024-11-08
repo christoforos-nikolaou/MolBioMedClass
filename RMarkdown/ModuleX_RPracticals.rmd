@@ -158,7 +158,7 @@ for(i in 1:100){
 2. We first need to decide on the list. One interesting case is to focus on particular pathways. Below there is an example of how one can get the genes belonging to a particular pathway from the mouse genome.
 
 ```{r}
-mouseKEGG<-readRDS("~/Dropbox/Data/GO_KEGG_Lists_RDS/kegg_pathways_list_mus_musculus.rds")
+mouseKEGG<-readRDS("C:/Users/chris/Dropbox/github/MolBioMedClass/Datasets/kegg_pathways_list_mus_musculus.rds")
 mtorgenes <- as.character(mouseKEGG$`mTOR signaling pathway - Mus musculus (house mouse)`[3][,1])
 ```
 
@@ -178,7 +178,7 @@ Or, in a more directly biological example: consider a position in the genome in 
 The data we got from 147 individuals are contained in the following dataset:
 
 ```{r}
-genevardata <- read.table("../Datasets/GeneticVariationData.tsv", header=T, sep="\t")
+genevardata <- read.table("C:/Users/chris/Dropbox/github/MolBioMedClass/Datasets/GeneticVariationData.tsv", header=T, sep="\t")
 str(genevardata)
 head(genevardata)
 ```
@@ -262,7 +262,7 @@ We often have to deal with such problems in time series data or basically all ty
 In the dataset shown below we have measured DNA methylation along a 10Mb stretch of human chromosome 10. You can find the file in [this link](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/GenomeSeriesData.tsv)
 
 ```{r}
-chrommethdata <- read.delim("../Datasets/GenomeSeriesData.tsv", header=T, sep="\t")
+chrommethdata <- read.delim("C:/Users/chris/Dropbox/github/MolBioMedClass/Datasets/GenomeSeriesData.tsv", header=T, sep="\t")
 head(chrommethdata)
 str(chrommethdata)
 ```
