@@ -80,7 +80,7 @@ We will be using this [file](https://www.dropbox.com/scl/fi/m5ry87xg6b1l6pzzjdxw
 
 ### Assignments
 
-* Choose a computational problem (or invent one) and describe it with a flowchart or in pseudocode
+* Try to rework the Bayes Rule problem. Think about what is the essential part in the comparison between two inverse conditional probabilities.
 
 ## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 15th 2023)
 
