@@ -136,7 +136,7 @@ i<-which(newArthritis$Status=="RA")
 length(which(newArthritis$Sex[i]=="Female"))/length(i)
 ```
 
-And now let's compare this with the _conditional probability of a having RA, given you are a female_.
+And now let's compare this with the _conditional probability of having RA, given you are a female_.
 
 ```{r}
 j<-which(newArthritis$Sex=="Female")

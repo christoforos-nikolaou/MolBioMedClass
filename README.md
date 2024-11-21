@@ -129,14 +129,14 @@ In this class we will see how measures of similarity may apply to biological sys
 
 ### Reading
 
-* Wladston Ferreira Filho. Computer Science Distilled. [Chapter 1. Basics](https://www.dropbox.com/s/xeu4qdpu3jbkczb/Computer_Science_Chapter01_Basics.pdf)
-* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 5. Σύγκριση Αλληλουχιών](https://repository.kallipos.gr/bitstream/11419/1582/1/Chapter04_seqalignment_R.pdf)
-* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 7. Ανάλυση της Γονιδιακής Έκφρασης](https://repository.kallipos.gr/bitstream/11419/1585/1/Chapter07_geneexpression_R.pdf)
+* [Pairwise Sequence Alignment](https://www.dropbox.com/scl/fi/gj1mcgqvayyyil2sde1u2/02-PairAlignment.pdf?rlkey=wi3xtagcr53ejovq68v7d8hzz&dl=0)
+* [BLAST-BLAT](https://www.dropbox.com/scl/fi/hr7gmlr188xrod2y8st07/03-BLAST-BLAT.pdf?rlkey=mf2zkpdxw88580bj47rb3swi4&dl=0)
+* [Suffix Trees](https://www.dropbox.com/scl/fi/hr7gmlr188xrod2y8st07/03-BLAST-BLAT.pdf?rlkey=mf2zkpdxw88580bj47rb3swi4&dl=0)
 * Points of Significance. [Clustering](https://www.dropbox.com/s/7qja6rg3sxuhv3p/Clustering.pdf)
 
 ### Assignments
 
-* Sequence Alignment and Clustering
+* Sequence Alignment and Clustering (You will find this at the end of [this lecture](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B))
 
 ## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 29th 2024)
 
