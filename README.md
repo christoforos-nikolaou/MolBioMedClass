@@ -160,7 +160,7 @@ Comparing means makes sense only up to one level. Samples and populations are va
 * Performing PCA and k-means Clustering in Gene Expression Data  
    First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset.
 
-## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_B)(Dec 6th 2023)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/1258473)(Dec 20th 2024)
 
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
 
