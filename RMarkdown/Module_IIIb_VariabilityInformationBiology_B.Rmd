@@ -41,20 +41,20 @@ Depending on the frequency of the variant in the population we may distinguish b
 
 Depending on the effect a variant has on the observed phenotype we may be talking about **polymorphisms** (with little or no effect) and **causal variants** (with large, and in some cases devastating effects).
 
-![](C:/Users/chris/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_01.jpg)
+![](/home/christoforos/Dropbox/CompBiolBook/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_01.jpg)
 
 ### Why is it interesting
 
 Variability is interesting in itself, but genomic variants that are associated to phenotypic properties, especially with pathological conditions, are of extreme importance in biomedicine. Below you see an example of a series of causal SNV in the human CFTR locus which is associated with Cystic Fibrosis. A single nucleotide variant called $\Delta$F508 is the most strongly linked variant with the occurrence of the disease.
 
-![](C:/Users/chris/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_02.jpg) 
+![](/home/christoforos/Dropbox/CompBiolBook/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_02.jpg) 
 
 
 #### Experimental approach
 
 Large-scale studies of genomic variability are now possible through the application of Whole-Genome or Whole-Exome sequencing.
 
-![](C:/Users/chris/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/Overview_WES.png)
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/Overview_WES.png)
 
 Which is then followed by a series of computational steps including:
 
@@ -62,7 +62,7 @@ Which is then followed by a series of computational steps including:
 * the definition of the variants (remember ANOVA)
 * the interpretation/functional study of the variants
 
-![](C:/Users/chris/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_CompAnal_Overview.png)
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_CompAnal_Overview.png)
 
 #### Single nucleotide variants
 
@@ -71,12 +71,13 @@ Although this is a simplification, you may consider this like a "sliding window"
 A variant may also be _not variable_ as long as it is different from the reference genome sequence in the same position. 
 (This is because the reference genome, already implies an assessment of variability since the nucleotide at this position is the one most commonly occurring in the population). 
 
-![](C:/Users/chris/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_IGV_image.png)
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_IGV_image.png)
 
 Below you see an example of no variability (first two panels), a homozygous variant (second panel, all reads are different than the reference) and a heterozygous variant (fourth panel, approximately half of the reads are variable compared to the genome reference).
 
 
-![](C:/Users/chris/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/ENUDare.png)
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/ENUDare.png)
+
 #### Interpretation of variants
 
 Once a variant is identified the next steps for its interpretation may include:
@@ -86,7 +87,7 @@ Once a variant is identified the next steps for its interpretation may include:
 * Prediction of the possible impact of the variant (is it lying in conserved sequences? regulatory? coding?)
 * Cross-comparison with other sources of knowledge for the functional annotation (what could they do)
 
-![](C:/Users/chris/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_Analysis_overview.png)
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/WES_Analysis_overview.png)
 
 
 ### Assessment of Genomic Variability 
@@ -101,7 +102,7 @@ Answering the second question is much more complex. We first need to have a stro
 
 Here, we compare two groups of people, one with a certain pathological phenotype (left) and one, consisting of healthy individuals (control group, right). By checking the sequence of the particular variant in each group we find 26 out of 32 patients to be heterozygous in the variant (red), while only 2 out of 32 healthy individuals have the same (C/G) genotype, the other 30 being homozygous to the common variant (C/C).  
 
-![](C:/Users/chris/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_06.jpg)
+![](/home/christoforos/Dropbox/CompBiolBook/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_06.jpg)
 
 What does this mean? Is the variant likely to be associated with the condition? And if yes, how strongly? How can we assess the difference between heathy individuals and patients?
 
@@ -125,7 +126,7 @@ You see that the test calculates a certain quantity called "odds ratio", for whi
 
 This is shown in the table below
 
-![](C:/Users/chris/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/OddsRatio.png)
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/OddsRatio.png)
 
 and for our case is equal to (a slightly adjusted) ratio of  $OR=(6/30)/(26/2)$.
 
@@ -143,7 +144,7 @@ Odds Ratios are supported with exact p-values obtained through the application o
 
 The p-value that is linked with the OR is, as mentioned above, an exact probability calculated with the help of the hypergeometric distribution. (In the figure below, you should interpret the $\binom{x}{y}$ notation as the number of combinations of $y$ selected from $x$.) 
 
-![](C:/Users/chris/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/OddsP.png)
+![](/home/christoforos/Dropbox/Teaching/My_MScClasses/MBioMed/Figures/OddsP.png)
 
 #### Complexity of Statistics Interlude. Multiple loci
 
@@ -152,7 +153,7 @@ This is the case for **one** locus, but in the real world, we very rarely know t
 The result is a huge number of p-values which we often sort according to their size (transformed as $-log10(p)$) in plots like the one below. 
 Because of their shape, with few positions having very high -log10(p) (and thus being highly significant) that resemble a skyscraper-skyline, we call them "Manhattan plots".
 
-![](C:/Users/chris/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_08.jpg)
+![](/home/christoforos/Dropbox/CompBiolBook/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_08.jpg)
 
 These contain thousands of SNVs, for which we calculate the ratio of frequencies between diseased/healthy samples. 
 
@@ -166,9 +167,110 @@ We already new that some diseases, such as the thalassemias or Cystic Fibrosis a
 
 The relationship between the two is shown in the diagram below for some of the most well-studied genetic diseases.
 
-![](C:/Users/chris/Dropbox/CompBiol/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_07.jpg)
+![](/home/christoforos/Dropbox/CompBiolBook/10010-Nikolaou-YpologistikiBiologiaRev/source_material/images/Figure10_07.jpg)
 
-## Assignment
+### A short story about bias. Intuitive Fisher's test application, Cultural Cognition and the threats and responsibilities of being a scientist.  
+
+#### The most depressing brain finding ever...
+
+In 2012 a group led by Dan M. Kahan of Yale Law School, published [this study](https://www.cambridge.org/core/journals/behavioural-public-policy/article/abs/motivated-numeracy-and-enlightened-selfgovernment/EC9F2410D5562EF10B7A5E2539063806). This work is an application of [Kahan's Theory of Cultural Cognition](https://en.wikipedia.org/wiki/Cultural_cognition_of_risk) according to which, there exists among people a **tendency to perceive risks and related facts in relation to personal values**.  
+
+That paper was coined by many as the...
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/MostDepressingStudyAboutBrain.png)
+
+because of its key finding, which basically was that, in certain contexts, it is the **smartest people that make the wrong decisions**.
+
+The main question Kahan et al. wanted to answer was: "Why does public conflict over societal risks persist in the face of compelling and widely accessible scientific evidence?" 
+They set out to inquire whether, in the process of making judgement on data, people tend to take full advantage of their cognitive capacities or if they are constrained by some other factors, which they described as "motivated cognition". In short, the question was: "In face of difficult questions, do intelligent people do better?"  
+
+#### The experiment
+
+They proceeded in the following way. They started with a large group of people and used a standardized numeracy test. Numeracy is [a measure of the ability and disposition to make use of quantitative information] (https://www.numericalreasoningtest.org/#). They then split the group in two and gave the following question to the first half of them: A group of people uses a new skin cream to treat a rash and reports whether it got better or worse. An independent control group of people with rashes reports the same after the same period, without applying any treatment. The data are shown in the table below.
+
+Take a minute and think about it. What would your answer be, now that you have understood how the Fisher's test works? 
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/CreamExample.png)
+
+While many people, in the lower numeracy percentiles went with the high number of 223 and reported that it is better to use the cream, the correct answer is actually the opposite. **The ratio of people who got better/worse  using the cream is close to 2, while the same ratio for those who didn't is close to 5**. 
+
+In order to remove biases for positive or negative inclinations (i.e. some people are more prone to saying "yes" or "no" spontaneously), they presented the same data with the opposite outcomes. 
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/SkinCreamGunControlTables.png)
+
+As expected, subjects highest in numeracy, did substantially better than less numerate ones when the data were presented as results from a study of a new skin rash treatment. 
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/SkinCreamOutcome.png)
+
+All well up to this point. 
+
+But then the researchers presented the same data in the contingency table to describe a different question, this time one that is loaded with a certain political context. They presented a separate, independent group of people with the fictional scenario of cities imposing restrictions on carrying concealed handguns and the outcome of crime rates compared to control cases where such restrictions were not in place. They used identical numbers as in the skin cream question.
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/GunControlTest.png)
+And then **this happened**.  
+Compare the two plots. In the top, a "benign question" leads to an expected increase in correct answers as numeracy goes up. But when you look at the bottom you see very little effect of the numeracy in getting the correct answer. 
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/GunControlOutcome.png)
+
+This is actually explained by the preexisting political biases that come into play when attempting to reason with data related with a politically biased question. Below you see the same responses when split in subgroups depending on political associations. Left-leaning people perform according to their numeracy only when the data support their pre-existing inclination to think that constraints on handguns reduces crime rate. Right-leaning people do the same when the data support the opposite.   
+
+What is **even more disturbing** is that the performance of both groups, when faced with data that go against their pre-existing thesis, is actually **getting worse as their numeracy increases**.
+
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/GunControlOutcomePoliticallyMotivatedCognition.png)
+This is shown in the graph below, in which the researchers have measure the loss of accuracy depending on the numeracy of the subjects. People with high numeracy actually do worse. Smarter people are less likely to perform according to their numeracy when faced with politically-biased questions. Instead, they will tend to stick to their pre-existing notion, in something that is more similar to prejudice, or belief than actual reasoning. 
+
+Kahan et al. called this "Motivated Numeracy".
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/MotivatedNumeracy.png)
+
+#### Motivated Cognition
+
+You can understand this better when looking at the graph below. Left-leaning democrats and right-leaning republicans have opposing views on gun control. But these opposing views become much more expressed among people who are in general better in dealing with numbers.
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/PoliticallyMotivatedNumeracy.png)
+
+This is not an observation that is limited to gun control. It extends to many other issues related to the environment, vaccines, tax reforms etc.
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/PoliticallyMotivatedNumeracy2.png)
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/PoliticallyMotivatedNumeracyGlobalWarming.png)
+
+And it does not only apply to numeracy but to overall intelligence, measure through IQ.
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/PoliticallyMotivatedIntelligence_IQ.png)
+
+Or the capacity for analytical thinking as shown by this Cognitive Reflection Test Score (i.e. how well do people use "slow" thinking instead of jumping to conclusions).
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/PoliticallyMotivatedAnalyticalThinking.png)
+
+The authors explain this through their theory of **Motivated Cognition**. According to this, there is a inherent tendency for people to protect their identity. In order to stick with the pre-existing perceptions of their cultural group and to avoid cultural conflict they actually **disable** their cognitive faculties. They unconsciously opt for the wrong decision in order not to disrupt the cohesion of their cultural, political or other type of group they identify with.
+
+Depressing? It surely is something to reflect upon even from the scientific point of view. To what extent do we fix our decision making to pre-existing biases even in the face of data that say otherwise? Are there identity groups in the scientific world, in the form of people that support one or another theory? 
+
+
+#### Scientific Curiosity 
+
+In 2017, five years after the original "most depressing study", the same group was performing analyses on how likely people were to respond to scientific documentaries. They used a similar standardized scoring scheme but instead of numeracy, they now scored people according to their **scientific curiosity**. This was based on how likely people were to engage with scientific findings, documentaries, lay articles etc.
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/ScienceCuriosityPaper.png)
+
+With this information in hand, they turned back to their previous study and measured the Cultural Cognition prominence dependent now not on numeracy or IQ but on scientific curiosity. When compared to that, the cultural and political biases were gone. People still have some original predispositions that are politically-dependent, but their ability to reason increases with increasing scientific curiosity. 
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/ScienceCuriosityHeals.png)
+This is associated with a true open-mindedness. People with high scientific curiosity will be almost twice as likely to access a news story or information that goes against their political predisposition. And this is true for both left- and right-leaning individuals.
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/ScienceCuriosityTheRealOpenMindedness.png)
+
+
+![](/home/christoforos/Dropbox/github/MolBioMedClass/Figures/General/ScienceCuriosityTheRealOpenMindedness2.png)
+
+A positive and optimistic conclusion from this is that, having a genuine **scientific curiosity**, wanting to know how nature and things work and what wonders may still lie hidden in the cosmos, is not only the real open-mindedness but also the best way to use one's intellectual capacities in an unbiased and constructive manner. 
+
+Now, get out there and be curious! 
+
+
+### Assignment
 
 For this week's assignment you are asked to perform a motif building and search analysis using a set of defined motif instances and custom-made R functions.
 

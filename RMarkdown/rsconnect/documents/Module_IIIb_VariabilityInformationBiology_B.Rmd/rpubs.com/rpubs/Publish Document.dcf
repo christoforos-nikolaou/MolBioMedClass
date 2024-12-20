@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/1258473/7128b5da98184bc59f8f0dd05d4d8112
+bundleId: https://api.rpubs.com/api/v1/document/1258473/7128b5da98184bc59f8f0dd05d4d8112
+url: http://rpubs.com/ChristoforosNikolaou/1258473
+version: 1
