@@ -23,11 +23,11 @@ Course Objectives
 * [Nature Methods. Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance). A key primer series for statistics
 * [Statistics in Biology](https://www.nature.com/collections/qghhqm). A few Nature Editorials on quantitative concepts for biologists.
 
-## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_0_Welcome.md) (Oct 25th 2024)
+## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_0_Welcome.md) (Oct 24th 2025)
 
 ### [Lecture slides](https://www.dropbox.com/s/4164rafkq7b0sof/MBioMed_OpeningNotes.pdf)
 
-## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ia_Introductory_Concepts.md) (Nov 1st 2024)
+## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ia_Introductory_Concepts.md) (Oct 31st 2025)
 
 This weeks class is an introduction to the concepts we will be discussing throughout the semester. Namely:
 
@@ -42,11 +42,8 @@ This weeks class is an introduction to the concepts we will be discussing throug
 ### Practical: Introduction to R Programming Language and Environment
 
 * In this class we will get started with R as a programming language and Rstudio as our Integrated Development Environment (IDE) of choice.
-
 * You may find a slide presentation for an R Basics Introduction [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Presentations/ModuleIntroR.pdf)
-
 * A html file with more details and code that you can popy-paste to your own environments may be found [here](https://www.dropbox.com/scl/fi/jgddiowy0k51kjqt6ksnf/R_introduction.html?rlkey=enzdh02olvz9god2b5o61ifzi&st=5wo1b9f6&dl=0). (It's safer to download the file and open it in the browser of your choice)
-
 * We will use a hands on approach to see how we can start using R to describe problems, analyze them numerically and interpret the results.
 * We will use [this file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/Practicals_2024/R_practical_01_introduction.rmd).
 * For today we will be also needing [this data file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/bballshots.txt)
@@ -61,7 +58,7 @@ Students are all advised to access the reading material (to be read BEFORE class
 
 ### [Lecture slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf)
 
-## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 8th 2023)
+## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 7th 2025)
 
 * Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
 
@@ -82,7 +79,7 @@ We will be using this [file](https://www.dropbox.com/scl/fi/m5ry87xg6b1l6pzzjdxw
 
 * Try to rework the Bayes Rule problem. Think about what is the essential part in the comparison between two inverse conditional probabilities.
 
-## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 15th 2023)
+## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 14th 2025)
 
 Perhaps the most common types of analyses have to do with comparing things. In this class we will discuss ways to compare measurements, quantities from samples and populations. In particular we will discuss:
 
@@ -118,7 +115,7 @@ You are advised to download the following files in order to use them in the prac
 
 * Analysis of Gene Expression Data. Identification of Differentially expressed genes
 
-## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 22nd 2024)
+## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 21st 2025)
 
 In this class we will see how measures of similarity may apply to biological systems and in particular in two basic bioinformatics problems: Sequence comparisons and gene expression analysis. We will discuss in detail:
 
@@ -138,7 +135,7 @@ In this class we will see how measures of similarity may apply to biological sys
 
 * Sequence Alignment and Clustering (You will find this at the end of [this lecture](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B))
 
-## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 29th 2024)
+## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 28th 2025)
 
 Comparing means makes sense only up to one level. Samples and populations are variable and this variability is to be taken into account. In this class we will discuss issues related to variability and how it is strongly linked to the concept of information. The main points at this stage are
 
@@ -160,7 +157,7 @@ Comparing means makes sense only up to one level. Samples and populations are va
 * Performing PCA and k-means Clustering in Gene Expression Data  
    First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset.
 
-## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/1258473)(Dec 20th 2024)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/1258473)(Nov 28th 2025)
 
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
 
@@ -177,7 +174,7 @@ Variability lies at the heart of a number of biological phenomena from genomic v
 
 * Analyzing Motifs in Sequences
 
-## 7. Part X. An R practical Class (Dec 13th 2024)
+## 7. Part X. An R practical Class (Dec 5th 2025)
 
 This class will include an all-around practical on most of the topics we have covered up to now, using R.
 
@@ -185,7 +182,7 @@ You can find the (tentative) material [here](RMarkdown/ModuleX_RPracticals.rmd).
 
 (More info for this, to be posted soon)
 
-## 8. Part IVa. Correlation, Regression and Causation. In statistics. (Dec 20th 2024)
+## 8. Part IVa. Correlation, Regression and Causation. In statistics. (Dec 5th 2025)
 
 The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
 
@@ -203,7 +200,7 @@ The ultimate goal in the study of physical phenomena is to reveal quantifiable r
 
 * TBA
 
-## 9. Part IVb. Correlation, Regression and Causation. In biomedical modeling (included in previous practical class for the 2023-2024 season)
+## 9. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Dec 12th 2025)
 
 In this class we will see how some of the models we recently discussed find applications in the biomedical sciences. We will see how models of regression and classification can by applied in the fields of:
 
@@ -219,11 +216,11 @@ In this class we will see how some of the models we recently discussed find appl
 
 * Research and prepare material for your final project proposal
 
-## 9. Recap, Projects and Evaluation (Postponed for early 2024)
+## 9. Recap, Projects and Evaluation (Dec 19th 2025)
 
 This (final) class will be devoted to clarifying concepts, a general recap and discussion of your final projects, the proposal of which you will have to prepare and present in class. Projects may be collaborative but it is important that they put to practice the skills you have acquired during the semester.
 
-## 10. Final Projects Presentation and Discussion (March 15th, 2024)
+## 10. Final Projects Presentation and Discussion (TBA)
 
 A day will be devoted to the final presentation of your projects.
-You may find the final assignments [here](Evaluations/ClassEvaluation_15March2024.md)
+You may find the final assignments [here](Evaluations/ClassEvaluation_XXX.md)
