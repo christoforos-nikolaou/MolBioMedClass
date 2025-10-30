@@ -1,0 +1,40 @@
+---
+title: "MBioMed Class Practical I"
+author: "Christoforos Nikolaou"
+format: html
+editor: visual
+---
+
+## Introduction
+
+This is a first practical aiming at showcasing observed over expected frequencies
+
+## The problem
+
+Description of the problem
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false 
+library(tidyverse)
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+nrodata<-read.delim("C:/Users/chris/Dropbox/Data/GenomeUrbanizationPaper2017/SacCer2_All_NRO_values.tsv", header=T, sep="\t")
+hist(nrodata$GROValue, breaks=100)
+upratio<-length(which(nrodata$GROValue>=0))/length(nrodata$GROValue)
+upratio
+
+```
+
+```{r}
+upratio
+
+```

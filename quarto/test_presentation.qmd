@@ -1,0 +1,31 @@
+---
+title: "Untitled"
+format: pptx
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+### Test figure
+
+[![a random figure](C:/Users/chris/Dropbox/github/MolBioMedClass/Figures/General/PoliticallyMotivatedAnalyticalThinking.png){fig-alt="or smth"}](www.in.gr)
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+nrodata<-read.delim("C:/Users/chris/Dropbox/Data/GenomeUrbanizationPaper2017/SacCer2_All_NRO_values.tsv", header=T, sep="\t")
+hist(nrodata$GROValue, breaks=100)
+upratio<-length(which(nrodata$GROValue>=0))/length(nrodata$GROValue)
+upratio
+```

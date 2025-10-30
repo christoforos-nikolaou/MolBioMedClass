@@ -38,6 +38,8 @@ This weeks class is an introduction to the concepts we will be discussing throug
 * Remembering stuff (from high-school)
 * How to measure things
 * How to assess/compare/interpret measurements
+* **Some tasks**  
+   Check out some of the plots and diagrams at the very end of the slide deck. Are you familiar with them? Have you seen them before in papers or textbooks? Try and think what each element in them represents and then consider alternative ways to represent the same data.
 
 ### Practical: Introduction to R Programming Language and Environment
 
