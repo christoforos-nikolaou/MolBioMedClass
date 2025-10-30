@@ -166,6 +166,11 @@ _Think before you answer_
 
 ---
 
+## Bayes Theorem
+
+![](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/BayesTheorem.jpg?raw=true)
+---
+
 ## Part B. Planning your analyses
 
 ---
