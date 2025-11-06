@@ -41,21 +41,11 @@ This weeks class is an introduction to the concepts we will be discussing throug
 * **Some tasks**  
    Check out some of the plots and diagrams at the very end of the slide deck. Are you familiar with them? Have you seen them before in papers or textbooks? Try and think what each element in them represents and then consider alternative ways to represent the same data.
 
-### Practical: Introduction to R Programming Language and Environment
-
-* In this class we will get started with R as a programming language and Rstudio as our Integrated Development Environment (IDE) of choice.
-* You may find a slide presentation for an R Basics Introduction [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Presentations/ModuleIntroR.pdf)
-* A html file with more details and code that you can popy-paste to your own environments may be found [here](https://www.dropbox.com/scl/fi/jgddiowy0k51kjqt6ksnf/R_introduction.html?rlkey=enzdh02olvz9god2b5o61ifzi&st=5wo1b9f6&dl=0). (It's safer to download the file and open it in the browser of your choice)
-* We will use a hands on approach to see how we can start using R to describe problems, analyze them numerically and interpret the results.
-* We will use [this file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/Practicals_2024/R_practical_01_introduction.rmd).
-* For today we will be also needing [this data file](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/bballshots.txt)
-
 ### Reading
 
 Students are all advised to access the reading material (to be read BEFORE class) that you may find below:
 
 * Harvey Motulsky, Intuitive Biostatistics. [Chapter 1. Introduction to Statistics](https://www.dropbox.com/s/qaxqndv6zjoxi1l/Intuitive_Biostatistics.pdf)
-* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 1. Εισαγωγή: Τι είναι η Υπολογιστική Βιολογία](https://repository.kallipos.gr/bitstream/11419/1578/1/Chapter00_intro_R.pdf) [!Not to be used]
 * S. J. Gould. [The median isn't the message](https://journalofethics.ama-assn.org/article/median-isnt-message/2013-01)
 
 ### [Lecture slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf)
@@ -75,19 +65,13 @@ c. [Part Ib. Problems that require computation "-omics" Approaches to Biology](h
    - Problems that deal with serial data
    - Problems that require/allow modeling
 
-### Practicals: Using R to understand Conditional Probability
-
-We will be using this [file](https://www.dropbox.com/scl/fi/m5ry87xg6b1l6pzzjdxwq/RPractical_2_BayesRule.rmd?rlkey=idygc7h6s9q8vmgmbog0wiidw&dl=0) for the code and [this file](https://www.dropbox.com/scl/fi/04d557smmktwtjwzbxg4a/newArthritis.tsv?rlkey=114dyja38xtu6u3c0vtlcbxdz&dl=0) as input.
-
 ### Reading Material:
 
 * Points of Significance. [The Importance of being uncertain](https://www.dropbox.com/s/ukex2y7jh3fy1st/ImportanceOfBeingUncertain.pdf)
 
-### Assignments
+## 3. Part IIa. Similarity and Distance. Statistics
 
-* Try to rework the Bayes Rule problem. Think about what is the essential part in the comparison between two inverse conditional probabilities.
-
-## 3. [Part IIa. Similarity and Distance. Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 14th 2025)
+* a. [Similarity and Distance Problems in Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 14th 2025)
 
 Perhaps the most common types of analyses have to do with comparing things. In this class we will discuss ways to compare measurements, quantities from samples and populations. In particular we will discuss:
 
@@ -101,6 +85,9 @@ Perhaps the most common types of analyses have to do with comparing things. In t
 ### Practical Exercises in R
 
 We will be using R to analyze data and so assignments will be based on R. You are strongly advised to install R and R studio in your work computers.
+
+* Extra Exercise (Bayes Rule in R)
+* We will be using this [file](https://www.dropbox.com/scl/fi/m5ry87xg6b1l6pzzjdxwq/RPractical_2_BayesRule.rmd?rlkey=idygc7h6s9q8vmgmbog0wiidw&dl=0) for the code and [this file](https://www.dropbox.com/scl/fi/04d557smmktwtjwzbxg4a/newArthritis.tsv?rlkey=114dyja38xtu6u3c0vtlcbxdz&dl=0) as input.
 
 ### Data files to be used in practicals
 
