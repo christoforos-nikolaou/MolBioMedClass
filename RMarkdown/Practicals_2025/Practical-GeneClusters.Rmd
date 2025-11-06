@@ -1,13 +1,30 @@
 ---
-title: "MBioMed Class Practical I"
+title: "R Practical -  Identifying Gene Clusters in the Linear Genome"
 author: "Christoforos Nikolaou"
-format: 
-  html:
-    fig-width: 8
-    fig-height: 4
-    code-fold: false
-editor: visual
+date: "`r Sys.Date()`"
+
+output:
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document: null
+  pdf_document:
+    latex_engine: xelatex
+link-citations: yes
+bibliography: null
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+setwd("C:/Users/chris/Dropbox/github/MolBioMedClass/RMarkdown")
+```
+
 
 ## Introduction
 
@@ -19,25 +36,31 @@ This is a first practical aiming at showcasing observed over expected frequencie
 
 Description of the problem
 
-```{r}
-1 + 1
-```
+## Loading Libraries and Data
 
-You can add options to executable code like this
+Next we will have to load the necessary libraries and packages onto R. Remember that if a package is not already installed in your machine you will need to install it with $install.packages("nameOfpackage")$. Otherwise you can load it directly as we show below.
 
 ```{r}
-#| echo: false 
-#| output: false
-#| warning: false
 library(tidyverse)
 ```
 
+As you see the tidyverse() package is a package that loads a number of other packages and libraries that help us treat, analyze and visualize data.
+
+### Loading data
+
+We will next load the data from a file that is already 
+
 ```{r}
 nrodata<-read.delim("https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Datasets/SacCer2_All_NRO_values.tsv", header=T, sep="\t")
+str(nrodata)
+```
+
+```{r}
 hist(nrodata$GROValue, breaks=100)
 upratio<-length(which(nrodata$GROValue>=0))/length(nrodata$GROValue)
 upratio
 ```
+
 
 ```{r}
 library(rle)
@@ -112,3 +135,4 @@ ggplot(clusterTable, aes(x = as.numeric(`Cluster Size`), y = `Probability Ratio`
 j<-which(runs$lengths>=7)
 runs[j]
 ```
+
