@@ -1,5 +1,5 @@
 ---
-title: "R Practical 01 -  Introduction"
+title: "R Practical -  Introduction"
 author: "Christoforos Nikolaou"
 date: "`r Sys.Date()`"
 
@@ -20,7 +20,7 @@ bibliography: null
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, echo=F}
 setwd("C:/Users/chris/Dropbox/github/MolBioMedClass/RMarkdown")
 ```
 

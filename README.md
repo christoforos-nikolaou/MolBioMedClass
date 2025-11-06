@@ -60,9 +60,15 @@ Students are all advised to access the reading material (to be read BEFORE class
 
 ### [Lecture slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf)
 
-## 2. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md) (Nov 7th 2025)
+## 2. Introduction to R and Practicals 
+a. [R Practical 1. Introduction to R Programming Language and Environment](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/R_introduction.html)  
+b. [R Practical 2. Identifying gene clusters in the linear genome](https://rpubs.com/ChristoforosNikolaou/IdentifyingGeneClusters)  
+c. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md)  
+(Nov 7th 2025)
 
-* Computation in biomedical problems. We will break down the types of data that we may come up against. These fall into the following broad categories
+* In this class we will begin our hands-on work with the R environment. Starting from the basics of R we will move on to a practical example of how we can use R to idenitify gene clusters in the linear genome, a question directly related to the problem of pattern identification we discussed in a previous class.   
+
+* We will also present and discuss problems that require Computation in Biomedical Sciences. We will break down the types of data that we may come up against. These fall into the following broad categories
 
    - Problems of difference/distance/similarity
    - Problems related to variability

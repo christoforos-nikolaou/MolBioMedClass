@@ -1,5 +1,5 @@
 ---
-title: "R Practical 02-  Bayes Rule"
+title: "R Practical -  Bayes Rule"
 author: "Christoforos Nikolaou"
 date: "`r Sys.Date()`"
 

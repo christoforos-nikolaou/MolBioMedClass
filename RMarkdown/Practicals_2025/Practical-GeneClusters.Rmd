@@ -17,26 +17,62 @@ link-citations: yes
 bibliography: null
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, echo=F}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, echo=F}
 setwd("C:/Users/chris/Dropbox/github/MolBioMedClass/RMarkdown")
 ```
 
 
 ## Introduction
 
-This is a first practical aiming at showcasing observed over expected frequencies
+Having seen the basics of the R language and environment we will try to put some of what we 've learned in a real world application. This will a first practical aiming at showcasing the concept of pattern identification through the calculation of observed-over-expected frequencies/probabilities.
 
-## test
+## Part I. The problem
 
-## The problem
+We will deal with a real life biological problem: the identification of clusters of genes with **similar properties** in the **linear genome**. We will use data from [this publication](https://academic.oup.com/nar/article/45/10/5818/3079510) by our group.   
 
-Description of the problem
+The problem here is quite straight-forward. We have transiently de-activated topo-isomerase II, a major genome structural protein in yeast (and all eukaryotes) and have measured gene expression changes genome-wide, in the form of Genome Run-On (GRO) values. We are interested in how the topological stress that accumulates during topo-isomerase II inactivation propagates along the genome.   
+* Do genes become severely affected?  
+* In what way? Are they up- or down-regulated?  
+* Most importantly, does this de-regulation occur in tandem? Do genes become more affected if they are next to each other?  
 
-## Loading Libraries and Data
+
+![](https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/refs/heads/master/Figures/Practicals/ClusterObservation.png)
+
+
+Some initial observations on gene expression changes show that genes are **both** up- (red) **and** down-regulated (blue). Moreover, we may be tempted to **hypothesize** that they do so in the form of linear clusters: **series of genes placed in tandem** like so.  
+
+
+![](https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/refs/heads/master/Figures/Practicals/ClusterFormation.png)
+
+
+The question now becomes: How can we identify these clusters and then how can we be sure they are really there because of some **dependence** between consecutive genes and not out of chance?  
+
+In short, we need a way to test for **the expected size of the clusters** and then compare it with the **size of the clusters we observe**.
+
+## Part II. Data and Methods
+
+
+### The data
+
+We will first load the necessary data into R. We need a file containing all the NRO values and the coordinates of the genes. This file is available by the authors, so we use the link in the supplementary data to retrieve it and directly load it into our environment.  
+
+```{r}
+grodata<-read.delim("https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Datasets/SacCer2_All_NRO_values.tsv", header=T, sep="\t")
+```
+
+we can take a look at it and make sure it contains all we need
+
+```{r}
+str(grodata)
+```
+
+In preparation for the analysis we will next load the necessary packages and libraries.
+
+### Loading Libraries
 
 Next we will have to load the necessary libraries and packages onto R. Remember that if a package is not already installed in your machine you will need to install it with $install.packages("nameOfpackage")$. Otherwise you can load it directly as we show below.
 
@@ -46,93 +82,249 @@ library(tidyverse)
 
 As you see the tidyverse() package is a package that loads a number of other packages and libraries that help us treat, analyze and visualize data.
 
-### Loading data
+## Part III. Analysis
 
-We will next load the data from a file that is already 
+### Visual inspection of the data
+
+It is always good to have a visual idea of what the data look like before any analysis. Since we are dealing with one numerical value (GRO values) we can first perform some basic descriptive statistics on it, to calculate central tendencies, variance etc
+```{r}
+library(psych)
+describe(grodata$GROValue)
+```
+and then we can visualize the actual values in a histogram plot or a boxplot
 
 ```{r}
-nrodata<-read.delim("https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Datasets/SacCer2_All_NRO_values.tsv", header=T, sep="\t")
-str(nrodata)
+library(ggplot2)
+ggplot(grodata, aes(x = GROValue)) +
+  geom_histogram(binwidth = 0.1, fill = "olivedrab", color = "black") +
+  labs(title = "GRO Value Distribution", x = "GRO Values", y = "Frequency")
+#
+grovals<-data.frame(x = factor(""), y = grodata$GROValue) # this is just creating a dummy data.frame
+ggplot(grovals, aes(x = x, y = y)) +
+  geom_boxplot(fill = "olivedrab", color = "black", width = 0.3) +
+  labs(title = "GRO Value Boxplot", x= NULL, y = "GRO Values")
 ```
 
-```{r}
-hist(nrodata$GROValue, breaks=100)
-upratio<-length(which(nrodata$GROValue>=0))/length(nrodata$GROValue)
-upratio
-```
+Stop and think. What information do you gather from the above?
 
+
+## Extracting clusters
+
+We will start with going after exactly what we wanted to identify. That is, the clusters of consecutive positive or negative GRO values and their sizes.  
+To this end we will implement a very useful built-in R function called rle(). rle() takes a vector of (usually binary) values and creates series of homogeneous characters. For example given a series of:     
+$$S=[1,1,1,0,0,1,0,1,1]$$   
+  
+rle will create 5 subseries (which it calls "runs") of homogeneous characters and their corresponding lengths in two separate vectors:  
+The values of each "run" will be: 1, 0, 1, 0, 1  
+And the lengths of each will be: 3, 2, 1, 1, 2.  
+Basically, the original series S is translated into 3 1s, 2 0s, 1 1, 1 0 and 2 1s.  
+
+Below we load rle() and run it on our GRO values after we have created a binary transformation of GRO values into 1 (for GRO>=0) and 0 (for GRO<0).
 
 ```{r}
 library(rle)
-chroms<-as.factor(nrodata$chrom)
+chroms<-as.factor(grodata$chrom)
 runs<-rle(c("0"))
-for(chromosome in levels(chroms)){
-  i<-which(nrodata$chrom==chromosome)
-  values<-nrodata$GROValue[i]
-  values<-ifelse(values >= 0, 1, 0)
-  runs<-c(runs,rle(values))
+for(chromosome in levels(chroms)){ # we have to split values from each chromosome 
+  i<-which(grodata$chrom==chromosome)
+  values<-grodata$GROValue[i]
+  values<-ifelse(values >= 0, 1, 0) # values are now +/- GRO values
+  runs<-c(runs,rle(values)) # running rle and storing the output to previous chromosome data
 }
 ```
+
+We can see the output of this by simply calling the variable $runs$.
+```{r}
+runs
+```
+
+From which we see that we have identified 2304 runs of consecutive positive or negative values, of any size k.   
+  
+We can now start looking into their size distribution. We may also do this separately for positive and negative values like we see below.  
+First by creating two separate vectors holding the sizes of positive(=1) and negative(=0) clusters.  
+
 
 ```{r}
 posclusters<-runs$lengths[which(runs$values==1)]
 negclusters<-runs$lengths[which(runs$values==0)]
+```
+
+Next, we can calculate the times each cluster size occurs in the data. We can use the table() function for this. 
+
+```{r}
 tabp<-as.data.frame(table(posclusters))
 tabn<-as.data.frame(table(negclusters))
+#
+tabp
+```
+
+Next, we need to calculate the frequencies of these clusters. We will thus divide the number each cluster size occurs in our data with the total size of clusters (runs) reported by rle.
+
+```{r}
 tabp$Freq<-tabp$Freq/length(runs$lengths)
-colnames(tabp)[1]<-"Cluster Size"
+colnames(tabp)[1]<-"ClusterSize"
 tabn$Freq<-tabn$Freq/length(runs$lengths)
-colnames(tabn)[1]<-"Cluster Size"
+colnames(tabn)[1]<-"ClusterSize"
 tabp$type<-"positive"
 tabn$type<-"negative"
 tab<-rbind(tabp, tabn)
-tab$`Cluster Size`<-as.numeric(as.character(tab$`Cluster Size`))
+tab$ClusterSize<-as.numeric(as.character(tab$ClusterSize))
+```
 
+Last, we will plot the two distributions on the same graph against the corresponding k.
+
+```{r}
 #
 library(ggplot2)
-ggplot(tab, aes(x = as.numeric(`Cluster Size`), y = Freq, color= type)) +
+ggplot(tab, aes(x = as.numeric(ClusterSize), y = Freq, color= type)) +
   geom_point(size = 5, alpha = 0.6) +
   scale_color_manual(values = c("positive" = "firebrick4", "negative" = "steelblue4")) +
-  scale_x_continuous(breaks = sort(unique(tab$`Cluster Size`))) +
+  scale_x_continuous(breaks = sort(unique(tab$ClusterSize))) +
   labs(title = "Cluster Size Distribution", x = "Cluster Size", y = "Frequency") +
   theme_minimal()
 ```
+
+Notice how, for both types of clusters show very similar behaviour. Since there are no clear qualitative differences in the two distributions and for reasons of better statistics, we can merge the counts for both positive/negative clusters and simply create one distribution of **observed cluster sizes**. The code below does exactly that.
+
+```{r}
+observedclusters<-runs$lengths
+tabo<-as.data.frame(table(observedclusters))
+tabo$Freq<-tabo$Freq/length(runs$lengths)
+colnames(tabo)[1]<-"ClusterSize"
+tabo$type<-"observed"
+tabo$ClusterSize<-as.numeric(as.character(tabo$ClusterSize))
+#
+ggplot(tabo, aes(x = as.numeric(ClusterSize), y = Freq, color= type)) +
+  geom_point(size = 5, alpha = 0.6, col="forestgreen") +
+  scale_x_continuous(breaks = sort(unique(tabo$ClusterSize))) +
+  labs(title = "Cluster Size Distribution", x = "Cluster Size", y = "Frequency") +
+  theme_minimal()
+```
+
+
+
+There appears to be an exponential decay. This is plausible. The longer the cluster the less likely we would expect it to be. The question is how expected.  
+
+Remember two things:  
+1. What we see above is the observed frequency for a cluster of any given cluster size.  
+2. **But**, also remember our initial hypothesis is that there is some degree of dependence between consecutive genes that leads to the formation of large clusters. In fact, clusters that are larg**er** than the ones expected by chance (which we saw above).  
+  
+The question remains:  
+* How can we know if the cluster sizes we see are indeed larger than the ones expected by chance?  
+
+
+The key now rests on two things:  
+1. To calculate the **expected frequencies** of clusters based on **our data**.  
+2. To compare these frequencies with the **actual, observed** we have just extracted.  
+
+
+### Getting a background model. Expected Values
+
+In order to create a **background model** we can work in various ways. For instance, we could **simulate the data**, that is create random sets of GRO values, but we will leave this for another practical.  
+
+There is a more straight-forward way and it is to test the **null hypothesis** that we can create from our initial hypothesis. Remember that we have assumed **some dependence** between GRO values. The opposite would then be to examine the case of **independence**. Under independence every GRO value will be independent from the previous one. Using simple probability theory we could calculate the **expected probability** of any cluster size. We only need the base probability of a gene having a positive or a negative value.   
+
+Remember this plot:
+```{r}
+library(ggplot2)
+ggplot(grodata, aes(x = GROValue)) +
+  geom_histogram(binwidth = 0.1, fill = "olivedrab", color = "black") +
+  labs(title = "GRO Value Distribution", x = "GRO Values", y = "Frequency")
+```
+
+From which we can see that the distribution of GRO values is symmetrical around zero. We can easily calculate the percentage of positive/negative values like this:
+
+```{r}
+length(which(grodata$GROValue>=0))/length(grodata$GROValue)
+#
+length(which(grodata$GROValue<0))/length(grodata$GROValue)
+```
+from which we see that the frequency of positive/negative values in 0.507/0.492 Since this is very close to 50%-50%, we will simplify the frequencies to 0.5 for both positive and negative GRO values.  
+
+What can we do next? We can create a function that will calculate the probability of a k-gene cluster of positive or negative GRO-value genes. Remember, **assuming independence** the probability of consecutive k genes with a positive GRO value is:
+$$Ppos_{k}=P[positive]^k$$  
+and since we have set P[positive]=P[negative]=0.5, this becomes the same for any cluster of k consecutive genes:  
+
+$$P_{k}=P^k$$
+We may therefore easily calculate the probabilities of clusters up to any k. Below we do this for an extreme case for 30 genes. (Why is this extreme? Think about it).
 
 ```{r}
 p<-vector(mode="numeric", length=30)
 for(k in 1:30){
   p[k]=0.5**k
 }
-tabr<-data.frame("Cluster Size"=1:30, "Freq"=p, "type"="random")
-colnames(tabr)[1]<-"Cluster Size"
+tabr<-data.frame("ClusterSize"=1:30, "Freq"=p, "type"="expected")
+```
+
+We can see how the probability really decays exponentially with k in a line plot
+
+```{r}
+ggplot(tabr, aes(x = ClusterSize, y = Freq)) +
+  #geom_line(color = "forestgreen", linewidth = 3) +   # Line color can be customized
+  geom_point(color = "grey40", size=5, alpha=0.5) +   # Add points to see individual values
+  labs(title = "Cluster Size vs Expected Probability",
+       x = "Cluster Size",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+All that is left now is to compare this plot with the one we got from the actual data.
+
+### Comparing Observed over Expected Values
+
+The first thing we can do is plot the two distributions (observed and expected) on the same plot. 
+
+```{r}
+tab<-rbind(tabo, tabr)
 #
-tab<-rbind(tab, tabr)
-#
-ggplot(tab, aes(x = as.numeric(`Cluster Size`), y = log10(Freq), color= type)) +
-  geom_point(size = 5, alpha = 0.6) +
-  scale_color_manual(values = c("positive" = "firebrick4", "negative" = "steelblue4", "random"="grey30")) +
-  scale_x_continuous(breaks = sort(unique(tab$`Cluster Size`))) +
+ggplot(tab, aes(x = as.numeric(ClusterSize), y = Freq, color= type)) +
+  geom_point(size = 5, alpha = 0.7) +
+  scale_color_manual(values = c("observed" = "forestgreen", "expected"="grey40")) +
+  scale_x_continuous(breaks = sort(unique(tab$ClusterSize))) +
   labs(title = "Cluster Size Distribution", x = "Cluster Size", y = "Frequency") +
   theme_minimal()
 ```
+
+Some difference is visible, initially in favour of expected values, which rapidly shifts towards observed ones. As we are considering probabilities, the values decay really fast and after a given point they appear indistinguishable from zero. In such cases, we can use a simple log-transformation to increase the dynamic range of the values. This is what the above picture looks like, by simply taking the the log10 of the probabilities. 
+
+```{r}
+tab<-rbind(tabo, tabr)
+#
+ggplot(tab, aes(x = as.numeric(ClusterSize), y = log10(Freq), color= type)) +
+  geom_point(size = 5, alpha = 0.7) +
+  scale_color_manual(values = c("observed" = "forestgreen", "expected"="grey40")) +
+  scale_x_continuous(breaks = sort(unique(tab$ClusterSize))) +
+  labs(title = "Cluster Size Distribution", x = "Cluster Size", y = "log10(Frequency)") +
+  theme_minimal()
+```
+
+Differences between observed and expected values do really strike out now. Expected values follow a straight line, as would be expected for an exponential decay. The observed values, however do not show an exponential decay, but have a long-tail suggesting a different type of  distribution (They actually resemble a power-law but we will leave this for another practical). What happes with the real clusters is that **large-sized clusters appear much more frequently than expected**.  
+
+Starting from k=4, observed clusters frequencies begin to deviate from expected ones. By k=7 they are clearly non overlapping and at k=10 they are >3-fold more frequent than expected by chance.  
+
+As a last step we can try quantify to quantify these differences more precisely. We will use a simple approach of probability ratios. Below we take all cluster sizes from k=1 to k=15 and calculate the ratio of observed over expected frequencies. 
+
 
 ```{r}
 clusterTable<-matrix(0, nrow=15, ncol=2)
 for(i in 1:15){
   clusterTable[i,1]<-i
-  clusterTable[i,2]<-tabp$Freq[i]/tabr$Freq[i]
+  clusterTable[i,2]<-tabo$Freq[i]/tabr$Freq[i]
 }
 clusterTable<-as.data.frame(clusterTable)
 colnames(clusterTable)<-c("Cluster Size", "Probability Ratio")
+```
+
+And then we plot the value of this ratio against the baseline of 1. We may call this value an **enrichment**, meaning that it reflects the degree to which clusters of a given size appear more frequently than expected by chance. 
+
+```{r}
 ggplot(clusterTable, aes(x = as.numeric(`Cluster Size`), y = `Probability Ratio`)) +
-  geom_point(size = 5, alpha = 0.6, color="olivedrab") +
-  labs(title = "Cluster Size Enrichment", x = "Cluster Size", y = "Probability Ratio") +
+  geom_point(size = 5, alpha = 0.8, color="firebrick4") +
+  labs(title = "Cluster Size Obs/Exp Enrichment", x = "Cluster Size", y = "Probability Ratio") +
   geom_hline(yintercept=1, color="grey50", linetype="dashed", linewidth=0.5) +
   theme_minimal()
 ```
 
-```{r}
-j<-which(runs$lengths>=7)
-runs[j]
-```
+We see that from k=5 and above, all cluster sizes are enriched in frequency in the real, observed data, compared to the expected values. For k>=7 there is an at least 2-fold (ratio>=2) enrichment. This is exactly the threshold we set in our paper for which we considered all clusters of at least 7 genes to be significantly enriched (albeit through a slightly more robust simulation analysis).
+
 
