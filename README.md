@@ -51,7 +51,7 @@ Students are all advised to access the reading material (to be read BEFORE class
 ### [Lecture slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf)
 
 ## 2. Introduction to R and Practicals 
-a. [R Practical 1. Introduction to R Programming Language and Environment](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/R_introduction.html)  
+a. [R Practical 1. Introduction to R Programming Language and Environment](https://rpubs.com/ChristoforosNikolaou/Practical-RIntro)  
 b. [R Practical 2. Identifying gene clusters in the linear genome](https://rpubs.com/ChristoforosNikolaou/IdentifyingGeneClusters)  
 c. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md)  
 (Nov 7th 2025)

@@ -1,0 +1,302 @@
+---
+title: "Data Analysis with R"
+output: html_document
+---
+
+```{r include = F}
+library(gplots)
+library(RColorBrewer)
+library(plyr)
+```
+
+### The R programming environment
+
+The R environment combines the characteristics of a programming language and a graphical system (interface) that allows for the parallel testing of commands, analyses, and graphical representations.Installing RIn a Windows environment, as well as on Linux or MacOS, it is recommended for beginners to install RStudio [https://www.rstudio.com/], in which not only the commands but also the entire file you are reading are written.The Old Faithful datasetAs the subject of our course, we will revisit the Old Faithful dataset, which we analyzed with Excel during our Computer Use (BIO109) classes. This time we will use R for its processing and the graphical representations of our analyses.The dataset contains data on the duration and waiting time of the eruptions of the Old Faithful geyser in Yellowstone National Park in the USA.
+```{r}
+head(faithful)
+```
+
+### Using functions in R
+
+In the command above, we wrote head() placing the name of the dataset inside the parenthesis. This is the way we use functions in R. There is a very large number of functions for numerical, statistical data analysis, as well as for their graphical representation.For example, if we want to see the number of values contained in the data set, we can use the command str()
+
+```{r}
+str(faithful)
+```
+
+The result of the above function tells us that the data set is of the "data.frame" form and contains 272 observations for two variables, which are called eruptions and waiting and are of numerical form (numeric).Data types in RR uses a range of data types organized into different classes. For example, a data table (list) can contain real (numeric), integer, or complex numbers, characters (character), or logical variables (True, False). The str function also gives us information about the type of variables.
+```{r}
+a <- c(1,2,5.3,6,-2,4) # numeric vector
+b <- c("one","two","three") # character vector
+c <- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector
+str(a)
+```
+
+In the above series of commands, we create 3 data series which are all of the vector class, i.e., a one-dimensional data series. The difference is that vector a is of type numeric, i.e., real numbers, b is characters, and c is logical variables, respectively.See for example the result of str on b, c in relation to a.
+
+```{r}
+str(b)
+str(c)
+```
+
+Returning to our original dataset (faithful), str() tells us that it consists of two vectors of real numbers.Subsetting. Data ExtractionThe faithful dataset consists, as we saw, of two numerical tables of type vector. How could we view each one separately by isolating subsets of data from a larger set?This process is called subsetting and can be done in various ways.Structural subsettingBy the term "structural" subsetting, we mean the use of the data structure for extracting their subsets. In our example, the faithful data.frame contains two vectors in two columns. If we want to see the contents of the first column, we can use the bracket syntax.
+```{r}
+head(faithful[,1])
+```
+respectively, the contents of the second are given by:
+```{r}
+head(faithful[,2])
+```
+In the above examples, we simply use head() so as not to get the entire set of values in our console.Another way to view the data in a data.frame whose columns have a name is to request the corresponding column by its name using the $ operator. The above example is absolutely equivalent to:
+```{r}
+head(faithful$waiting)
+```
+The logic of subsetting can be done in more than one dimension. Thus, just as we used [,1] for the first column, the following:
+```{r}
+faithful[1,]
+```
+gives us the data of the first row. While the following:
+```{r}
+faithful[1,2]
+```
+gives us the element located in the first row and the second column. Generally, the element x,y in any data.frame is given by the coordinates [x,y].Subsetting can be extended to data series by giving ranges. Thus the following:
+```{r}
+faithful[1:10,2]
+```
+Gives the first 10 elements of column 2. Try just writing:
+```{r}
+1:10
+```
+The use of x:y defines a series of integers between x and y.In the case where we do not want a series of consecutive values but some discrete ones, we can use the concatenation operator c():
+```{r}
+c(1,10,2:20,5,6)
+```
+which, as you see, can combine discrete elements and series.Value assignment to a variableIn R, we are not obliged to work only with existing variables. We can obviously create our own. To do this, we just have to use the assignment operator <-:
+```{r}
+x<-faithful[1,2]
+```
+The above command first creates a variable named x and then assigns it the value of the first row/second column of faithful. To see what x contains, we just have to ask it to be printed to the console:
+```{r}
+x
+```
+In the same way, we can create variables that will be vectors:
+```{r}
+x<-c(1,2,3)
+y<-1:10
+z<-faithful$eruptions
+```
+or data.frames by connecting vector-type variables and giving a name to each column
+```{r}
+df<-data.frame(x=1:3, y=c("a","b","c"), z=c(10,30,40))
+df
+```
+with the only prerequisite that all columns are of equal length (in the above example = 3).Logical/Numerical subsettingWe can create subsets by requesting specific values based on logical/numerical checks. If, for example, we want the eruptions values that are less than or equal to 3, we can write:
+```{r}
+faithful$eruptions<=3
+```
+The result of the above command is a series of TRUE and FALSE values which are logical operators. Each of the 272 values corresponds to the question of whether the eruptions value is less than or equal to 3. What happens if we want to get the values that are less than 3? We just have to put the above logical check inside brackets in the eruptions vector.
+```{r}
+faithful$eruptions[faithful$eruptions<=3]
+```
+A better way to have absolute control of subsetting is by using the which function. This is used in combination with a logical/numerical check as follows:
+```{r}
+which(faithful$eruptions<=3)
+```
+The result is a vector that DOES NOT contain the values that satisfy the condition but their POSITIONS in the original vector. To get the values, we can simply combine the two vectors.
+```{r}
+which(faithful$eruptions<=3)->values
+faithful$eruptions[values]
+```
+
+### Functions in R
+So far, we have seen how we manipulate data to extract values and their subsets. But how can we perform analyses using R? The power of R lies in its functions, which are commands that perform complex procedures without the need to code them in statements. For example, if we want to find the minimum waiting time for an eruption in the faithful data.frame, we don't need to read all 272 values. We simply call the corresponding function:
+```{r}
+min(faithful$waiting)
+```
+The min() function thus returns the minimum value of a vector. We can do the same for the maximum value with the max() function:
+```{r}
+max(faithful$waiting)
+```
+min() and max() are only two of a huge number of functions that allow us to perform numerical and statistical analyses, as well as to graphically represent data. Next, we will look at some of the most basic ones in our attempt to better analyze the faithful dataset.Descriptive StatisticsOne of the most common uses of R is statistical data analysis. By applying simple functions, we can calculate characteristics of a data table such as the mean, the median, etc. For example, the mean value of the eruption duration values of faithful is given by:
+```{r}
+mean(faithful$eruptions)
+```
+While the corresponding values for variance and standard deviation are given by:
+```{r}
+var(faithful$eruptions)
+sd(faithful$eruptions)
+```
+Note that, as we expect from statistics, the first value is equal to the square of the second. We can verify this by using simple arithmetic operations in R.
+```{r}
+sd(faithful$eruptions)^2
+```
+where ^2 corresponds to raising to the power of 2. Conversely, taking the square root can be done using the sqrt() function:
+```{r}
+sqrt(var(faithful$eruptions))
+```
+or by raising to the corresponding exponent (1/2):
+```{r}
+var(faithful$eruptions)^(1/2)
+```
+Other descriptive statistics functions are the range: range(), the median: median(), etc.Installing Libraries in RA very useful statistical function is describe(), but it does not belong to the standard R package. To use it, we must first install the R package that contains it. Packages (or libraries) are sets of R functions that can be installed at will and contain special functionalities beyond the basic ones. The package we need for describe() is called psych and its installation is done as follows:
+```{r}
+#install.packages("psych")
+```
+Once the installation is completed without errors, we simply have to load the library as follows:
+```{r}
+library(psych)
+```
+
+Note the difference between installation and loading. In the first command, the package name is in double quotes, while in the second it is not. Also, note that the first command only needs to "run" once. Once the library is installed, you don't need to "download" it every time. However, you need to load it every time you execute R and want to use one of its functions.We can now execute describe(), which, unlike the previous ones, can be applied to data.frames and give results for a series of descriptive statistical elements:
+```{r}
+describe(faithful)
+```
+
+### Simple graphical representations with R
+
+So far, we have seen how we can use R for simple numerical and statistical analyses. However, a very important part of the language is its use for the graphical representation of data. Next, we will see how we can create elegant and information-dense graphs with simple (and less simple) commands.Bar ChartsThe simplest form of graphical data representation is a bar chart with bars whose heights correspond to numerical values. In R, we create such graphs with the barplot() function:
+```{r}
+barplot(faithful$eruptions)
+```
+which, as you see, turns out to be quite dense as it contains 272 values. Let's make it more distinct by representing only the first 50 values:
+```{r}
+barplot(faithful$eruptions[1:50])
+```
+Now let's make the graph more complete by adding some elements regarding the names of the axes, the title of the plot, etc:
+```{r}
+barplot(faithful$eruptions[1:50], xlab="Eruptions", ylab="Duration", main="Old Faithful", col="dark green")
+```
+In the above example, note that we also changed the color of the bars.HistogramsHistograms are a special category of bar charts, but instead of individual values, they represent frequencies of values within specific ranges. The hist() function represents histograms of vector-form data. See the example:
+```{r}
+hist(faithful$eruptions, col="dark red", xlim=c(min(faithful$eruptions), max(faithful$eruptions)), xlab="Eruption Duration", main="Eruptions")
+```
+Each bar here corresponds to the number of eruptions that have a duration between the values that correspond to the respective range defined by the x-axis. These ranges can be made smaller or larger by using the breaks option.
+```{r}
+hist(faithful$eruptions, col="dark red", xlim=c(min(faithful$eruptions), max(faithful$eruptions)), xlab="Eruption Duration", main="Eruptions", breaks=100)
+```
+Here with breaks=100 we have increased the number of segments for which we calculate the frequencies to 100. And here this number becomes 1000:
+```{r}
+hist(faithful$eruptions, col="dark red", xlim=c(min(faithful$eruptions), max(faithful$eruptions)), xlab="Eruption Duration", main="Eruptions", breaks=1000)
+```
+Observing the above histogram, it is clear that our data essentially consists of two distinct populations. Some eruptions have a short duration and some a longer one, something we could not distinguish simply by looking at the numerical values and which demonstrates the importance of graphical data representation. We can try to distinguish the eruptions into two groups: those with duration <= 3 and those with duration > 3. The following commands distinguish based on a logical check and then represent the two groups in two separate histograms on the same image.
+```{r}
+which(faithful$eruptions<=3.0)->short
+which(faithful$eruptions>3.0)->long
+par(mfrow=c(2,1))
+hist(faithful[short,1], col="dark red", xlim=c(min(faithful$eruptions), max(faithful$eruptions)), xlab="Eruption Duration", main="Short Eruptions")
+hist(faithful[long,1], col="dark blue", xlim=c(min(faithful$eruptions), max(faithful$eruptions)), xlab="Eruption Duration", main="Long Eruptions")
+```
+
+#### Boxplots and Testing Statistical Hypotheses
+The above system of two histograms can be used to distinguish two populations, however, it is not very practical for direct comparison. Something like this can be done more easily using boxplots. Boxplots are 5-point diagrams that simultaneously represent the median, the central 50% of the values, and the extreme (maximum, minimum) values of a set. Their main advantage is that they can be used side-by-side in samples for direct comparison, as below for the short-long eruption populations:
+```{r}
+boxplot(faithful[short,1], faithful[long,1], col=c("dark red", "dark blue"), names=c("Short","Long"), lwd=3, ylab="Eruption Duration", notch=T, varwidth=T, main="Short vs Long Eruptions")
+```
+
+In the above image, we have added a series of additional elements such as colors and parameters that shape the range of the box in relation to the number of values in the sample. We have also added a parameter that defines a notch (the narrowing around the median value) in a range of values that corresponds to a confidence interval. Something like this helps us tell if the difference between the two populations/samples is statistically significant. Roughly, if the two segments corresponding to the notches do not overlap, then the difference is statistically significant. Of course, here there is no such issue since we have initially separated our data in a way that there is no possibility of overlap.
+
+#### Testing statistical hypotheses
+In the above example, we saw how we could draw conclusions about differences between datasets by examining them with graphical representations. However, no matter how important graphical representations are for giving us a picture of the data, the objective way to examine statistical hypotheses is by applying strict statistical tests. We will see how we can apply one of the simplest statistical tests to two random samples of 100 waiting values in the faithful data.frame. The test we will perform is whether the mean values of the two samples are statistically significantly different, and the test for this specific check is the t-test. Initially, we will create two random samples of 50 values from the 272 possible values of our dataset.
+```{r}
+sample(1:272, 50)->x1
+sample(setdiff(1:272,x1), 50)->x2 # so as not to choose from the same 50 above
+```
+The second command is written so that 50 random values are selected not from the original 1:272, but from the subset that does not contain the first 50 belonging to x1. We are now ready to apply the t.test as follows:
+```{r}
+t.test(faithful$waiting[x1], faithful$waiting[x2])
+```
+
+The result we get from the t.test contains a series of useful information. Initially, we can see the mean values of our two samples. These are 72.96 and 71.92, respectively. The test we want to perform is that the difference between these two values is significantly different from 0. However, the confidence interval of our test (95% Confidence Interval), which gives us the range of values that this difference can take, is such (-4.227 to 6.307) that it contains the value 0. Thus, the test is judged to be not statistically significant, something that is also reflected in the p-value = 0.696. The p-value is the probability of a difference in mean values equal to or greater than the observed one occurring, given the null hypothesis that the population means are equal. Thus, the smaller it is, the more statistically significant the difference we calculate. In our case, the value is quite large, a fact that confirms what we concluded from the confidence interval.Let's now look at the corresponding check, not on two random samples, but on those that have short or long eruption durations. The question we are asking now is whether the duration of the eruption is capable of distinguishing between waiting times. Having already the values for the short and long eruptions, we apply the t.test as follows:
+```{r}
+t.test(faithful$waiting[short],faithful$waiting[long])
+```
+
+We now see that both the mean values (54.49 and 79.99) are very different, and the confidence interval is very far from 0 without containing it. The p-value is extremely small ($<10^{-16}$). We can say with great certainty that different duration values lead to very different waiting time values.Scatter plots. Correlation and Linear RegressionWe can deepen the analysis we have done so far by using another category of diagrams that use not one, but two sets of data that are connected. In the faithful example, the duration and waiting time of each eruption are two such data that can be represented in two dimensions in a scatterplot. The simplest use of the plot() function gives us such a diagram:
+```{r}
+plot(faithful$eruptions, faithful$waiting)
+```
+which is the same (as we saw above) as:
+```{r}
+plot(faithful[,1], faithful[,2])
+```
+Let's make the diagram a little more attractive by adding "body" and "color" to the points:
+```{r}
+plot(faithful[,1], faithful[,2], xlab="Eruption Duration", ylab="Eruption Waiting time", main="Old Faithful", type="p", pch=19, col="dark red")
+```
+and then, let's distinguish between short and long eruptions. This can be done by first representing one of the two subsets with plot() and then adding the second subset with the lines() function, which has exactly the same syntax but only works after plot() is called.
+```{r}
+plot(faithful[short,1], faithful[short,2], xlab="Eruption Duration", ylab="Eruption Waiting time", main="Old Faithful", type="p", pch=19, col="dark red", xlim=c(min(faithful$eruptions), max(faithful$eruptions)), ylim=c(min(faithful$waiting), max(faithful$waiting)));
+lines(faithful[long,1], faithful[long,2], xlab="Eruption Duration", ylab="Eruption Waiting time", main="Old Faithful", type="p", pch=19, col="dark blue")
+```
+We can repeat the above analysis by adding a legend in the top left "topleft" corner of the plot using the legend() function, after plot() and lines():
+```{r}
+plot(faithful[short,1], faithful[short,2], xlab="Eruption Duration", ylab="Eruption Waiting time", main="Old Faithful", type="p", pch=19, col="dark red", xlim=c(min(faithful$eruptions), max(faithful$eruptions)), ylim=c(min(faithful$waiting), max(faithful$waiting)));
+lines(faithful[long,1], faithful[long,2], xlab="Eruption Duration", ylab="Eruption Waiting time", main="Old Faithful", type="p", pch=19, col="dark blue")
+legend("topleft", c("Short","Long"), fill=c("dark red", "dark blue"), bty="n")
+```
+
+### Data Modeling
+
+#### Linear Correlation
+A few useful conclusions emerge from our analysis so far. Initially, that there are indeed two distinct categories of short and long eruptions, and subsequently, that there appears to be a correlation between the duration of the eruption and the waiting time until it. This is evident from the fact that the greater the value of the former, the greater the value of the latter. In statistics, there is an easy way to measure this correlation phenomenon. The simplest is the calculation of the linear correlation coefficient, which in R can be done with a simple function, cor():
+```{r}
+cor(faithful$eruptions, faithful$waiting)
+```
+
+The value of the correlation coefficient can be from -1 (fully negative correlation) to 1 (fully positive correlation), while values close to 0 indicate the absence of correlation, i.e., they correspond to data that do not co-vary. In our case, the value $\approx 0.9$ is strong evidence of a positive correlation. We can see if there is a difference in the correlation between duration and waiting time for the short and long eruptions:
+```{r}
+cor(faithful$eruptions[short], faithful$waiting[short])
+cor(faithful$eruptions[long], faithful$waiting[long])
+```
+
+You see that the individual coefficients are much smaller and that the value $\approx 0.9$ is mainly the result of the mixed population.
+
+### Data Modeling. 
+
+#### Linear Regression
+But how could we use the data to make predictions about eruption waiting time? Since the two data sets are correlated and linearly so, we can try to extract a numerical relationship that connects them. We can do this using the lm() function in R, which applies a technique called "linear regression," i.e., it extracts a linear relationship that best explains the data. We will apply lm to the first 100 eruptions of the faithful set as follows:
+```{r}
+lm(formula = waiting ~ eruptions, data = faithful[1:100,])
+```
+
+The syntax of the above command is slightly different from what we have seen so far. Initially, we declare the relationship we want to extract. Here we want to use the first 100 eruptions values as independent variables to predict the waiting values. The result of applying lm() is also slightly different from what we have seen so far. It consists of two values (intercept and eruptions) that correspond to the values $\alpha$ and $\beta$ in a function of the type $waiting = \alpha + \beta \cdot eruptions$.To see how this linear relationship behaves, we can add it to the scatter plot we created above with the abline() function:
+```{r}
+plot(faithful[short,1], faithful[short,2], xlab="Eruption Duration", ylab="Eruption Waiting time", main="Old Faithful", type="p", pch=19, col="dark red", xlim=c(min(faithful$eruptions), max(faithful$eruptions)), ylim=c(min(faithful$waiting), max(faithful$waiting)));
+lines(faithful[long,1], faithful[long,2], xlab="Eruption Duration", ylab="Eruption Waiting time", main="Old Faithful", type="p", pch=19, col="dark blue")
+legend("topleft", c("Short","Long"), fill=c("dark red", "dark blue"), bty="n")
+abline(a=37.977, b=9.529, col="green", lwd=3)
+```
+
+where the green line corresponds to the result of the linear model we applied above. A slightly more experienced eye will see that this line is not the best straight line for our data. This is logical if we consider that our data are 272 pairs of values and we have "trained" a model with only the first 100. A more complete model could use all of our values:
+```{r}
+lm(formula = waiting ~ eruptions, data = faithful)
+```
+Applying the new values gives a different straight line, which is shown here in dark green:
+```{r}
+plot(faithful[short,1], faithful[short,2], xlab="Eruption Duration", ylab="Eruption Waiting time", main="Old Faithful", type="p", pch=19, col="dark red", xlim=c(min(faithful$eruptions), max(faithful$eruptions)), ylim=c(min(faithful$waiting), max(faithful$waiting)));
+lines(faithful[long,1], faithful[long,2], xlab="Eruption Duration", ylab="Eruption Waiting time", main="Old Faithful", type="p", pch=19, col="dark blue")
+legend("topleft", c("Short","Long"), fill=c("dark red", "dark blue"), bty="n")
+abline(a=37.977, b=9.529, col="green", lwd=3)
+abline(a=33.47, b=10.73, col="dark green", lwd=3)
+```
+Finally, we can see to what extent our linear model can predict the waiting times by comparing the actual ones with those predicted by it. With the following commands, we first represent 50 random waiting values with a line and then with lines() the 50 waiting values resulting from the application of the two lm() models to the corresponding eruption values, the partial (in light green) and the full (in blue):
+```{r}
+sample(1:272,50)->random
+plot(seq(1:50), faithful$waiting[random], type="l", col="black", ylim=c(0,100), lwd=2, xlab="Number of Eruption", ylab="Waiting Time", main="Real vs Modelled Waiting Times")
+lines(seq(1:50), 37.977+9.529*faithful$eruptions[random], type="l", col="green", lwd=2)
+lines(seq(1:50), 33.47+10.73*faithful$eruptions[random], type="l", col="blue", lwd=2)
+legend("bottomright", c("Real","Partial","Full"), lwd=c(3,3,3), col=c("black","green","blue"), bty="n")
+```
+The differences between the two models do not seem to be large. We can see with one last analysis to what extent these are actually significant. We will create the sets of their differences from the actual values and represent them as boxplots.
+
+```{r}
+mod1<-(37.977+9.529*faithful$eruptions[random])-faithful$waiting[random]
+mod2<-(33.47+10.73*faithful$eruptions[random])-faithful$waiting[random]
+boxplot(mod1, mod2, lwd=3, notch=T, names=c("Partial","Full"), ylab="Difference from observed values", main="Model Performance")
+```
+The corresponding mean values of the differences are:
+```{r}
+mean(mod1)
+mean(mod2)
+```
+From the above, it emerges that there are indeed no large differences between the two models, but that the full one (mod2) gives values closer to 0 (as it should).
