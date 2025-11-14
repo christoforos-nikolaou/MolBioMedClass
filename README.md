@@ -82,13 +82,6 @@ Perhaps the most common types of analyses have to do with comparing things. In t
 * How we calculate distances and similarities between numerical values
 * How we may use these distances to group individuals/items in clusters
 
-### Practical Exercises in R
-
-We will be using R to analyze data and so assignments will be based on R. You are strongly advised to install R and R studio in your work computers.
-
-* Extra Exercise (Bayes Rule in R)
-* We will be using this [file](https://www.dropbox.com/scl/fi/m5ry87xg6b1l6pzzjdxwq/RPractical_2_BayesRule.rmd?rlkey=idygc7h6s9q8vmgmbog0wiidw&dl=0) for the code and [this file](https://www.dropbox.com/scl/fi/04d557smmktwtjwzbxg4a/newArthritis.tsv?rlkey=114dyja38xtu6u3c0vtlcbxdz&dl=0) as input.
-
 ### Data files to be used in practicals
 
 You are advised to download the following files in order to use them in the practical exercises
@@ -119,6 +112,14 @@ In this class we will see how measures of similarity may apply to biological sys
 * Data transformations for sequence alignment
 * Clustering data for gene expression analysis
 
+### Practical Exercises in R
+
+We will be using R to analyze data and so assignments will be based on R. You are strongly advised to install R and R studio in your work computers.
+
+* Extra Exercise (Bayes Rule in R)
+* We will be using this [file](https://www.dropbox.com/scl/fi/m5ry87xg6b1l6pzzjdxwq/RPractical_2_BayesRule.rmd?rlkey=idygc7h6s9q8vmgmbog0wiidw&dl=0) for the code and [this file](https://www.dropbox.com/scl/fi/04d557smmktwtjwzbxg4a/newArthritis.tsv?rlkey=114dyja38xtu6u3c0vtlcbxdz&dl=0) as input.
+
+  
 ### Reading
 
 * [Pairwise Sequence Alignment](https://www.dropbox.com/scl/fi/gj1mcgqvayyyil2sde1u2/02-PairAlignment.pdf?rlkey=wi3xtagcr53ejovq68v7d8hzz&dl=0)
