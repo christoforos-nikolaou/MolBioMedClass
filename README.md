@@ -50,14 +50,14 @@ Students are all advised to access the reading material (to be read BEFORE class
 
 ### [Lecture slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf)
 
-## 2. Introduction to R and Practicals 
+## 2. Introduction to R and Practicals
+
 a. [R Practical 1. Introduction to R Programming Language and Environment](https://rpubs.com/ChristoforosNikolaou/Practical-RIntro)  
 b. [R Practical 2. Identifying gene clusters in the linear genome](https://rpubs.com/ChristoforosNikolaou/IdentifyingGeneClusters)  
 c. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md)  
 (Nov 7th 2025)
 
-* In this class we will begin our hands-on work with the R environment. Starting from the basics of R we will move on to a practical example of how we can use R to idenitify gene clusters in the linear genome, a question directly related to the problem of pattern identification we discussed in a previous class.   
-
+* In this class we will begin our hands-on work with the R environment. Starting from the basics of R we will move on to a practical example of how we can use R to idenitify gene clusters in the linear genome, a question directly related to the problem of pattern identification we discussed in a previous class.
 * We will also present and discuss problems that require Computation in Biomedical Sciences. We will break down the types of data that we may come up against. These fall into the following broad categories
 
    - Problems of difference/distance/similarity
@@ -110,7 +110,7 @@ You are advised to download the following files in order to use them in the prac
 
 * Analysis of Gene Expression Data. Identification of Differentially expressed genes
 
-## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 21st 2025)
+## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 28th 2025)
 
 In this class we will see how measures of similarity may apply to biological systems and in particular in two basic bioinformatics problems: Sequence comparisons and gene expression analysis. We will discuss in detail:
 
@@ -130,7 +130,7 @@ In this class we will see how measures of similarity may apply to biological sys
 
 * Sequence Alignment and Clustering (You will find this at the end of [this lecture](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B))
 
-## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 28th 2025)
+## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Dec 5th 2025)
 
 Comparing means makes sense only up to one level. Samples and populations are variable and this variability is to be taken into account. In this class we will discuss issues related to variability and how it is strongly linked to the concept of information. The main points at this stage are
 
@@ -152,7 +152,7 @@ Comparing means makes sense only up to one level. Samples and populations are va
 * Performing PCA and k-means Clustering in Gene Expression Data  
    First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset.
 
-## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/1258473)(Nov 28th 2025)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/1258473)(Dec 12th 2025)
 
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
 
@@ -169,7 +169,7 @@ Variability lies at the heart of a number of biological phenomena from genomic v
 
 * Analyzing Motifs in Sequences
 
-## 7. Part X. An R practical Class (Dec 5th 2025)
+## 7. Part X. An R practical Class (Not part of 2025 Classes)
 
 This class will include an all-around practical on most of the topics we have covered up to now, using R.
 
@@ -177,7 +177,7 @@ You can find the (tentative) material [here](RMarkdown/ModuleX_RPracticals.rmd).
 
 (More info for this, to be posted soon)
 
-## 8. Part IVa. Correlation, Regression and Causation. In statistics. (Dec 5th 2025)
+## 8. Part IVa. Correlation, Regression and Causation. In statistics. (TBD)
 
 The ultimate goal in the study of physical phenomena is to reveal quantifiable relationships between properties. The first step towards this is the observation of correlation. Correlation is a statistical property that links two (or more) properties but may be generalized in models, which may be used to predict future events. In this class we will see how we can quantify the relationships between two or more properties and how, depending on the types of values they take, we need to distinguish between the following types of analyses:
 
@@ -195,7 +195,7 @@ The ultimate goal in the study of physical phenomena is to reveal quantifiable r
 
 * TBA
 
-## 9. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Dec 12th 2025)
+## 9. Part IVb. Correlation, Regression and Causation. In biomedical modeling (Not part of 2025 classes)
 
 In this class we will see how some of the models we recently discussed find applications in the biomedical sciences. We will see how models of regression and classification can by applied in the fields of:
 
