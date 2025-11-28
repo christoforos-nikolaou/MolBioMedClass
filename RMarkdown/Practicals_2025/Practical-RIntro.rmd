@@ -11,7 +11,10 @@ library(plyr)
 
 ### The R programming environment
 
-The R environment combines the characteristics of a programming language and a graphical system (interface) that allows for the parallel testing of commands, analyses, and graphical representations.Installing RIn a Windows environment, as well as on Linux or MacOS, it is recommended for beginners to install RStudio [https://www.rstudio.com/], in which not only the commands but also the entire file you are reading are written.The Old Faithful datasetAs the subject of our course, we will revisit the Old Faithful dataset, which we analyzed with Excel during our Computer Use (BIO109) classes. This time we will use R for its processing and the graphical representations of our analyses.The dataset contains data on the duration and waiting time of the eruptions of the Old Faithful geyser in Yellowstone National Park in the USA.
+The R environment combines the characteristics of a programming language and a graphical system (interface) that allows for the parallel testing of commands, analyses, and graphical representations.Installing RIn a Windows environment, as well as on Linux or MacOS, it is recommended for beginners to install RStudio [https://www.rstudio.com/], in which not only the commands but also the entire file you are reading are written.
+
+#### The Old Faithful dataset
+As the subject of our course, we will revisit the Old Faithful dataset. This time we will use R for its processing and the graphical representations of our analyses.The dataset contains data on the duration and waiting time of the eruptions of the Old Faithful geyser in Yellowstone National Park in the USA.
 ```{r}
 head(faithful)
 ```
@@ -25,6 +28,7 @@ str(faithful)
 ```
 
 The result of the above function tells us that the data set is of the "data.frame" form and contains 272 observations for two variables, which are called eruptions and waiting and are of numerical form (numeric).Data types in RR uses a range of data types organized into different classes. For example, a data table (list) can contain real (numeric), integer, or complex numbers, characters (character), or logical variables (True, False). The str function also gives us information about the type of variables.
+
 ```{r}
 a <- c(1,2,5.3,6,-2,4) # numeric vector
 b <- c("one","two","three") # character vector
