@@ -163,13 +163,9 @@ You can find a practical for today's class as an R-studio file [here](https://gi
 
 ### Reading
 
-Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 4. Μοτίβα σε Αλληλουχίες](https://repository.kallipos.gr/bitstream/11419/1581/1/Chapter03_seqmotifs_R.pdf)
-
+* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 4. Μοτίβα σε Αλληλουχίες](https://repository.kallipos.gr/bitstream/11419/1581/1/Chapter03_seqmotifs_R.pdf)
 * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 10. Ανάλυση Γενετικής Ποικιλομορφίας](https://repository.kallipos.gr/bitstream/11419/1588/1/Chapter10_genvariation_R.pdf)
 
-### Assignments
-
-* Analyzing Motifs in Sequences
 
 ## 7. Part X. An R practical Class (Not part of 2025 Classes)
 
