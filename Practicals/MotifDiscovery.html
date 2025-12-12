@@ -366,7 +366,7 @@ pre-aligned sequences, and then we will search for them in unknown
 sequences. The example will be a set of binding sites for a
 transcription factor involved in the differentiation of hematopoietic
 system cells, GATA, as identified in the human genome. The data consist
-of 50 hexanucleotides, which you can download from the gata.fa file <a href="https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/gata.fa">here</a>.
+of 50 hexanucleotides, which you can download from the gata.fa file <a href="https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Datasets/gata.fa">here</a>.
 (The data are taken from the book by Deonier, Tavare, and Waterman
 “Computational Genome Analysis”).</p>
 </div>
@@ -386,15 +386,16 @@ manipulate.<br />
 <p>Declare the folder where you will download the data as the working
 directory with the command. In my computer this is</p>
 <pre class="r"><code>setwd(&quot;~/Dropbox/github/MolBioMedClass/Rfunctions/&quot;)</code></pre>
-<p>and load the function you will find here as <a href="https://www.dropbox.com/s/2hmtvg6wn9xgjst/readfastafile.R">readfastafile.R</a>
-as well as <a href="https://www.dropbox.com/s/67815vjkrvxa72i/seqMotif.R">seqMotif.R</a>
+<p>and load the function you will find here as <a href="https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Rfunctions/readfastafile.R">readfastafile.R</a>
+as well as <a href="https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Rfunctions/seqMotif.R">seqMotif.R</a>
 which you will find at the respective links</p>
 <pre class="r"><code>source(&quot;~/Dropbox/github/MolBioMedClass/Rfunctions/seqMotif.R&quot;)
 source(&quot;~/Dropbox/github/MolBioMedClass/Rfunctions/readfastafile.R&quot;)</code></pre>
 <p>At this point, we will read the GATA sequences file using the
 readfastafile function and store them in a sequence array called gata.
-You can download the file from <a href="https://www.dropbox.com/s/pr51bnmp39b996a/gata.fa">here</a>. In my
-computer, this is already stored in a different folder so I run:</p>
+You can download the file from <a href="https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Datasets/gata.fa">here</a>.
+In my computer, this is already stored in a different folder so I
+run:</p>
 <pre class="r"><code>gata&lt;-readfastafile(&quot;../Datasets/gata.fa&quot;)</code></pre>
 <p>Examine the result to see the contents of the collection. It consists
 of 50 six-nucleotide sequences each. The fact that all sequences have
@@ -558,7 +559,7 @@ the other and compare their residues by position.</p>
 goal is to extract a consensus sequence from the set of sequences in our
 collection. Remember that the consensus sequence corresponds to the most
 common residue extracted by position. You can extract the consensus
-sequence using the namesake function <a href="https://www.dropbox.com/s/0n24xp9gjen6p1g/consensus.R">consensus.R</a>
+sequence using the namesake function <a href="https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Rfunctions/consensus.R">consensus.R</a>
 as shown below:</p>
 <pre class="r"><code>source(&quot;~/Dropbox/github/MolBioMedClass/Rfunctions/consensus.R&quot;)
 consensus(gata, threshold=0.3)</code></pre>
@@ -667,7 +668,7 @@ probabilistically.</p>
 of a DNA sequence, i.e., how characteristic the pattern it contains is,
 it is good to compare it with a set of random sequences. You can do all
 the above steps on a set of random sequences of the same length (6
-nucleotides) which you will find in the <a href="https://www.dropbox.com/s/102g7y0ortf43dq/random.fa">random.fa</a>
+nucleotides) which you will find in the <a href="https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Datasets/random.fa">random.fa</a>
 file.<br />
 Now we can take this random sequence collection into account by creating
 a PSSM matrix.</p>
@@ -699,10 +700,10 @@ PSSM you have created</p>
 <div id="searching-for-matches-in-a-longer-sequence" class="section level4">
 <h4>6. Searching for matches in a longer sequence</h4>
 <p>Having created the PSSM, you are now in the position to search for
-this specific motif in a DNA sequence. You can use this sequence <a href="https://www.dropbox.com/s/ni6nrp0niv47kd2/test1.fa">test1.fa</a>
+this specific motif in a DNA sequence. You can use this sequence <a href="https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Datasets/test1.fa">test1.fa</a>
 as an example. Read it according to what we have done already.</p>
 <pre class="r"><code>targetseq&lt;-readfastafile(&quot;../Datasets/test1.fa&quot;)</code></pre>
-<p>And now also download the PSSM-Searching function from <a href="https://www.dropbox.com/s/4ssz9kg3dj9bhbt/pssmSearch.R">pssmSearch.R</a>.
+<p>And now also download the PSSM-Searching function from <a href="https://raw.githubusercontent.com/christoforos-nikolaou/MolBioMedClass/master/Rfunctions/pssmSearch.R">pssmSearch.R</a>.
 Once loaded</p>
 <pre class="r"><code>source(&quot;../Rfunctions/pssmSearch.R&quot;)</code></pre>
 <p>You can now execute the search by placing the pre-calculated PSSM
