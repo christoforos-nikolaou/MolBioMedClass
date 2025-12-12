@@ -159,7 +159,7 @@ Variability lies at the heart of a number of biological phenomena from genomic v
 
 ### Practical II
 
-You can find a practical for today's class as an R-studio file [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Practicals/MotifDiscovery.rmd) or as an html file [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Practicals/MotifDiscovery.html).
+You can find a practical for today's class as an R-studio file [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Practicals/MotifDiscovery.rmd) or as an html file [here](https://rpubs.com/ChristoforosNikolaou/RPracticalMotifSearch).
 
 ### Reading
 
