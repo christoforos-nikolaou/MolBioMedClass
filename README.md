@@ -2,7 +2,7 @@ Welcome to the (unusually long named)
 
 # Fundamental principles in Bioinformatics, Computational Biology and Biostatistics
 
-A class that is part of the Molecular Biomedicine MSc Program.  
+A class that is part of the Molecular Biomedicine MSc Program.
 The class is supported by BSRC "Alexander Fleming" **[Computational Genomics Group](http://computational-genomics.weebly.com/)**
 
 ## Course Structure
@@ -38,32 +38,29 @@ This weeks class is an introduction to the concepts we will be discussing throug
 * Remembering stuff (from high-school)
 * How to measure things
 * How to assess/compare/interpret measurements
-* **Some tasks**  
-   Check out some of the plots and diagrams at the very end of the slide deck. Are you familiar with them? Have you seen them before in papers or textbooks? Try and think what each element in them represents and then consider alternative ways to represent the same data.
+* **Some tasks**
+  Check out some of the plots and diagrams at the very end of the slide deck. Are you familiar with them? Have you seen them before in papers or textbooks? Try and think what each element in them represents and then consider alternative ways to represent the same data.
 
 ### Reading
 
 Students are all advised to access the reading material (to be read BEFORE class) that you may find below:
 
 * Harvey Motulsky, Intuitive Biostatistics. [Chapter 1. Introduction to Statistics](https://www.dropbox.com/s/qaxqndv6zjoxi1l/Intuitive_Biostatistics.pdf)
-* S. J. Gould. [The median isn't the message](https://journalofethics.ama-assn.org/article/median-isnt-message/2013-01)
+* S. J. Gould. [The median isn&#39;t the message](https://journalofethics.ama-assn.org/article/median-isnt-message/2013-01)
 
 ### [Lecture slides](https://www.dropbox.com/s/hp2kxxkptpig6ov/MBioMed_00_Introduction.pdf)
 
 ## 2. Introduction to R and Practicals
 
-a. [R Practical 1. Introduction to R Programming Language and Environment](https://rpubs.com/ChristoforosNikolaou/Practical-RIntro)  
-b. [R Practical 2. Identifying gene clusters in the linear genome](https://rpubs.com/ChristoforosNikolaou/IdentifyingGeneClusters)  
-c. [Part Ib. Problems that require computation "-omics" Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md)  
-(Nov 7th 2025)
+a. [R Practical 1. Introduction to R Programming Language and Environment](https://rpubs.com/ChristoforosNikolaou/Practical-RIntro)b. [R Practical 2. Identifying gene clusters in the linear genome](https://rpubs.com/ChristoforosNikolaou/IdentifyingGeneClusters)c. [Part Ib. Problems that require computation &#34;-omics&#34; Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md)(Nov 7th 2025)
 
 * In this class we will begin our hands-on work with the R environment. Starting from the basics of R we will move on to a practical example of how we can use R to idenitify gene clusters in the linear genome, a question directly related to the problem of pattern identification we discussed in a previous class.
 * We will also present and discuss problems that require Computation in Biomedical Sciences. We will break down the types of data that we may come up against. These fall into the following broad categories
 
-   - Problems of difference/distance/similarity
-   - Problems related to variability
-   - Problems that deal with serial data
-   - Problems that require/allow modeling
+  - Problems of difference/distance/similarity
+  - Problems related to variability
+  - Problems that deal with serial data
+  - Problems that require/allow modeling
 
 ### Reading Material:
 
@@ -119,7 +116,6 @@ We will be using R to analyze data and so assignments will be based on R. You ar
 * Extra Exercise (Bayes Rule in R)
 * We will be using this [file](https://www.dropbox.com/scl/fi/m5ry87xg6b1l6pzzjdxwq/RPractical_2_BayesRule.rmd?rlkey=idygc7h6s9q8vmgmbog0wiidw&dl=0) for the code and [this file](https://www.dropbox.com/scl/fi/04d557smmktwtjwzbxg4a/newArthritis.tsv?rlkey=114dyja38xtu6u3c0vtlcbxdz&dl=0) as input.
 
-  
 ### Reading
 
 * [Pairwise Sequence Alignment](https://www.dropbox.com/scl/fi/gj1mcgqvayyyil2sde1u2/02-PairAlignment.pdf?rlkey=wi3xtagcr53ejovq68v7d8hzz&dl=0)
@@ -150,8 +146,8 @@ Comparing means makes sense only up to one level. Samples and populations are va
 
 ### Assignments
 
-* Performing PCA and k-means Clustering in Gene Expression Data  
-   First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset.
+* Performing PCA and k-means Clustering in Gene Expression Data
+  First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset.
 
 ## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/1258473)(Dec 12th 2025)
 
@@ -161,9 +157,14 @@ Variability lies at the heart of a number of biological phenomena from genomic v
 * We will see how variation in sequences may be quantified in order to assess the regulatory potential of particular sequences
 * We will visualize and quantify variability in many dimensions as the product of state-of-the-art single-cell genomics analyses
 
+### Practical II
+
+You can find a practical for today's class as an R-studio file [here]()(https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Practicals/MotifDiscovery.rmd) or as an html file [here\](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Practicals/MotifDiscovery.html)
+
 ### Reading
 
-* Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 4. Μοτίβα σε Αλληλουχίες](https://repository.kallipos.gr/bitstream/11419/1581/1/Chapter03_seqmotifs_R.pdf)
+Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 4. Μοτίβα σε Αλληλουχίες](https://repository.kallipos.gr/bitstream/11419/1581/1/Chapter03_seqmotifs_R.pdf)
+
 * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 10. Ανάλυση Γενετικής Ποικιλομορφίας](https://repository.kallipos.gr/bitstream/11419/1588/1/Chapter10_genvariation_R.pdf)
 
 ### Assignments
@@ -184,7 +185,7 @@ The ultimate goal in the study of physical phenomena is to reveal quantifiable r
 
 * Relationships between categorical values in contingency tables
 * Correlations between numerical values that are paired
-   At a next level we will see how we can draw from such relationships to build predictive models of regression and classification.
+  At a next level we will see how we can draw from such relationships to build predictive models of regression and classification.
 
 ### Reading
 
