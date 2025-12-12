@@ -1,0 +1,254 @@
+---
+title: "Practical II. Identifying and Searching Sequence Patterns in DNA"
+author: "Christoforos Nikolaou"
+date: "2025-12-12"
+output: html_document
+---
+
+### Introduction
+
+In this exercise, we will deal with the identification of sequence patterns. Initially, we will try to identify small cis-elements in pre-aligned sequences, and then we will search for them in unknown sequences. The example will be a set of binding sites for a transcription factor involved in the differentiation of hematopoietic system cells, GATA, as identified in the human genome. The data consist of 50 hexanucleotides, which you can download from the gata.fa file [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Datasets/gata.fa). 
+(The data are taken from the book by Deonier, Tavare, and Waterman "Computational Genome Analysis").
+
+### Exercise Objectives  
+The goals of this exercise are:  
+1. To read the aligned sequences into a data structure that we can manipulate.  
+2. To extract a consensus for the entire set.  
+3. To extract a PWM for the sequences at each position.  
+4. To graphically represent the PWM in two different ways.  
+ 
+### A. Identifying Sequence Patterns from sequence collections
+
+#### 1. Reading Sequences  
+
+Declare the folder where you will download the data as the working directory with the command. In my computer this is
+```{r}
+setwd("~/Dropbox/github/MolBioMedClass/Rfunctions/")
+```
+
+and load the function you will find here as [readfastafile.R](https://www.dropbox.com/s/2hmtvg6wn9xgjst/readfastafile.R) as well as [seqMotif.R](https://www.dropbox.com/s/67815vjkrvxa72i/seqMotif.R) which you will find at the respective links
+
+```{r}
+source("~/Dropbox/github/MolBioMedClass/Rfunctions/seqMotif.R")
+source("~/Dropbox/github/MolBioMedClass/Rfunctions/readfastafile.R")
+```
+
+At this point, we will read the GATA sequences file using the readfastafile function and store them in a sequence array called gata. You can download the file from [here](https://www.dropbox.com/s/pr51bnmp39b996a/gata.fa). In my computer, this is already stored in a different folder so I run:  
+```{r}
+gata<-readfastafile("../Datasets/gata.fa")
+```
+
+Examine the result to see the contents of the collection. It consists of 50 six-nucleotide sequences each. The fact that all sequences have the same length will be useful later for extracting pattern characteristics, as we will assume we can align the sequences one under the other and compare their residues by position.
+
+```{r}
+gata
+```
+
+
+#### 2. Extracting Consensus
+We now have the sequences stored in an R data structure. Our next goal is to extract a consensus sequence from the set of sequences in our collection. Remember that the consensus sequence corresponds to the most common residue extracted by position. You can extract the consensus sequence using the namesake function [consensus.R](https://www.dropbox.com/s/0n24xp9gjen6p1g/consensus.R) as shown below:
+```{r}
+source("~/Dropbox/github/MolBioMedClass/Rfunctions/consensus.R")
+consensus(gata, threshold=0.3)
+```
+
+You get a sequence corresponding to the consensus. As discussed in class, the probability with which the most prevalent residue appears can vary greatly for each position, affecting the reliability of the consensus. In the above example, we set the threshold to 0.3, meaning that if the maximum value was greater than 0.3, it returns that specific residue. What would the results be if we wanted to be stricter, e.g., requiring the most prevalent residue to have a probability of at least 0.6?
+
+```{r}
+consensus(gata, threshold=0.6)
+```
+
+You see how the consensus changes because for the last position there is relative ambiguity (no residue has p>=0.6). In this case, the function returns all residues with a probability of at least 1-threshold (in this case [AG]). Try increasing the threshold further and see how the consensus becomes increasingly "probabilistic". This does not mean you can no longer say what happens at each position, just that the initial estimate for a clear consensus is not so reliable. For example:  
+
+```{r}
+consensus(gata, threshold=0.9)
+```
+
+Nevertheless, as we already discussed in class, the best way to estimate a pattern is to look at the Probability Weight Matrix (PWM) and represent it as a logo.
+
+#### 3. Creating a PWM
+
+Beyond a simple consensus sequence, a sequence pattern can be quantified and analyzed better with a PWM, i.e., a position-specific probability matrix. Using the seqMotif.R function, we can calculate the PWM of a sequence collection as follows:
+```{r}
+gata_motif<-seqMotif(gata, drawmotif=F)
+gata_motif
+```
+The result is the probability matrix where the preference for the "GATA" pattern in the four middle positions of the sequence is clear, but we see that the trend is not equivalent for all residues. For example, the fifth position of the sequence is A with probability 0.68, while the third (also A) has a corresponding probability of 0.90. 
+
+In this case, we chose not to represent the motif with the option (drawmotif=F), but if we want we can see a first visualization of it in the form of a heatmap with the following command:
+
+```{r}
+seqMotif(gata, drawmotif=T)
+```
+
+Observe the shape that emerges. You first see on the x-axis the nucleotide positions we are examining (from P1 to P6) and on the y-axis the four possible outcomes (nucleotide). The corresponding elements (base by position) are colored based on the PWM, with red values for high and white for low. Can you see the correspondence with the consensus? 
+
+#### 4. Graphical Representation of PWM. Sequence Logo
+
+An even better way to represent a pattern is the one derived from aligned sequences through Shannon information analysis and its representation as a sequence logo. This can be done very easily using a function called ggseqlogo, which you can find here:
+
+```{r}
+#install.packages("ggseqlogo")
+library("ggseqlogo")
+```
+
+Now use this function on a slightly differently formatted version of the GATA collection:
+```{r}
+gata_seqs <- unlist(gata)
+logo <- ggseqlogo(gata_seqs)
+logo
+```
+
+Observe the logo that was created. To what extent does it contain information you got from the PWM via the heatmap?
+
+### B. Searching for sequence patterns in an unknown sequence
+
+In this part we will see how we can use an existing sequence pattern to identify hits, that is sequences in a longer stretch of DNA (e.g. an entire chromosome or a genome) that match the pattern. This is also done probabilistically.  
+
+#### 5. Creation of PSSM 
+
+To better understand the strength of a probabilistic representation of a DNA sequence, i.e., how characteristic the pattern it contains is, it is good to compare it with a set of random sequences. You can do all the above steps on a set of random sequences of the same length (6 nucleotides) which you will find in the [random.fa](https://www.dropbox.com/s/102g7y0ortf43dq/random.fa) file.  
+Now we can take this random sequence collection into account by creating a PSSM matrix. 
+
+```{r}
+random<-readfastafile("../Datasets/random.fa")
+random_motif<-seqMotif(random, draw=F)
+random_motif
+```
+We can now create a PSSM matrix by comparing the gata.fa and random.fa collections. We will calculate the base2-logarithm of the ratio of the two motifs with gata in the numerator. A necessary addition is to add pseudocounts to both motifs to avoid indeterminacies like N/0 or log(0). An indicative command adds a small amount (0.01) to both parts of the ratio:
+```{r}
+pssm<-log2((gata_motif+0.01)/(random_motif+0.01))
+```
+where gata_motif and random_motif have been obtained by applying seqMotif() to the respective sequence collections. Take a look at the PSSM you have created
+
+```{r}
+pssm
+```
+
+#### 6. Searching for matches in a longer sequence
+
+Having created the PSSM, you are now in the position to search for this specific motif in a DNA sequence. You can use this sequence  [test1.fa](https://www.dropbox.com/s/ni6nrp0niv47kd2/test1.fa) as an example. Read it according to what we have done already.
+```{r}
+targetseq<-readfastafile("../Datasets/test1.fa")
+```
+
+And now also download the PSSM-Searching function from [pssmSearch.R](https://www.dropbox.com/s/4ssz9kg3dj9bhbt/pssmSearch.R). Once loaded
+```{r}
+source("../Rfunctions/pssmSearch.R")
+```
+
+You can now execute the search by placing the pre-calculated PSSM against the target sequence like so:
+```{r}
+pssmSearch(pssm, targetseq, threshold=0.8)
+```
+
+Compare this with a search using the PWM
+
+```{r}
+pssmSearch(gata_motif, targetseq, threshold=0.8)
+```
+
+Which shows you exactly how less specific a PWM-search is.
+
+#### 7. Comparing PWM and PSSM Motif Strengths
+
+As a last step we will compare the searches with PSSM and PWM at the level of motif clarity and information content. First we will write the code to extract the hits from the target sequence. We will use this simple function we will create:
+
+```{r}
+extract_substrings <- function(sequence, starts, ends) {
+  sequence <- as.character(sequence)[1]  # Single string
+  starts <- as.numeric(starts)
+  ends <- as.numeric(ends)
+  
+  if(length(starts) != length(ends)) stop("Length mismatch")
+  
+  result <- mapply(function(s, e) substr(sequence, s, e), starts, ends)
+  return(result)
+}
+```
+
+Then we will identify the starts of the hits in the target sequence like so:
+```{r}
+pssm_output<-seqstarts<-pssmSearch(pssm, targetseq, threshold=0.5)
+pssm_output
+```
+and now just get the starts
+```{r}
+starts<-pssm_output[,1]
+starts
+```
+
+Since we know the patterns are 6 nucleotides long we can simply create the end coordinates by adding 5 to all starts and extract the hits like this:
+
+```{r}
+ends<-starts+5
+substringsPSSM <- extract_substrings(targetseq, starts, ends)
+substringsPSSM
+```
+We can now apply the logo function to this list
+
+```{r}
+ggseqlogo(substringsPSSM)
+```
+and do the same for the PWM hits
+
+```{r}
+pwm_output<-seqstarts<-pssmSearch(gata_motif, targetseq, threshold=0.8)
+starts<-pwm_output[,1]
+ends<-starts+5
+substringsPWM <- extract_substrings(targetseq, starts, ends)
+ggseqlogo(substringsPWM)
+```
+
+#### 8. Comparing PSSM and PWM searches at the level of Information Content
+
+As a last step we will calculate the Information Content of the resulting searches. We will need first to create **new PWMs** from the hits. For example:
+
+```{r}
+pwmtest<-seqMotif(as.list(substringsPSSM))
+```
+Then, it is (fairly) simple to calculate the **mean Information Content** directly from the matrix. We will use our own function which you see here:
+
+```{r}
+shannon_ic <- function(pwm) {
+  # pwm: matrix/data.frame with rows A,C,G,T and columns P1,P6...
+  bases <- c("A", "C", "G", "T")
+  
+  # For each position (column)
+  ic <- apply(pwm, 2, function(col) {
+    # Normalize probabilities (in case they don't sum exactly to 1)
+    p <- as.numeric(col)
+    p <- p / sum(p)
+    p[p == 0] <- NA  # Avoid log(0)
+    
+    # Shannon entropy: H = -sum(p * log2(p))
+    entropy <- -sum(p * log2(p), na.rm = TRUE)
+    
+    # Information content: IC = 2 - H (max entropy for 4 bases = log2(4) = 2)
+    ic_pos <- 2 - entropy
+    return(ic_pos)
+  })
+  
+  return(ic)
+}
+```
+
+And then run it on our test PWM to get the IC for every position
+
+```{r}
+shannon_ic(pwmtest)
+```
+
+Or directly the mean over all positions
+
+```{r}
+mean(shannon_ic(pwmtest))
+```
+
+Compare this to the same type of output, now for the PWM search.
+
+```{r}
+pwmtest<-seqMotif(as.list(substringsPWM))
+mean(shannon_ic(pwmtest))
+```
+
