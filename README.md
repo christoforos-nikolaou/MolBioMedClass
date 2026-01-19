@@ -166,7 +166,6 @@ You can find a practical for today's class as an R-studio file [here](https://gi
 * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 4. Μοτίβα σε Αλληλουχίες](https://repository.kallipos.gr/bitstream/11419/1581/1/Chapter03_seqmotifs_R.pdf)
 * Χριστόφορος Νικολάου, Υπολογιστική Βιολογία. [Κεφάλαιο 10. Ανάλυση Γενετικής Ποικιλομορφίας](https://repository.kallipos.gr/bitstream/11419/1588/1/Chapter10_genvariation_R.pdf)
 
-
 ## 7. Part X. An R practical Class (Not part of 2025 Classes)
 
 This class will include an all-around practical on most of the topics we have covered up to now, using R.
@@ -213,7 +212,7 @@ In this class we will see how some of the models we recently discussed find appl
 
 This (final) class will be devoted to clarifying concepts, a general recap and discussion of your final projects, the proposal of which you will have to prepare and present in class. Projects may be collaborative but it is important that they put to practice the skills you have acquired during the semester.
 
-## 10. Final Projects Presentation and Discussion (TBA)
+## 10. Final Projects Presentation and Discussion (Feb 18th 2026)
 
 A day will be devoted to the final presentation of your projects.
-You may find the final assignments [here](Evaluations/ClassEvaluation_XXX.md)
+You may find the final assignments [here](Evaluations/ClassEvaluation_February2026.md)
