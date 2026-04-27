@@ -70,7 +70,6 @@ we can take a look at it and make sure it contains all we need
 str(grodata)
 ```
 
-In preparation for the analysis we will next load the necessary packages and libraries.
 
 ### Loading Libraries
 
@@ -328,3 +327,57 @@ ggplot(clusterTable, aes(x = as.numeric(`Cluster Size`), y = `Probability Ratio`
 We see that from k=5 and above, all cluster sizes are enriched in frequency in the real, observed data, compared to the expected values. For k>=7 there is an at least 2-fold (ratio>=2) enrichment. This is exactly the threshold we set in our paper for which we considered all clusters of at least 7 genes to be significantly enriched (albeit through a slightly more robust simulation analysis).
 
 
+### Αppendix
+
+We saw above that large (>=7 genes) clusters are indeed reflecting some positional dependence in the response to topological stress.  
+Going back to the gene level, one additional hypothesis is that GRO values may be dependent on the size of the genes or the space between them.  
+As a first step we will create the variables for both on the GRO data, like so:
+
+#### Calculating and adding the gene size and interval size between consecutive genes
+```{r}
+library(dplyr)
+# gene size
+grodata <- grodata %>% mutate(genesize = endCoord - startCoord)
+# interval size
+grodata <- grodata %>%
+  arrange(chrom, startCoord) %>%
+  group_by(chrom) %>%
+  mutate(
+    next_start = ifelse(row_number() == 1, 1L, lead(startCoord)),
+    interval_size = pmax(0, next_start - endCoord)
+  ) %>%
+  select(-next_start)
+```
+
+We may then first plot the data comparatively for positive and negative GRO values separately
+
+```{r}
+pos<-which(grodata$GROValue>=0)
+neg<-which(grodata$GROValue<0)
+#
+par(mfrow=c(1,2)) # splitting the panel in two
+boxplot(log10(grodata$genesize[pos]), log10(grodata$genesize[neg]), main="Gene Size", col="steelblue4", names=c("GRO>0", "GRO<0"), las=1)
+#
+boxplot(log10(grodata$interval_size[pos]+1), log10(grodata$interval_size[neg]+1), main="Gene Interval Size", col="olivedrab", names=c("GRO>0", "GRO<0"), las=1)
+```
+
+From the plots it is suggestive that:  
+a) Gene size appears to be not related to the GRO value, hence the topological response.  
+b) Gene interval sizes, on the other hand, appear to be longer for GRO-positive genes, compared to GRO-negative ones.  
+
+We may test both hypotheses with a simple application of a t-Test. First for the gene size
+
+```{r}
+t.test(grodata$genesize[pos], grodata$genesize[neg])
+```
+
+in which we see that the average gene sizes of both GRO-positive and -negative genes are very similar (~1500 nucleotides), which is also supported by the high p-value and the symmetric confidence interval spanning 0.  
+
+On the other hand, the test for the interval size, yields a very different outcome.
+
+```{r}
+t.test(grodata$interval_size[pos], grodata$interval_size[neg])
+
+```
+
+We see that, indeed, there is a strong statistically significant difference between GRO-positive and GRO-negative genes. Smaller intergenic spaces negatively affect genes, under topological stress. This is explained on the basis of topological stress dissipation. That is, topological stress may be "relieved" by dissipating in the non-genic space around genes, during transcription. 

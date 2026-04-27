@@ -102,6 +102,12 @@ Problem #2: We tend to be overconfident
 * Distinguishing random fluctuations from real effects can be hard
 * Problem #3: We are fooled by regression to the mean.
 
+### Deductive Reasoning 
+
+https://en.wikipedia.org/wiki/Wason_selection_task
+
+![](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/General/DeductiveReasoning.png?raw=true)
+
 ---
 
 ## The Texas sharpshooter's fallacy
@@ -168,8 +174,7 @@ _Think before you answer_
 
 ## Bayes Theorem
 
-![](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/BayesTheorem.jpg?raw=true)
----
+## ![](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/Statistics/BayesTheorem.jpg?raw=true)
 
 ## Part B. Planning your analyses
 
