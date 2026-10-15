@@ -23,11 +23,11 @@ Course Objectives
 * [Nature Methods. Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance). A key primer series for statistics
 * [Statistics in Biology](https://www.nature.com/collections/qghhqm). A few Nature Editorials on quantitative concepts for biologists.
 
-## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_0_Welcome.md) (Oct 24th 2025)
+## 0. [Welcome note](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_0_Welcome.md) (Oct 15th 2026)
 
 ### [Lecture slides](https://www.dropbox.com/s/4164rafkq7b0sof/MBioMed_OpeningNotes.pdf)
 
-## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ia_Introductory_Concepts.md) (Oct 31st 2025)
+## 1. [Part Ia. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ia_Introductory_Concepts.md) (Oct 30th 2026)
 
 This weeks class is an introduction to the concepts we will be discussing throughout the semester. Namely:
 
@@ -39,7 +39,7 @@ This weeks class is an introduction to the concepts we will be discussing throug
 * How to measure things
 * How to assess/compare/interpret measurements
 * **Some tasks**
-  Check out some of the plots and diagrams at the very end of the slide deck. Are you familiar with them? Have you seen them before in papers or textbooks? Try and think what each element in them represents and then consider alternative ways to represent the same data.
+   Check out some of the plots and diagrams at the very end of the slide deck. Are you familiar with them? Have you seen them before in papers or textbooks? Try and think what each element in them represents and then consider alternative ways to represent the same data.
 
 ### Reading
 
@@ -52,15 +52,18 @@ Students are all advised to access the reading material (to be read BEFORE class
 
 ## 2. Introduction to R and Practicals
 
-a. [R Practical 1. Introduction to R Programming Language and Environment](https://rpubs.com/ChristoforosNikolaou/Practical-RIntro)b. [R Practical 2. Identifying gene clusters in the linear genome](https://rpubs.com/ChristoforosNikolaou/IdentifyingGeneClusters)c. [Part Ib. Problems that require computation &#34;-omics&#34; Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md)(Nov 7th 2025)
+a. [R Practical 1. Introduction to R Programming Language and Environment](https://rpubs.com/ChristoforosNikolaou/Practical-RIntro)  
+b. [R Practical 2. Identifying gene clusters in the linear genome](https://rpubs.com/ChristoforosNikolaou/IdentifyingGeneClusters)  
+c. [Part Ib. Problems that require computation &#34;-omics&#34; Approaches to Biology](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.md)  
+(Nov 6th 2026)
 
 * In this class we will begin our hands-on work with the R environment. Starting from the basics of R we will move on to a practical example of how we can use R to idenitify gene clusters in the linear genome, a question directly related to the problem of pattern identification we discussed in a previous class.
 * We will also present and discuss problems that require Computation in Biomedical Sciences. We will break down the types of data that we may come up against. These fall into the following broad categories
 
-  - Problems of difference/distance/similarity
-  - Problems related to variability
-  - Problems that deal with serial data
-  - Problems that require/allow modeling
+   - Problems of difference/distance/similarity
+   - Problems related to variability
+   - Problems that deal with serial data
+   - Problems that require/allow modeling
 
 ### Reading Material:
 
@@ -68,7 +71,7 @@ a. [R Practical 1. Introduction to R Programming Language and Environment](https
 
 ## 3. Part IIa. Similarity and Distance. Statistics
 
-* a. [Similarity and Distance Problems in Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 14th 2025)
+* a. [Similarity and Distance Problems in Statistics](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIa) (Nov 13th 2026)
 
 Perhaps the most common types of analyses have to do with comparing things. In this class we will discuss ways to compare measurements, quantities from samples and populations. In particular we will discuss:
 
@@ -100,7 +103,7 @@ You are advised to download the following files in order to use them in the prac
 
 * Analysis of Gene Expression Data. Identification of Differentially expressed genes
 
-## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 28th 2025)
+## 4. Part IIb. Similarity and Distance. In sequence comparison and gene expression. [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B) (Nov 20th 2026)
 
 In this class we will see how measures of similarity may apply to biological systems and in particular in two basic bioinformatics problems: Sequence comparisons and gene expression analysis. We will discuss in detail:
 
@@ -127,7 +130,7 @@ We will be using R to analyze data and so assignments will be based on R. You ar
 
 * Sequence Alignment and Clustering (You will find this at the end of [this lecture](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIb_B))
 
-## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Dec 5th 2025)
+## 5. Part IIIa. [Variability and Information. In statistics and Data Science](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIa) (Nov 27th 2026)
 
 Comparing means makes sense only up to one level. Samples and populations are variable and this variability is to be taken into account. In this class we will discuss issues related to variability and how it is strongly linked to the concept of information. The main points at this stage are
 
@@ -147,9 +150,9 @@ Comparing means makes sense only up to one level. Samples and populations are va
 ### Assignments
 
 * Performing PCA and k-means Clustering in Gene Expression Data
-  First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset.
+   First download the dataset from this link that contains the [normalized gene expression](https://www.dropbox.com/s/zexg6cjr8lvg263/GeneExpressionDataset_normalized.tsv). Τhen, follow the instructions in the lecture notes above to perform ANOVA, PCA and Clustering of the dataset.
 
-## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/1258473)(Dec 12th 2025)
+## 6. Part IIIb. Variability and Information. In gene regulation and genomic variation [VolI](https://rpubs.com/ChristoforosNikolaou/MBioMedPtIIIb_A) and [VolII](https://rpubs.com/ChristoforosNikolaou/1258473)(Dec 5th 2026)
 
 Variability lies at the heart of a number of biological phenomena from genomic variation, to cell populations. In this class we will discuss how we go about to study and exploit variability in numerous contexts. In particular:
 
@@ -180,7 +183,7 @@ The ultimate goal in the study of physical phenomena is to reveal quantifiable r
 
 * Relationships between categorical values in contingency tables
 * Correlations between numerical values that are paired
-  At a next level we will see how we can draw from such relationships to build predictive models of regression and classification.
+   At a next level we will see how we can draw from such relationships to build predictive models of regression and classification.
 
 ### Reading
 
