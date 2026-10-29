@@ -74,16 +74,7 @@ _Can you discover "runs" of Xs or -s in the above panel?_
 
 ## A numbers game (guess a range!)
 
-1 The year of birth of Mozart  
-2 Number of inhabited Greek islands  
-3 Nikos Galis career average points per game  
-4 The length of the Danube River (in km)  
-5 Gestation period of a lion (in days)  
-6 Number of films directed by Stanley Kubrick  
-7 Number of years between the first and the last Beatles recording  
-8 Age of Pope Francis  
-9 Number of women who have won a Literature Nobel Prize  
-10 Wingspan of an Airbus A320 (in m)
+[Try this game](https://how-confident-should-you-be.netlify.app/)
 
 ---
 
@@ -102,11 +93,15 @@ Problem #2: We tend to be overconfident
 * Distinguishing random fluctuations from real effects can be hard
 * Problem #3: We are fooled by regression to the mean.
 
-### Deductive Reasoning 
+### Deductive Reasoning
 
 https://en.wikipedia.org/wiki/Wason_selection_task
 
 ![](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Figures/General/DeductiveReasoning.png?raw=true)
+
+![]()
+
+![]()
 
 ---
 
