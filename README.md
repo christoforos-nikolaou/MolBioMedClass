@@ -7,11 +7,11 @@ The class is supported by BSRC "Alexander Fleming" **[Computational Genomics Gro
 
 ### Course Structure
 
-9(+1) Lectures on topics related to computational and statistical approaches of molecular/biomedical problems.  
+9(+1) Lectures on topics related to computational and statistical approaches of molecular/biomedical problems.
 
-* Readings will include short papers on statistics and computational biology, original research papers and notes that you may find in this github page in the form of html files, code or slides. 
+* Readings will include short papers on statistics and computational biology, original research papers and notes that you may find in this github page in the form of html files, code or slides.
 * Topics and questions to be discussed in class.
-* Final evaluation will consist of written essay(s) and presentations in class.  
+* Final evaluation will consist of written essay(s) and presentations in class.
 
 #### Course Objectives
 
@@ -27,7 +27,7 @@ The class is supported by BSRC "Alexander Fleming" **[Computational Genomics Gro
 
 #### 0. Welcome (Oct 15th 2026)
 
-This class is dedicated to getting to know each other, providing the outline of the course and have a general discussion on its goals and objectives. 
+This class is dedicated to getting to know each other, providing the outline of the course and have a general discussion on its goals and objectives.
 
 #### 1. [Part I. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ia_Introductory_Concepts.ipynb) (Oct 30th 2026)
 
@@ -55,3 +55,4 @@ Check out the following sources:
 * Remembering stuff (from high-school)
 * How to measure things
 * How to assess/compare/interpret measurements
+* Hands on. We will be exploring some simple analyses with the help of the R-Programming Environment, starting from [R-Intro](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/Practicals_2025/Practical-RIntro.html) and some more advanced practicals [R-Practicals](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/ModuleX_RPracticals_full.rmd)
