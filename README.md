@@ -39,9 +39,7 @@ This week's class is an introduction to the concepts we will be discussing throu
 * What it actually is
 * Fallacies and Mistakes we make in discarding statistics (or forgetting about it)
 
-##### Reading
-
-Check out the following sources:
+You may want to check out the following sources:
 
 * Harvey Motulsky, Intuitive Biostatistics. [Chapter 1. Introduction to Statistics](https://www.dropbox.com/s/qaxqndv6zjoxi1l/Intuitive_Biostatistics.pdf)
 * S. J. Gould. [The median isn&#39;t the message](https://journalofethics.ama-assn.org/article/median-isnt-message/2013-01)
@@ -50,9 +48,16 @@ Check out the following sources:
 
 (This slide deck includes an older version of this class. Some things may have changed or have been removed)
 
-#### 2. [Part II. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_IIb_Computation_and_omics_approaches_to_Biology.ipynb) (Nov 6th 2026)
+#### 2. [Part II. Introduction. Basic Concepts in Statistics and Informatics for bioscience](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes_2022/Part_Ib_Computation_and_omics_approaches_to_Biology.ipynb) (Nov 6th 2026)
 
-* Remembering stuff (from high-school)
+In this class we will discuss problems of biology that require computation (such as sequence alignment, DNA motif identification, gene expression analysis) and touch upon the **qualitative aspects** of the bioinformatics approaches suitable for their solution.   
+We will generally discuss:   
+* How to start remembering stuff (from high-school)
 * How to measure things
 * How to assess/compare/interpret measurements
-* Hands on. We will be exploring some simple analyses with the help of the R-Programming Environment, starting from [R-Intro](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/Practicals_2025/Practical-RIntro.html) and some more advanced practicals [R-Practicals](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/ModuleX_RPracticals_full.rmd)
+
+
+#### 3. [Part III. Hands-on work with basic statistics and data analysis](https://rpubs.com/ChristoforosNikolaou/Practical-RIntro) (Nov 13th 2026)
+
+This class will be a hands-on introduction to the R programming environment. We will present some **absolutely basic** aspects of the language through a simple series of examples (all included in the link above). 
+* Hands on. We will be exploring some simple analyses with the help of the R-Programming Environment, starting from this class' [R-Intro](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/Practicals_2025/Practical-RIntro.rmd) and some more advanced practicals [R-Practicals](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/ModuleX_RPracticals_full.rmd)
