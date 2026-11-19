@@ -63,7 +63,7 @@ This class will be a hands-on introduction to the R programming environment. We 
 
 * Hands on. We will be exploring some simple analyses with the help of the R-Programming Environment, starting from this class' [R-Intro](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/Practicals_2025/Practical-RIntro.rmd) and some more advanced practicals [R-Practicals](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/RMarkdown/ModuleX_RPracticals_full.rmd)
 
-#### 4. [Part IV. Introduction to student projects]() (Nov 20th 2026)
+#### 4. [Part IV. Introduction to student projects](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes%202026/StudentProjects.ipynb) (Nov 20th 2026)
 
 We will discuss the suggested papers for your projects.
-You may find the full list [here]()
+You may find the full list of suggested papers [here](https://github.com/christoforos-nikolaou/MolBioMedClass/blob/master/Classes%202026/StudentProjects.ipynb)
